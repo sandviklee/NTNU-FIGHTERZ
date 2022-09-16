@@ -12,9 +12,21 @@ public class UserData {
 	 * @param password the password stored in the new {@code UserData}
 	 * @throws IllegalArgumentException on bad input such as no password
 	 */
-	public UserData(String password) throws IllegalArgumentException{
+	public UserData(String password) {
+		try {
+			valideUserData(password);
+			this.password = password;
+		} catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			return;
+		}
+		
+	}
+
+	private static void valideUserData(String password) throws IllegalArgumentException{
+		// Shall detect bad input
 		if (password.length() == 0) throw new IllegalArgumentException("Cant have no password");
-		this.password = password;
+
 	}
 
 	public String getPassword() {
