@@ -14,11 +14,10 @@ public class LoginSignUp {
 	 * When either does not complie return null.
 	 * @param userName the string that login will attempt to find a corresensponding user
 	 * @param password the the string that login will attempt to find a corresensponding user
-	 * @param confirmePassword the string to compare password equal to
 	 * 
 	 * @return A User if valide input and user in data storage else null.
 	 */
-	public static User login(String userName, String password, String confirmePassword) {
+	public static User login(String userName, String password) {
 		// TODO:
 	}
 
@@ -31,10 +30,10 @@ public class LoginSignUp {
 	 * 
 	 * @param userName          the string that will be will be 
 	 * @param password          the string that will be saved as password for the new {@code User}
-	 * @param confirmePassword  the string to compare password equal to
+	 * @param confirmPassword  the string to compare password equal to
 	 * @return  a new {@code User} that is saved in data storage. If already in storage return null.
 	 */
-	public static User signUp(String userName, String password, String confirmePassword) {
+	public static User signUp(String userName, String password, String confirmPassword) {
 		// TODO:
 	}
 
@@ -49,11 +48,13 @@ public class LoginSignUp {
 	}
 
 	/**
-	 * validatePassword shall check if password is a non empty string only containing a combaination of letters and numbers.
-	 * @param password a string
+	 * Checks if password is a non empty string only containing a combaination of letters and numbers and that confirmPassword matches password.
+	 * 
+	 * @param password         the string to check if valide
+	 * @param confirmPassword  the string to check if equal to password
 	 * @return true if password is valide else false
 	 */
-	private static boolean validatePassword(String password) {
+	private static boolean validatePassword(String password, String confirmPassword) {
 		// TODO: 
 	}
 	
