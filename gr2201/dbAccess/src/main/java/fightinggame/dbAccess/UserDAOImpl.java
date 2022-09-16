@@ -16,22 +16,13 @@ public class UserDAOImpl implements UserDAO{
 		// this.path
 	}
 
-	/**
-	 * getAllUsers will get all the users form data storage.
-	 * @return
-	 */
 	public List<String> getAllUsers() {
 		// TODO: 
 	}
 	public List<String> filterAllUsers(String filterParam) {
 		// TODO:
 	}
-	/**
-	 * Finds the {@code User} that have same id in data storage.
-	 * If their are no user with this id return a null object.
-	 * @param id {@code UserId}  that it uses to search data storage
-	 * @return the {@code User} with given id in case there are non return null
-	 */
+	
 	public String findUser(UserId id) {
 		// TODO:
 	}
@@ -42,7 +33,7 @@ public class UserDAOImpl implements UserDAO{
 	public void deleteUser(UserId id) {
 		// TODO:
 	}
-	public void addUser(String name, UserData data) {
+	public void addUser(String userId, UserData data) {
 		// TODO:
 	}
 
