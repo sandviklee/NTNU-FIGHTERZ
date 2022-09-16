@@ -7,9 +7,9 @@ public class User {
 	private UserData userData;
 	private UserId userId;
 
-	public User(String id, String pas) {
+	public User(String id, String password) {
 		// TODO: Make constructor more robust with exceptions and checking for edge cases.
-		this.userData = new UserData(pas);
+		this.userData = new UserData(password);
 		this.userId = new UserId(id);
 	}
 
@@ -33,11 +33,31 @@ public class User {
 		return this.getUserData().getPassword();
 	}
 
-	public void setUserId(UserId userId) {
+	/**
+	 * Changes UserId to new userId.
+	 * If {@code userId} cant be constructed with userId, then does not chage userId.
+	 * @param userId  the string to try to change field userId.
+	 */
+	public void changeUserId(String userId) {
+		// TODO:
+		
+	}
+
+	/**
+	 * Changes UserData to new userData.
+	 * If {@code userData} cant be constructed with userData, then does not chage userData.
+	 * @param userData  the string to try to change field userData.
+	 */
+	public void changeUserData(String userData) {
+		// TODO:
+		
+	}
+
+	private void setUserId(UserId userId) {
 		this.userId = userId;
 	}
 
-	public void setUserData(UserData userData) {
+	private void setUserData(UserData userData) {
 		this.userData = userData;
 	}
 }
