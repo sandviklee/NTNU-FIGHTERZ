@@ -40,7 +40,7 @@ public class SignUpController {
             }
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(user);

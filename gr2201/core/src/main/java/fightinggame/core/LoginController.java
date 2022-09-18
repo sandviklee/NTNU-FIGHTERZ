@@ -31,7 +31,7 @@ public class LoginController {
             errorMessage.setText("Wrong username or password");
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(user);
@@ -40,7 +40,7 @@ public class LoginController {
 
     @FXML
     private void handleSwichToSignUp(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("signUp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
         Parent root = loader.load();
         SignUpController signUpController = loader.getController();
         SceneController.changeScene("NTNU Fighterz", root, event);
