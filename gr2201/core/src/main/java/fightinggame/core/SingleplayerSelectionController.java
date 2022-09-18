@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 
 public class SingleplayerSelectionController {
-    @FXML private Button lockIn;
+    @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
 
@@ -24,7 +24,7 @@ public class SingleplayerSelectionController {
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        // TODO: Future content
+        // Future content
         // FXMLLoader loader = new FXMLLoader(getClass().getResource("singleplayer.fxml"));
         // Parent root = loader.load();
         // SignUpController signUpController = loader.getController();
