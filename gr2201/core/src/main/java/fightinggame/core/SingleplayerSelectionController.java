@@ -39,7 +39,7 @@ public class SingleplayerSelectionController {
     private void handleGoBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
-        SignUpController signUpController = loader.getController();
+        MainMenuController controller = loader.getController();
         SceneController.changeScene("NTNU Fighterz", root, event);
     }
 }
