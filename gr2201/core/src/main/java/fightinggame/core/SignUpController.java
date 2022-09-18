@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -20,8 +21,8 @@ public class SignUpController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private Button createAccount;
-    @FXML Label nonValidCredentials;
-    @FXML Label nonMatchingPasswords;
+    @FXML private TextArea nonValidCredentials;
+    @FXML private TextArea nonMatchingPasswords;
 
     @FXML
     private void handleCreateAccount (ActionEvent event) throws IOException{
