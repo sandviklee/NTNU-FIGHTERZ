@@ -40,6 +40,7 @@ public class SingleplayerSelectionController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController controller = loader.getController();
+        controller.setUser(user);
         SceneController.changeScene("NTNU Fighterz", root, event);
     }
 }
