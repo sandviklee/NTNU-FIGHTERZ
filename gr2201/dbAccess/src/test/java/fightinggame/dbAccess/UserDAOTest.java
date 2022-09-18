@@ -26,6 +26,8 @@ public class UserDAOTest {
 	public void setup() {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
+		
+		Path path = new Path("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt");
 		dao = new UserDAOImpl(path);
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");
@@ -56,8 +58,6 @@ public class UserDAOTest {
 		assertTrue(dao.getAllUsers()[0].equals(testUser1.getUserId().toString() + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
 		assertTrue(dao.getAllUsers()[1].equals(testUser2.getUserId().toString() + ", " + testUser2.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
 		assertTrue(dao.getAllUsers()[2].equals(testUser3.getUserId().toString() + ", " + testUser3.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
-
-
 	}
 
 	@Test
@@ -151,5 +151,13 @@ public class UserDAOTest {
 		assertEquals(1, dao.getAllUsers().size(), "The amount is not correct should only contain one user");
 		assertTrue(dao.getAllUsers()[0].equals(testUser1.getUserId().toString() + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, values changed after addUser()");
 	}
-	
+
+	@Test
+	@DisplayName("Tests if addUser() adds the User in Data Storage")
+	public void testPath() {
+		UserDAO daoPathTest = new UserDAOImpl();
+		Path testPath = new Path();
+		daoPathTest.setPath(testPath);
+		assertTrue(daoPathTest.getPath().equals(testPath));
+	}
 }
