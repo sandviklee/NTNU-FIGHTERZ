@@ -15,11 +15,11 @@ import java.io.IOException;
 import fightinggame.core;
 
 public class LoginController {
-    @FXML TextField usernameField;
-    @FXML PasswordField passwordField;
-    @FXML TextArea errorMessage;
-    @FXML Hyperlink swichToSignUp;
-    @FXML Button login;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextArea errorMessage;
+    @FXML private Hyperlink swichToSignUp;
+    @FXML private Button login;
 
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
