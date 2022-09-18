@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO{
 	public void deleteUser(UserId id) {
 		// TODO:
 	}
-	public void addUser(UserID userId, UserData data) {
+	public void addUser(UserId userId, UserData data) {
 		// TODO:
 	}
 
