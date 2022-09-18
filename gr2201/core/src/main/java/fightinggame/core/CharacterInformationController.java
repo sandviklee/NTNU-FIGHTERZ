@@ -16,8 +16,9 @@ public class CharacterInformationController {
 
     @FXML
     private void initalize(){
-        characterSplashArt.setImage(getClass().getResource(character + "SplashArt.jpg"));
-        difficulty.setImage(getClass().getResource(character + "Difficulty.jpg"));
+        characterSplashArt.setImage(getClass().getResource(character + "SplashArt.png"));
+        // temporary difficulty image, same for all characters
+        difficulty.setImage(getClass().getResource("Difficulty.jpg"));
         title.setText(character.toUpperCase() + " INFO");
         description.setText("Lorem ipsum comes later.");
         for (int i = 0; i < 5; i++) {
