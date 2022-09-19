@@ -17,7 +17,7 @@ public class LoginSignUp {
 	 * @return A User if valide input and user in data storage else null.
 	 */
 	public static User login(String username, String password) {
-		if (!validateUserName(username) || !validatePassword(password, confirmPassword)) return null;
+		if (!validateUserName(username) || !validatePassword(password, password)) return null;
 		try {
 			User user = new User(username, password);
 			String userData = dao.findUser(user.getUserId());
