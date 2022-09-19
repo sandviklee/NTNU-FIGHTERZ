@@ -4,58 +4,49 @@
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.M4</version> <!-- lookup parent from repository -->
+        <groupId>it1901.fightinggame</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>fightinggame</groupId>
+  <!-- <groupId>it1901</groupId>
+  <artifactId>gr2201</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging> -->
+
+    
+    <groupId>it1901.fightinggame</groupId>
     <artifactId>dbAccess</artifactId>
-    <version>1</version>
     <name>dbAccess</name>
     <description>Blank multi project for Spring Boot + Elm</description>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>fightinggame</groupId>
-                <artifactId>dbAccess-frontend</artifactId>
-                <version>1</version>
-            </dependency>
-            <dependency>
-                <groupId>fightinggame</groupId>
-                <artifactId>dbAccess-backend</artifactId>
-                <version>1</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <!-- Run the checkstyle code quality tool -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </pluginRepository>
-    </pluginRepositories>
+            <!-- Run the spotbugs code quality tool -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Configure jacoco code coverage -->
+            <!-- <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin> -->
+        </plugins>
+    </build>
+
 </project>

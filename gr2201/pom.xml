@@ -4,11 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>it1901</groupId>
-  <artifactId>gr2201</artifactId>
+  <groupId>it1901.fightinggame</groupId>
+  <artifactId>parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-  <name>gr2201</name>
+  <!-- <name>gr2201</name> -->
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -18,11 +19,6 @@
     <maven.compiler.target>16</maven.compiler.target>
   </properties>
 
-  <modules>
-    <module>core</module>
-    <module>dbAccess</module>
-  </modules>
-  <packaging>pom</packaging>
 
   <dependencies>
         <!-- javafx -->
@@ -112,4 +108,9 @@
             </plugin>
         </plugins>
     </build>
+
+  <modules>
+    <module>core</module>
+    <module>dbAccess</module>
+  </modules>
 </project>
