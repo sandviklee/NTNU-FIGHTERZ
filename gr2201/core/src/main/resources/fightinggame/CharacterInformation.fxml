@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="1095.0" fitWidth="1938.0" layoutX="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ACharBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="characterSplashArt" fitHeight="1095.0" fitWidth="960.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="1090.0" fitWidth="1938.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@CharacterInfoShape.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="difficulity" fitHeight="228.0" fitWidth="748.0" layoutX="1056.0" layoutY="826.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane fx:id="characterSpecials" layoutX="1082.0" layoutY="593.0" prefHeight="150.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <Button fx:id="goBack" layoutX="144.0" layoutY="96.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="126.0" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="31.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Label fx:id="description" layoutX="862.0" layoutY="169.0" prefHeight="242.0" prefWidth="960.0" textFill="WHITE" />
+      <Text fill="WHITE" layoutX="1244.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specials:" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="56.0" />
+         </font>
+      </Text>
+      <Label fx:id="title" layoutX="984.0" layoutY="39.0" prefHeight="121.0" prefWidth="682.0" textFill="WHITE" />
+   </children>
+</AnchorPane>
