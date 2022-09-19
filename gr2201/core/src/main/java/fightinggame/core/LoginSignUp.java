@@ -17,17 +17,21 @@ public class LoginSignUp {
 	 * @return A User if valide input and user in data storage else null.
 	 */
 	public static User login(String username, String password) {
-		// TODO:
 		if (!validateUserName(username) || !validatePassword(password, confirmPassword)) return null;
-		User user = new User(username, password);
+		try {
+			User user = new User(username, password);
+			String userData = dao.findUser(user.getUserId());
+			if (userData.isEmpty()) return null;
 
-		String userData = dao.findUser(user.getUserId());
-		if (userData.isEmpty()) return null;
-
-		// check if password is the same in db as login input
-		if (password.equals(userData.split(",")[1])) return null;
-		user.changeUserData(userData);
-		return user;
+			// check if password is the same in db as login input
+			if (password.equals(userData.split(",")[1])) return null;
+			user.changeUserData(userData);
+			return user;
+		} catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			System.out.println(e.getLocalizedMessage());
+			return null;
+		}
 	}
 
 	/**
@@ -43,15 +47,20 @@ public class LoginSignUp {
 	 * @return  a new {@code User} that is saved in data storage. If already in storage return null.
 	 */
 	public static User signUp(String username, String password, String confirmPassword) {
-		// TODO: 
 		if (!validateUserName(username) || !validatePassword(password, confirmPassword)) return null;
-		User user = new User(username, password);
-
-		// check if user in db and add when not
-		String userData = dao.findUser(user.getUserId());
-		if (userData.isEmpty()) return null;
-		dao.addUser(user.getUserId(), user.getUserData());
-		return user;
+		try {
+			User user = new User(username, password);
+	
+			// check if user in db and add when not
+			String userData = dao.findUser(user.getUserId());
+			if (userData.isEmpty()) return null;
+			dao.addUser(user.getUserId(), user.getUserData());
+			return user;
+		} catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			System.out.println(e.getLocalizedMessage());
+			return null;
+		}
 	}
 
 	/**
