@@ -6,7 +6,7 @@ public class CharacterInformationController {
     private String character;
     
     @FXML private ImageView characterSplashArt, difficulty;
-    @FXML private TextArea title, description;
+    @FXML private Label title, description;
     @FXML private GridPane characterSpecials;
     @FXML private Button goBack;
 
