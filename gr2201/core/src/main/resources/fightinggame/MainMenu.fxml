@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="1092.0" fitWidth="1948.0" layoutX="-8.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Main%20Menu.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="126.0" layoutY="399.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font>
+      </Button>
+      <Button defaultButton="true" layoutX="126.0" layoutY="501.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="126.0" layoutY="613.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="126.0" layoutY="718.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="126.0" layoutY="823.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="188.0" fitWidth="714.0" layoutX="130.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
