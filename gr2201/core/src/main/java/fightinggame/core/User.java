@@ -60,7 +60,6 @@ public class User {
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
-		
 	}
 
 	private void setUserId(UserId userId) {

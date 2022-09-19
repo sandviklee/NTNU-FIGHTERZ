@@ -3,7 +3,7 @@ package fightinggame.core;
 public class UserId {
 	private String userId;
 
-	public UserId(String userId) {
+	public UserId(String userId) throws IllegalArgumentException{
 		valideUserId(userId);
 		this.userId = userId;
 	}
