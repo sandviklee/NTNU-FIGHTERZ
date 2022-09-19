@@ -18,6 +18,12 @@
     <maven.compiler.target>16</maven.compiler.target>
   </properties>
 
+  <modules>
+    <module>core</module>
+    <module>dbAccess</module>
+  </modules>
+  <packaging>pom</packaging>
+
   <dependencies>
         <!-- javafx -->
         <dependency>
@@ -101,7 +107,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>app.App</mainClass>
+                    <mainClass>fightinggame.core.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
