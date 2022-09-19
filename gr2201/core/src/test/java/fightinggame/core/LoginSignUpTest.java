@@ -80,6 +80,4 @@ public class LoginSignUpTest {
 		User userAlreadyInDb = loginSignUp.signUp(valideUsername, validePassword1, validePassword1);
 		assertTrue(userAlreadyInDb == null, "user not in db and input values are none valide");
 	}
-
-
 }

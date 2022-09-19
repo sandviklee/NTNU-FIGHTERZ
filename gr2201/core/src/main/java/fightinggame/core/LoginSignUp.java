@@ -28,7 +28,6 @@ public class LoginSignUp {
 			user.changeUserData(userData);
 			return user;
 		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}
@@ -101,7 +100,6 @@ public class LoginSignUp {
 	private static int hashPassword(String p) {
 		// TODO: Find a good hashing algo and a decoder.
 	}
-
 
 	public void setPath(Path p) {
 		this.getDAO().setPath(p);

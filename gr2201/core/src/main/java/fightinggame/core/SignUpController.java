@@ -45,13 +45,5 @@ public class SignUpController {
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(user);
         SceneController.changeScene("NTNU Fighterz", root, event);
-
-
-
-
-        
-
-
-        
     }
 }
