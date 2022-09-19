@@ -37,4 +37,9 @@ public class UserDataTest {
 
 	}
 
+	@Test
+	@DisplayName
+	public void testStringToData() {
+
+	}
 }
