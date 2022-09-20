@@ -20,10 +20,11 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			return readFromFile(this.getPath());
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getLocalizedMessage());
+			System.out.println(e.getLocalizedMessage());
 		}
 		return new List();
 	}
+
 	public List<String> filterAllUsers(String filterParam) {
 		List<String> correnspondingUsers = new List();
 		for (String userInfo : getAllUsers()) {
@@ -67,8 +68,6 @@ public class UserDAOImpl implements UserDAO{
 			}
 		}
 		storeToFile(this.getPath(), String.join("\n", tempList), true);
-
-
 	}
 
 	public void addUser(UserId userId, UserData data) {
@@ -90,7 +89,7 @@ public class UserDAOImpl implements UserDAO{
 
 
 	private static List<String> readFromFile(Path filename) throws FileNotFoundException {		
-		List<String> users = new ArrayList<>();
+		List<String> usersInfo = new ArrayList<>();
 		
 		File userFile = new File(filename);
 		if (userFile.exists()){
@@ -99,19 +98,20 @@ public class UserDAOImpl implements UserDAO{
 			while(userFileReader.hasNextLine()) {
 				String line = userFileReader.nextLine();
 				for (String dataFromFile : line.split(", ")){
-					users.add(dataFromFile);
+					usersInfo.add(dataFromFile);
 				}
 			}
 			userFileReader.close();
 		}
 		else throw new FileNotFoundException("The settings file could not be found.");
-		return users;
+		return usersInfo;
 	}
 
 	private static void storeToFile(Path filename, String data, Boolean shallOverwrite) throws IOException{
 		File currentFile = new File(filename);
 		FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);
 		String headLine = "id, password";
+		
 
 		if (shallOverwrite){
 			currentWriter.write(headLine + "\n" + data);
