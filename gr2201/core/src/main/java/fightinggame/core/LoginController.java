@@ -27,7 +27,7 @@ public class LoginController {
         String password = passwordField.getText();
         User user = LoginSignUp.login(username, password);
         
-        if (user = null){
+        if (user == null){
             errorMessage.setText("Wrong username or password");
             return;
         }
