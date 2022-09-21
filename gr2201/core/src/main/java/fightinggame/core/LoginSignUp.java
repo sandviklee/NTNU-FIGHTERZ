@@ -21,12 +21,15 @@ public class LoginSignUp {
 		try {
 			User user = new User(username, password);
 			String userData = dao.findUser(user.getUserId());
-			if (userData.isEmpty()) return null;
+			if (userData.isEmpty() || !userData.contains(", ")) return null;
 
 			// check if password is the same in db as login input
-			if (password.equals(userData.split(",")[1])) return null;
-			user.changeUserData(userData);
+			if (!password.equals(userData.split(", ")[1])) return null;
+			// String userDataParams = userData.subSequence(userData.indexOf(", "), userData.length()-1);
+			// user.changeUserData((new UserData()).stringToUserData(userDataParams));
+			user.changeUserData(new UserData(userData.subSequence(userData.indexOf(", "), userData.length()-1));
 			return user;
+
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
@@ -85,8 +88,9 @@ public class LoginSignUp {
 	}
 
 	private static boolean containsOnlyLettersAndNumbers(String str) {
-		boolean notEmpty = !password.isEmpty();
-		boolean containsOnlyLettersAndNumbers = password.matches("[a-zA-Z0-9]*");
+		// Needs better name. nonEmptyOnlyLettersAndNumbers
+		boolean notEmpty = !str.isEmpty();
+		boolean containsOnlyLettersAndNumbers = str.matches("[a-zA-Z0-9]*");
 		return (notEmpty && containsOnlyLettersAndNumbers);
 	}
 

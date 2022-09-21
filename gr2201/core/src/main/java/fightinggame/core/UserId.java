@@ -3,15 +3,19 @@ package fightinggame.core;
 public class UserId {
 	private String userId;
 
+	/**
+	 * Constructs a {@code UserId} with given userId.
+	 * @param userId  string to try to constuct userId
+	 * @throws IllegalArgumentException when a userId is given that
+	 */
 	public UserId(String userId) throws IllegalArgumentException{
 		valideUserId(userId);
 		this.userId = userId;
 	}
 	
 	private static void valideUserId(String id) throws IllegalArgumentException{
-		if (id.length() == 0) throw new IllegalArgumentException("Id cant be empty");
-		if (id) throw new IllegalArgumentException("Id cant be empty");
-
+		if (id.isEmpty()) throw new IllegalArgumentException("Id cant be empty");
+		if (!id.matches("[a-zA-Z0-9]*")) throw new IllegalArgumentException("Id must be alphaNumeric");
 	}
 
 	/**
@@ -32,7 +36,7 @@ public class UserId {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	private void setUserId(String userId) {
 		this.userId = userId;
 	}
 }

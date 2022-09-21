@@ -19,10 +19,9 @@ public class UserData {
 
 	private static void valideUserData(String password) throws IllegalArgumentException{
 		// Shall detect bad input
-		boolean empty = password.isEmpty();
-		boolean containsOnlyLettersAndNumbers = !password.matches("[a-zA-Z0-9]*");
-		if (empty || containsOnlyLettersAndNumbers) throw new IllegalArgumentException("Invalid password");
-		
+		boolean isEmpty = password.isEmpty();
+		boolean notOnlyContainsLettersAndNumbers = !password.matches("[a-zA-Z0-9]*");
+		if (isEmpty || notOnlyContainsLettersAndNumbers) throw new IllegalArgumentException("Invalid password");
 	}
 
 	/**
@@ -37,7 +36,7 @@ public class UserData {
 	/**
 	 * Takes a string and convert it to a UserData.
 	 * Must have all UserData fields in correct order and values must be seperated by comma.
-	 * order: password
+	 * order: [password]
 	 * If data is correct form and have each data field with valide values  make UserData,
 	 * else return null
 	 * @param data  string to interprete
@@ -45,6 +44,7 @@ public class UserData {
 	 */
 	public UserData stringToUserData(String data) {
 		// TODO:
+
 	}
 
 	public String getPassword() {

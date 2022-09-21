@@ -19,7 +19,10 @@ public class UserDAOTest {
 	private Path path = new Path();
 
 	private static void clearFile(Path path) {
-		// TODO make file at path clear
+		File currentFile = new File(path);
+		FileWriter currentWriter = new FileWriter(currentFile, false);
+		currentWriter.write("");
+		currentWriter.close();
 	}
 
 	@BeforeEach

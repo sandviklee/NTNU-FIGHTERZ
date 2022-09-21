@@ -1,3 +1,5 @@
+package fightinggame.core;
+
 public class GameApp extends Application  {
 	public static void main(String[] args) {
 		Application.launch(args);
