@@ -3,8 +3,6 @@ package fightinggame.core;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 
 public class SingleplayerSelectionController {
     @FXML private Button lockIn, goBack;
