@@ -20,9 +20,9 @@ public class CharacterInformationMenuController extends SceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformation.fxml"));
         Parent root = loader.load();
         CharacterInformationController controller = loader.getController();
-        controller.setUser(this.getUser());
+        controller.setUser(super.getUser());
         controller.setCharacter(image.getId());
-        this.changeScene("NTNU Fighterz", root, event);
+        super.changeScene("NTNU Fighterz", root, event);
     }
     
     @FXML
@@ -30,7 +30,7 @@ public class CharacterInformationMenuController extends SceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController controller = loader.getController();
-        controller.setUser(this.getUser());
-        this.changeScene("NTNU Fighterz", root, event);
+        controller.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 }

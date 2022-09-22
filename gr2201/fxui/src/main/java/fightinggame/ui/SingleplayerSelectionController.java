@@ -49,7 +49,7 @@ public class SingleplayerSelectionController extends SceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
-        mainMenuController.setUser(this.getUser());
-        this.changeScene("NTNU Fighterz", root, event);
+        mainMenuController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 }

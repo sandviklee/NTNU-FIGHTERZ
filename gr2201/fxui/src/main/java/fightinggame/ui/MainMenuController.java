@@ -23,8 +23,8 @@ public class MainMenuController extends SceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
         Parent root = loader.load();
         SingleplayerSelectionController singleplayerSelectionController = loader.getController();
-        singleplayerSelectionController.setUser(this.getUser());
-        this.changeScene("NTNU Fighterz", root, event);
+        singleplayerSelectionController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML
@@ -38,8 +38,8 @@ public class MainMenuController extends SceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInfo.fxml"));
         Parent root = loader.load();
         CharacterInformationController characterInformationController = loader.getController();
-        characterInformationController.setUser(this.getUser());
-        this.changeScene("NTNU Fighterz", root, event);
+        characterInformationController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML
