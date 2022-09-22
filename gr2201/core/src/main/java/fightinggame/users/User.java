@@ -8,11 +8,16 @@ public class User {
 	private UserId userId;
 
 	public User(String id, String password) throws IllegalArgumentException{
-		// TODO: Make constructor more robust with exceptions and checking for edge cases.
+		// uses validaters in classes UserData and UserId 
 		this.userData = new UserData(password);
 		this.userId = new UserId(id);
 	}
 
+	/**
+	 * Checks if this user has the same UserId as other User
+	 * @param u User to compere
+	 * @return if they are equal
+	 */
 	public boolean equals(User u) {
 		return this.getUserId().equals(u.getUserId());
 	}
