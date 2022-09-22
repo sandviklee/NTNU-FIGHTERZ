@@ -1,9 +1,14 @@
 package fightinggame.core;
 
-import static org.junit.jupiter.api.Assertions;
-import static org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Assertions;
 
 
 public class UserDataTest {
@@ -16,7 +21,7 @@ public class UserDataTest {
 	private UserData data;
 	
 	@Test
-	@DisplayName
+	@DisplayName("Tests if the constructor works properly")
 	public void testConstructor() {
 		// Contructed with bad input values
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -32,14 +37,8 @@ public class UserDataTest {
 	}
 
 	@Test
-	@DisplayName
-	public void test() {
-
-	}
-
-	@Test
-	@DisplayName
+	@DisplayName("Tests if the ")
 	public void testStringToData() {
-
+		//TODO: make a string an try to get correct UserDAta
 	}
 }
