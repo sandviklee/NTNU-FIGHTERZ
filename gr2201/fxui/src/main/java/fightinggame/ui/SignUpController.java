@@ -23,8 +23,8 @@ public class SignUpController extends SceneController{
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private Button createAccount, goBack;
-    @FXML private TextArea nonValidCredentials;
-    @FXML private TextArea nonMatchingPasswords;
+    @FXML private Label nonValidCredentials;
+    @FXML private Label nonMatchingPasswords;
 
     @FXML
     private void handleCreateAccount (ActionEvent event) throws IOException{
