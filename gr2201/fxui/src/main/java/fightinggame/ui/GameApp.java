@@ -20,6 +20,7 @@ public class GameApp extends Application  {
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("NTNU Fighterz");
 		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("LogIn.fxml"))));
+		primaryStage.setMaximized(false);
 		primaryStage.show();
 	}
 }
