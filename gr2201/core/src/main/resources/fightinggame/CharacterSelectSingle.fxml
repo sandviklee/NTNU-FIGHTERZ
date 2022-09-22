@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="1094.0" fitWidth="1942.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
@@ -40,7 +39,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="Ram" fitHeight="313.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Ram" fitHeight="313.0" fitWidth="500.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Char1Select.png" />
                </image>
@@ -48,7 +47,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sly" fitHeight="323.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="Sly" fitHeight="323.0" fitWidth="326.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@Char2Select.png" />
                </image>
@@ -56,7 +55,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sol" fitHeight="313.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="Sol" fitHeight="313.0" fitWidth="500.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>
@@ -66,7 +65,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="goBack" layoutX="130.0" layoutY="114.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="goBack" layoutX="130.0" layoutY="114.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="31.0" />
          </font>
@@ -74,7 +73,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="lockIn" layoutX="776.0" layoutY="890.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="399.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
+      <Button fx:id="lockIn" layoutX="776.0" layoutY="890.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="98.0" prefWidth="399.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="39.0" />
          </font>
