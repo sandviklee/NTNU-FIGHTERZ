@@ -53,7 +53,6 @@ public class SignUpController extends SceneController{
     private void handleBackToLogin(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
         Parent root = loader.load();
-        LoginController loginController = loader.getController();
         this.changeScene("NTNU Fighterz", root, event);
     }
 
