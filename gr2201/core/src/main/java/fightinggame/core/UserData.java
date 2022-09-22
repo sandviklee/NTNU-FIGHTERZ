@@ -26,10 +26,13 @@ public class UserData {
 
 	/**
 	 * Makes a string representation of UserData.
+	 * 
 	 */
 	@Override
 	public String toString() {
 		// TODO:
+		String seperator = ", ";
+		return this.getPassword();
 
 	}
 
@@ -44,7 +47,7 @@ public class UserData {
 	 */
 	public UserData stringToUserData(String data) {
 		// TODO:
-
+		return new UserData(data);
 	}
 
 	public String getPassword() {
