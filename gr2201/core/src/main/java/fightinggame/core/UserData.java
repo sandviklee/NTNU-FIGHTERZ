@@ -9,24 +9,45 @@ public class UserData {
 
 	/**
 	 * Contructs UserData but will throw exception on bad input.
-	 * @param password the password stored in the new {@code UserData}
-	 * @throws IllegalArgumentException on bad input such as no password
+	 * @param password  the password stored in the new {@code UserData}
+	 * @throws IllegalArgumentException  on bad input such as no password
 	 */
-	public UserData(String password) {
-		try {
-			valideUserData(password);
-			this.password = password;
-		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
-			return;
-		}
-		
+	public UserData(String password) throws IllegalArgumentException{
+		valideUserData(password);
+		this.password = password;
 	}
 
 	private static void valideUserData(String password) throws IllegalArgumentException{
 		// Shall detect bad input
-		if (password.length() == 0) throw new IllegalArgumentException("Cant have no password");
+		boolean isEmpty = password.isEmpty();
+		boolean notOnlyContainsLettersAndNumbers = !password.matches("[a-zA-Z0-9]*");
+		if (isEmpty || notOnlyContainsLettersAndNumbers) throw new IllegalArgumentException("Invalid password");
+	}
 
+	/**
+	 * Makes a string representation of UserData.
+	 * 
+	 */
+	@Override
+	public String toString() {
+		// TODO:
+		String seperator = ", ";
+		return this.getPassword();
+
+	}
+
+	/**
+	 * Takes a string and convert it to a UserData.
+	 * Must have all UserData fields in correct order and values must be seperated by comma.
+	 * order: [password]
+	 * If data is correct form and have each data field with valide values  make UserData,
+	 * else return null
+	 * @param data  string to interprete
+	 * @return UserData with data or null object if containing non valide input
+	 */
+	public UserData stringToUserData(String data) {
+		// TODO:
+		return new UserData(data);
 	}
 
 	public String getPassword() {
@@ -35,10 +56,4 @@ public class UserData {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
-
-
-
-	
 }

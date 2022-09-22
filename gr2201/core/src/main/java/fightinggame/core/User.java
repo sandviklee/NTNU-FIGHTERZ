@@ -7,7 +7,7 @@ public class User {
 	private UserData userData;
 	private UserId userId;
 
-	public User(String id, String password) {
+	public User(String id, String password) throws IllegalArgumentException{
 		// TODO: Make constructor more robust with exceptions and checking for edge cases.
 		this.userData = new UserData(password);
 		this.userId = new UserId(id);
@@ -39,8 +39,12 @@ public class User {
 	 * @param userId  the string to try to change field userId.
 	 */
 	public void changeUserId(String userId) {
-		// TODO:
-		
+		try {
+			UserId id = new UserId(userId);
+			this.setUserId(id);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	/**
@@ -49,8 +53,12 @@ public class User {
 	 * @param userData  the string to try to change field userData.
 	 */
 	public void changeUserData(String userData) {
-		// TODO:
-		
+		try {
+			UserData data = new UserData(userData);
+			this.setUserData(data);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	private void setUserId(UserId userId) {
