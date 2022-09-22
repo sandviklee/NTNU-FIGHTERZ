@@ -1,23 +1,22 @@
 package fightinggame.core.dbaccess;
 import fightinggame.dbaccess.UserDAO;
+import fightinggame.dbaccess.UserDAOImpl;
+
 import fightinggame.users.User;
 import fightinggame.users.UserData;
 import fightinggame.users.UserId;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.IOException;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+// import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // TODO_ change of addUser method must remove toString in all addUser
 public class UserDAOTest {
@@ -27,28 +26,32 @@ public class UserDAOTest {
 	private User testUser2;
 	private User testUser3;
 
-	private Path path = new Path();
+	private String path;
 
-	private static void clearFile(Path path) {
+	private static void clearFile(String path) throws IOException {
 		File currentFile = new File(path);
 		FileWriter currentWriter = new FileWriter(currentFile, false);
 		currentWriter.write("");
 		currentWriter.close();
-	// }
+	}
 
 	@BeforeEach
 	public void setup() {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
 		
-		Path path = new Path("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt");
+		String path = "gr2201/gr2201/core/src/test/resource/fightinggame/dbaccess/testUsers.txt";
 		dao = new UserDAOImpl(path);
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");
 		testUser3 = new User("Subject3", "789");
 
 		// TODO make a method to empty data storage so previous test does not affect other tests.
-		clearFile(path);
+		try {
+			clearFile(path);
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	@Test
@@ -78,9 +81,9 @@ public class UserDAOTest {
 	@DisplayName("Does filterAllUsers() give all Users in Data Storage that ")
 	public void testFilterAllUsers() {
 		assertEquals(0, dao.getAllUsers().size(), "The amount is not correct, should not contain users");
-		String filter = testUser1.getUserData();
+		String filter = testUser1.getUserData().toString();
 		String filterContainingAllEntries = ",";
-		String nonFilter = testUser2.getUserData();
+		String nonFilter = testUser2.getUserData().toString();
 
 		// Add a two users with same UserData and one with other UserData
 		dao.addUser(testUser1.getUserId(), testUser1.getUserData());
@@ -93,9 +96,10 @@ public class UserDAOTest {
 
 		for (int i = 0; i < 100; i++) {
 			dao.addUser(new UserId(Integer.toString(i)), testUser1.getUserData());
-		}
-		for (String user : dao.filterAllUsers(filter)) {
-			assertTrue(dao.filterAllUsers().get(i).equals(Integer.toString(i) + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
+			
+			for (String user : dao.filterAllUsers(filter)) {
+				assertTrue(user.equals(Integer.toString(i) + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
+			}
 		}
 		assertEquals(102, dao.filterAllUsers(filter).size(), "The amount is not correct, should not contain many users");
 
@@ -166,12 +170,12 @@ public class UserDAOTest {
 		assertTrue(dao.getAllUsers().get(0).equals(testUser1.getUserId().toString() + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, values changed after addUser()");
 	}
 
-	@Test
-	@DisplayName("Tests if addUser() adds the User in Data Storage")
-	public void testPath() {
-		UserDAO daoPathTest = new UserDAOImpl();
-		Path testPath = new Path();
-		daoPathTest.setPath(testPath);
-		assertTrue(daoPathTest.getPath().equals(testPath));
-	}
+	// @Test
+	// @DisplayName("Tests if addUser() adds the User in Data Storage")
+	// public void testPath() {
+	// 	UserDAO daoPathTest = new UserDAOImpl();
+	// 	String testPath = new String();
+	// 	daoPathTest.setPath(testPath);
+	// 	assertTrue(daoPathTest.getPath().equals(testPath));
+	// }
 }
