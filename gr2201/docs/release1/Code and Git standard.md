@@ -1,0 +1,2 @@
+# Code and Git standard
+
