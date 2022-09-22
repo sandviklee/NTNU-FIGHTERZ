@@ -29,10 +29,11 @@ public class LoginSignUp {
 			if (!password.equals(userData.split(", ")[1])) return null;
 			
 			// Change userData to correct info from data storage
-			user.changeUserData((String) userData.subSequence(userData.indexOf(", "), userData.length()-1));
+			String seperator = ", ";
+			user.changeUserData((String) userData.subSequence(userData.indexOf(", ") + seperator.length(), userData.length()));
 			return user;
 
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}
@@ -57,11 +58,10 @@ public class LoginSignUp {
 	
 			// check if user in db and add when not
 			String userData = dao.findUser(user.getUserId());
-			if (userData.isEmpty()) return null;
+			if (!userData.isEmpty()) return null;
 			dao.addUser(user.getUserId(), user.getUserData());
 			return user;
-		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
+		} catch (NullPointerException e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}

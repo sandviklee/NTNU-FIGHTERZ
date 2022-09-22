@@ -7,10 +7,16 @@ public class User {
 	private UserData userData;
 	private UserId userId;
 
-	public User(String id, String password) throws IllegalArgumentException{
+	public User(String id, String password) throws NullPointerException{
 		// uses validaters in classes UserData and UserId 
-		this.userData = new UserData(password);
-		this.userId = new UserId(id);
+		try {
+			this.userData = new UserData(password);
+			this.userId = new UserId(id);
+			
+		} catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			throw new IllegalArgumentException("Bad input");
+		}
 	}
 
 	/**
