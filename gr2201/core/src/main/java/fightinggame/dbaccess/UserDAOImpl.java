@@ -132,13 +132,19 @@ public class UserDAOImpl implements UserDAO{
 	private static void storeToFile(String filename, String data, Boolean shallOverwrite) throws IOException{
 		// File currentFile = new File(filename);
 
-		// ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
 		// File currentFile = new File(classLoader.getResource("users.txt").getFile());
 
 		// File currentFile = new File(filename + ".txt");
 		// FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);
-		ClassLoader classLoader = UserDAO.class.getClassLoader();
-		File currentFile = new File(classLoader.getResource(filename + ".txt"));
+		File currentFile;
+		try {
+			ClassLoader classLoader = UserDAO.class.getClassLoader();
+			currentFile = new File(classLoader.getResource(filename + ".txt").toURI());
+			
+		} catch (Exception e) {
+			currentFile = new File("");
+			// TODO: handle exception
+		}
 		// currentFile.createNewFile();
 		// if (file.createNewFile()) 
 		
@@ -161,5 +167,7 @@ public class UserDAOImpl implements UserDAO{
 	public static void main(String[] args) {
 		UserDAO dao = new UserDAOImpl();
 		dao.addUser(new UserId("userId1"), new UserData("data1"));
+		dao.addUser(new UserId("userId1"), new UserData("data1"));
+
 	}
 }

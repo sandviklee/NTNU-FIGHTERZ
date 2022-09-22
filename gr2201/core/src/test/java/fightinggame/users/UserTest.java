@@ -8,29 +8,31 @@ import fightinggame.users.User;
 
 
 public class UserTest {
-	private User validUser;
-	private User nonValidUser;
+	private String validUserId;
+	private String nonValidUserId;
+	private String validUserData;
+	private String nonValidUserData;
 
-	@BeforeEach
-	public void setup() {
-		validUser = new User("TestUsername", "TestPassword");
-		nonValidUser = new User(",,,", ",,,");
-	}
+	private User user;
 
 	@Test
 	@DisplayName("Tests if the constructor works properly")
 	public void testConstructor() {
 		// Contructed with bad input values
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			new User(toShortPassword);
+			new User(nonValidUserId, nonValidUserData);
 		}, "This UserData is not possible");
 
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			new UserData(specialCharactersPassword);
+			new User(validUserId, nonValidUserData);
 		}, "This UserData is not possible");
 
-		data = new UserData(validePassword);
-		assertTrue(data.getPassword().equals(validePassword), "Does not have correct field");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			new User(nonValidUserId, validUserData);
+		}, "This UserData is not possible");
+
+		// user = new User(validUserId, validUserData);
+		// assertTrue(user.getPassword().equals(validePassword), "Does not have correct field");
 	}
 
 

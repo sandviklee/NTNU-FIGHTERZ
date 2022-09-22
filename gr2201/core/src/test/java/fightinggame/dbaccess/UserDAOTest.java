@@ -1,9 +1,9 @@
-package fightinggame.core.dbaccess;
-import fightinggame.dbaccess.UserDAO;
-import fightinggame.dbaccess.UserDAOImpl;
+package fightinggame.dbaccess;
+// import fightinggame.dbaccess.UserDAO;
+// import fightinggame.dbaccess.UserDAOImpl;
 
 import fightinggame.users.User;
-import fightinggame.users.UserData;
+// import fightinggame.users.UserData;
 import fightinggame.users.UserId;
 
 import java.io.File;
