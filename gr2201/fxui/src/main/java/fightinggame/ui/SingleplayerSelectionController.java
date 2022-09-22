@@ -9,7 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public class SingleplayerSelectionController {
     @FXML private Button lockIn, goBack;
@@ -23,9 +25,9 @@ public class SingleplayerSelectionController {
 
     @FXML
     private void handleSelectCharacter(ActionEvent event) {
-        ImageView image = (ImageView) event.getSource();
-        characterSelected.setImage(new Imageview(image));
-        image.setOpacity(0.7);
+        Image image = (Image) event.getSource();
+        characterSelected.setImage(image);
+        ((ImageView) event.getSource()).setOpacity(0.7);
         lockIn.setDisable(false);
     }
 
@@ -46,8 +48,8 @@ public class SingleplayerSelectionController {
     private void handleGoBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
-        MainMenuController controller = loader.getController();
-        controller.setUser(user);
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setUser(user);
         SceneController.changeScene("NTNU Fighterz", root, event);
     }
 }

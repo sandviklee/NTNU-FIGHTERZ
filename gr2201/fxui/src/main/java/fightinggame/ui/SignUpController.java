@@ -1,4 +1,5 @@
 package fightinggame.ui;
+import fightinggame.users.LoginSignUp;
 import fightinggame.users.User;
 
 import java.io.IOException;
@@ -30,9 +31,9 @@ public class SignUpController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        User user = LoginSignUp.signUp(username, password, confirmPassword);
+        User tempUser = LoginSignUp.signUp(username, password, confirmPassword);
 
-        if (user == null){
+        if (tempUser == null){
             if (password.equals(confirmPassword)){
                 nonValidCredentials.setText("Username already exist or password and usermane does not fit criteria.");
             }
@@ -53,7 +54,8 @@ public class SignUpController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
         LoginController loginController = loader.getController();
-        SceneController.changeScene("NTNU Fighterz", root, event)
+        loginController.setUser(user);
+        SceneController.changeScene("NTNU Fighterz", root, event);
     }
 
 }
