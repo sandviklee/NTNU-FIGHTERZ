@@ -48,10 +48,13 @@
             <Image url="@Logo.png" />
          </image>
       </ImageView>
-      <Label fx:id="nonValidCredentials" layoutX="221.0" layoutY="322.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" />
+      <Label fx:id="nonValidCredentials" layoutX="221.0" layoutY="322.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font></Label>
       <Label fx:id="nonMatchingPasswords" layoutX="256.0" layoutY="488.0" prefHeight="22.0" prefWidth="240.0" textAlignment="RIGHT">
          <font>
-            <Font size="8.0" />
+            <Font size="9.0" />
          </font></Label>
       <Button fx:id="goBack" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="23.0" prefWidth="71.0" text="Back">
          <font>

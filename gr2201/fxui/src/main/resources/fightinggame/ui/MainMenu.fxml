@@ -6,39 +6,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
    <children>
-      <ImageView fitHeight="1092.0" fitWidth="1948.0" layoutX="-8.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="729.0" fitWidth="1309.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Main%20Menu.png" />
          </image>
       </ImageView>
-      <Button fx:id="playSingleplayer" layoutX="126.0" layoutY="399.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+      <Button fx:id="playSingleplayer" layoutX="90.0" layoutY="260.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="54.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="126.0" layoutY="501.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
+      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="90.0" layoutY="330.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="54.0" prefWidth="460.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="characterInfo" layoutX="126.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="90.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="54.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="settings" layoutX="126.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
+      <Button fx:id="settings" layoutX="90.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="54.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="exit" layoutX="126.0" layoutY="823.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
+      <Button fx:id="exit" layoutX="90.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="54.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <ImageView fitHeight="188.0" fitWidth="714.0" layoutX="130.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Logo.png" />
          </image>

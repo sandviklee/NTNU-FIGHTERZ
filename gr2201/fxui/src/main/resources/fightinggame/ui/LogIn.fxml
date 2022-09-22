@@ -28,7 +28,7 @@
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
       </Button>
-      <Hyperlink fx:id="switchToSignUp" layoutX="292.0" layoutY="500.0" onAction="#handleSwichToSignUp" prefHeight="30.0" prefWidth="209.0" text="Create new account" textFill="WHITE">
+      <Hyperlink fx:id="switchToSignUp" layoutX="306.0" layoutY="502.0" onAction="#handleSwichToSignUp" prefHeight="30.0" prefWidth="209.0" text="Create new account" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
@@ -38,9 +38,9 @@
             <Image url="@Logo.png" />
          </image>
       </ImageView>
-      <Label fx:id="errorMessage" layoutX="443.0" layoutY="505.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT">
+      <Label fx:id="errorMessage" layoutX="254.0" layoutY="322.0" prefHeight="34.0" prefWidth="238.0" textAlignment="RIGHT" textFill="WHITE">
          <font>
-            <Font size="11.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font></Label>
    </children>
 </AnchorPane>
