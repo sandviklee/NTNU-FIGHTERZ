@@ -40,6 +40,7 @@ public class UserDAOTest {
 		
 		path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/";
 		dao = new UserDAOImpl(path);
+		((UserDAOImpl) dao).setPath(path);
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");
 		testUser3 = new User("Subject3", "789");

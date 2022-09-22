@@ -29,7 +29,8 @@ public class LoginSignUp {
 			if (!password.equals(userData.split(", ")[1])) return null;
 			
 			// Change userData to correct info from data storage
-			user.changeUserData((String) userData.subSequence(userData.indexOf(", "), userData.length()-1));
+			String seperator = ", ";
+			user.changeUserData((String) userData.subSequence(userData.indexOf(", ") + seperator.length(), userData.length()));
 			return user;
 
 		} catch (IllegalArgumentException e) {

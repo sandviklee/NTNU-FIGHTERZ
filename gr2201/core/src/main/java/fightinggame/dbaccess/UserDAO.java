@@ -45,7 +45,7 @@ public interface UserDAO {
 	/**
 	 * Adds user with this userId and data to data storage.
 	 * If there already exist a user with same id do nothing.
-	 * @param userId is search value and added in new data storage entry
+	 * @param id is search value and added in new data storage entry
 	 * @param data added to data storage entry
 	 */
 	public void addUser(UserId id, UserData data); 

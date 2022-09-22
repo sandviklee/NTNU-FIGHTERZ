@@ -18,7 +18,9 @@ public class UserDAOImpl implements UserDAO{
 	public UserDAOImpl(){
 		// this.path = Paths.get("gr2201/gr2201/core/src/main/resource/fightinggame/dbaccess/users.txt");
 		// this.path = "src/main/resources/fightinggame//dbaccess//users.txt";
+		
 		this.path = "gr2201/gr2201/core/src/main/resources/fightinggame/dbaccess/";
+		// this.path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/";
 	}
 
 	public UserDAOImpl(String p){
@@ -30,7 +32,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			return readFromFile(this.getPath());
 		} catch (FileNotFoundException e) {
-			System.out.println(e.getLocalizedMessage());
+			System.out.println("FileNotFound at " + this.getPath());
 		}
 		return new ArrayList();
 	}
@@ -150,15 +152,15 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 
-	public static void main(String[] args) {
-		UserDAO dao = new UserDAOImpl();
-		dao.addUser(new UserId("userId1"), new UserData("data1"));
-		dao.addUser(new UserId("userId1"), new UserData("data1"));
-		dao.addUser(new UserId("userId3"), new UserData("data1"));
+	// public static void main(String[] args) {
+	// 	UserDAO dao = new UserDAOImpl();
+	// 	dao.addUser(new UserId("userId1"), new UserData("data1"));
+	// 	dao.addUser(new UserId("userId1"), new UserData("data1"));
+	// 	dao.addUser(new UserId("userId3"), new UserData("data1"));
 
 		
-		// System.out.println(dao.findUser(new UserId("Sverre1")));
-		System.out.println(dao.findUser(new UserId("userId3")));
+	// 	// System.out.println(dao.findUser(new UserId("Sverre1")));
+	// 	System.out.println(dao.findUser(new UserId("userId3")));
 
-	}
+	// }
 }
