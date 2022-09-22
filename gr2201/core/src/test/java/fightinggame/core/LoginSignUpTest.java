@@ -1,9 +1,17 @@
 package fightinggame.core;
+import fightinggame.dbaccess.*;
 
-import static org.junit.jupiter.api.Assertions;
-import static org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Test;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // import javafx.scene.shape.Path;
 
@@ -15,7 +23,7 @@ public class LoginSignUpTest {
 	private String validePassword2;
 	private String nonValidPassword;
 
-	private static void clearFile(Path path) {
+	private static void clearFile(String path) throws IOException {
 		// TODO make file at path clear
 		File currentFile = new File(path);
 		FileWriter currentWriter = new FileWriter(currentFile, false);
@@ -26,7 +34,7 @@ public class LoginSignUpTest {
 	
 	@BeforeEach
 	public void setup() {
-		Path path = new Path("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt"); // test path
+		String path = new String("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt"); // test path
 		loginSignUp.setPath(path);
 		valideUsername = "User1";
 		nonValideUsername = "!,.*¨¨";
@@ -34,7 +42,11 @@ public class LoginSignUpTest {
 		validePassword2 = "Password2";
 		nonValidPassword = "pa,ssword";
 
-		clearFile(path);
+		try {
+			clearFile(path);
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	@Test
@@ -57,7 +69,7 @@ public class LoginSignUpTest {
 
 		// check for good username and good password for user in db
 		User userInDb = loginSignUp.login(valideUsername, validePassword1);
-		assertTrue(userNotInDb.equals(valideUser));
+		assertTrue(userInDb.equals(valideUser));
 	}
 
 	@Test
