@@ -1,5 +1,7 @@
-package fightinggame.core;
+package fightinggame.core.users;
 import fightinggame.dbaccess.*;
+import fightinggame.users.LoginSignUp;
+import fightinggame.users.User;
 
 import java.io.File;
 import java.io.FileWriter;
