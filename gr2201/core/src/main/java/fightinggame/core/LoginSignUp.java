@@ -1,6 +1,8 @@
 package fightinggame.core;
 
-import fightinggame.dbAccess;
+import fightinggame.dbaccess.*;
+
+// import path
 /**
  * LoginSignUp will handle all login and sign up functions and validate input.
  */
@@ -25,9 +27,9 @@ public class LoginSignUp {
 
 			// check if password is the same in db as login input
 			if (!password.equals(userData.split(", ")[1])) return null;
-			// String userDataParams = userData.subSequence(userData.indexOf(", "), userData.length()-1);
-			// user.changeUserData((new UserData()).stringToUserData(userDataParams));
-			user.changeUserData(new UserData(userData.subSequence(userData.indexOf(", "), userData.length()-1));
+			
+			// Change userData to correct info from data storage
+			user.changeUserData((String) userData.subSequence(userData.indexOf(", "), userData.length()-1));
 			return user;
 
 		} catch (IllegalArgumentException e) {
@@ -71,7 +73,7 @@ public class LoginSignUp {
 	 * @return true if username is valide else false
 	 */
 	private static boolean validateUserName(String username) {
-		return containsOnlyLettersAndNumbers(username);
+		return isAlphanumericAndNonEmpty(username);
 	}
 
 	/**
@@ -82,13 +84,12 @@ public class LoginSignUp {
 	 * @return true if password is valide else false
 	 */
 	private static boolean validatePassword(String password, String confirmPassword) {
-		boolean CorrespondingPassewords = isCorrespondingPasswords(password, confirmPassword);
-		boolean correctString = containsOnlyLettersAndNumbers(password);
-		return (CorrespondingPassewords && correctString);
+		boolean correspondingPassewords = isCorrespondingPasswords(password, confirmPassword);
+		boolean correctString = isAlphanumericAndNonEmpty(password);
+		return (correspondingPassewords && correctString);
 	}
 
-	private static boolean containsOnlyLettersAndNumbers(String str) {
-		// Needs better name. nonEmptyOnlyLettersAndNumbers
+	private static boolean isAlphanumericAndNonEmpty(String str) {
 		boolean notEmpty = !str.isEmpty();
 		boolean containsOnlyLettersAndNumbers = str.matches("[a-zA-Z0-9]*");
 		return (notEmpty && containsOnlyLettersAndNumbers);
@@ -101,11 +102,11 @@ public class LoginSignUp {
 	/**
 	 * hashPassword shall hash password.
 	 */
-	private static int hashPassword(String p) {
+	// private static int hashPassword(String p) {
 		// TODO: Find a good hashing algo and a decoder.
-	}
+	// }
 
-	public void setPath(Path p) {
-		this.getDAO().setPath(p);
+	public void setPath(String p) {
+		((UserDAOImpl) dao).setPath(p);
 	}
 }
