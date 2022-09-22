@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SignUpController">
+   <children>
+      <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@SignUp.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="86.0" layoutY="355.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
+         <font>
+            <Font size="29.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="86.0" layoutY="433.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </PasswordField>
+      <PasswordField fx:id="confirmPasswordField" layoutX="86.0" layoutY="510.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </PasswordField>
+      <Button fx:id="createAccount" layoutX="88.0" layoutY="584.0" mnemonicParsing="false" onAction="#handleCreateAccount" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Sign up And Log In" textFill="#233e82">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nonValidCredentials" layoutX="221.0" layoutY="322.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="nonMatchingPasswords" layoutX="256.0" layoutY="488.0" prefHeight="22.0" prefWidth="240.0" textAlignment="RIGHT">
+         <font>
+            <Font size="9.0" />
+         </font></Label>
+      <Button fx:id="goBack" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="23.0" prefWidth="71.0" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
