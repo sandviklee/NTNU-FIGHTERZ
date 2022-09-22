@@ -36,7 +36,7 @@ public class LoginController extends SceneController{
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(tempUser);
-        this.changeScene("NTNU Fighterz", root, event);
+        super.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML

@@ -44,7 +44,7 @@ public class CharacterInformationController extends SceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
         Parent root = loader.load();
         CharacterInformationMenuController controller = loader.getController();
-        controller.setUser(this.getUser());
-        this.changeScene("NTNU Fighterz", root, event);
+        controller.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 }
