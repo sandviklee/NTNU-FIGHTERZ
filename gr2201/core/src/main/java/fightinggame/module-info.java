@@ -1,5 +1,4 @@
 module fightinggame.core {
-
-	// requires fightinggame.core;
-	opens fightinggame.core;
+    exports fightinggame.users;
+    // Do not want dbaccess to be open
 }
