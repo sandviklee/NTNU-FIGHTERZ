@@ -1,8 +1,13 @@
-package fightinggame.core;
-import static org.junit.jupiter.api.Assertions;
-import static org.junit.jupiter.api.BeforeEach;
-import static org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Test;
+package fightinggame.users;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Assertions;
 
 public class UserIdTest {
 	private String valideId = "Username1";
@@ -16,7 +21,7 @@ public class UserIdTest {
 
 	
 	@Test
-	@DisplayName
+	@DisplayName("Test")
 	public void testConstructor() {
 		// Contructed with bad input values
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -27,12 +32,12 @@ public class UserIdTest {
 			new UserId(specialCharactersId);
 		}, "This UserId is not possible");
 
-		id = new UserId(validePassword);
-		assertTrue(id.getUserId().equals(validePassword), "Does not have correct field");
+		id = new UserId(valideId);
+		assertTrue(id.getUserId().equals(valideId), "Does not have correct field");
 	}
 
 	@Test
-	@DisplayName
+	@DisplayName("Test if equals method works")
 	public void testEquals() {
 		id = new UserId(valideId);
 		otherId = new UserId(otherValideId);
