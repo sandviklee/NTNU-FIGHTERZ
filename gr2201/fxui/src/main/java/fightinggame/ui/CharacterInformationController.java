@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class CharacterInformationController {
+public class CharacterInformationController extends SceneController{
     private String character;
     
     @FXML private ImageView characterSplashArt, difficulty;
@@ -44,7 +44,7 @@ public class CharacterInformationController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
         Parent root = loader.load();
         CharacterInformationMenuController controller = loader.getController();
-        controller.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        controller.setUser(this.getUser());
+        this.changeScene("NTNU Fighterz", root, event);
     }
 }

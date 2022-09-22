@@ -1,12 +1,14 @@
 package fightinggame.ui;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
-public class MainMenuController {
+public class MainMenuController extends SceneController {
     @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, exit;
 
     @FXML
@@ -17,12 +19,12 @@ public class MainMenuController {
     }
     
     @FXML
-    private void handlePlaySingleplayer(ActionEvent event){
+    private void handlePlaySingleplayer(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
         Parent root = loader.load();
         SingleplayerSelectionController singleplayerSelectionController = loader.getController();
-        singleplayerSelectionController.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        singleplayerSelectionController.setUser(this.getUser());
+        this.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML
@@ -32,12 +34,12 @@ public class MainMenuController {
     }
     
     @FXML
-    private void handleCharacterInfo(ActionEvent event){
+    private void handleCharacterInfo(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInfo.fxml"));
         Parent root = loader.load();
         CharacterInformationController characterInformationController = loader.getController();
-        characterInformationController.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        characterInformationController.setUser(this.getUser());
+        this.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML

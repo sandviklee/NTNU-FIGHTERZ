@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginController extends SceneController{
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorMessage;

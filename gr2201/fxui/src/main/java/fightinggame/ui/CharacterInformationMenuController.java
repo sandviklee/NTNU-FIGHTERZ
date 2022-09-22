@@ -10,19 +10,19 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class CharacterInformationMenuController {
+public class CharacterInformationMenuController extends SceneController{
     @FXML private GridPane characterSelectGrid;
     @FXML private Button goBack;
 
     @FXML
-    private void handleSelectCharacter(ActionEvent event) {
+    private void handleSelectCharacter(ActionEvent event) throws IOException {
         ImageView image = (ImageView) event.getSource();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformation.fxml"));
         Parent root = loader.load();
         CharacterInformationController controller = loader.getController();
-        controller.setUser(user);
+        controller.setUser(this.getUser());
         controller.setCharacter(image.getId());
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        this.changeScene("NTNU Fighterz", root, event);
     }
     
     @FXML
@@ -30,7 +30,7 @@ public class CharacterInformationMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController controller = loader.getController();
-        controller.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        controller.setUser(this.getUser());
+        this.changeScene("NTNU Fighterz", root, event);
     }
 }

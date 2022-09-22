@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 
-public class SignUpController {
+public class SignUpController extends SceneController{
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
@@ -45,8 +45,8 @@ public class SignUpController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
-        mainMenuController.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        mainMenuController.setUser(tempUser);
+        this.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML 
@@ -54,8 +54,7 @@ public class SignUpController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = loader.load();
         LoginController loginController = loader.getController();
-        loginController.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        this.changeScene("NTNU Fighterz", root, event);
     }
 
 }
