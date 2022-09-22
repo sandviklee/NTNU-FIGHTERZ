@@ -13,27 +13,27 @@
             <Image url="@Main%20Menu.png" />
          </image>
       </ImageView>
-      <Button layoutX="126.0" layoutY="399.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+      <Button fx:id="playSingleplayer" layoutX="126.0" layoutY="399.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
       </Button>
-      <Button defaultButton="true" layoutX="126.0" layoutY="501.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
+      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="126.0" layoutY="501.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
       </Button>
-      <Button layoutX="126.0" layoutY="613.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="126.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
       </Button>
-      <Button layoutX="126.0" layoutY="718.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
+      <Button fx:id="settings" layoutX="126.0" layoutY="718.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
       </Button>
-      <Button layoutX="126.0" layoutY="823.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
+      <Button fx:id="exit" layoutX="126.0" layoutY="823.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="63.0" prefWidth="680.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
