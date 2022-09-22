@@ -1,4 +1,4 @@
-package fightinggame.core.users;
+package fightinggame.users;
 import fightinggame.dbaccess.*;
 import fightinggame.users.LoginSignUp;
 import fightinggame.users.User;

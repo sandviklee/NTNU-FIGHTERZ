@@ -19,7 +19,9 @@ public class UserDAOImpl implements UserDAO{
 	public UserDAOImpl(){
 		// TODO: make construtor
 		// this.path = Paths.get("gr2201/gr2201/core/src/main/resource/fightinggame/dbaccess/users.txt");
-		this.path = "src/main/resources/fightinggame//dbaccess//users.txt";
+		// this.path = "src/main/resources/fightinggame//dbaccess//users.txt";
+		this.path = "users";
+
 	}
 
 	public UserDAOImpl(String p){
@@ -109,9 +111,9 @@ public class UserDAOImpl implements UserDAO{
 		List<String> usersInfo = new ArrayList<>();
 
 		ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
-		File file = new File(classLoader.getResource(filename + ".txt").getFile());
+		File userFile = new File(classLoader.getResource(filename + ".txt").getFile());
 
-		File userFile = new File(filename);
+		// File userFile = new File(filename);
 		if (userFile.exists()){
 			Scanner userFileReader = new Scanner(userFile);
 
@@ -130,12 +132,14 @@ public class UserDAOImpl implements UserDAO{
 	private static void storeToFile(String filename, String data, Boolean shallOverwrite) throws IOException{
 		// File currentFile = new File(filename);
 
-		ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
-		File currentFile = new File(classLoader.getResource(filename + ".txt").getFile());
+		// ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
+		// File currentFile = new File(classLoader.getResource("users.txt").getFile());
 
-		// ClassLoader classLoader = UserDAO.class.getClassLoader();
-		// File currentFile = new File(classLoader.getResource(filename + ".txt").toString());
-		currentFile.createNewFile();
+		// File currentFile = new File(filename + ".txt");
+		// FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);
+		ClassLoader classLoader = UserDAO.class.getClassLoader();
+		File currentFile = new File(classLoader.getResource(filename + ".txt"));
+		// currentFile.createNewFile();
 		// if (file.createNewFile()) 
 		
 		FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);

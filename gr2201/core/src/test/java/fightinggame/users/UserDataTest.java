@@ -1,4 +1,4 @@
-package fightinggame.core.users;
+package fightinggame.users;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
