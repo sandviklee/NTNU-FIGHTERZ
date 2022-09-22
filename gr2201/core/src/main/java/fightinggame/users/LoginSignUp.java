@@ -33,7 +33,7 @@ public class LoginSignUp {
 			user.changeUserData((String) userData.subSequence(userData.indexOf(", ") + seperator.length(), userData.length()));
 			return user;
 
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}
@@ -61,8 +61,7 @@ public class LoginSignUp {
 			if (!userData.isEmpty()) return null;
 			dao.addUser(user.getUserId(), user.getUserData());
 			return user;
-		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
+		} catch (NullPointerException e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}

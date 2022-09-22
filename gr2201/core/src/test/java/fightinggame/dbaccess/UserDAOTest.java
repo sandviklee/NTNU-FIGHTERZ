@@ -44,8 +44,6 @@ public class UserDAOTest {
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");
 		testUser3 = new User("Subject3", "789");
-
-		// TODO make a method to empty data storage so previous test does not affect other tests.
 		try {
 			clearFile(path);
 		} catch (IOException e) {
