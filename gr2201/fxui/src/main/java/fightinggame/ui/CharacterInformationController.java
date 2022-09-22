@@ -26,14 +26,16 @@ public class CharacterInformationController {
 
     @FXML
     private void initalize(){
-        characterSplashArt.setImage(new Image(getClass().getResource(character + "SplashArt.png")));
+        Image characterSplashArt = new Image((getClass().getResource(character + "SplashArt.png")).toString());
+        this.characterSplashArt.setImage(characterSplashArt);
         // temporary difficulty image, same for all characters
-        difficulty.setImage(getClass().getResource("Difficulty.jpg"));
+        Image difficulty = new Image((getClass().getResource("Difficulty.jpg")).toString());
+        this.difficulty.setImage(difficulty);
         title.setText(character.toUpperCase() + " INFO");
         description.setText("Lorem ipsum comes later.");
         for (int i = 0; i < 5; i++) {
-            ImageView special = new ImageView(getClass().getResource(character + "Move" + i + ".jpg"));
-            characterSpecials.add(special);
+            Image characterSpecials = new Image((getClass().getResource(character + "Move" + i + ".jpg")).toString());
+            this.characterSpecials.getChildren().add(new ImageView(characterSpecials));
         }
     }
 

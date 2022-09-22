@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 public class MainMenuController {
     @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, exit;
 
+    @FXML
     private void initialize(){
         playMultiplayer.setDisable(true);
         settings.setDisable(true);
@@ -19,8 +20,8 @@ public class MainMenuController {
     private void handlePlaySingleplayer(ActionEvent event){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
         Parent root = loader.load();
-        SingleplayerController singleplayerController = loader.getController();
-        singleplayerController.setUser(this.user);
+        SingleplayerSelectionController singleplayerSelectionController = loader.getController();
+        singleplayerSelectionController.setUser(user);
         SceneController.changeScene("NTNU Fighterz", root, event);
     }
 
@@ -34,8 +35,8 @@ public class MainMenuController {
     private void handleCharacterInfo(ActionEvent event){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInfo.fxml"));
         Parent root = loader.load();
-        CharacterInfoController characterInfoController = loader.getController();
-        characterInfoController.setUser(user);
+        CharacterInformationController characterInformationController = loader.getController();
+        characterInformationController.setUser(user);
         SceneController.changeScene("NTNU Fighterz", root, event);
     }
 
