@@ -15,10 +15,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// TODO_ change of addUser method must remove toString in all addUser
 public class UserDAOTest {
 	private UserDAO dao;
 
@@ -40,7 +38,7 @@ public class UserDAOTest {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
 		
-		String path = "gr2201/gr2201/core/src/test/resource/fightinggame/dbaccess/testUsers.txt";
+		path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/";
 		dao = new UserDAOImpl(path);
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");

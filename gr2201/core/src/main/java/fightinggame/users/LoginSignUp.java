@@ -57,7 +57,7 @@ public class LoginSignUp {
 	
 			// check if user in db and add when not
 			String userData = dao.findUser(user.getUserId());
-			if (userData.isEmpty()) return null;
+			if (!userData.isEmpty()) return null;
 			dao.addUser(user.getUserId(), user.getUserData());
 			return user;
 		} catch (IllegalArgumentException e) {

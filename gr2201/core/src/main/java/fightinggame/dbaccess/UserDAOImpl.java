@@ -5,7 +5,6 @@ import fightinggame.users.UserId;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.nio.file.Path;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.File;
@@ -17,11 +16,9 @@ public class UserDAOImpl implements UserDAO{
 	private String path;
 
 	public UserDAOImpl(){
-		// TODO: make construtor
 		// this.path = Paths.get("gr2201/gr2201/core/src/main/resource/fightinggame/dbaccess/users.txt");
 		// this.path = "src/main/resources/fightinggame//dbaccess//users.txt";
-		this.path = "users";
-
+		this.path = "gr2201/gr2201/core/src/main/resources/fightinggame/dbaccess/";
 	}
 
 	public UserDAOImpl(String p){
@@ -94,7 +91,7 @@ public class UserDAOImpl implements UserDAO{
 
 	public void addUser(UserId userId, UserData data) {
 		try {
-			storeToFile(this.getPath(), userId.toString() + ", " + data.toString(), false);
+			storeToFile(this.getPath(), userId.toString() + ", " + data.toString() + "\n", false);
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -110,18 +107,20 @@ public class UserDAOImpl implements UserDAO{
 	private static List<String> readFromFile(String filename) throws FileNotFoundException {		
 		List<String> usersInfo = new ArrayList<>();
 
-		ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
-		File userFile = new File(classLoader.getResource(filename + ".txt").getFile());
+		// ClassLoader classLoader = UserDAOImpl.class.getClassLoader();
+		// File userFile = new File(classLoader.getResource(filename + "users.txt").getFile());
 
-		// File userFile = new File(filename);
+		File userFile = new File(filename + "users.txt");
 		if (userFile.exists()){
 			Scanner userFileReader = new Scanner(userFile);
 
 			while(userFileReader.hasNextLine()) {
 				String line = userFileReader.nextLine();
-				for (String dataFromFile : line.split(", ")){
-					usersInfo.add(dataFromFile);
-				}
+				usersInfo.add(line);
+				// System.out.println(line);
+				// for (String dataFromFile : line.split(", ")){
+					// usersInfo.add(dataFromFile);
+				// }
 			}
 			userFileReader.close();
 		}
@@ -130,24 +129,11 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	private static void storeToFile(String filename, String data, Boolean shallOverwrite) throws IOException{
-		// File currentFile = new File(filename);
+		// File currentFile = new File("gr2201/gr2201/core/src/main/resources/fightinggame/dbaccess/" + file);
+		String file = filename + "users.txt";
+		File currentFile = new File(file);
 
-		// File currentFile = new File(classLoader.getResource("users.txt").getFile());
-
-		// File currentFile = new File(filename + ".txt");
-		// FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);
-		File currentFile;
-		try {
-			ClassLoader classLoader = UserDAO.class.getClassLoader();
-			currentFile = new File(classLoader.getResource(filename + ".txt").toURI());
-			
-		} catch (Exception e) {
-			currentFile = new File("");
-			// TODO: handle exception
-		}
-		// currentFile.createNewFile();
-		// if (file.createNewFile()) 
-		
+		// if (currentFile.createNewFile()) System.out.println("Created new file");
 		FileWriter currentWriter = new FileWriter(currentFile, !shallOverwrite);
 		String headLine = "id, password";
 		
@@ -155,7 +141,7 @@ public class UserDAOImpl implements UserDAO{
 			currentWriter.write(headLine + "\n" + data);
 		}
 		else {
-			if (!currentFile.exists()){
+			if (currentFile.createNewFile()){
 				currentWriter.write(headLine);
 			}
 			currentWriter.append(data);
@@ -168,6 +154,11 @@ public class UserDAOImpl implements UserDAO{
 		UserDAO dao = new UserDAOImpl();
 		dao.addUser(new UserId("userId1"), new UserData("data1"));
 		dao.addUser(new UserId("userId1"), new UserData("data1"));
+		dao.addUser(new UserId("userId3"), new UserData("data1"));
+
+		
+		// System.out.println(dao.findUser(new UserId("Sverre1")));
+		System.out.println(dao.findUser(new UserId("userId3")));
 
 	}
 }

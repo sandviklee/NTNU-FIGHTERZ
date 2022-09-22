@@ -36,7 +36,7 @@ public class LoginSignUpTest {
 	
 	@BeforeEach
 	public void setup() {
-		String path = new String("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt"); // test path
+		String path = new String("gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/users.txt"); // test path
 		loginSignUp.setPath(path);
 		valideUsername = "User1";
 		nonValideUsername = "!,.*¨¨";
@@ -57,6 +57,7 @@ public class LoginSignUpTest {
 		// must make sure User in db
 		User valideUser = loginSignUp.signUp(valideUsername, validePassword1, validePassword1);
 
+		// if (valideUser == null) 
 		// check for bad username good password
 		User badPasUser = loginSignUp.login(valideUsername, nonValidPassword);
 		assertTrue(badPasUser == null, "user not in db and input values are none valide");
