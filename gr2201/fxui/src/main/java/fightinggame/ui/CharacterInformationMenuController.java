@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class CharacterInformationMenuController extends SceneController{
@@ -15,14 +16,14 @@ public class CharacterInformationMenuController extends SceneController{
     @FXML private Button goBack;
 
     @FXML
-    private void handleSelectCharacter(ActionEvent event) throws IOException {
+    private void handleSelectCharacter(MouseEvent event) throws IOException {
         ImageView image = (ImageView) event.getSource();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformation.fxml"));
         Parent root = loader.load();
         CharacterInformationController controller = loader.getController();
         controller.setUser(super.getUser());
         controller.setCharacter(image.getId());
-        super.changeScene("NTNU Fighterz", root, event);
+        super.changeSceneMouseEvent("NTNU Fighterz", root, event);
     }
     
     @FXML
