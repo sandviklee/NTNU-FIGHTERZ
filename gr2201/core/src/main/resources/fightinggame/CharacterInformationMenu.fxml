@@ -18,7 +18,7 @@
             <Image url="@CharacterInfo.png" />
          </image>
       </ImageView>
-      <Button fx:id="goBack" layoutX="150.0" layoutY="96.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="goBack" layoutX="150.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="31.0" />
          </font>
@@ -36,7 +36,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="767.0" fitWidth="468.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="767.0" fitWidth="468.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Char1SelectInfo.png" />
                </image>
@@ -44,7 +44,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fitHeight="771.0" fitWidth="317.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fitHeight="771.0" fitWidth="317.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@Char2SelectInfo.png" />
                </image>
@@ -52,7 +52,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fitHeight="775.0" fitWidth="321.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fitHeight="775.0" fitWidth="321.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3SelectInfo.png" />
                </image>
