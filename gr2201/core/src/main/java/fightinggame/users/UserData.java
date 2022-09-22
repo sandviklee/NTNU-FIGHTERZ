@@ -25,12 +25,12 @@ public class UserData {
 	}
 
 	/**
-	 * Makes a string representation of UserData.
-	 * 
+	 * Makes a string representation of UserData. 
+	 * Where each field is seperated by a seperator.
+	 * @return The string representation of UserData
 	 */
 	@Override
 	public String toString() {
-		// TODO:
 		String seperator = ", ";
 		return this.getPassword();
 
