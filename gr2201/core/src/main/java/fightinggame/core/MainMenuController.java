@@ -7,6 +7,12 @@ import javafx.scene.control.Button;
 public class mainMenuController {
     @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, exit;
 
+    private void initialize(){
+        playMultiplayer.setDisable(true);
+        settings.setDisable(true);
+        exit.setDisable(true);
+    }
+    
     @FXML
     private void handlePlaySingleplayer(ActionEvent event){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
