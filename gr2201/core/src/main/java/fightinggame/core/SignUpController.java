@@ -20,7 +20,7 @@ public class SignUpController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private Button createAccount;
+    @FXML private Button createAccount, goBack;
     @FXML private TextArea nonValidCredentials;
     @FXML private TextArea nonMatchingPasswords;
 
