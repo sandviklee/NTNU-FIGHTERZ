@@ -12,18 +12,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.LoginController">
    <children>
-      <ImageView fitHeight="726.0" fitWidth="1300.0" layoutX="-7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Login%20With%20Username.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="78.0" layoutY="357.0" prefHeight="54.0" prefWidth="400.0" style="-fx-background-color: #233e82;">
+      <TextField fx:id="usernameField" layoutX="78.0" layoutY="357.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
          <font>
             <Font size="29.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="passwordField" layoutX="79.0" layoutY="435.0" prefHeight="54.0" prefWidth="400.0" style="-fx-background-color: #233e82;" />
-      <Button fx:id="login" layoutX="79.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="54.0" prefWidth="400.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
+      <PasswordField fx:id="passwordField" layoutX="79.0" layoutY="434.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;" />
+      <Button fx:id="login" layoutX="79.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="54.0" prefWidth="408.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>

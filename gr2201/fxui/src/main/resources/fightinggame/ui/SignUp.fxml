@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SignUpController">
    <children>
-      <ImageView fitHeight="1093.0" fitWidth="1930.0" layoutX="-7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@SignUp.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="122.0" layoutY="541.0" prefHeight="64.0" prefWidth="594.0" style="-fx-background-color: #233e82;">
+      <TextField fx:id="usernameField" layoutX="86.0" layoutY="355.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
          <font>
             <Font size="29.0" />
          </font>
@@ -25,34 +25,37 @@
             <DropShadow />
          </effect>
       </TextField>
-      <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="655.0" prefHeight="64.0" prefWidth="594.0" style="-fx-background-color: #233e82;">
+      <PasswordField fx:id="passwordField" layoutX="86.0" layoutY="433.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
          <effect>
             <DropShadow />
          </effect>
       </PasswordField>
-      <PasswordField fx:id="confirmPasswordField" layoutX="126.0" layoutY="777.0" prefHeight="64.0" prefWidth="594.0" style="-fx-background-color: #233e82;">
+      <PasswordField fx:id="confirmPasswordField" layoutX="86.0" layoutY="510.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
          <effect>
             <DropShadow />
          </effect>
       </PasswordField>
-      <Button fx:id="createAccount" layoutX="127.0" layoutY="875.0" mnemonicParsing="false" onAction="#handleCreateAccount" prefHeight="63.0" prefWidth="596.0" style="-fx-background-color: #597BCE;" text="Sign up And Log In" textFill="#233e82">
+      <Button fx:id="createAccount" layoutX="88.0" layoutY="584.0" mnemonicParsing="false" onAction="#handleCreateAccount" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Sign up And Log In" textFill="#233e82">
          <font>
-            <Font name="Arial Rounded MT Bold" size="27.0" />
+            <Font name="Arial Rounded MT Bold" size="22.0" />
          </font>
          <effect>
             <DropShadow />
          </effect>
       </Button>
-      <ImageView fitHeight="188.0" fitWidth="714.0" layoutX="120.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Logo.png" />
          </image>
       </ImageView>
-      <Label fx:id="nonValidCredentials" layoutX="428.0" layoutY="502.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" />
-      <Label fx:id="nonMatchingPasswords" layoutX="430.0" layoutY="612.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" />
-      <Button fx:id="goBack" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="63.0" prefWidth="126.0" text="Back">
+      <Label fx:id="nonValidCredentials" layoutX="221.0" layoutY="322.0" prefHeight="34.0" prefWidth="281.0" textAlignment="RIGHT" />
+      <Label fx:id="nonMatchingPasswords" layoutX="256.0" layoutY="488.0" prefHeight="22.0" prefWidth="240.0" textAlignment="RIGHT">
          <font>
-            <Font name="Arial Rounded MT Bold" size="31.0" />
+            <Font size="8.0" />
+         </font></Label>
+      <Button fx:id="goBack" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="23.0" prefWidth="71.0" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
          <effect>
             <DropShadow />
