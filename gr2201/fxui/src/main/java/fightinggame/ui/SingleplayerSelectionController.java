@@ -13,7 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-public class SingleplayerSelectionController {
+public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
@@ -49,7 +49,7 @@ public class SingleplayerSelectionController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
-        mainMenuController.setUser(user);
-        SceneController.changeScene("NTNU Fighterz", root, event);
+        mainMenuController.setUser(this.getUser());
+        this.changeScene("NTNU Fighterz", root, event);
     }
 }
