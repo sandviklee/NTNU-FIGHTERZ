@@ -1,7 +1,4 @@
 package fightinggame.users;
-import fightinggame.dbaccess.*;
-import fightinggame.users.LoginSignUp;
-import fightinggame.users.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,8 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // import javafx.scene.shape.Path;
@@ -36,7 +32,7 @@ public class LoginSignUpTest {
 	
 	@BeforeEach
 	public void setup() {
-		String path = new String("gr2201/gr2201/dbAccess/src/test/resource/fightinggame/dbAccess/testUsers.txt"); // test path
+		String path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/"; // test path
 		loginSignUp.setPath(path);
 		valideUsername = "User1";
 		nonValideUsername = "!,.*¨¨";
@@ -57,6 +53,7 @@ public class LoginSignUpTest {
 		// must make sure User in db
 		User valideUser = loginSignUp.signUp(valideUsername, validePassword1, validePassword1);
 
+		// if (valideUser == null) 
 		// check for bad username good password
 		User badPasUser = loginSignUp.login(valideUsername, nonValidPassword);
 		assertTrue(badPasUser == null, "user not in db and input values are none valide");
@@ -71,7 +68,8 @@ public class LoginSignUpTest {
 
 		// check for good username and good password for user in db
 		User userInDb = loginSignUp.login(valideUsername, validePassword1);
-		assertTrue(userInDb.equals(valideUser));
+		assertNotNull(userInDb);
+		assertTrue(valideUser.equals(userInDb));
 	}
 
 	@Test
