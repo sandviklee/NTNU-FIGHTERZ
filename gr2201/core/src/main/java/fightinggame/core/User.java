@@ -55,7 +55,7 @@ public class User {
 	public void changeUserData(String userData) {
 		try {
 			UserData data = new UserData(userData);
-			this.setUserData(userData);
+			this.setUserData(data);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
