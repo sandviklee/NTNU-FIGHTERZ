@@ -19,7 +19,6 @@
     <dependencies>
         <dependency>
             <groupId>fightinggame</groupId>
-
             <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
