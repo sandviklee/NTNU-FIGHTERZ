@@ -1,9 +1,6 @@
 package fightinggame.dbaccess;
-// import fightinggame.dbaccess.UserDAO;
-// import fightinggame.dbaccess.UserDAOImpl;
 
 import fightinggame.users.User;
-// import fightinggame.users.UserData;
 import fightinggame.users.UserId;
 
 import java.io.File;
@@ -38,7 +35,7 @@ public class UserDAOTest {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
 		
-		path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/";
+		path = "gr2201/core/src/test/recources/fightinggame/dbaccess/";
 		dao = new UserDAOImpl(path);
 		((UserDAOImpl) dao).setPath(path);
 		testUser1 = new User("Subject1", "123");
