@@ -16,13 +16,8 @@ public class UserDAOImpl implements UserDAO{
 	private String path;
 
 	public UserDAOImpl(){
-		// this.path = Paths.get("gr2201/gr2201/core/src/main/resource/fightinggame/dbaccess/users.txt");
-		// this.path = "src/main/resources/fightinggame//dbaccess//users.txt";
-		
 		this.path = "gr2201/core/src/main/resources/fightinggame/dbaccess/";
-				 //  gr2201/core/src/main/resources/fightinggame/dbaccess/users.txt
 		// this.path = "gr2201/core/src/test/recources/fightinggame/dbaccess/";
-					
 	}
 
 	public UserDAOImpl(String p){
