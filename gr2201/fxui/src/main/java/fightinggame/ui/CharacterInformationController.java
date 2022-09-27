@@ -25,6 +25,7 @@ public class CharacterInformationController extends SceneController implements I
 
     public void setCharacter(String character) {
         this.character = character;
+        title.setText(character);
     }
 
 
@@ -48,7 +49,7 @@ public class CharacterInformationController extends SceneController implements I
         // temporary difficulty image, same for all characters
         Image difficulty = new Image((getClass().getResource("Difficulty.png")).toString());
         this.difficulty.setImage(difficulty);
-        title.setText("Ram" + " INFO");
+        //title.setText("Ram" + " INFO");
         description.setText("Lorem ipsum comes later.");
         for (int i = 1; i < 5; i++) {
             Image characterSpecials = new Image((getClass().getResource("Ram" + "Move" + i + ".png")).toString());
