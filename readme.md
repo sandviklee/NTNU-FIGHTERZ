@@ -13,3 +13,6 @@ Her har vi **core**, **docs** og **fxui**.
 **Fxui** inneholder hovedkoden vår, alle fxml filer, bilder, og kontrollere. Her er det mesteparten av _kodingsprosjektet_. 
 
 ---
+
+
+https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2201/gr2201.git

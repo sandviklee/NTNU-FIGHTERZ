@@ -25,7 +25,25 @@ public class CharacterInformationController extends SceneController implements I
 
     public void setCharacter(String character) {
         this.character = character;
-        title.setText(character);
+
+        initCharacter(character);
+    }
+
+    private void initCharacter(String character) {
+        System.out.println((getClass().getResource(character + "SplashArt.png")).toString());
+        title.setText(character + " INFO");
+        Image characterSplashArt = new Image((getClass().getResource(character + "SplashArt.png")).toString());
+       
+        this.characterSplashArt.setImage(characterSplashArt);
+        // temporary difficulty image, same for all characters
+        Image difficulty = new Image((getClass().getResource("Difficulty.png")).toString());
+        this.difficulty.setImage(difficulty);
+        //title.setText("Ram" + " INFO");
+        description.setText("Lorem ipsum comes later.");
+        for (int i = 1; i < 5; i++) {
+            Image characterSpecials = new Image((getClass().getResource(character + "Move" + i + ".png")).toString());
+            this.characterSpecials.getChildren().add(new ImageView(characterSpecials));
+        }
     }
 
 

@@ -19,8 +19,8 @@
             <Image url="@ACharBackground.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSplashArt" fitHeight="739.0" fitWidth="647.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="741.0" fitWidth="1306.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="characterSplashArt" fitHeight="627.0" fitWidth="819.0" layoutX="-7.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="741.0" fitWidth="1306.0" layoutX="-13.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharacterInfoShape.png" />
          </image>
@@ -39,7 +39,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Button fx:id="goBack" layoutX="58.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="goBack" layoutX="58.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="20.0" prefWidth="131.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="31.0" />
          </font>
@@ -47,15 +47,18 @@
             <DropShadow />
          </effect>
       </Button>
-      <Label fx:id="description" layoutX="528.0" layoutY="80.0" prefHeight="226.0" prefWidth="750.0" textFill="WHITE" />
+      <Label fx:id="description" layoutX="730.0" layoutY="60.0" prefHeight="226.0" prefWidth="539.0" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="29.0" />
+         </font></Label>
       <Text fill="WHITE" layoutX="838.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specials:" textAlignment="CENTER">
          <font>
             <Font name="Arial Rounded MT Bold" size="32.0" />
          </font>
       </Text>
-      <Label fx:id="title" layoutX="561.0" layoutY="12.0" prefHeight="87.0" prefWidth="682.0" textFill="WHITE">
+      <Label fx:id="title" layoutX="732.0" layoutY="12.0" prefHeight="93.0" prefWidth="511.0" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="13.0" />
+            <Font name="Arial Rounded MT Bold" size="72.0" />
          </font></Label>
    </children>
 </AnchorPane>
