@@ -1,5 +1,5 @@
 package fightinggame.ui;
-import fightinggame.users.LoginSignUp;
+import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 
-public class SignUpController extends SceneController{
+public class SignupController extends SceneController{
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
@@ -31,7 +31,7 @@ public class SignUpController extends SceneController{
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        User tempUser = LoginSignUp.signUp(username, password, confirmPassword);
+        User tempUser = LoginSignup.signUp(username, password, confirmPassword);
 
         if (tempUser == null){
             if (password.equals(confirmPassword)){
@@ -50,7 +50,7 @@ public class SignUpController extends SceneController{
     }
 
     @FXML 
-    private void handleBackToLogin(ActionEvent event) throws IOException{
+    private void handleBackTologIn(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
         Parent root = loader.load();
         super.changeScene("NTNU Fighterz", root, event);
