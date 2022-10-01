@@ -1,7 +1,6 @@
 package fightinggame.ui;
 
 import java.io.IOException;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
