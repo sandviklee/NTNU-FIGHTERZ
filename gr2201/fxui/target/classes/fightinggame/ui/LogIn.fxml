@@ -17,20 +17,23 @@
             <Image url="@Login%20With%20Username.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="78.0" layoutY="357.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;">
+      <TextField fx:id="usernameField" layoutX="86.0" layoutY="359.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82; -fx-text-fill: white;">
          <font>
-            <Font size="29.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="passwordField" layoutX="79.0" layoutY="434.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82;" />
-      <Button fx:id="login" layoutX="79.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="54.0" prefWidth="408.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
+      <PasswordField fx:id="passwordField" layoutX="86.0" layoutY="436.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82; -fx-text-fill: white;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font></PasswordField>
+      <Button fx:id="login" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
       </Button>
-      <Hyperlink fx:id="switchToSignUp" layoutX="306.0" layoutY="502.0" onAction="#handleSwichToSignUp" prefHeight="30.0" prefWidth="209.0" text="Create new account" textFill="WHITE">
+      <Hyperlink fx:id="switchToSignUp" layoutX="318.0" layoutY="504.0" onAction="#handleSwichToSignUp" prefHeight="30.0" prefWidth="209.0" text="Create new account" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="18.0" />
+            <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </Hyperlink>
       <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">

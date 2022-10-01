@@ -38,6 +38,12 @@
             <RowConstraints />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="150.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+         </children>
       </GridPane>
       <Button fx:id="goBack" layoutX="58.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="20.0" prefWidth="131.0" text="Back">
          <font>
