@@ -18,13 +18,13 @@
             <Image url="@Character%20selection%20Singleplayer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="70.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="101.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCover.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSelected" fitHeight="217.0" fitWidth="574.0" layoutX="340.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="249.0" layoutY="591.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="characterSelected" fitHeight="672.0" fitWidth="576.0" layoutX="366.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="278.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCoverSmall.png" />
          </image>
@@ -55,7 +55,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sol" fitHeight="244.0" fitWidth="216.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="Sol" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>
@@ -73,7 +73,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="lockIn" layoutX="496.0" layoutY="619.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="73.0" prefWidth="278.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
+      <Button fx:id="lockIn" layoutX="557.0" layoutY="637.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="36.0" prefWidth="212.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="39.0" />
          </font>

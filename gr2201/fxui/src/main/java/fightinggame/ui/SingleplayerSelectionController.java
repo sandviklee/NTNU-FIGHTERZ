@@ -5,12 +5,14 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
 public class SingleplayerSelectionController extends SceneController{
@@ -23,11 +25,18 @@ public class SingleplayerSelectionController extends SceneController{
         lockIn.setDisable(true);
     }
 
+    private void resetCharacterImageOpacity() {
+        for (Node imageView : characterSelectGrid.getChildren()) {
+            imageView.setOpacity(1);
+        }
+    }
+
     @FXML
-    private void handleSelectCharacter(ActionEvent event) {
-        Image image = (Image) event.getSource();
-        characterSelected.setImage(image);
-        ((ImageView) event.getSource()).setOpacity(0.7);
+    private void handleSelectCharacter(MouseEvent event) {
+        resetCharacterImageOpacity();
+        ImageView image = (ImageView) event.getSource();
+        characterSelected.setImage(new Image(getClass().getResource(image.getId() + "SplashArt.png").toString()));
+        image.setOpacity(0.7);
         lockIn.setDisable(false);
     }
 
