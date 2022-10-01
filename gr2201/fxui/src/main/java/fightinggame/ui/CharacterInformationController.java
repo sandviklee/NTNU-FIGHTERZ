@@ -2,9 +2,11 @@ package fightinggame.ui;
 
 import java.io.IOException;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ public class CharacterInformationController extends SceneController{
     }
 
     private void initCharacter(String character) {
+        int i = 0;
         System.out.println((getClass().getResource(character + "SplashArt.png")).toString());
         title.setText(character + " INFO");
         Image characterSplashArt = new Image((getClass().getResource(character + "SplashArt.png")).toString());
@@ -34,9 +37,11 @@ public class CharacterInformationController extends SceneController{
         this.difficulty.setImage(difficulty);
         //title.setText("Ram" + " INFO");
         description.setText("Lorem ipsum comes later.");
-        for (int i = 1; i < 5; i++) {
-            Image characterSpecials = new Image((getClass().getResource(character + "Move" + i + ".png")).toString());
-            this.characterSpecials.getChildren().add(new ImageView(characterSpecials));
+        for (Node Imageview : characterSpecials.getChildren()) {
+            i += 1;
+            if (Imageview instanceof ImageView) {
+                ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + i + ".jpeg")).toString()));
+            }
         }
     }
 
