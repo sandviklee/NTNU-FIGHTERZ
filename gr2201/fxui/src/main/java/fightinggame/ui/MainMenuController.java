@@ -2,6 +2,7 @@ package fightinggame.ui;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,6 @@ public class MainMenuController extends SceneController {
     private void initialize(){
         playMultiplayer.setDisable(true);
         settings.setDisable(true);
-        exit.setDisable(true);
     }
     
     @FXML
@@ -50,8 +50,7 @@ public class MainMenuController extends SceneController {
 
     @FXML
     private void handleExit(ActionEvent event){
-        //todo
-        return;
+        Platform.exit();
     }
 
 }
