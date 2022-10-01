@@ -55,7 +55,7 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(super.getUser());
