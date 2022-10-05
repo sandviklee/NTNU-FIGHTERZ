@@ -4,9 +4,9 @@ import fightinggame.dbaccess.*;
 
 // import path
 /**
- * LoginSignUp will handle all login and sign up functions and validate input.
+ * LoginSignup will handle all login and sign up functions and validate input.
  */
-public class LoginSignUp {
+public class LoginSignup {
 	private static UserDAO dao = new UserDAOImpl();
 
 	/**
@@ -18,7 +18,7 @@ public class LoginSignUp {
 	 * @param password  the the string that login will attempt to find a corresensponding user
 	 * @return A User if valide input and user in data storage else null.
 	 */
-	public static User login(String username, String password) {
+	public static User logIn(String username, String password) {
 		if (!validateUserName(username) || !validatePassword(password, password)) return null;
 		try {
 			User user = new User(username, password);
@@ -98,13 +98,6 @@ public class LoginSignUp {
 	private static boolean isCorrespondingPasswords(String p1, String p2) {
 		return p1.equals(p2);
 	}
-
-	/**
-	 * hashPassword shall hash password.
-	 */
-	// private static int hashPassword(String p) {
-		// TODO: Find a good hashing algo and a decoder.
-	// }
 
 	public void setPath(String p) {
 		((UserDAOImpl) dao).setPath(p);
