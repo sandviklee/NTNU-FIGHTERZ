@@ -32,7 +32,7 @@ public class LoginSignupTest {
 	
 	@BeforeEach
 	public void setup() {
-		String path = "gr2201/gr2201/core/src/test/recources/fightinggame/dbaccess/"; // test path
+		String path = "gr2201/gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
 		LoginSignup.setPath(path);
 		valideUsername = "User1";
 		nonValideUsername = "!,.*¨¨";

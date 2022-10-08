@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>fightinggame</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>base</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>
