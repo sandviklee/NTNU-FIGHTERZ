@@ -23,7 +23,7 @@ public class LoginController extends SceneController{
     @FXML private Button login;
 
     @FXML
-    private void handlelogIn(ActionEvent event) throws IOException {
+    private void handleLogIn(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         User tempUser = LoginSignup.logIn(username, password);
@@ -40,7 +40,7 @@ public class LoginController extends SceneController{
     }
 
     @FXML
-    private void handleSwichToSignUp(ActionEvent event) throws IOException {
+    private void handleSwitchToSignup(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
         Parent root = loader.load();
         this.changeScene("NTNU Fighterz", root, event);
