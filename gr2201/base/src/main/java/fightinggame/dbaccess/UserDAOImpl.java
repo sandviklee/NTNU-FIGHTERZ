@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO{
 	private String path;
 
 	public UserDAOImpl(){
-		this.path = "gr2201/core/src/main/resources/fightinggame/dbaccess/";
+		this.path = "../base/src/main/resources/fightinggame/dbaccess/";
 		// this.path = "gr2201/core/src/test/recources/fightinggame/dbaccess/";
 	}
 
@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO{
 
 	public List<String> getAllUsers() {
 		try {
-			return readFromFile(this.getPath());
+			return readFromFile(this.path);
 		} catch (FileNotFoundException e) {
 			System.out.println("FileNotFound at " + this.getPath());
 		}

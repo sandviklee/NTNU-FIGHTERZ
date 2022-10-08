@@ -160,9 +160,9 @@
     </build>
 
     <modules>
-        <module>core</module>
+        <module>base</module>
         <module>fxui</module>
-        <!-- <module>dbaccess</module> -->
+        <module>gameplay</module>
     </modules>
 </project>
 
