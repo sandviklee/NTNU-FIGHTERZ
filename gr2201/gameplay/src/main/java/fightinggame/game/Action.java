@@ -30,7 +30,8 @@ public class Action {
      * @param damage                it will give to hurtboxes on collision
      */
     public Action(Effectbox hitbox, String spriteName, boolean isSelfInterruptible, 
-    boolean isEnemyInterruptible, Vector knockback, int duration, int actionPriority, int hitBoxStartTime, int damage) {
+    boolean isEnemyInterruptible, Vector knockback, int duration, int actionPriority, 
+    int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, boolean animationLoopStartTime) {
         //TODO:
     }
 
@@ -42,7 +43,8 @@ public class Action {
      * @param isSelfInterruptible   to determine if it can be interrupted by own action
      * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
      */
-    public Action(int actionPriority, int duration, int isSelfInterruptible, int isEnemyInterruptible) {
+    public Action(int actionPriority, int duration, int isSelfInterruptible, int isEnemyInterruptible,
+    int totalFrames, boolean animationLoop, boolean animationLoopStartTime) {
         //TODO:
     }
 
