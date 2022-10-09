@@ -4,6 +4,7 @@ import java.io.IOError;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
@@ -36,47 +37,49 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn(LabeledMatchers.hasText(lable));
     }
 
-  
-
     private String getLableText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }
 
+    @BeforeEach
+    public void setup(){
+        clickOn("#usernameField").eraseText(10);
+        clickOn("#passwordField").eraseText(10);
+        clickOn("#confirmPasswordField").eraseText(10);
+        
+
+    }
+
     @Test
     public void testInvalidPassword(){
-        click("#passwordField");
-        write("...");
-        click("#confirmPasswordField");
-        write("...");
-        click("#usernameField");
-        write("George");;
-        click("#createAccount");
+        clickOn("#passwordField").write("...");
+        clickOn("#confirmPasswordField").write("...");
+        clickOn("#usernameField").write("George");;
+        click("Sign up And Log In");
         Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#onValidCredentials"));
+
     }
 
     @Test
     public void testInvalidUsername(){
-        click("#passwordField");
-        write("Hans");
-        click("#confirmPasswordField");
-        write("Hans");
-        click("#usernameField");
-        write("...");
-        click("#createAccount");
+        clickOn("#passwordField").write("Hans");
+        clickOn("#confirmPasswordField").write("Hans");
+        clickOn("#usernameField").write("...");
+        click("Sign up And Log In");
         Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#onValidCredentials"));
     }
 
     @Test
     public void testNonMatchingPassword(){
-        click("#passwordField");
-        write("Hans");
-        click("#confirmPasswordField");
-        write("Grete");
-        click("#usernameField");
-        write("Hugo");
-        click("#createAccount");
+        clickOn("#passwordField").write("Hans");
+        clickOn("#confirmPasswordField").write("Grete");
+        clickOn("#usernameField").write("Hugo");
+        click("Sign up And Log In");
         Assertions.assertEquals("Passwords not matching", getLableText("#nonMatchingPasswords"));
     }
+
+
+
 
     
 

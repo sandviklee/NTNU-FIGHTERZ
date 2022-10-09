@@ -4,6 +4,7 @@ module fightinggame.ui {
     requires transitive javafx.graphics;
     requires fightinggame.base;
     
-    opens fightinggame.ui to javafx.fxml;
+    opens fightinggame.ui to javafx.fxml, javafx.graphics;
     exports fightinggame.ui;
+    
 }
