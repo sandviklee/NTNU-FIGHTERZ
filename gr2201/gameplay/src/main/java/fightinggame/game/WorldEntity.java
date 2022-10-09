@@ -1,11 +1,10 @@
 package fightinggame.game;
 
 public abstract class WorldEntity {
-	private int id;
-	private Effectbox hitBox;
-	private Action currentAction;
-	private Sprite sprite;
-	private boolean isAlive;
+	protected int id;
+	protected Effectbox hitBox;
+	protected Action currentAction;
+	protected boolean isAlive;
 
 	public WorldEntity() {
 
