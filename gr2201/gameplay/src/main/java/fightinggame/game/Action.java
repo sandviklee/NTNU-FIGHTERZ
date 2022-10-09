@@ -43,7 +43,7 @@ public class Action {
      * @param isSelfInterruptible   to determine if it can be interrupted by own action
      * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
      */
-    public Action(int actionPriority, int duration, int isSelfInterruptible, int isEnemyInterruptible,
+    public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
     int totalFrames, boolean animationLoop, boolean animationLoopStartTime) {
         //TODO:
     }
