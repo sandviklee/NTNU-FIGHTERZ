@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.scene.control.Label;
 
 public class SignupControllerTest extends ApplicationTest {
@@ -75,6 +76,26 @@ public class SignupControllerTest extends ApplicationTest {
         click("Sign up And Log In");
         Assertions.assertEquals("Passwords not matching", getLableText("#nonMatchingPasswords"));
     }
+
+    @Test
+    public void testBack(){
+        clickOn("#goBack");
+        Assertions.assertNotNull(getCurrentRootById("loginRoot"), "Wrong root when pressing goBack button");
+        
+    }
+
+    private Parent getCurrentRootById(String id){
+        for (Window window: Window.getWindows()){
+            if (window.isShowing() && window instanceof Stage){
+                if (window.getScene().getRoot().getId().equals(id)){
+                    return window.getScene().getRoot();
+                }
+            }
+        }
+        return null;
+    }
+
+
 
 
 
