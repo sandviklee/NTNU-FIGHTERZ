@@ -41,14 +41,12 @@ public class SignupControllerTest extends ApplicationTest {
         return ((Label) getRoot().lookup(label)).getText();
     }
 
-    @BeforeEach
-    public void setup(){
-        clickOn("#usernameField").eraseText(10);
-        clickOn("#passwordField").eraseText(10);
-        clickOn("#confirmPasswordField").eraseText(10);
-        
-
-    }
+    // @BeforeEach
+    // public void setup(){
+    //     clickOn("#usernameField").eraseText(10);
+    //     clickOn("#passwordField").eraseText(10);
+    //     clickOn("#confirmPasswordField").eraseText(10);
+    // }
 
     @Test
     public void testInvalidPassword(){
@@ -56,7 +54,7 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#confirmPasswordField").write("...");
         clickOn("#usernameField").write("George");;
         click("Sign up And Log In");
-        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#onValidCredentials"));
+        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#nonValidCredentials"));
 
     }
 
@@ -66,7 +64,7 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#confirmPasswordField").write("Hans");
         clickOn("#usernameField").write("...");
         click("Sign up And Log In");
-        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#onValidCredentials"));
+        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#nonValidCredentials"));
     }
 
     @Test
