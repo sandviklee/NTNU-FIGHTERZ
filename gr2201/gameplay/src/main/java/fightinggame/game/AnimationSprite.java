@@ -5,24 +5,24 @@ package fightinggame.game;
 public class AnimationSprite {
     private String spriteName;
     private int currentFrame;
-    private int frameCount;
+    private int totalFrames;
     private int animationLoopStartTime;
     private boolean animationLoop;
 
     /**
      * Make AnimationSprite with given attributes
      * @param spriteName
-     * @param frameCount
+     * @param totalFrames
      * @param animationLoop
      * @param animationLoopStartTime
      */
-    public AnimationSprite(String spriteName, int frameCount, boolean animationLoop, int animationLoopStartTime){
+    public AnimationSprite(String spriteName, int totalFrames, boolean animationLoop, int animationLoopStartTime){
         // TODO:
     }
 
     /**
      * Next increments currentFrame.
-     * When currentFrame exceeds frameCount either jump to animationLoopStartTime if animationLoop is true else stop
+     * When currentFrame exceeds totalFrames either jump to animationLoopStartTime if animationLoop is true else stop
      */
     public void next(){
         //TODO:
