@@ -31,11 +31,11 @@ public class LoginControllerTest extends ApplicationTest{
         return root;
     }
 
-    private void click(String lable){
-        clickOn(LabeledMatchers.hasText(lable));
+    private void click(String label){
+        clickOn(LabeledMatchers.hasText(label));
     }
 
-    private String getLableText(String label){
+    private String getLabelText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }
 
@@ -44,7 +44,7 @@ public class LoginControllerTest extends ApplicationTest{
         clickOn("#passwordField").write("...");
         clickOn("#usernameField").write("Not a user");
         click("Login");
-        Assertions.assertEquals("Wrong username or password", getLableText("#errorMessage"));
+        Assertions.assertEquals("Wrong username or password", getLabelText("#errorMessage"));
     }
 
     @Test
