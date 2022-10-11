@@ -23,6 +23,11 @@
             <version>0.0.1</version>
         </dependency>
         <dependency>
+            <groupId>fightinggame</groupId>
+            <artifactId>gameplay</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
 			<version>4.0.16-alpha</version>
