@@ -51,9 +51,9 @@ public class LoginSignup {
 		// check if user in db and add when not
 		User userFromDb = dao.findUser(user);
 		// String userData = dao.findUser(user.getUserId());
-		if (userFromDb == null) return null;
-		dao.addUser(userFromDb);
-		return userFromDb;
+		if (userFromDb != null) return null;
+		dao.addUser(user);
+		return user;
 	}
 
 	/**
@@ -90,5 +90,13 @@ public class LoginSignup {
 
 	public void setPath(String p) {
 		((UserDAOImpl) dao).setPath(p);
+	}
+
+	public static void main(String[] args) {
+		// User u = LoginSignup.logIn("Sverre1", "pass");
+		User us = LoginSignup.signUp("Svurre1", "Svurre1", "Svurre1");
+		// System.out.println(u.getUserName() + " " + u.getPassword());
+		// System.out.println(us.getUserName() + " " + us.getPassword());
+
 	}
 }
