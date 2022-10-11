@@ -56,7 +56,6 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#usernameField").write("George");;
         click("Sign up And Log In");
         Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#nonValidCredentials"));
-
     }
 
     @Test
