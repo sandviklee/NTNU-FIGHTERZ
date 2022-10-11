@@ -1,9 +1,8 @@
 package fightinggame.dbaccess;
 
-import fightinggame.users.UserData;
-import fightinggame.users.UserId;
-import java.util.List;
+import fightinggame.users.*;
 
+import java.util.ArrayList;
 
 /**
  * UserDAO is following the Database Access Object partern.
@@ -15,20 +14,20 @@ public interface UserDAO {
 	 * getAllUsers will get all the users form data storage, where each string in list have all info about a user.
 	 * @return list of all users
 	 */
-	public List<String> getAllUsers(); 
-	/**
-	 * Searches data storage for each entry with filterParam and return all lines with given value.
-	 * @param filterParam  the value it searches after in each line
-	 * @return all lines containing filterParam
-	 */
-	public List<String> filterAllUsers(String filterParam); 
+	public ArrayList<User> getAllUsers(); 
+	// /**
+	//  * Searches data storage for each entry with filterParam and return all lines with given value.
+	//  * @param filterParam  the value it searches after in each line
+	//  * @return all lines containing filterParam
+	//  */
+	// public List<String> filterAllUsers(String filterParam); 
 	/**
 	 * Finds the {@code User} that have same id in data storage.
 	 * If their are no user with this id return a null object.
 	 * @param id  {@code UserId}  that it uses to search data storage
 	 * @return the {@code User} with given id in case there are non return null
 	 */
-	public String findUser(UserId id); 
+	public User findUser(User lookUpUser); 
 	/**
 	 * Update the user with this {@code id} and changes the info into given {@code data}
 	 * If there are no user with userId in data storage do nothing.
@@ -48,5 +47,5 @@ public interface UserDAO {
 	 * @param id is search value and added in new data storage entry
 	 * @param data added to data storage entry
 	 */
-	public void addUser(UserId id, UserData data); 
+	public void addUser(User user); 
 }
