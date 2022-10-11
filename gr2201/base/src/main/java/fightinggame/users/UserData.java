@@ -25,6 +25,14 @@ public class UserData {
 	}
 
 	/**
+	 * Checks if this userData has the same fields as other UserData
+	 * @param u UserData to compere
+	 * @return true if they are equal
+	 */
+	public boolean equals(UserData u) {
+		return this.getPassword().equals(u.getPassword());
+	}
+	/**
 	 * Makes a string representation of UserData. 
 	 * Where each field is seperated by a seperator.
 	 * @return The string representation of UserData
