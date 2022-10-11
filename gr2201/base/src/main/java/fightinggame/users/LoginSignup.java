@@ -20,23 +20,16 @@ public class LoginSignup {
 	 */
 	public static User logIn(String username, String password) {
 		if (!validateUserName(username) || !validatePassword(password, password)) return null;
-		try {
+		// try {
 			User user = new User(username, password);
-			String userData = dao.findUser(user.getUserId());
-			if (userData.isEmpty() || !userData.contains(", ")) return null;
+			User userFromDb = dao.findUser(user);
+			if (userFromDb == null) return null;
+			return userFromDb;
 
-			// check if password is the same in db as login input
-			if (!password.equals(userData.split(", ")[1])) return null;
-			
-			// Change userData to correct info from data storage
-			String seperator = ", ";
-			user.changeUserData((String) userData.subSequence(userData.indexOf(", ") + seperator.length(), userData.length()));
-			return user;
-
-		} catch (NullPointerException e) {
-			System.out.println(e.getLocalizedMessage());
-			return null;
-		}
+		// } catch (NullPointerException e) {
+		// 	System.out.println(e.getLocalizedMessage());
+		// 	return null;
+		// }
 	}
 
 	/**
@@ -53,18 +46,14 @@ public class LoginSignup {
 	 */
 	public static User signUp(String username, String password, String confirmPassword) {
 		if (!validateUserName(username) || !validatePassword(password, confirmPassword)) return null;
-		try {
-			User user = new User(username, password);
-	
-			// check if user in db and add when not
-			String userData = dao.findUser(user.getUserId());
-			if (!userData.isEmpty()) return null;
-			dao.addUser(user.getUserId(), user.getUserData());
-			return user;
-		} catch (NullPointerException e) {
-			System.out.println(e.getLocalizedMessage());
-			return null;
-		}
+		User user = new User(username, password);
+
+		// check if user in db and add when not
+		User userFromDb = dao.findUser(user);
+		// String userData = dao.findUser(user.getUserId());
+		if (userFromDb == null) return null;
+		dao.addUser(userFromDb);
+		return userFromDb;
 	}
 
 	/**
