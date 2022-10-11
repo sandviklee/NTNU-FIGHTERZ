@@ -42,7 +42,7 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("singleplayer.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
         singleplayerGameController.setUser(super.getUser());
