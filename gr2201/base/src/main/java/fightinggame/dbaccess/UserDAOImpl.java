@@ -25,9 +25,8 @@ public class UserDAOImpl implements UserDAO {
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public UserDAOImpl(){
-		this.path = "base/src/main/resources/fightinggame/dbaccess/";
+		this.path = "../base/src/main/resources/fightinggame/dbaccess/";
 		mapper.registerModule(new UserModule());
-		// this.path = "base/src/test/recources/fightinggame/dbaccess/";
 	}
 
 	public UserDAOImpl(String p){
@@ -90,6 +89,8 @@ public class UserDAOImpl implements UserDAO {
 	public void addUser(User user) {
 		try {
 			ArrayList<User> users = getAllUsers();
+			if (users.contains(user)) return;
+
 			users.add(user);
 			storeToFile(this.getPath(), userListToJson(users));
 		} catch (IOException e) {
@@ -189,5 +190,4 @@ public class UserDAOImpl implements UserDAO {
 	public String getPath() {
 		return this.path;
 	}
-
 }
