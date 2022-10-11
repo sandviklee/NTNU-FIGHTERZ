@@ -1,5 +1,8 @@
 package fightinggame.users;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The User represents a user. It will have all info about the logged in user. 
  */
@@ -18,6 +21,10 @@ public class User {
 			throw new IllegalArgumentException("Bad input");
 		}
 	}
+	public User(UserId id, UserData data) {
+		this.userId = id;
+		this.userData = data;
+	}
 
 	/**
 	 * Checks if this user has the same UserId as other User
@@ -28,18 +35,22 @@ public class User {
 		return this.getUserId().equals(u.getUserId());
 	}
 
+	@JsonGetter
 	public UserId getUserId() {
 		return this.userId;
 	}
 
+	@JsonGetter
 	public UserData getUserData() {
 		return this.userData;
 	}
 	
+	@JsonIgnore
 	public String getUserName() {
 		return this.getUserId().getUserId();
 	}
-	
+
+	@JsonIgnore
 	public String getPassword() {
 		return this.getUserData().getPassword();
 	}
