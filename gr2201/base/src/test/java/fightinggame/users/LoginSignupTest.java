@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // import javafx.scene.shape.Path;
 
 public class LoginSignupTest {
-	private LoginSignup LoginSignup = new LoginSignup();
+	private LoginSignup loginSignup = new LoginSignup();
 	private String valideUsername;
 	private String nonValideUsername;
 	private String validePassword1;
@@ -32,8 +32,9 @@ public class LoginSignupTest {
 	
 	@BeforeEach
 	public void setup() {
-		String path = "gr2201/gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
-		LoginSignup.setPath(path);
+		String path = "base/src/test/recources/fightinggame/dbaccess/"; // test path
+
+		loginSignup.setPath(path);
 		valideUsername = "User1";
 		nonValideUsername = "!,.*¨¨";
 		validePassword1 = "Password1";
@@ -51,23 +52,22 @@ public class LoginSignupTest {
 	@DisplayName("Tests if getAllUsers() give all Users in Data Storage")
 	public void testlogIn() {
 		// must make sure User in db
-		User valideUser = LoginSignup.signUp(valideUsername, validePassword1, validePassword1);
+		User valideUser = loginSignup.signUp(valideUsername, validePassword1, validePassword1);
 
-		// if (valideUser == null) 
 		// check for bad username good password
-		User badPasUser = LoginSignup.logIn(valideUsername, nonValidPassword);
+		User badPasUser = loginSignup.logIn(valideUsername, nonValidPassword);
 		assertTrue(badPasUser == null, "user not in db and input values are none valide");
 
 		// check for bad password
-		User badIdUser = LoginSignup.logIn(nonValidPassword, validePassword1);
+		User badIdUser = loginSignup.logIn(nonValidPassword, validePassword1);
 		assertTrue(badIdUser == null, "user not in db and input values are none valide");
 
 		// check for good username and good password for user not in db
-		User userNotInDb = LoginSignup.logIn(valideUsername, validePassword2);
+		User userNotInDb = loginSignup.logIn(valideUsername, validePassword2);
 		assertTrue(userNotInDb == null, "user not in db and input values are none valide");
 
 		// check for good username and good password for user in db
-		User userInDb = LoginSignup.logIn(valideUsername, validePassword1);
+		User userInDb = loginSignup.logIn(valideUsername, validePassword1);
 		assertNotNull(userInDb);
 		assertTrue(valideUser.equals(userInDb));
 	}
@@ -76,24 +76,24 @@ public class LoginSignupTest {
 	@DisplayName("Tests if signUp() creates user in Data Storage")
 	public void testSignUp() {
 		// Non matching passwords get null
-		User badPasswordsUser = LoginSignup.signUp(valideUsername, validePassword1, validePassword2);
+		User badPasswordsUser = loginSignup.signUp(valideUsername, validePassword1, validePassword2);
 		assertTrue(badPasswordsUser == null, "user not in db and input values are none valide");
 
 		// Non valid password get null
-		User badPasUser = LoginSignup.signUp(valideUsername, nonValidPassword, nonValidPassword);
+		User badPasUser = loginSignup.signUp(valideUsername, nonValidPassword, nonValidPassword);
 		assertTrue(badPasUser == null, "user not in db and input values are none valide");
 
 		// Non valid Username get null
-		User badIdUser = LoginSignup.signUp(nonValideUsername, validePassword1, validePassword1);
+		User badIdUser = loginSignup.signUp(nonValideUsername, validePassword1, validePassword1);
 		assertTrue(badIdUser == null, "user not in db and input values are none valide");
 
 		// Valide username and character get user
-		User valideUser = LoginSignup.signUp(valideUsername, validePassword1, validePassword1);
+		User valideUser = loginSignup.signUp(valideUsername, validePassword1, validePassword1);
 		assertTrue(valideUser.getUserId().getUserId().equals(valideUsername), "user do not have correct id");
 		assertTrue(valideUser.getUserData().getPassword().equals(validePassword1), "user do not have the correct password");
 
 		// Make same user get null
-		User userAlreadyInDb = LoginSignup.signUp(valideUsername, validePassword1, validePassword1);
+		User userAlreadyInDb = loginSignup.signUp(valideUsername, validePassword1, validePassword1);
 		assertTrue(userAlreadyInDb == null, "user not in db and input values are none valide");
 	}
 }

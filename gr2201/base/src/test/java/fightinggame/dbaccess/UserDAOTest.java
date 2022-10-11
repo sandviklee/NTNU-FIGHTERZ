@@ -35,7 +35,7 @@ public class UserDAOTest {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
 		
-		path = "gr2201/base/src/test/recources/fightinggame/dbaccess/";
+		path = "./base/src/test/recources/fightinggame/dbaccess/";
 		dao = new UserDAOImpl(path);
 		((UserDAOImpl) dao).setPath(path);
 		testUser1 = new User("Subject1", "123");
@@ -70,38 +70,6 @@ public class UserDAOTest {
 		assertTrue(dao.getAllUsers().get(1).equals(testUser2.getUserId().toString() + ", " + testUser2.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
 		assertTrue(dao.getAllUsers().get(2).equals(testUser3.getUserId().toString() + ", " + testUser3.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
 	}
-
-	// @Test
-	// @DisplayName("Does filterAllUsers() give all Users in Data Storage that ")
-	// public void testFilterAllUsers() {
-	// 	assertEquals(0, dao.getAllUsers().size(), "The amount is not correct, should not contain users");
-	// 	String filter = testUser1.getUserData().toString();
-	// 	String filterContainingAllEntries = ",";
-	// 	String nonFilter = testUser2.getUserData().toString();
-
-	// 	// Add a two users with same UserData and one with other UserData
-	// 	dao.addUser(testUser1.getUserId(), testUser1.getUserData());
-	// 	dao.addUser(testUser2.getUserId(), testUser1.getUserData());
-	// 	dao.addUser(testUser3.getUserId(), testUser3.getUserData());
-	// 	assertEquals(3, dao.getAllUsers().size(), "The amount is not correct should contain two users");
-		
-	// 	assertTrue(dao.filterAllUsers(filter).get(0).equals(testUser1.getUserId().toString() + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
-	// 	dao.filterAllUsers(filter);
-
-	// 	for (int i = 0; i < 100; i++) {
-	// 		dao.addUser(new UserId(Integer.toString(i)), testUser1.getUserData());
-			
-	// 		for (String user : dao.filterAllUsers(filter)) {
-	// 			assertTrue(user.equals(Integer.toString(i) + ", " + testUser1.getUserData().toString()), "The content of dao is not correct, either not correct order or bad values");
-	// 		}
-	// 	}
-	// 	assertEquals(102, dao.filterAllUsers(filter).size(), "The amount is not correct, should not contain many users");
-
-	// 	// check if superFilter gets all entries
-	// 	assertEquals(103, dao.filterAllUsers(filterContainingAllEntries).size(), "The amount is not correct, should contain many users");
-	// 	assertEquals(0, dao.filterAllUsers(nonFilter).size(), "The amount is not correct, should not contain any users");
-
-	// }
 
 	@Test
 	@DisplayName("Tests if updateUser() update given User in Data Storage")
