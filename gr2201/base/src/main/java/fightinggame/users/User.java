@@ -10,14 +10,13 @@ public class User {
 	private UserData userData;
 	private UserId userId;
 
-	public User(String id, String password) throws NullPointerException{
+	public User(String id, String password) throws IllegalArgumentException{
 		// uses validaters in classes UserData and UserId 
 		try {
 			this.userData = new UserData(password);
 			this.userId = new UserId(id);
 			
 		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
 			throw new IllegalArgumentException("Bad input");
 		}
 	}
@@ -58,29 +57,19 @@ public class User {
 	/**
 	 * Changes UserId to new userId.
 	 * If {@code userId} cant be constructed with userId, then does not chage userId.
-	 * @param userId  the string to try to change field userId.
+	 * @param userId  the id to try to change field userId.
 	 */
-	public void changeUserId(String userId) {
-		try {
-			UserId id = new UserId(userId);
-			this.setUserId(id);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
+	public void changeUserId(UserId userId) {
+		this.setUserId(userId);
 	}
 
 	/**
 	 * Changes UserData to new userData.
 	 * If {@code userData} cant be constructed with userData, then does not chage userData.
-	 * @param userData  the string to try to change field userData.
+	 * @param userData  the data to try to change field userData.
 	 */
-	public void changeUserData(String userData) {
-		try {
-			UserData data = new UserData(userData);
-			this.setUserData(data);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
+	public void changeUserData(UserData userData) {
+		this.setUserData(userData);
 	}
 
 	private void setUserId(UserId userId) {
