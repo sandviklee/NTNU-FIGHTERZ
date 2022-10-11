@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import fightinggame.game.Effectbox;
 
-public class EffectboxDeserializer extends JsonDeserializer<UserData> {
+public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
 
     @Override
     public Effectbox deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
@@ -24,13 +24,18 @@ public class EffectboxDeserializer extends JsonDeserializer<UserData> {
     public Effectbox deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
-            JsonNode lengthNode = objectNode.get("length");
+            JsonNode widthNode = objectNode.get("width");
             JsonNode heightNode = objectNode.get("height");
+            JsonNode offsetXNode = objectNode.get("offsetX");
+            JsonNode offsetYNode = objectNode.get("offsetY");
+            JsonNode isTraversibleNode = objectNode.get("isTraversible");
+
+            
 
 
 
-            Effectbox data = new Effectbox();
-            return data;
+            Effectbox box = new Effectbox();
+            return box;
            }
            
         return null;
