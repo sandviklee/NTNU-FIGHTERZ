@@ -1,10 +1,8 @@
 package fightinggame.ui;
 
-import java.io.IOError;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
@@ -34,20 +32,13 @@ public class SignupControllerTest extends ApplicationTest {
         return root;
     }
 
-    private void click(String lable){
-        clickOn(LabeledMatchers.hasText(lable));
+    private void click(String label){
+        clickOn(LabeledMatchers.hasText(label));
     }
 
-    private String getLableText(String label){
+    private String getLabelText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }
-
-    // @BeforeEach
-    // public void setup(){
-    //     clickOn("#usernameField").eraseText(10);
-    //     clickOn("#passwordField").eraseText(10);
-    //     clickOn("#confirmPasswordField").eraseText(10);
-    // }
 
     @Test
     public void testInvalidPassword(){
@@ -55,7 +46,7 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#confirmPasswordField").write("...");
         clickOn("#usernameField").write("George");;
         click("Sign up And Log In");
-        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#nonValidCredentials"));
+        Assertions.assertEquals("Username already exists or password/username do not fit criteria.", getLabelText("#nonValidCredentials"));
 
     }
 
@@ -65,7 +56,7 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#confirmPasswordField").write("Hans");
         clickOn("#usernameField").write("...");
         click("Sign up And Log In");
-        Assertions.assertEquals("Username already exist or password and usermane does not fit criteria.", getLableText("#nonValidCredentials"));
+        Assertions.assertEquals("Username already exists or password/username do not fit criteria.", getLabelText("#nonValidCredentials"));
     }
 
     @Test
@@ -74,7 +65,7 @@ public class SignupControllerTest extends ApplicationTest {
         clickOn("#confirmPasswordField").write("Grete");
         clickOn("#usernameField").write("Hugo");
         click("Sign up And Log In");
-        Assertions.assertEquals("Passwords not matching", getLableText("#nonMatchingPasswords"));
+        Assertions.assertEquals("Passwords do not match.", getLabelText("#nonMatchingPasswords"));
     }
 
     @Test
