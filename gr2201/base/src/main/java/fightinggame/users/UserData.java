@@ -36,20 +36,6 @@ public class UserData {
 
 	}
 
-	/**
-	 * Takes a string and convert it to a UserData.
-	 * Must have all UserData fields in correct order and values must be seperated by comma.
-	 * order: [password]
-	 * If data is correct form and have each data field with valide values  make UserData,
-	 * else return null
-	 * @param data  string to interprete
-	 * @return UserData with data or null object if containing non valide input
-	 */
-	public UserData stringToUserData(String data) {
-		// TODO:
-		return new UserData(data);
-	}
-
 	public String getPassword() {
 		return password;
 	}
