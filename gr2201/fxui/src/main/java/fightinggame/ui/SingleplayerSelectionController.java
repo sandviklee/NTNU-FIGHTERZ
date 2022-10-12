@@ -25,6 +25,10 @@ public class SingleplayerSelectionController extends SceneController{
         lockIn.setDisable(true);
     }
 
+    public ImageView getCharacterSelected(){
+        return this.characterSelected;
+    }
+
     private void resetCharacterImageOpacity() {
         for (Node imageView : characterSelectGrid.getChildren()) {
             imageView.setOpacity(1);
