@@ -2,6 +2,8 @@ package fightinggame.ui;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 
@@ -9,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.scene.control.Label;
 
 public class MainMenuControllerTest extends ApplicationTest{
@@ -37,7 +40,21 @@ public class MainMenuControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void testSwichTo
+    public void testSwichToSingleplayerSelection(){
+        click("PLAY SINGLEPLAYER");
+        Assertions.assertNotNull(getCurrentRootById("singleplayerSelectionRoot"));
+    }
+
+    private Parent getCurrentRootById(String id){
+        for (Window window: Window.getWindows()){
+            if (window.isShowing() && window instanceof Stage){
+                if (window.getScene().getRoot().getId().equals(id)){
+                    return window.getScene().getRoot();
+                }
+            }
+        }
+        return null;
+    }
 
 
 
