@@ -14,7 +14,6 @@ public class UserTest {
 	private String nonValidUserId = "pasdf.-,";
 
 	private String validUserData = "password1";
-	private String validUserDataOther = "password2";
 	private String nonValidUserData = "pasdf.-,";
 
 	private User user1;
@@ -40,15 +39,11 @@ public class UserTest {
 		user1 = new User(validUserId, validUserData);
 		assertTrue(user1.getUserName().equals(validUserId), "Does not have correct field");
 		assertTrue(user1.getPassword().equals(validUserData), "Does not have correct field");
-
 	}
-
-
 
 	@Test
 	@DisplayName("Does it equals correct")
 	public void TestEquals() {
-		// TODO:
 		user1 = new User(validUserId, validUserData);
 		user2 = new User(validUserIdOther, validUserData);
 
@@ -65,8 +60,6 @@ public class UserTest {
 		assertTrue(user1.getUserData().equals(new UserData(validUserIdOther)));
 	}
 
-
-
 	@Test
 	public void testChangeUserId() {
 		user1 = new User(validUserId, validUserData);
@@ -74,5 +67,4 @@ public class UserTest {
 		assertTrue(user1.getUserId().equals(new UserId(validUserIdOther)));
 		assertTrue(user1.getUserData().equals(new UserData(validUserData)));
 	}
-
 }

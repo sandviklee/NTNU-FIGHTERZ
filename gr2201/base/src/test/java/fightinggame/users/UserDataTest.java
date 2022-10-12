@@ -1,6 +1,5 @@
 package fightinggame.users;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +11,6 @@ import org.junit.jupiter.api.Assertions;
 
 
 public class UserDataTest {
-	
-
 	private String validePassword = "Password1";
 	private String validePasswordOther = "Password2";
 	private String toShortPassword = "";
@@ -41,10 +38,31 @@ public class UserDataTest {
 	@Test
 	@DisplayName("Tests if the equals works properly")
 	public void TestEquals() {
-		UserData data1 = new UserData(validePassword);
-		UserData data2 = new UserData(validePasswordOther);
+		data1 = new UserData(validePassword);
+		data2 = new UserData(validePasswordOther);
 
 		assertTrue(data1.equals(data1));
 		assertFalse(data1.equals(data2));
 	}
+
+	@Test
+	@DisplayName("Tests if the getPassword works properly")
+	public void TestToString() {
+		data1 = new UserData(validePassword);
+		assertEquals(validePassword, data1.toString());
+	}
+
+	@Test
+	@DisplayName("Tests if the setPassword works properly")
+	public void TestSetPassword() {
+		data1 = new UserData(validePassword);
+		assertEquals(validePassword, data1.getPassword());
+		data1.changePassword(validePasswordOther);
+		assertEquals(validePasswordOther, data1.getPassword());
+		// Dont change password on bad password
+		data1.changePassword(specialCharactersPassword);
+		assertEquals(validePasswordOther, data1.getPassword());
+
+	}
+
 }

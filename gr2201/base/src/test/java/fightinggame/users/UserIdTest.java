@@ -1,9 +1,7 @@
 package fightinggame.users;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import fightinggame.users.UserId;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,7 +21,7 @@ public class UserIdTest {
 
 	
 	@Test
-	@DisplayName("Test")
+	@DisplayName("Test constructor only make correct userIds")
 	public void testConstructor() {
 		// Contructed with bad input values
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -46,5 +44,13 @@ public class UserIdTest {
 		assertFalse(id.equals(otherId), "userIds is not the same");
 		assertTrue(id.equals(id), "userId should be the same");
 	}
+
+	@Test
+	@DisplayName("Test toString method")
+	public void testToString() {
+		id = new UserId(valideId);
+		assertEquals(valideId, id.toString(), "toString does not create correct string");
+	}
+
 
 }

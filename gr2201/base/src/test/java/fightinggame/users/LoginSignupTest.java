@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// import javafx.scene.shape.Path;
-
 public class LoginSignupTest {
 	private LoginSignup loginSignup = new LoginSignup();
 	private String valideUsername;
@@ -23,16 +21,22 @@ public class LoginSignupTest {
 
 	private static void clearFile(String path) throws IOException {
 		// TODO make file at path clear
-		File currentFile = new File(path);
+		File currentFile = new File(path + "users.json");
 		FileWriter currentWriter = new FileWriter(currentFile, false);
-		currentWriter.write("");
+		currentWriter.write("Write file");
 		currentWriter.close();
 	}
 
-	
+
 	@BeforeEach
 	public void setup() {
-		String path = "base/src/test/recources/fightinggame/dbaccess/"; // test path
+		// String path = "base/src/test/recources/fightinggame/dbaccess/"; // test path
+		//TESTS
+		// String path = "gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
+		// String path = "gr2201/gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
+		// String path = "../recources/fightinggame/dbaccess/"; // test path		
+		// String path = "../../recources/fightinggame/dbaccess/"; // test path
+		String path = "../../../recources/fightinggame/dbaccess/"; // test path
 
 		loginSignup.setPath(path);
 		valideUsername = "User1";
