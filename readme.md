@@ -25,7 +25,7 @@ Jacoco kan åpnes ved å skrive inn:
 ### Om prosjektet
 
 _Prosjektet vårt er delt opp i tre hovedmapper i mappen gr2201.
-Her har vi **base**, **docs** og **fxui**._ 
+Her har vi **base**, **docs**, **fxui** og **gameplay**._ 
 
 **Base** inneholder alt som omhandler brukerinformasjon. Det er kode som feks. DAO, hvor Database Access Object partern blir fulgt. [Base README](gr2201/base/readme.md)
 
