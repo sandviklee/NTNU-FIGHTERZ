@@ -5,19 +5,19 @@ Her skal klassene **Action**, **AnimationSprite**, **Effectbox**, **Player**, **
 
 ---
 
-**World** klassen holder på all logikken som skal kommunisere med alt i verdenen og UI.
+**World** klassen holder på alle "enteties" som er i verden og logikken for å få alle entities til å kunne handle. Verdenen skal også gi tilgang til tilstanden så controlleren kan sende info til UI om hvordan verden ser ut ved det tidspunktet.
 
-**WorldEntity** klassen er en superklasse for alle typer "entities" som skal dannes i verdenen.
+**WorldEntity** klassen er en superklasse for alle typer "entities" som skal dannes i verdenen. Den skal også holde på alle felles metoder og felter for alle entities i verden.
 
 **Projectile** klassen lager projectiles, arver WorldEntity.
 
 **Terrain** klassen lager terrain, arver WorldEntity.
 
-**Player** klassen er karakteren selv, arver WorldEntity.
+**Character** klassen er karakteren selv, arver WorldEntity.
 
 **Action** klassen er for å lage "actions" til karakterene i spillet. 
 
-**AnimationSprite** klassen skal spille av animasjonenene til Players/Projectiles sine actions.
+**AnimationSprite** klassen skal inneholde logikken til å spille av animasjonene til Players/Projectiles sine actions. Denne klassen kan så bli hentet av actions slik at animasjonen kan spilles av.
 
 **Effectbox** klassen er Hitbox/Hurtbox logikken, slik at Players/projectiles kan påvirke hverandre.
 
