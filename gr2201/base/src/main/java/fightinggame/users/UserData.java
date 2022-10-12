@@ -47,7 +47,16 @@ public class UserData {
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void changePassword(final String password) {
+		try {
+			valideUserData(password);
+			this.setPassword(password);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Cant change to this password");
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	private void setPassword(String password) {
 		this.password = password;
 	}
 }

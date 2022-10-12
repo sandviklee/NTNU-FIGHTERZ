@@ -1,3 +1,4 @@
 [{"UserId":{"id":"Sverre"},"UserData":{"password":"pass"}},
 {"UserId":{"id":"Sverre1"},"UserData":{"password":"pass"}},
-{"UserId":{"id":"s"},"UserData":{"password":"s"}}]
+{"UserId":{"id":"s"},"UserData":{"password":"s"}},
+{"UserId":{"id":"Kris"},"UserData":{"password":"k"}}]

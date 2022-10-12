@@ -35,8 +35,4 @@ public class UserId {
 	public String getUserId() {
 		return userId;
 	}
-
-	private void setUserId(final String userId) {
-		this.userId = userId;
-	}
 }
