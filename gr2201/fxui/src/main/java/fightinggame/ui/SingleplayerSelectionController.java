@@ -42,12 +42,15 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Singleplayer.fxml"));
-        Parent root = loader.load();
-        SingleplayerGameController singleplayerGameController = loader.getController();
-        singleplayerGameController.setUser(super.getUser());
-        singleplayerGameController.loadWorld(null, null);
-        super.changeScene("NTNU Fighterz", root, event);
+        // Future content
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("singleplayer.fxml"));
+        // Parent root = loader.load();
+        // SignUpController signUpController = loader.getController();
+        // SceneController.changeScene("NTNU Fighterz", root, event);
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setContentText("This part of the game is not implemented yet :)");
+        alert.showAndWait();
     }
 
     @FXML
