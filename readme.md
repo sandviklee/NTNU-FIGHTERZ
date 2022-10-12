@@ -7,22 +7,33 @@
 
 ### Hvordan åpne prosjektet
 
-Prosjektet vårt kan åpnes ved å skrive inn
+Prosjektet vårt kan åpnes ved å skrive inn:
 
  `mvn javafx:run` i terminalen din.
  
 ---
 
+### Hvordan kjøre Jacoco og få rapporten
+
+Jacoco kan åpnes ved å skrive inn:
+
+`mvn clean jacoco:prepare-agent install jacoco:report` i terminalen din.
+
+
+---
+
 ### Om prosjektet
 
 _Prosjektet vårt er delt opp i tre hovedmapper i mappen gr2201.
-Her har vi **core**, **docs** og **fxui**._ 
+Her har vi **base**, **docs** og **fxui**._ 
 
-**Core** inneholder alt som omhandler brukerinformasjon. Det er kode som feks. DAO, hvor Database Access Object partern blir fulgt. [Core README](gr2201/core/readme.md)
+**Base** inneholder alt som omhandler brukerinformasjon. Det er kode som feks. DAO, hvor Database Access Object partern blir fulgt. [Base README](gr2201/base/readme.md)
 
 **Docs** og undermappen **release1** inneholder all dokumentasjon om prosjektet fram til nå. Her ligger alt fra diagrammer, figma og møtereferat. [Docs README](gr2201/docs/readme.md)
 
 **Fxui** inneholder hovedkoden vår, alle fxml filer, bilder, og kontrollere. Her er det mesteparten av _kodingsprosjektet_. [Fxui README](gr2201/fxui/readme.md)
+
+**Gameplay** har alt som har med spillogikken å gjøre. Her er alle klassene som får hovedspillet til å kunne kjøre. [Gameplay README](gr2201/gameplay/readme.md)
 
 ---
 
