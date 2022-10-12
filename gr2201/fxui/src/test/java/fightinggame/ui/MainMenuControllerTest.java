@@ -45,6 +45,9 @@ public class MainMenuControllerTest extends ApplicationTest{
         Assertions.assertNotNull(getCurrentRootById("singleplayerSelectionRoot"));
     }
 
+    @Test
+    public void testSwichT
+
     private Parent getCurrentRootById(String id){
         for (Window window: Window.getWindows()){
             if (window.isShowing() && window instanceof Stage){
