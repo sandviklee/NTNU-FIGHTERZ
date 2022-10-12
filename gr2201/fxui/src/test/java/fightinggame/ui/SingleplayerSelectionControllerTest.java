@@ -24,11 +24,15 @@ public class SingleplayerSelectionControllerTest extends ApplicationTest{
         stage.show();
     }
 
-
     @Test
     public void testSelectCharacter(){
         clickOn("#Ram");
         Assertions.assertEquals("javafx.scene.image.Image@f0c8a99", controller.getCharacterSelected().getImage().toString());
+        clickOn("#Sly");
+        Assertions.assertEquals("javafx.scene.image.Image@76a4ebf2", controller.getCharacterSelected().getImage().toString());
+        clickOn("#Sol");
+        Assertions.assertEquals("javafx.scene.image.Image@53fe15ff", controller.getCharacterSelected().getImage().toString());
     }
+
    
 }
