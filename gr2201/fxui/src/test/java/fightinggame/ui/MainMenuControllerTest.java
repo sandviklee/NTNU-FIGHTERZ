@@ -20,7 +20,7 @@ public class MainMenuControllerTest extends ApplicationTest{
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("Signup.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("MainMenu.fxml"));
         root = loader.load();
         controller = loader.getController();
         stage.setScene(new Scene(root));
@@ -42,11 +42,14 @@ public class MainMenuControllerTest extends ApplicationTest{
     @Test
     public void testSwichToSingleplayerSelection(){
         click("PLAY SINGLEPLAYER");
-        Assertions.assertNotNull(getCurrentRootById("singleplayerSelectionRoot"));
+        Assertions.assertNotNull(getCurrentRootById("characterSelectSingleRoot"));
     }
 
     @Test
-    public void testSwichT
+    public void testSwichToCharacterInformationMenu(){
+        click("CHARACTER INFO");
+        Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"));
+    }
 
     private Parent getCurrentRootById(String id){
         for (Window window: Window.getWindows()){
