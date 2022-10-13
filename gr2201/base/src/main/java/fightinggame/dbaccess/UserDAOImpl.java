@@ -41,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
 		} catch (FileNotFoundException e) {
 			System.out.println("FileNotFound at " + this.getPath());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return new ArrayList<User>();
 	}
