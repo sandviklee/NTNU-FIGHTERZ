@@ -29,8 +29,8 @@ public class UserDAOImpl implements UserDAO {
 		mapper.registerModule(new UserModule());
 	}
 
-	public UserDAOImpl(String p){
-		this.path = p;
+	public UserDAOImpl(String path){
+		this.path = path;
 		mapper.registerModule(new UserModule());
 	}
 
