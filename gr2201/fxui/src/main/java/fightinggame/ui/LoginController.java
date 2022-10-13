@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-import fightinggame.users.LoginSignUp;
+import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
 
 public class LoginController extends SceneController{
@@ -23,10 +23,10 @@ public class LoginController extends SceneController{
     @FXML private Button login;
 
     @FXML
-    private void handleLogin(ActionEvent event) throws IOException {
+    private void handleLogIn(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        User tempUser = LoginSignUp.login(username, password);
+        User tempUser = LoginSignup.logIn(username, password);
         
         if (tempUser == null){
             errorMessage.setText("Wrong username or password");
@@ -40,8 +40,8 @@ public class LoginController extends SceneController{
     }
 
     @FXML
-    private void handleSwichToSignUp(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
+    private void handleSwitchToSignup(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
         Parent root = loader.load();
         this.changeScene("NTNU Fighterz", root, event);
     }

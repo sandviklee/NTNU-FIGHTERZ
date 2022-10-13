@@ -2,8 +2,10 @@ module fightinggame.ui {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;
-    requires fightinggame.core;
+    requires fightinggame.base;
+    requires fightinggame.gameplay;
     
-    opens fightinggame.ui to javafx.fxml;
+    opens fightinggame.ui to javafx.fxml, javafx.graphics;
     exports fightinggame.ui;
+    
 }
