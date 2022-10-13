@@ -1,4 +1,5 @@
 # Dev notes
+Last release a lot of the documentation and important discussion regarding the release was "hidden" in release specific documents and meeting notes. Therefore, in this release, we wanted to make our documentation easier to read and reflect more on how the sprint that has passed went and what we have added in this new release. As such, we have added these dev notes where we will discuss how the sprint went, whether we reached our goals and last but not least how we will improve for the next sprint.
 
 ## How it was working on this sprint
 ### Simon
