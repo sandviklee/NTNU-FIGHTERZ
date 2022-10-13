@@ -9,6 +9,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -27,12 +28,19 @@ public class SingleplayerSelectionControllerTest extends ApplicationTest{
 
     @Test
     public void testSelectCharacter(){
+        String pathRam = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/RamSplashArt.png";
+        String pathSly = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/SlySplashArt.png";
+        String pathSol = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/SolSplashArt.png";
+        String selectedImage;
         clickOn("#Ram");
-        Assertions.assertEquals("javafx.scene.image.Image@1cf6d1be", controller.getCharacterSelected().getImage().toString(), "Wrong image");
+        selectedImage = controller.getCharacterSelected().getImage().getUrl();
+        Assertions.assertEquals(pathRam.substring(pathRam.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
         clickOn("#Sly");
-        Assertions.assertEquals("javafx.scene.image.Image@4b013c76", controller.getCharacterSelected().getImage().toString(), "Wrong image");
+        selectedImage = controller.getCharacterSelected().getImage().getUrl();
+        Assertions.assertEquals(pathSly.substring(pathSly.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
         clickOn("#Sol");
-        Assertions.assertEquals("javafx.scene.image.Image@cb0755b", controller.getCharacterSelected().getImage().toString(), "Wrong image");
+        selectedImage = controller.getCharacterSelected().getImage().getUrl();
+        Assertions.assertEquals(pathSol.substring(pathSol.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
     }
 
     @Test
