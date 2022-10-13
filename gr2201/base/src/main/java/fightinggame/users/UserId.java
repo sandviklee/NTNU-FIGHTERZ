@@ -8,12 +8,12 @@ public class UserId {
 	 * @param userId  string to try to constuct userId
 	 * @throws IllegalArgumentException when a userId is given that
 	 */
-	public UserId(String userId) throws IllegalArgumentException{
-		valideUserId(userId);
+	public UserId(final String userId) throws IllegalArgumentException{
+		validUserId(userId);
 		this.userId = userId;
 	}
 	
-	private static void valideUserId(String id) throws IllegalArgumentException{
+	private static void validUserId(final String id) throws IllegalArgumentException{
 		if (id.isEmpty()) throw new IllegalArgumentException("Id cant be empty");
 		if (!id.matches("[a-zA-Z0-9]*")) throw new IllegalArgumentException("Id must be alphaNumeric");
 	}
@@ -23,7 +23,7 @@ public class UserId {
 	 * @param id  UserID to compare to this.
 	 * @return {@code true} if both fields are the same.
 	 */
-	public boolean equals(UserId id) {
+	public boolean equals(final UserId id) {
 		return this.getUserId().equals(id.getUserId());
 	}
 
@@ -34,9 +34,5 @@ public class UserId {
 
 	public String getUserId() {
 		return userId;
-	}
-
-	private void setUserId(String userId) {
-		this.userId = userId;
 	}
 }

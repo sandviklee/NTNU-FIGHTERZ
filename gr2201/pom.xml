@@ -24,18 +24,8 @@
             <artifactId>javafx-fxml</artifactId>
             <version>18</version>
         </dependency>
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>2.11.2</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.13.3</version>
-            </dependency>
+            
+            
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -167,4 +157,3 @@
         <module>gameplay</module>
     </modules>
 </project>
-
