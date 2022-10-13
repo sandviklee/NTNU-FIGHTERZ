@@ -4,6 +4,7 @@ import fightinggame.users.User;
 import fightinggame.game.World;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Terrain;
+import fightinggame.game.WorldEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +18,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Pair;
 
 public class SingleplayerGameController extends SceneController {
-    @FXML private Canvas canvas;
+    @FXML private Canvas worldCanvas;
     private World world;
+    private ArrayList<WorldEntity> worldEntities;
     private HashMap<String, Image> playerSprites;
     private HashMap<String, Image> terrainSprites;
     private Pair<Integer, Integer> playerPosition = new Pair<>(200,200); //dette blir point
@@ -28,9 +30,11 @@ public class SingleplayerGameController extends SceneController {
     public void loadWorld(String character, String gameStage){
         GameCharacter player = loadPlayer(character, playerPosition);
         GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain(gameStage);
-        renderer = new SpriteRenderer(canvas, player, dummy, terrain);
-        UpdateWorld();
+        //Terrain terrain = loadTerrain(gameStage);
+        //worldEntities.add(player);
+        //worldEntities.add(dummy);
+        renderer = new SpriteRenderer(worldCanvas, player);
+        updateWorld();
     }
 
     private GameCharacter loadPlayer(String character, Pair<Integer, Integer> position){
@@ -45,14 +49,13 @@ public class SingleplayerGameController extends SceneController {
         //load terrain here with serializer
     }
 
-    private void UpdateWorld() {
+    private void updateWorld() {
         new AnimationTimer() {
-
             @Override
             public void handle(long now) {
+                //world.updateWorld();
                 renderer.update();
             }
-            
         }.start();
     }
 
