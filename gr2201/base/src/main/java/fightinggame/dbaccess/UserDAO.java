@@ -15,12 +15,7 @@ public interface UserDAO {
 	 * @return list of all users
 	 */
 	public ArrayList<User> getAllUsers(); 
-	// /**
-	//  * Searches data storage for each entry with filterParam and return all lines with given value.
-	//  * @param filterParam  the value it searches after in each line
-	//  * @return all lines containing filterParam
-	//  */
-	// public List<String> filterAllUsers(String filterParam); 
+
 	/**
 	 * Finds the {@code User} that have same id in data storage.
 	 * If their are no user with this id return a null object.
