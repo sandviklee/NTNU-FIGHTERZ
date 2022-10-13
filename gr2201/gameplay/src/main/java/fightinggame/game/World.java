@@ -34,7 +34,7 @@ public class World {
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
             for (WorldEntity entity2 : worldEntities) {
-                if(entity1.contains(entity2)){
+                if(entity1.equals(entity2)){
                     System.out.println("Collision between" + entity1 + "and" + entity2);
                 }
             }
@@ -44,7 +44,7 @@ public class World {
     private void setActions(ArrayList<String> input){
         String inputString = String.join("", input);
         String validInput = inputString.replaceAll("[^WASDKL ]", "");
-        gameCharacter.setCurrentAction(validInput);
+        gameCharacter1.setCurrentAction(validInput);
     }
 
     private void applyActions(){

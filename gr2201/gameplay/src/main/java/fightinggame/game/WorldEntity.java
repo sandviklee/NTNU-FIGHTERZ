@@ -14,14 +14,6 @@ public abstract class WorldEntity {
 		this.getCurrentAction().nextActionFrame();
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	private void setId(int id) {
-		this.id = id;
-	}
-
 	public Effectbox getHitBox() {
 		return hitBox;
 	}
@@ -38,12 +30,8 @@ public abstract class WorldEntity {
 		this.currentAction = currentAction;
 	}
 
-	private Sprite getSprite() {
-		return sprite;
-	}
-
-	private void setSprite(Sprite sprite) {
-		this.sprite = sprite;
+	public int getCurrentFrame(){
+		return currentAction.getCurrentFrame();
 	}
 
 	public boolean isAlive() {

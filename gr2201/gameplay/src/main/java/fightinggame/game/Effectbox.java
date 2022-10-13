@@ -13,6 +13,7 @@ public class Effectbox {
 
     public boolean worldEntityInEffectArea(WorldEntity entity) {
         // TODO:
+        return false;
     }
 
     public void setIsTraversable(boolean state){
@@ -21,10 +22,12 @@ public class Effectbox {
 
     private boolean pointInArea(Point p){
         // TODO:
+        return false;
     }
     
     private boolean EffectBoxInEffectBox(Effectbox otherBox){
         // TODO:
+        return false;
     }
     private void setPosition(Point p){
         // TODO:
