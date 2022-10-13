@@ -1,14 +1,5 @@
 # Workflow and code
-This document is a continuation and improvement of the "Code and git standard" document from sprint 1. The last document provided a lot of new good ideas, but not all were followed during the sprint and some were found to not be as necessary.
-
-## Changes from last document and what has been done this sprint
-* Things we have followed from the last document and that should be continued:
-    * Branch names, have made it much easier to find what issue a branch relates to and easier to close issues when merged.
-    * Merging to dev before master, this project would have crumbled without. Makes it easier to have save stable release and merge things together before deploying a new release. Provides common ground for all new branches.
-* Using issues as a base for all tasks worked well, and the subtasks worked fine for sprint 1. However, in sprint 2, these "subtasks" proved to be bigger and as such rather warranted their own issue entirely. As such, subtasks were not deemed necessary for many tasks. Some tasks did however use subtasks. This isn't used for all issues, but rather used where seen fit.
-* The commit message format was not followed. During sprint 2 it did not seem relevant to know what branch the commit was from or what subtask, so rather commit messages just described what changes happened to what file. This was not always done properly, and as such many commits were just called "Bugfix" or such, and makes it harder to know what file or feature this is relating to after merging.  As the project has continued, the thought of reintroducing this has been discussed. When merging to dev, it might be nice to know what issue the different commits are coming from, especially as many of them are just "Fix typos" or "Fix bugs regarding this". It might be nice to reintroduce this, and as such, despite it not being used during sprint 2, it has been added to the workflow and code document for future use.
-* Code review has been done both through merge comments and 1-on-1's, but with the new style of pair programming and hackathons it is also easier to review code as you write and avoid errors early on.
-
+This document describes the workflow, code standard and tools used in the project.
 ## Git
 ### Issues and tasks
 * Replacing the former system of "subtasks", [linked issues](https://docs.gitlab.com/ee/user/project/issues/related_issues.html) will replace the task of linking issues together. As some subtasks are sometimes too big to be a subtask and should rather be an issue, this will make it easy to still see the dependencies between different issues.
