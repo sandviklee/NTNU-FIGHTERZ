@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public UserDAOImpl(){
-		this.path = "../base/src/main/resources/fightinggame/dbaccess/";
+		this.path = "src/main/resources/fightinggame/dbaccess/";
 		mapper.registerModule(new UserModule());
 	}
 
@@ -46,9 +46,9 @@ public class UserDAOImpl implements UserDAO {
 		return new ArrayList<User>();
 	}
 	
-	public User findUser(User lookUpUser) {
+	public User findUser(User targetUser) {
 		for (User user : getAllUsers()) {
-			if(user.equals(lookUpUser)) {
+			if(user.equals(targetUser)) {
 				return user;
 			}
 		}

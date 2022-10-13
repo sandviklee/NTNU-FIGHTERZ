@@ -27,7 +27,7 @@ public interface UserDAO {
 	 * @param id  {@code UserId}  that it uses to search data storage
 	 * @return the {@code User} with given id in case there are non return null
 	 */
-	public User findUser(User lookUpUser); 
+	public User findUser(User targetUser); 
 	/**
 	 * Update the user with this {@code id} and changes the info into given {@code data}
 	 * If there are no user with userId in data storage do nothing.
