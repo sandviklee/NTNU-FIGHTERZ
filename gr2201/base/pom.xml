@@ -88,6 +88,22 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+
+          <!-- Run the checkstyle code quality tool -->
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+          <!-- Run the spotbugs code quality tool -->
+          <plugin>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-maven-plugin</artifactId>
+          </plugin>
+          <!-- Configure jacoco code coverage -->
+          <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+          </plugin>
       </plugins>
     </pluginManagement>
   </build>
