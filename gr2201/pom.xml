@@ -13,20 +13,7 @@
     </properties>
 
     <dependencyManagement>
-      <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>18</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>18</version>
-        </dependency>
-            
-            
-
+        <dependencies>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
@@ -37,13 +24,6 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>5.4.2</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>3.5.10</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -70,11 +50,9 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M7</version>
                     <configuration>
-                         
                             <argLine>
                              --add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                             </argLine>
-                        
                     </configuration>
                 </plugin>
                 <!-- Run the checkstyle code quality tool -->

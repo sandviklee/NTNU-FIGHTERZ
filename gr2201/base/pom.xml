@@ -15,8 +15,6 @@
   <version>0.0.1</version>
 
   <name>base</name>
-  <!-- FIXME change it to the project's website -->
-  <!-- <url>http://www.example.com</url> -->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,13 +26,10 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.4.2</version> <!-- Unsurten what version the project would gain most from-->
-
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.4.2</version> <!-- Unsurten what version the project would gain most from-->
     </dependency>
       <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
     <dependency>
