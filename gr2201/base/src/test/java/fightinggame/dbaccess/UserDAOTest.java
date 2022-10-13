@@ -41,7 +41,6 @@ public class UserDAOTest {
 		testUser2 = new User("Subject2", "456");
 		testUser3 = new User("Subject3", "789");
 		try {
-			System.out.println(dao.getAllUsers());
 			clearFile(path);
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());

@@ -67,7 +67,6 @@ public class UserModuleTest {
     public void userSerializerTest() {
         try {
             String res = mapper.writeValueAsString(user);
-            System.out.println(res);
             assertTrue(res.equals(userJsonResult));
 
         } catch (JsonProcessingException e) {
