@@ -1,6 +1,6 @@
 # Base beskrivelse
 
-Base inneholder pakkene: **dbaccess**, **users** og **JSON**. Base omhandler alt om brukere og innloggings funksjonalitet.
+Base inneholder pakkene: **dbaccess**, **users** og **json**. Base omhandler alt om brukere og innloggings funksjonalitet.
 Dette er hvor alt med brukerprofiler blir gjort.
 
 ---
@@ -9,4 +9,4 @@ Dette er hvor alt med brukerprofiler blir gjort.
 
 **users** er klasser som har alt med dannelse av brukere og annen funksjonalitet. 
 
-**JSON** er også en module, og inneholder deserializers og serializers for brukere. 
+**json** er også en module, og inneholder deserializers og serializers for brukere. 
