@@ -17,11 +17,7 @@ public class AnimationSpriteTest {
 
     private int validFrameAmount;
     private int validAnimationLoopStartFrame ;
-
     private int nonValidAnimationLoopStartFrame ;
-
-
-
     private int negNum;
 
     @BeforeEach
@@ -30,7 +26,6 @@ public class AnimationSpriteTest {
         validFrameAmount = 10;
         validAnimationLoopStartFrame = 5;
         nonValidAnimationLoopStartFrame = 11;
-
     }
 
     @Test
