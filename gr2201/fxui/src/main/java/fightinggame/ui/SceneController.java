@@ -34,6 +34,16 @@ public class SceneController {
         stage.show();
     }
 
+    protected void changeSceneFullscreen(String title, Parent root, ActionEvent event) {
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
+       
+    }
+
     protected void changeSceneMouseEvent(String title, Parent root, MouseEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
