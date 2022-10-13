@@ -82,6 +82,6 @@ public class LoginSignup {
 	}
 
 	public void setPath(String path) {
-		((UserDAOImpl) dao).setPath(p);
+		((UserDAOImpl) dao).setPath(path);
 	}
 }
