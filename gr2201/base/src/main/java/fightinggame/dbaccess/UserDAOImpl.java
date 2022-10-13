@@ -89,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
 	public void addUser(User user) {
 		try {
 			ArrayList<User> users = getAllUsers();
-			if (users.contains(user)) return;
+			if (users.stream().anyMatch((u) -> u.equals(user))) return;
 
 			users.add(user);
 			storeToFile(this.getPath(), userListToJson(users));

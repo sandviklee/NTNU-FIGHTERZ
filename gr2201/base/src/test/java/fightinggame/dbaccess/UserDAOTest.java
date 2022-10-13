@@ -31,14 +31,14 @@ public class UserDAOTest {
 	
 	}
 
+
 	@BeforeEach
 	public void setup() {
 		// path is to test data storage so running the test will not affect working data storage.
 		// This will prevent loss of data of users.
-		
-		path = "base/src/test/recources/fightinggame/dbaccess/";
+		path = "src/test/resources/fightinggame/dbaccess/";
+
 		dao = new UserDAOImpl(path);
-		// ((UserDAOImpl) dao).setPath(path);
 		testUser1 = new User("Subject1", "123");
 		testUser2 = new User("Subject2", "456");
 		testUser3 = new User("Subject3", "789");
