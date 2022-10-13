@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 import fightinggame.users.User;
-// import fightinggame.users.UserData;
 
 public class UserSerializer extends JsonSerializer<User> {
     /*

@@ -11,13 +11,13 @@ public class User {
 	private UserId userId;
 
 	public User(String id, String password) throws IllegalArgumentException{
-		// uses validaters in classes UserData and UserId 
+		// uses validators in classes UserData and UserId 
 		try {
 			this.userData = new UserData(password);
 			this.userId = new UserId(id);
 			
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Bad input");
+			throw new IllegalArgumentException("Bad input" + e.getLocalizedMessage());
 		}
 	}
 	public User(UserId id, UserData data) {

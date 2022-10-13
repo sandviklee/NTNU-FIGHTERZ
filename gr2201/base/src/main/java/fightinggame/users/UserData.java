@@ -13,11 +13,11 @@ public class UserData {
 	 * @throws IllegalArgumentException  on bad input such as no password
 	 */
 	public UserData(String password) throws IllegalArgumentException{
-		valideUserData(password);
+		validUserData(password);
 		this.password = password;
 	}
 
-	private static void valideUserData(String password) throws IllegalArgumentException{
+	private static void validUserData(String password) throws IllegalArgumentException{
 		// Shall detect bad input
 		boolean isEmpty = password.isEmpty();
 		boolean notOnlyContainsLettersAndNumbers = !password.matches("[a-zA-Z0-9]*");
@@ -49,7 +49,7 @@ public class UserData {
 	}
 	public void changePassword(final String password) {
 		try {
-			valideUserData(password);
+			validUserData(password);
 			this.setPassword(password);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Cant change to this password");

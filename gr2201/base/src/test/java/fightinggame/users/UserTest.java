@@ -22,7 +22,7 @@ public class UserTest {
 	@Test
 	@DisplayName("Tests if the constructor works properly")
 	public void testConstructor() {
-		// Contructed with bad input values
+		// Constructed with bad input values
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			new User(nonValidUserId, nonValidUserData);
 		}, "This UserData is not possible");

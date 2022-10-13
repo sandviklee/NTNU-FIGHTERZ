@@ -147,9 +147,6 @@ public class UserDAOImpl implements UserDAO {
 	 * @throws IOException
 	 */
 	private static String readFromFile(String filename) throws IOException {		
-  		
-	
-		// // File userFile = new File(classLoader.getResource(filename + "users.txt").getFile());
 		String usersInfo = "";
 		File userFile = new File(filename + "users.json");
 		if (userFile.exists()){

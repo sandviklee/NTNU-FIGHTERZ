@@ -28,9 +28,7 @@ public class UserDAOTest {
 		currentFile.createNewFile();
 		currentWriter.write("");
 		currentWriter.close();
-	
 	}
-
 
 	@BeforeEach
 	public void setup() {
@@ -86,9 +84,6 @@ public class UserDAOTest {
 		dao.updateUser(testUser3.getUserId(), testUser3.getUserData());
 		assertEquals(1, dao.getAllUsers().size(), "The amount is not correct should only contain one user");
 		assertTrue(dao.getAllUsers().get(0).equals(testUser1), "The content of dao is not correct, the updateUser() did update testUser1s UserData");
-		
-		// TODO DECISION: in case of bug where several users with same userId are in the data storage. Should it update all instances with same UserId or just the first?
-
 	}
 
 	@Test
@@ -96,7 +91,7 @@ public class UserDAOTest {
 	public void testDeleteUser() {
 		assertEquals(0, dao.getAllUsers().size(), "The amount is not correct, should not contain users");
 
-		// Add three new user to db with different id.
+		// Add three new users to db with different id.
 		dao.addUser(testUser1);
 		dao.addUser(testUser2);
 		dao.addUser(testUser3);
@@ -104,18 +99,16 @@ public class UserDAOTest {
 
 		assertEquals(3, dao.getAllUsers().size(), "The amount is not correct should contain three users");
 		dao.deleteUser(testUser1.getUserId());
-		// Does it remove more then wanted
+		// Does it remove more than wanted
 		assertEquals(2, dao.getAllUsers().size(), "The amount is not correct, should contain two");
 		assertTrue(dao.getAllUsers().get(0).equals(testUser2), "The content of dao is not correct, wrong value removed");
 		assertTrue(dao.getAllUsers().get(1).equals(testUser3), "The content of dao is not correct, wrong value removed");
 		
-		// When given a non existing Id does it not delete any values.
+		// When given a non existent id does not delete any values.
 		dao.deleteUser(testUser1.getUserId());
 		assertEquals(2, dao.getAllUsers().size(), "The amount is not correct, should contain two");
 		assertTrue(dao.getAllUsers().get(0).equals(testUser2), "The content of dao is not correct, wrong value removed");
 		assertTrue(dao.getAllUsers().get(1).equals(testUser3), "The content of dao is not correct, wrong value removed");
-
-		// TODO DECISION: in case of bug where several users with same userId are in the data storage. Should it update all instances with same UserId or just the first?
 	}
 
 	@Test
@@ -128,7 +121,7 @@ public class UserDAOTest {
 		assertEquals(1, dao.getAllUsers().size(), "The amount is not correct should only contain one user");
 		assertTrue(dao.getAllUsers().get(0).equals(testUser1), "The content of dao is not correct, bad values or none");
 
-		// Add same user to db it should not be added
+		// Try to add same user to db, should not be added.
 		dao.addUser(testUser1);
 		assertEquals(1, dao.getAllUsers().size(), "The amount is not correct should only contain one user");
 		assertTrue(dao.getAllUsers().get(0).equals(testUser1), "The content of dao is not correct, values changed after addUser()");

@@ -10,30 +10,24 @@ public class LoginSignup {
 	private static UserDAO dao = new UserDAOImpl();
 
 	/**
-	 * Checks if inputinfo is valide and return a {@code User} from data storage that match input.
+	 * Checks if inputinfo is valid and return a {@code User} from data storage that match input.
 	 * 
-	 * For valide input check if a user with corresensponding username and password is contained in the data storage.
+	 * For valid input check if a user with corresensponding username and password is contained in the data storage.
 	 * When either does not complie return null.
 	 * @param username  the string that login will attempt to find a corresensponding user
 	 * @param password  the the string that login will attempt to find a corresensponding user
-	 * @return A User if valide input and user in data storage else null.
+	 * @return A User if valid input and user in data storage else null.
 	 */
 	public static User logIn(String username, String password) {
 		if (!validateUserName(username) || !validatePassword(password, password)) return null;
-		// try {
-			User user = new User(username, password);
-			User userFromDb = dao.findUser(user);
-			if (userFromDb == null) return null;
-			return userFromDb;
-
-		// } catch (NullPointerException e) {
-		// 	System.out.println(e.getLocalizedMessage());
-		// 	return null;
-		// }
+		User user = new User(username, password);
+		User userFromDb = dao.findUser(user);
+		if (userFromDb == null) return null;
+		return userFromDb;
 	}
 
 	/**
-	 * Checks if inputinfo is valide and makes a {@code User} in the data storage and return said {@code User}.
+	 * Checks if inputinfo is valid and makes a {@code User} in the data storage and return said {@code User}.
 	 * 
 	 * It checks if the {@code username} is in data storage if it is already in use return null, 
 	 * else make a new return a {@code User} from data storage that match input. 
@@ -50,7 +44,6 @@ public class LoginSignup {
 
 		// check if user in db and add when not
 		User userFromDb = dao.findUser(user);
-		// String userData = dao.findUser(user.getUserId());
 		if (userFromDb != null) return null;
 		dao.addUser(user);
 		return user;
@@ -59,7 +52,7 @@ public class LoginSignup {
 	/**
 	 * Checks if username is a non empty string only containing a combaination of letters and numbers.
 	 * @param username the string to test
-	 * @return true if username is valide else false
+	 * @return true if username is valid else false
 	 */
 	private static boolean validateUserName(String username) {
 		return isAlphanumericAndNonEmpty(username);
@@ -68,9 +61,9 @@ public class LoginSignup {
 	/**
 	 * Checks if password is a non empty string only containing a combaination of letters and numbers and that confirmPassword matches password.
 	 * 
-	 * @param password         the string to check if valide
+	 * @param password         the string to check if valid
 	 * @param confirmPassword  the string to check if equal to password
-	 * @return true if password is valide else false
+	 * @return true if password is valid else false
 	 */
 	private static boolean validatePassword(String password, String confirmPassword) {
 		boolean correspondingPassewords = isCorrespondingPasswords(password, confirmPassword);
@@ -88,7 +81,7 @@ public class LoginSignup {
 		return p1.equals(p2);
 	}
 
-	public void setPath(String p) {
+	public void setPath(String path) {
 		((UserDAOImpl) dao).setPath(p);
 	}
 }

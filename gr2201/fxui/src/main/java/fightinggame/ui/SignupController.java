@@ -30,7 +30,7 @@ public class SignupController extends SceneController{
 
         if (tempUser == null){
             if (password.equals(confirmPassword)){
-                nonValidCredentials.setText("Username already exist or password and usermane does not fit criteria.");
+                nonValidCredentials.setText("Username already exist or password and username does not fit criteria.");
             }
             else{
                 nonMatchingPasswords.setText("Passwords not matching");
