@@ -180,8 +180,8 @@ public class UserDAOImpl implements UserDAO {
 		currentWriter.close();
 	}
 
-	public void setPath(String p) {
-		this.path = p;
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	public String getPath() {

@@ -77,8 +77,8 @@ public class LoginSignup {
 		return (notEmpty && containsOnlyLettersAndNumbers);
 	}
 
-	private static boolean isCorrespondingPasswords(String p1, String p2) {
-		return p1.equals(p2);
+	private static boolean isCorrespondingPasswords(String pass1, String pass2) {
+		return pass1.equals(pass2);
 	}
 
 	public void setPath(String path) {
