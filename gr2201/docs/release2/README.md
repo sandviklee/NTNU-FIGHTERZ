@@ -8,6 +8,7 @@
 * Updated diagrams and architecture of project
 * Added exit button
 * Began implementing gameplay classes
+* Better documentation of workflow and changes!
 
 ## Documentation
 The documentation for this release consists of:
