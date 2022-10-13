@@ -44,12 +44,12 @@ class World {
 }
 'Work in progress, current draft, done for now.
 class Action {
-    - 'hitBox: EffectBox
-    - 'sprites: AnimationSprite
+    '- hitBox: EffectBox
+    '- sprites: AnimationSprite
     - isSelfInterruptible: boolean
     - isEnemyInterruptible: boolean
     - actionPriority: integer
-    - 'knockback: Vector
+    '- knockback: Vector
     - duration: integer
     - currentTime: integer
     - hitBoxStartTime: integer
@@ -118,7 +118,7 @@ class Character {
 }
 'Unsure about implementation, first draft.
 class Projectile {
-    - actions: HashMap<String><Action>
+    '- actions: HashMap<String><Action>
     + doAction(): void
     + canMove(): boolean
 }
@@ -135,6 +135,7 @@ Point <-- "1" Vector
 WorldEntity "1" <--> "1" EffectBox
 WorldEntity <-- "1" Action
 Character <-- "*" Action
+Projectile <-- "*" Action
 WorldEntity <|-- Character
 WorldEntity <|-- Projectile
 WorldEntity <|-- Terrain

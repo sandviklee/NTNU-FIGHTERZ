@@ -14,6 +14,12 @@ A great improvement from the last sprint was the introduction of hackathons. Not
 This sprint worked much better than the last one. We still had a lot to do from the last sprint, which might've halted progress this sprint. However, learning from past experiences from sprint 1, the planning and documentation for the project severely improved. This was a godsent and helped the development so much. In addition, we added new elements to our workflow, such as pair programming, code reviews together, hackathons, JavaDocs and documentation before implementation. The process was much more painless than sprint 1, and for the most part everyone could independently work and know what they can do at all times. The group really came together and solved a lot of issues together, especially regarding the design, and everyone contributed many different ideas. The design improved as a result of planning with everyone instead of just implementing on your own. All in all, it is incredible that we got as far as we did, including all unforeseen obstacles.
 
 ## What were our goals and did we reach them?
+* **Goal 1: This**
+
+    helo
+* **Goal 2: That**
+
+    helo
 
 ## What can we improve for next sprint?
 ### Simon

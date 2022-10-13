@@ -1,7 +1,6 @@
-# What's new in release 1
+# What's new in release 2
 
 ## Features
 
 ## Documentation
-
 
