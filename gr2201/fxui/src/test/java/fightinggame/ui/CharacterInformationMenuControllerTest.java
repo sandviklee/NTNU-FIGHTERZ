@@ -2,6 +2,7 @@ package fightinggame.ui;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -33,6 +34,28 @@ public class CharacterInformationMenuControllerTest extends ApplicationTest {
     public void testClickRam(){
         clickOn("#Ram");
         String title = getLabelText("#title");
+        Assertions.assertEquals("Ram INFO", title, "Not correct title");
+    }
+
+    @Test
+    public void testClickSly(){
+        clickOn("#Sly");
+        String title = getLabelText("#title");
+        Assertions.assertEquals("Sly INFO", title, "Not correct title");
+    }
+
+    @Test
+    public void testClickSol(){
+        clickOn("#Sol");
+        String title = getLabelText("#title");
+        Assertions.assertEquals("Sol INFO", title, "Not correct title");
+    }
+
+    @Test
+    public void testGoBack(){
+        clickOn("#Sol");
+        clickOn("#goBack");
+        Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"), "Wrong root when pressing goBack button");
     }
 
     private Parent getCurrentRootById(String id){
@@ -45,4 +68,5 @@ public class CharacterInformationMenuControllerTest extends ApplicationTest {
         }
         return null;
     }
+
 }
