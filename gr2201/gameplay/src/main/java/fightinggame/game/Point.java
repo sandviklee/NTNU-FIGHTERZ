@@ -6,12 +6,20 @@ public class Point {
     private double x = 0;
     private double y = 0;
 
+    
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public void move(){
         this.x += actionVector.getVx();
         this.y += actionVector.getVy();
         this.x += gravityVector.getVx();
         this.y += gravityVector.getVy();
     }
+    
+
 
     public void setActionVector(Vector vector){
         this.actionVector = vector;

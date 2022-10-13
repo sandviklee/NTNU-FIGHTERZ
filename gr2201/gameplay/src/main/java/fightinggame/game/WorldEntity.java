@@ -11,7 +11,7 @@ public abstract class WorldEntity {
 	}
 	
 	public void doAction(){
-		this.getCurrentAction().handleAction();
+		this.getCurrentAction().nextActionFrame();
 	}
 
 	public int getId() {
