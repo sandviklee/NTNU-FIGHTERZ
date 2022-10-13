@@ -91,12 +91,4 @@ public class LoginSignup {
 	public void setPath(String p) {
 		((UserDAOImpl) dao).setPath(p);
 	}
-
-	public static void main(String[] args) {
-		// User u = LoginSignup.logIn("Sverre1", "pass");
-		User us = LoginSignup.signUp("Svurre1", "Svurre1", "Svurre1");
-		// System.out.println(u.getUserName() + " " + u.getPassword());
-		// System.out.println(us.getUserName() + " " + us.getPassword());
-
-	}
 }
