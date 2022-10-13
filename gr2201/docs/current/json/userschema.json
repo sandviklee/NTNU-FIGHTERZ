@@ -1,0 +1,38 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "User",
+    "description": "An array of user ids and data.",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "UserId": {
+                "description": "Information to identify a user.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Username chosen by user.",
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "[a-zA-Z0-9]*"
+                    }
+                },
+                "required": ["id"]
+            },
+            "UserData": {
+                "description": "Data associated with a user.",
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "description": "Password chosen by user.",
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "[a-zA-Z0-9]*"
+                    }
+                },
+                "required": ["password"]
+            }
+        },
+        "required": ["UserId", "UserData"]
+    }
+}
