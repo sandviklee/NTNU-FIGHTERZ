@@ -14,32 +14,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LoginSignupTest {
 	private LoginSignup loginSignup = new LoginSignup();
 	private String valideUsername;
+	private String valideOtherUsername;
+
 	private String nonValideUsername;
 	private String validePassword1;
 	private String validePassword2;
 	private String nonValidPassword;
 
 	private static void clearFile(String path) throws IOException {
-		// TODO make file at path clear
 		File currentFile = new File(path + "users.json");
 		FileWriter currentWriter = new FileWriter(currentFile, false);
-		currentWriter.write("Write file");
+		currentWriter.write("");
 		currentWriter.close();
 	}
 
 
 	@BeforeEach
 	public void setup() {
-		// String path = "base/src/test/recources/fightinggame/dbaccess/"; // test path
-		//TESTS
-		// String path = "gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
-		// String path = "gr2201/gr2201/base/src/test/recources/fightinggame/dbaccess/"; // test path
-		// String path = "../recources/fightinggame/dbaccess/"; // test path		
-		// String path = "../../recources/fightinggame/dbaccess/"; // test path
-		String path = "../../../recources/fightinggame/dbaccess/"; // test path
+		String path = "src/test/resources/fightinggame/dbaccess/"; // test path
+		
 
 		loginSignup.setPath(path);
 		valideUsername = "User1";
+		valideOtherUsername = "User2";
+
 		nonValideUsername = "!,.*¨¨";
 		validePassword1 = "Password1";
 		validePassword2 = "Password2";
@@ -67,7 +65,7 @@ public class LoginSignupTest {
 		assertTrue(badIdUser == null, "user not in db and input values are none valide");
 
 		// check for good username and good password for user not in db
-		User userNotInDb = loginSignup.logIn(valideUsername, validePassword2);
+		User userNotInDb = loginSignup.logIn(valideOtherUsername, validePassword2);
 		assertTrue(userNotInDb == null, "user not in db and input values are none valide");
 
 		// check for good username and good password for user in db
