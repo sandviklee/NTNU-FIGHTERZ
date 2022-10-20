@@ -135,7 +135,7 @@ The user needs to be able to change the audio volume, including both music and g
 * drag to adjust the in game sound effects volume
 
 ### Achievements (us-11)
-** As a player that likes playing online, but not competitively, I would still like to be able to get rewards regardless of my skills compared to other players. **
+**As a player that likes playing online, but not competitively, I would still like to be able to get rewards regardless of my skills compared to other players.**
 
 The user needs to be able to be rewarded by the game for playing. Achievements will reward the player for playing, as well as provide a goal for users to keep playing and something to reach for. Users that do not take the game itself competitvely but still want to have something to work towards, can instead focus on these achievements. A page containing the achievements should show which are locked and unlocked, as well as provide a tooltip on how to unlock on hovering.
 ##### Important to see
@@ -145,7 +145,7 @@ The user needs to be able to be rewarded by the game for playing. Achievements w
 * hover to see unlock conditions
 
 ### Skip tutorial (us-12)
-** As a player that is already experienced with this game or similar ones, I would like to be able to skip the explanation of the game and tutorial. **
+**As a player that is already experienced with this game or similar ones, I would like to be able to skip the explanation of the game and tutorial.**
 
 The user needs to be able to skip the tutorial, and as such it should not pop up on each startup. There should be a variable telling if the user is a first time user or not, and the tutorial should only pop up if it is the user's first time playing the game. Otherwise, the tutorial will be available on the main menu screen, but will not be forced upon the player every single time they open the game. Most of the implementation of this user story will be done in the background, with keeping track of whether or not the player has seen the tutorial before and whether or not it should be shown. One option is to have a variable keeping track, but this can also be done knowing that the user is a first time user every time they press the signup button instead of the login button.
 ##### Important to see
