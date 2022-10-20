@@ -8,29 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class VectorTest {
-
-    @Test
-    @DisplayName("")
-    public void testAddVector() {
-
-    }
-
-    @Test
-    @DisplayName("")
-    public void testApplyAcceleration() {
-
-    }
-
-    @Test
-    @DisplayName("")
-    public void testGetVx() {
-
-    }
-
-    @Test
-    @DisplayName("")
-    public void testGetVy() {
-
-    }
+public class WorldTest {
+    
 }
