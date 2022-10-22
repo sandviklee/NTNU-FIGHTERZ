@@ -27,7 +27,6 @@ public class CharacterInformationController extends SceneController{
 
     private void initCharacter(String character) {
         int i = 0;
-        System.out.println((getClass().getResource(character + "SplashArt.png")).toString());
         title.setText(character + " INFO");
         Image characterSplashArt = new Image((getClass().getResource(character + "SplashArt.png")).toString());
        

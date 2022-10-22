@@ -50,7 +50,7 @@ public class SingleplayerSelectionController extends SceneController{
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
         singleplayerGameController.setUser(super.getUser());
-        singleplayerGameController.loadWorld(null, null);
+        singleplayerGameController.loadWorld("Ram", null);
         super.changeSceneFullscreen("NTNU Fighterz", root, event);
     
     }

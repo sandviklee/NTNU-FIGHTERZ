@@ -2,13 +2,15 @@ package fightinggame.ui;
 
 import fightinggame.users.User;
 import fightinggame.game.World;
+import fightinggame.game.Action;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-
+import java.util.List;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -20,28 +22,32 @@ import javafx.util.Pair;
 public class SingleplayerGameController extends SceneController {
     @FXML private Canvas worldCanvas;
     private World world;
-    private ArrayList<WorldEntity> worldEntities;
-    private HashMap<String, Image> playerSprites;
+    private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
+    private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> terrainSprites;
-    private Pair<Integer, Integer> playerPosition = new Pair<>(200,200); //dette blir point
-    private Pair<Integer, Integer> dummyPosition = new Pair<>(400,400); //dette blir point
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(800, 620)); //dette blir point
+    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400)); //dette blir point
     private SpriteRenderer renderer;
+    private long fps = 10_000_000;
 
     public void loadWorld(String character, String gameStage){
         GameCharacter player = loadPlayer(character, playerPosition);
-        GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+        playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
+        //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         //Terrain terrain = loadTerrain(gameStage);
-        //worldEntities.add(player);
+        player.setCurrentAction(new Action(gameStage, 0, 100000, false, false, 18, true, 0));
+        worldEntities.add(player);
         //worldEntities.add(dummy);
-        renderer = new SpriteRenderer(worldCanvas, player);
+        this.world = new World(worldEntities);
+        renderer = new SpriteRenderer(worldCanvas, this.playerSprites, worldEntities);
+   
         updateWorld();
     }
 
-    private GameCharacter loadPlayer(String character, Pair<Integer, Integer> position){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){
         //load user here with serializer
-        ArrayList<String> playerParams = new ArrayList<>(); //placeholder
-        //return new GameCharacter(playerParams, position); //loaded from json,should maybe have a starting position
-        return null;
+        //ArrayList<String> playerParams = new ArrayList<>(); //placeholder
+        return new GameCharacter(character, position); //loaded from json,should maybe have a starting position
     }
 
     private Terrain loadTerrain(String terrainSprite){
@@ -51,10 +57,14 @@ public class SingleplayerGameController extends SceneController {
 
     private void updateWorld() {
         new AnimationTimer() {
+            private long tick = 0;
             @Override
             public void handle(long now) {
-                //world.updateWorld();
-                renderer.update();
+                if (now - tick >= fps) {
+                    renderer.update();
+                    world.updateWorld();
+                }
+            tick = now;
             }
         }.start();
     }

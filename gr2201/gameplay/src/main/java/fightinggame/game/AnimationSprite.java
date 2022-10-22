@@ -4,6 +4,7 @@ package fightinggame.game;
  */
 public class AnimationSprite {
     private int currentFrame = 0;
+    private int holdFrame = 0;
     private int totalFrames;
     private int animationLoopStartFrame;
     private boolean animationLoop;
@@ -49,7 +50,14 @@ public class AnimationSprite {
      */
     public void next(){
         if (currentFrame < totalFrames) {
-            this.currentFrame += 1;
+            System.out.println(holdFrame);
+            if (holdFrame <= 3) {
+                holdFrame += 1;
+            } else {
+                holdFrame = 0;
+                this.currentFrame += 1;
+            }
+            
         }
 
         if (animationLoop && !hasNext()) {

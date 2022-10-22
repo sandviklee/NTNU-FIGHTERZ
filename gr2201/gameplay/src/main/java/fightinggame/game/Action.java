@@ -29,9 +29,9 @@ public class Action {
      */
     public Action(Effectbox hitbox, String spriteName, boolean isSelfInterruptible, 
     boolean isEnemyInterruptible, Vector knockback, int duration, int actionPriority, 
-    int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, boolean animationLoopStartTime) {
+    int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
         this.hitBox = hitbox;
-        this.sprites = new AnimationSprite(totalFrames, animationLoopStartTime, hitBoxStartTime);
+        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame);
         this.isSelfInterruptible = isSelfInterruptible;
         this.isEnemyInterruptible = isEnemyInterruptible;
         this.knockback = knockback;
@@ -42,6 +42,7 @@ public class Action {
         this.name = spriteName;
         this.currentTime = 0;
         this.isDone = false;
+        this.hitBoxStartTime = hitBoxStartTime;
     }
 
     /**
@@ -53,8 +54,8 @@ public class Action {
      * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
      */
     public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
-    int totalFrames, boolean animationLoop, boolean animationLoopStartTime) {
-        this.sprites = new AnimationSprite(totalFrames, animationLoopStartTime, hitBoxStartTime);
+    int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
+        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame);
         this.isSelfInterruptible = isSelfInterruptible;
         this.isEnemyInterruptible = isEnemyInterruptible;
         this.duration = duration;
@@ -160,11 +161,14 @@ public class Action {
      * @return true if currentTime equal or larger then duration
      */
     private boolean isDone() {
+        return false;
+        /* 
         if (currentTime >= duration) {
             return true;
         } else {
             return false;
         }
+        */
     }
 
     /**

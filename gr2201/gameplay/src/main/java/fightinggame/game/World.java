@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class World {
     private ArrayList<WorldEntity> worldEntities;
     private GameCharacter gameCharacter1;
-    private GameCharacter gameCharacter2;
+    //private GameCharacter gameCharacter2;
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = worldEntities;
@@ -14,8 +14,6 @@ public class World {
             if(entity.getClass().equals(GameCharacter.class)){
                 if(gameCharacter1==null){
                     gameCharacter1 = (GameCharacter) entity;
-                } else {
-                    gameCharacter2 = (GameCharacter) entity;
                 }
             }
         }
@@ -25,12 +23,11 @@ public class World {
         this.worldEntities.add(worldEntity);
     }
 
-    public void updateWorld(ArrayList<String> input){
-        handleCollisions();
-        setActions(input);
+    public void updateWorld(){
+        //handleCollisions();
         applyActions();
     }
-
+    /* 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
             for (WorldEntity entity2 : worldEntities) {
@@ -40,12 +37,15 @@ public class World {
             }
         }
     }
+    */
 
+    /* 
     private void setActions(ArrayList<String> input){
         String inputString = String.join("", input);
         String validInput = inputString.replaceAll("[^WASDKL ]", "");
         gameCharacter1.setCurrentAction(validInput);
     }
+    */
 
     private void applyActions(){
         for (WorldEntity worldEntity : worldEntities) {

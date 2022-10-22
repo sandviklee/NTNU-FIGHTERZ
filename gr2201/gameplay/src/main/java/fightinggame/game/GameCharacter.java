@@ -1,6 +1,11 @@
 package fightinggame.game;
 
+import java.util.ArrayList;
+
 public class GameCharacter extends WorldEntity{
+    public GameCharacter(String name, ArrayList<Integer> pos) {
+        super(name, pos);
+    }
     private int weight;
     private int health;
 
