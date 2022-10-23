@@ -10,17 +10,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PointTest {
     
+    private Point point;
+
+    private Point
+
 
     @Test
     @DisplayName("Test if the constructor creates correct object with correct fields")
     public void testConstructor() {
-
+        
     }
 
     @Test
     @DisplayName("Test if moves point correctly")
     public void testMove() {
 
+        
     }
 
     @Test
