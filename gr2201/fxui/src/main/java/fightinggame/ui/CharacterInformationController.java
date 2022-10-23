@@ -1,7 +1,7 @@
 package fightinggame.ui;
 
 import java.io.IOException;
-
+import java.util.HashMap;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +43,15 @@ public class CharacterInformationController extends SceneController{
                 ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + i + ".jpeg")).toString()));
             }
         }
+    }
+
+    private HashMap<String, String> getCharacterInformation(String character) {
+        HashMap<String, String> characterInformation = new HashMap<String, String>();
+        
+        // get all character information
+        
+
+        return characterInformation;
     }
 
 

@@ -1,6 +1,6 @@
 [
     {
-        "characterName": "Jinjer Jink",
+        "characterName": "Ram",
         "characterDescription": "Two braids and a quick punch.",
         "difficulty": 3,
         "playstyle": "Rusher",
@@ -24,7 +24,31 @@
         ]
     },
     {
-        "characterName": "Kristoffor",
+        "characterName": "Sol",
+        "characterDescription": "Two braids and a quick punch.",
+        "difficulty": 3,
+        "playstyle": "Rusher",
+        "specialActions": [
+            {
+                "specialActionName": "Hair punch",
+                "specialActionDescription": "Punches with hair"
+            },
+            {
+                "specialActionName": "Double hair punch",
+                "specialActionDescription": "Punches with both braids!"
+            },
+            {
+                "specialActionName": "Hair grab",
+                "specialActionDescription": "Grabs with hair"
+            },
+            {
+                "specialActionName": "Hair slap",
+                "specialActionDescription": "SLAPSLAPSLAP"
+            }
+        ]
+    },
+    {
+        "characterName": "Sly",
         "characterDescription": "Two braids and a quick punch.",
         "difficulty": 3,
         "playstyle": "Rusher",
