@@ -24,17 +24,21 @@ public class VectorDeserializer extends JsonDeserializer<Vector> {
     public Vector deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
+
             JsonNode dxNode = objectNode.get("dx");
             JsonNode dyNode = objectNode.get("dy");
             JsonNode axNode = objectNode.get("ax");
             JsonNode ayNode = objectNode.get("ay");
+            JsonNode directionNode = objectNode.get("direction");
+
 
             int dx = dxNode.asInt();
             int dy = dyNode.asInt();
             int ax = axNode.asInt();
             int ay = ayNode.asInt();
+            int direction = directionNode.asInt();
             
-            Vector vec = new Vector(dx, dy, ax, ay);
+            Vector vec = new Vector(dx, dy, ax, ay, direction);
             return vec;
            }
            

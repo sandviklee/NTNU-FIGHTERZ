@@ -30,7 +30,7 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
             JsonNode offsetXNode;
             JsonNode offsetYNode;
             JsonNode isTraversibleNode;
-            Boolean isHurtBox;
+            Boolean isHurtBox = true;
             Boolean isTraversible = false;
             int width = widthNode.intValue();
             int length = heightNode.intValue();
@@ -39,7 +39,7 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
                 offsetXNode = objectNode.get("offsetX");
                 offsetYNode = objectNode.get("offsetY");
                 isTraversibleNode = objectNode.get("isTraversible");
-                isHurtBox = true;
+                isHurtBox = false;
             }
                         
             int offsetX = offsetXNode.intValue();
