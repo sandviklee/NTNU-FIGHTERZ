@@ -26,18 +26,15 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
             ObjectNode objectNode = (ObjectNode) jsonNode;
             JsonNode widthNode = objectNode.get("width");
             JsonNode heightNode = objectNode.get("height");
-            JsonNode offsetXNode = objectNode.get("offsetX");
-            JsonNode offsetYNode = objectNode.get("offsetY");
-            JsonNode isTraversibleNode = objectNode.get("isTraversible");
+            // JsonNode isTraversibleNode = objectNode.get("isTraversible");
 
-            
+            int width = widthNode.intValue();
+            int length = heightNode.intValue();
+            Boolean isTraversible = false;
 
-
-
-            Effectbox box = new Effectbox();
+            Effectbox box = new Effectbox(width, length, isTraversible);
             return box;
            }
-           
         return null;
     }    
 }
