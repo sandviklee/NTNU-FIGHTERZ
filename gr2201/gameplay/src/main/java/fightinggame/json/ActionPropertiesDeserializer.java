@@ -11,20 +11,20 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import fightinggame.game.Action;
+import fightinggame.game.ActionProperties;
 import fightinggame.game.Effectbox;
 
 
-public class ActionDeserializer extends JsonDeserializer<Action> {
+public class ActionPropertiesDeserializer extends JsonDeserializer<ActionProperties> {
 
     @Override
-    public Action deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public ActionProperties deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
        TreeNode treeNode = p.getCodec().readTree(p);
        return deserialize((JsonNode) treeNode);
 
     }
 
-    public Action deserialize(JsonNode jsonNode) {
+    public ActionProperties deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
 
@@ -42,19 +42,12 @@ public class ActionDeserializer extends JsonDeserializer<Action> {
 
             JsonNode isAnimationLoopNode = objectNode.get("isAnimationLoop");
 
+            // Must get these fields "hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "isProjectile"
 
+            // Effectbox hitbox, String spriteName, Vector knockback, boolean isSelfInterruptible, boolean isEnemyInterruptible, int duration, int actionPriority, int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, int animationLoopStartFrame
 
-
-            
-
-
-
-            
-
-
-
-            Action box = new Action();
-            return box;
+            ActionProperties actionProperties = new ActionProperties();
+            return actionProperties;
            }
            
         return null;
