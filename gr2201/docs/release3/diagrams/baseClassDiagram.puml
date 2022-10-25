@@ -1,0 +1,129 @@
+@startuml
+
+'Users package'
+package "users" {
+	class LoginSignup {
+		'- userDAO: UserDAOImpl'
+		+ logIn(String username, String password): User
+		+ signUp(String username, String password, String confirmePassword): User
+		- validateUserName(String username): boolean
+		- validatePassword(String password, String confirmPassword): boolean
+		- isAlphanumericAndNonEmpty(String str): boolean
+		- isCorrespondingPasswords(String pass1, String pass2): boolean
+		+ setPath(String path): void
+	}
+	class User {
+		'-userData: UserData'
+		'-userId: UserId'
+
+		+ User(String id, String, password)
+		+ equals(User u): boolean
+		+ getUserId(): UserId
+		+ getUserData(): UserData
+		+ getUserName(): String
+		+ getPassword(): String
+		+ changeUserId(UserId userId): void
+		+ changeUserData(UserData userData): void
+		+ setUserId(UserId userId): void
+		+ setUserData(UserData userData): void
+
+	}
+
+	class UserId {
+		- userId: String
+
+		+ UserId(final String userId)
+		- {static} validUserId(final String id): void
+		+ equals(final UserId id): boolean
+		+ toString(): String
+		+ getUserId(): String
+
+
+	}
+
+	class UserData {
+		- password: String
+
+		+ UserData(String password)
+		- validUserData(String password): void
+		+ equals(UserData u): boolean
+		+ toString(): String
+	}
+}
+
+package "dbaccess" {
+	interface UserDAO {
+		+ {static} getAllUsers(): ArrayList<User>
+		+ {static} findUser(User targetUser): User
+		+ {static} updateUser(UserId id, UserData data): void
+		+ {static} deleteUser(UserId id) : void
+		+ {static} addUser(): void
+	}
+
+	class UserDAOImpl {
+		- path: String
+		- mapper: ObjectMapper
+
+		+ UserDAOImpl()
+		+ UserDAOImpl(String path)
+
+		- userListToJson(List<User> userList): String
+		- serializeUser(User user): String
+		- deserializerUsers(String rawJson): ArrayList<User>
+		- {static} readFromFile(String filename): String
+		- {static} storeToFile(String filename, String data): void
+		+ getPath(): String
+
+	}
+}
+
+package "json" {
+	class UserDataDeserializer {
+		+ deserialize(JsonParser p, DeserilizationContext ctxt): UserData
+		+ deserialize(JsonNode jsonNode): UserData
+	}
+
+	class UserIdDeserializer {
+		+ deserialize(JsonParser p, DeserilizationContext ctxt): UserId
+		+ deserialize(JsonNode jsonNode): UserId
+	}
+
+	class UserDeserializer {
+		+ deserialize(JsonParser p, DeserilizationContext ctxt): User
+		+ deserialize(JsonNode jsonNode): User
+	}
+
+	class UserDataSerializer { 
+		+ serializer(UserData data, JsonGenerator jsonGen, SerializerProvider serializerProvider): void
+	}
+	class UserIdSerializer { 
+		+ serializer(UserId id, JsonGenerator jsonGen, SerializerProvider serializerProvider): void
+	}
+	class UserSerializer { 
+		+ serializer(User user, JsonGenerator jsonGen, SerializerProvider serializerProvider): void
+	}
+
+	class UserModule {
+		- {static} name: String
+		- {static} VERSION_UTIL: VersionUtil	
+
+		+ UserModule()
+	}
+}
+
+'Relations'
+UserId "*" <-- "1" User
+UserData "*" <-- "1" User
+User "*" <-- LoginSignup
+
+UserDAO <-- "1" LoginSignup
+UserDAOImpl <|-- UserDAO
+UserModule <-- UserDAOImpl
+
+UserDataSerializer <-- UserModule
+UserDataDeserializer <-- UserModule
+UserIdSerializer <-- UserModule
+UserIdDeserializer <-- UserModule
+UserSerializer <-- UserModule
+UserDeserializer <-- UserModule
+@enduml
