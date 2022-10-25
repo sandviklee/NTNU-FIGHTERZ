@@ -21,7 +21,7 @@ public class GameplayModule extends SimpleModule {
 	*/
 	public GameplayModule() {
 		super(NAME, VERSION_UTIL.version());
-		addDeserializer(Action.class, new ActionDeserializer());
+		addDeserializer(ActionProperties.class, new ActionPropertiesDeserializer());
 		addDeserializer(Effectbox.class, new EffectboxDeserializer());
 		addDeserializer(Vector.class, new VectorDeserializer());
 		addDeserializer(AnimationSprite.class, new AnimationSpriteDeserializer());
