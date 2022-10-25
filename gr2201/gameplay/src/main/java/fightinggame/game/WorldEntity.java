@@ -1,11 +1,12 @@
 package fightinggame.game;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public abstract class WorldEntity {
 	protected int id;
 	protected Effectbox hitBox;
-	protected Action currentAction;
+	protected Action currentAction = null;
 	protected boolean isAlive;
 	protected String name;
 	protected Point point;
@@ -16,8 +17,12 @@ public abstract class WorldEntity {
 	}
 	
 	public void doAction(){
+		this.point.setX(point.getX() + this.getCurrentAction().getKnockback().getVx());
 		this.getCurrentAction().nextActionFrame();
 	}
+
+	public Predicate<String> getPredicate() {
+		return null;};
 
 	public String getName() {
 		return name;
@@ -25,14 +30,6 @@ public abstract class WorldEntity {
 
 	public Point getPoint() {
 		return point;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	private void setId(int id) {
-		this.id = id;
 	}
 
 	public Effectbox getHitBox() {
@@ -47,9 +44,7 @@ public abstract class WorldEntity {
 		return currentAction;
 	}
 
-	public void setCurrentAction(Action currentAction) {
-		this.currentAction = currentAction;
-	}
+	public void setCurrentAction(Integer actionNumber) {}
 
 	public int getCurrentFrame(){
 		return currentAction.getCurrentFrame();

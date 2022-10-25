@@ -27,10 +27,7 @@ public class SpriteRenderer {
     public void update() {
         content.drawImage(backgroundImg, 0, 0);
         for (WorldEntity entity : entities) {
-            content.drawImage(playerSprites.get(entity.getName() + "Idle"), 552*entity.getCurrentAction().getCurrentFrame(), 0, 552, 422, entity.getPoint().getX(), entity.getPoint().getY(), 250, 191);
+            content.drawImage(playerSprites.get(entity.getName() + entity.getCurrentAction().getName()), 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402, entity.getPoint().getX(), entity.getPoint().getY(), 250, 191);
         }
-        
-        
-
     }
 }

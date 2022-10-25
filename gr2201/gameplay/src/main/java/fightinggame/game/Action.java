@@ -1,19 +1,20 @@
 package fightinggame.game;
 
 public class Action {
-
     private String name;
     private Effectbox hitBox;
     private AnimationSprite sprites;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
     private int actionPriority;
-    private Vector knockback;
+    private Vector knockback = new Vector(0, 0, 0, 0, 0);
     private int duration;
     private int currentTime;
     private int hitBoxStartTime;
     private int damage;
     private boolean isDone;
+    private int holdAction = 0;
+    private int holdFrameLength = 4;
 
     /**
      * Create an Action with hitbox e.g. attack
@@ -27,11 +28,11 @@ public class Action {
      * @param hitBoxStartTime       when the hitBox should be created
      * @param damage                it will give to hurtboxes on collision
      */
-    public Action(Effectbox hitbox, String spriteName, boolean isSelfInterruptible, 
-    boolean isEnemyInterruptible, Vector knockback, int duration, int actionPriority, 
+    public Action(Effectbox hitbox, String spriteName, Vector knockback, boolean isSelfInterruptible, 
+    boolean isEnemyInterruptible, int duration, int actionPriority, 
     int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
         this.hitBox = hitbox;
-        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame);
+        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
         this.isSelfInterruptible = isSelfInterruptible;
         this.isEnemyInterruptible = isEnemyInterruptible;
         this.knockback = knockback;
@@ -55,7 +56,7 @@ public class Action {
      */
     public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
     int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
-        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame);
+        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
         this.isSelfInterruptible = isSelfInterruptible;
         this.isEnemyInterruptible = isEnemyInterruptible;
         this.duration = duration;
@@ -63,6 +64,19 @@ public class Action {
         this.name = spriteName;
         this.currentTime = 0;
         this.isDone = false;
+    }
+
+    public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
+    int totalFrames, boolean animationLoop, int animationLoopStartFrame, Vector knockBack) {
+        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
+        this.isSelfInterruptible = isSelfInterruptible;
+        this.isEnemyInterruptible = isEnemyInterruptible;
+        this.duration = duration;
+        this.actionPriority = actionPriority;
+        this.name = spriteName;
+        this.currentTime = 0;
+        this.isDone = false;
+        this.knockback = knockBack;
     }
 
     /**
@@ -73,8 +87,13 @@ public class Action {
      */
     public void nextActionFrame(){
         if (!isDone()) {
+            if (holdAction < holdFrameLength) {
+                holdAction += 1;
+            } else {
+                holdAction = 0;
+                currentTime += 1;
+            }
             iterateSprite();
-            currentTime += 1;
         } else {
             this.isDone = true;
         }
@@ -161,14 +180,11 @@ public class Action {
      * @return true if currentTime equal or larger then duration
      */
     private boolean isDone() {
-        return false;
-        /* 
         if (currentTime >= duration) {
             return true;
         } else {
             return false;
         }
-        */
     }
 
     /**
