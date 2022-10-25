@@ -28,6 +28,27 @@
                 "isProjectile": false,
                 "spirite": ""
             },
+            "hitStun":{
+                "hitBox": {
+                    "width": 0,
+                    "height": 0,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionpPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    0,
+                    0
+                ],
+                "duration": 400,
+                "hitBoxStartTime": 0,
+                "isProjectile": false,
+                "spirite": ""
+            },
             "neutralSpecial": {
                 "hitBox": {
                     "width": 40,
