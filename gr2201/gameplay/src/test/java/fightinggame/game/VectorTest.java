@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 
 public class VectorTest {
-    private int validVx;
-    private int validVy;
-    private int validAx;
-    private int validAy;
-    private int leftDirection;
-    private int rightDirection;
+    private double validVx;
+    private double validVy;
+    private double validAx;
+    private double validAy;
+    private double leftDirection;
+    private double rightDirection;
 
-    private int nonValidVx;
-    private int nonValidVy;
-    private int nonValidAx;
-    private int nonValidAy;
+    private double nonValidVx;
+    private double nonValidVy;
+    private double nonValidAx;
+    private double nonValidAy;
 
     private Vector leftVector;
     private Vector rightVector;
@@ -92,7 +92,7 @@ public class VectorTest {
             assertEquals(i * validAy, standardVec.getAy() , "did not add correctly");
         }
 
-        standardVec = Vector();
+        standardVec = new Vector();
         for (int i = 1; i < 100; i++) {
             standardVec.addVector(leftVector);
             assertEquals(i * (-validVx), standardVec.getVx() , "did not add correctly");
@@ -100,7 +100,7 @@ public class VectorTest {
             assertEquals(i * (-validAx), standardVec.getAx() , "did not add correctly");
             assertEquals(i * (-validAy), standardVec.getAy() , "did not add correctly");
         }
-        standardVec = Vector();
+        standardVec = new Vector();
         standardVec.addVector(leftVector);
         standardVec.addVector(rightVector);
 

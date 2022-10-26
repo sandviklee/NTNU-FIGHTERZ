@@ -14,17 +14,17 @@ public class PointTest {
     private Point origoPoint;
     private Point positivePoint;
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     private Vector actionVector1;
     private Vector actionVector2;
     private Vector gravityVector;
 
-    private int Vx;
-    private int Vy;
-    private int Ax;
-    private int Ay;
+    private double Vx;
+    private double Vy;
+    private double Ax;
+    private double Ay;
     private int direction;
 
     @BeforeEach
