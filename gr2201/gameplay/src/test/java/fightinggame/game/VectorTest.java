@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Assertions;
 
 public class VectorTest {
     private int validVx;
@@ -49,8 +52,8 @@ public class VectorTest {
             standardVec = new Vector();
         }
         catch(Exception e) {
+            System.out.println(e.getLocalizedMessage());
             fail();
-            System.out.println(e.getLocalized);
         }
         // check values for leftVector and rightVector
         assertEquals(-validVx, leftVector.getVx() , "did not set correct cordinate");
@@ -110,10 +113,9 @@ public class VectorTest {
     @Test
     @DisplayName("check if applyAcceleration adjusts velocity correctly")
     public void testApplyAcceleration() {
-        
-
         // Try to apply zero acceleration
 
+        
         // 
     }
 }
