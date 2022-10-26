@@ -114,8 +114,16 @@ public class VectorTest {
     @DisplayName("check if applyAcceleration adjusts velocity correctly")
     public void testApplyAcceleration() {
         // Try to apply zero acceleration
+        standardVec.applyAcceleration();
+        assertEquals(0, standardVec.getVx() , "did not add correctly");
+        assertEquals(0, standardVec.getVy() , "did not add correctly");
+        assertEquals(0, standardVec.getAx() , "did not add correctly");
+        assertEquals(0, standardVec.getAy() , "did not add correctly");
 
-        
-        // 
+        rightVector.applyAcceleration();
+        assertEquals(validVx + validAx, rightVector.getVx() , "did not add correctly");
+        assertEquals(validVy + validAy, rightVector.getVy() , "did not add correctly");
+        assertEquals(validAx, rightVector.getAx() , "did not add correctly");
+        assertEquals(validAy, rightVector.getAy() , "did not add correctly");
     }
 }
