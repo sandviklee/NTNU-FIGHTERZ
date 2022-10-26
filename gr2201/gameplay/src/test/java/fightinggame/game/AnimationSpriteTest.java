@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Assertions;
 
@@ -55,8 +56,16 @@ public class AnimationSpriteTest {
 		}, "This AnimationSprite is not possible");
 
         // valid AnimationSprite should not give exception
-        animationSprite1 = new AnimationSprite(validFrameAmount, false, validAnimationLoopStartFrame);
-        animationSprite2 = new AnimationSprite(validFrameAmount, true, validAnimationLoopStartFrame);
+        try {
+            animationSprite1 = new AnimationSprite(validFrameAmount, false, validAnimationLoopStartFrame);
+            animationSprite2 = new AnimationSprite(validFrameAmount, true, validAnimationLoopStartFrame);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            fail();
+            // TODO: handle exception
+        }
+        
+        
     }
 
     @Test
