@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 
 public class ActionPropertiesTest {
-    
-
     private Effectbox validEffectbox;
     private Effectbox nonValidEffectbox;
 
@@ -37,7 +35,24 @@ public class ActionPropertiesTest {
     private ActionProperties secondActionProperties;
     private ActionProperties thirdActionProperties;
 
-
+    @BeforeEach
+    public void setup() {
+        validEffectbox = new Effectbox(null, new Point(0,0), true);
+        nonValidEffectbox = null;            
+        validSpriteName = "Idle";
+        nonValidSpriteName = "";
+        validVector = new Vector();
+        nonValidVector = null;            
+        validDuration = 10;
+        nonValidDuration = -1;
+        actionPriority = 3;
+        validHitBoxStartTime = 0;
+        nonValidHitBoxStartTime = -1;
+        validDamage = 10;
+        nonValidDamage = -10;            
+        validAnimationSprite = new AnimationSprite(10, true, 5, 3);
+        nonValidAnimationSprite = null;
+    }
     
     @Test
     @DisplayName("Check if constructor creates correct instances")
@@ -121,16 +136,16 @@ public class ActionPropertiesTest {
             fail();
         }
         // check fields
-        assertEquals(validEffectbox, secondActionProperties.getHitBox(), "this constructor has not set HitBox correctly");
-        assertEquals(validVector, secondActionProperties.getKnockback(), "this constructor has not set knockback correctly");
-        assertEquals(validHitBoxStartTime, secondActionProperties.getHitBoxStartTime(), "this constructor has not set HitBoxStartTime correctly");
-        assertEquals(validDamage, secondActionProperties.getDamage(), "this constructor has not set Damage correctly");
+        assertEquals(validEffectbox, thirdActionProperties.getHitBox(), "this constructor has not set HitBox correctly");
+        assertEquals(validVector, thirdActionProperties.getKnockback(), "this constructor has not set knockback correctly");
+        assertEquals(validHitBoxStartTime, thirdActionProperties.getHitBoxStartTime(), "this constructor has not set HitBoxStartTime correctly");
+        assertEquals(validDamage, thirdActionProperties.getDamage(), "this constructor has not set Damage correctly");
 
-        assertEquals(validSpriteName, secondActionProperties.getSpriteName(), "this constructor has not set spritename correctly");
-        assertEquals(actionPriority, secondActionProperties.getActionPriority(), "this constructor has not set actionPriority correctly");
-        assertEquals(validDuration, secondActionProperties.getDuration(), "this constructor has not set duration correctly");
-        assertTrue(secondActionProperties.isSelfInterruptible(), "this constructor has not set isSelfInterruptible correctly");
-        assertTrue(secondActionProperties.isEnemyInterruptible(), "this constructor has not set isEnemyInterruptible correctly");
-        assertEquals(validAnimationSprite, secondActionProperties.getAnimationSprite(), "this constructor has not set animationSprite correctly");
+        assertEquals(validSpriteName, thirdActionProperties.getSpriteName(), "this constructor has not set spritename correctly");
+        assertEquals(actionPriority, thirdActionProperties.getActionPriority(), "this constructor has not set actionPriority correctly");
+        assertEquals(validDuration, thirdActionProperties.getDuration(), "this constructor has not set duration correctly");
+        assertTrue(thirdActionProperties.isSelfInterruptible(), "this constructor has not set isSelfInterruptible correctly");
+        assertTrue(thirdActionProperties.isEnemyInterruptible(), "this constructor has not set isEnemyInterruptible correctly");
+        assertEquals(validAnimationSprite, thirdActionProperties.getAnimationSprite(), "this constructor has not set animationSprite correctly");
     }
 }
