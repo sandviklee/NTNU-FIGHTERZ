@@ -62,7 +62,6 @@ public class AnimationSpriteTest {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             fail();
-            // TODO: handle exception
         }
         
         
