@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Assertions;
 
 public class EffectboxTest {
     private int validHeight;
@@ -20,10 +23,10 @@ public class EffectboxTest {
     private Point otherValidPoint;
     private Point nonValidPoint;
 
-    private EffectBox traversableEffectBox;
-    private EffectBox otherTraversableEffectBox;
-    private EffectBox nonTraversableEffectBox;
-    private EffectBox otherNonTraversableEffectBox;
+    private Effectbox traversableEffectbox;
+    private Effectbox otherTraversableEffectbox;
+    private Effectbox nonTraversableEffectbox;
+    private Effectbox otherNonTraversableEffectbox;
 
 
 
@@ -36,10 +39,10 @@ public class EffectboxTest {
 
         nonValidWorldEntity = null;
         validWorldEntity = new WorldEntity();
-        traversableEffectBox = new EffectBox(validWorldEntity, validPoint, true, validLength, validHeight);
-        otherTraversableEffectBox = new EffectBox(validWorldEntity, otherValidPoint, true, validLength, validHeight);
-        nonTraversableEffectBox = new EffectBox(validWorldEntity, validPoint, false, validLength, validHeight);
-        otherNonTraversableEffectBox = new EffectBox(validWorldEntity, otherValidPoint, false, validLength, validHeight);
+        traversableEffectbox = new Effectbox(validWorldEntity, validPoint, true, validLength, validHeight);
+        otherTraversableEffectbox = new Effectbox(validWorldEntity, otherValidPoint, true, validLength, validHeight);
+        nonTraversableEffectbox = new Effectbox(validWorldEntity, validPoint, false, validLength, validHeight);
+        otherNonTraversableEffectbox = new Effectbox(validWorldEntity, otherValidPoint, false, validLength, validHeight);
 
     }
     
@@ -50,53 +53,53 @@ public class EffectboxTest {
         
         // clean test for Constructor
         try {
-            new EffectBox(validWorldEntity, validPoint, true, validLength, validHeight);
-            new EffectBox(validWorldEntity, validPoint, false, validLength, validHeight);
+            new Effectbox(validWorldEntity, validPoint, true, validLength, validHeight);
+            new Effectbox(validWorldEntity, validPoint, false, validLength, validHeight);
         }
         catch(Exception e) {
+            System.out.println(e.getLocalizedMessage());
             fail();
-            System.out.println(e.getLocalized);
         }
 
 
         // Impropper constructions (dirty tests)
         // bad height and length values
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new EffectBox(validWorldEntity, validPoint, true, validLength, negNum);
-            new EffectBox(validWorldEntity, validPoint, false, validLength, negNum);
+            new Effectbox(validWorldEntity, validPoint, true, validLength, negNum);
+            new Effectbox(validWorldEntity, validPoint, false, validLength, negNum);
 
-            new EffectBox(validWorldEntity, validPoint, true, negNum, validHeight);
-            new EffectBox(validWorldEntity, validPoint, false, negNum, validHeight);
-		}, "This EffectBox is not possible, should not allow negativ values as height or length");
+            new Effectbox(validWorldEntity, validPoint, true, negNum, validHeight);
+            new Effectbox(validWorldEntity, validPoint, false, negNum, validHeight);
+		}, "This Effectbox is not possible, should not allow negativ values as height or length");
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new EffectBox(validWorldEntity, validPoint, true, validLength, zero);
-            new EffectBox(validWorldEntity, validPoint, false, validLength, zero);
+            new Effectbox(validWorldEntity, validPoint, true, validLength, zero);
+            new Effectbox(validWorldEntity, validPoint, false, validLength, zero);
 
-            new EffectBox(validWorldEntity, validPoint, true, zero, validHeight);
-            new EffectBox(validWorldEntity, validPoint, false, zero, validHeight);
-		}, "This EffectBox is not possible, should not allow zero values as height or length");
+            new Effectbox(validWorldEntity, validPoint, true, zero, validHeight);
+            new Effectbox(validWorldEntity, validPoint, false, zero, validHeight);
+		}, "This Effectbox is not possible, should not allow zero values as height or length");
 
         // bad owner
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new EffectBox(nonValidWorldEntity, validPoint, true, validLength, validHeight);
-            new EffectBox(nonValidWorldEntity, validPoint, false, validLength, validHeight);
-		}, "This EffectBox is not possible, should not allow owner to be null");
+            new Effectbox(nonValidWorldEntity, validPoint, true, validLength, validHeight);
+            new Effectbox(nonValidWorldEntity, validPoint, false, validLength, validHeight);
+		}, "This Effectbox is not possible, should not allow owner to be null");
 
         // bad point
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new EffectBox(validWorldEntity, nonValidPoint, true, validLength, validHeight);
-            new EffectBox(validWorldEntity, nonValidPoint, false, validLength, validHeight);
-		}, "This EffectBox is not possible, should not allow owner to be null");
+            new Effectbox(validWorldEntity, nonValidPoint, true, validLength, validHeight);
+            new Effectbox(validWorldEntity, nonValidPoint, false, validLength, validHeight);
+		}, "This Effectbox is not possible, should not allow point to be null");
     }
 
     @Test
     @DisplayName("Check if the WorldEntityInEffectArea works ")    
     public void testWorldEntityInEffectArea() {
-        assertTrue(traversableEffectBox.worldEntityInEffectArea(validWorldEntity), " traversableEffectBox should not be in validWorldEntity");
-        assertFalse(otherTraversableEffectBox.worldEntityInEffectArea(validWorldEntity), " otherTraversableEffectBox should be in validWorldEntity");
-        assertTrue(nonTraversableEffectBox(validWorldEntity), " nonTraversableEffectBox should not be in validWorldEntity");
-        assertFalse(otherNonTraversableEffectBox(validWorldEntity), " otherNonTraversableEffectBox should be in validWorldEntity");
+        assertTrue(traversableEffectbox.worldEntityInEffectArea(validWorldEntity), " traversableEffectbox should not be in validWorldEntity");
+        assertFalse(otherTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " otherTraversableEffectbox should be in validWorldEntity");
+        assertTrue(nonTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " nonTraversableEffectbox should not be in validWorldEntity");
+        assertFalse(otherNonTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " otherNonTraversableEffectbox should be in validWorldEntity");
     }
 
 }
