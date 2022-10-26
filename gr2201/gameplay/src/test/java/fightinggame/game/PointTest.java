@@ -116,15 +116,11 @@ public class PointTest {
 
     @Test
     public void testAddActionVector() {
-        
         // check if it adds to the vector
         origoPoint.addActionVector(actionVector2)
         origoPoint.move();
         assertEquals(gravityVector.getVx() + actionVector1.getVx() + actionVector2.getVx(), origoPoint.getX(), " does not add new vector to the old vector");
         assertEquals(gravityVector.getVy() + actionVector1.getVy() + actionVector2.getVy(), origoPoint.getY(), " does not add new vector to the old vector");
-
-
-
     }
 
     @Test
@@ -160,5 +156,4 @@ public class PointTest {
         assertEquals(currentX + gravityVector.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
         assertEquals(currentY + gravityVector.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
     }
-
 }
