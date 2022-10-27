@@ -16,8 +16,8 @@ public class VectorTest {
     private double validVy;
     private double validAx;
     private double validAy;
-    private double leftDirection;
-    private double rightDirection;
+    private int leftDirection;
+    private int rightDirection;
 
     private double nonValidVx;
     private double nonValidVy;
