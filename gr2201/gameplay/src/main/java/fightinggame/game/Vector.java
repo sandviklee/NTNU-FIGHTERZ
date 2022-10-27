@@ -5,6 +5,7 @@ public class Vector {
     private double vy;
     private double ax;
     private double ay;
+    private int direction;
 
     public double getVx(){
         return this.vx;
@@ -32,7 +33,7 @@ public class Vector {
                 throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
             }
         }
-
+        this.direction = direction;
         this.vx = vx*direction;
         this.vy = vy*direction;
         this.ax = ax*direction;
@@ -51,6 +52,10 @@ public class Vector {
         this.vy += vector.vy;
         this.ax += vector.ax;
         this.ay += vector.ay;
+    }
+
+    public int getDirection() {
+        return direction;
     }
 
     public void applyAcceleration(){

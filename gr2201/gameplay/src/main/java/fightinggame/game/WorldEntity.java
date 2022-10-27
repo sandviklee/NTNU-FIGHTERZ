@@ -17,12 +17,20 @@ public abstract class WorldEntity {
 	}
 	
 	public void doAction(){
-		this.point.setX(point.getX() + this.getCurrentAction().getKnockback().getVx());
-		this.getCurrentAction().nextActionFrame();
+
 	}
 
 	public Predicate<String> getPredicate() {
-		return null;};
+		return null;
+	}
+
+	public ArrayList<String> getAvailKeys() {
+		return null;
+	}
+
+	public int getFacingDirection() {
+        return 0;
+    }
 
 	public String getName() {
 		return name;
@@ -32,9 +40,9 @@ public abstract class WorldEntity {
 		return point;
 	}
 
-	public Effectbox getHitBox() {
-		return hitBox;
-	}
+	public Effectbox getHurtBox() {
+        return null;
+    }
 
 	private void setHitBox(Effectbox hitBox) {
 		this.hitBox = hitBox;

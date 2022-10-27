@@ -31,15 +31,17 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> terrainSprites;
-    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(800, 635)); //dette blir point
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(925, 730)); //dette blir point
+    private ArrayList<Integer> playerHitBox = new ArrayList<>(Arrays.asList(70, 160));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400)); //dette blir point
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private long fps = 10_000_000;
+    private boolean held = false;
 
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, "WASD");
+        GameCharacter player = loadPlayer(character, playerPosition, "WDAS", playerHitBox);
         playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
         playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
@@ -52,12 +54,12 @@ public class SingleplayerGameController extends SceneController{
         updateWorld();
     }
 
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, String availKeys){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, String availKeys, ArrayList<Integer> hitboxProperties){
         //load user here with serializer
         //ArrayList<String> playerParams = new ArrayList<>(); //placeholder
         String[] strSplit = availKeys.split("");
         ArrayList<String> availKeysArray = new ArrayList<>(Arrays.asList(strSplit));
-        return new GameCharacter(character, position, availKeysArray); //loaded from json,should maybe have a starting position
+        return new GameCharacter(character, position, availKeysArray, hitboxProperties); //loaded from json,should maybe have a starting position
     }
 
     private Terrain loadTerrain(String terrainSprite){
@@ -71,8 +73,8 @@ public class SingleplayerGameController extends SceneController{
             @Override
             public void handle(long now) {
                 if (now - tick >= fps) {
-                    //System.out.println(keyInputs);
-                    world.updateWorld(keyInputs);
+                    System.out.println(keyInputs);
+                    world.updateWorld(keyInputs, held);
                     renderer.update();
                     resetKeyInputs();
                 }
@@ -88,6 +90,12 @@ public class SingleplayerGameController extends SceneController{
     @FXML
     private void handleKeyPressed(KeyEvent event){
         keyInputs += event.getCode();
+        held = true;
+    }
+
+    @FXML
+    private void handleKeyReleased(KeyEvent event){
+        held = false;
     }
 }
 

@@ -7,7 +7,7 @@ public class Action {
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
     private int actionPriority;
-    private Vector knockback = new Vector(0, 0, 0, 0, 0);
+    private Vector knockback;
     private int duration;
     private int currentTime;
     private int hitBoxStartTime;
@@ -16,35 +16,6 @@ public class Action {
     private int holdAction = 0;
     private int holdFrameLength = 4;
 
-    /**
-     * Create an Action with hitbox e.g. attack
-     * @param hitbox                of the Action
-     * @param spriteName            of the sprite to the action
-     * @param isSelfInterruptible   to determine if it can be interrupted by own action
-     * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
-     * @param knockback             given by action on hurtboxes
-     * @param duration              of the action
-     * @param actionPriority        of the action
-     * @param hitBoxStartTime       when the hitBox should be created
-     * @param damage                it will give to hurtboxes on collision
-     */
-    public Action(Effectbox hitbox, String spriteName, Vector knockback, boolean isSelfInterruptible, 
-    boolean isEnemyInterruptible, int duration, int actionPriority, 
-    int hitBoxStartTime, int damage, int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
-        this.hitBox = hitbox;
-        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
-        this.isSelfInterruptible = isSelfInterruptible;
-        this.isEnemyInterruptible = isEnemyInterruptible;
-        this.knockback = knockback;
-        this.duration = duration;
-        this.actionPriority = actionPriority;
-        this.hitBoxStartTime = hitBoxStartTime;
-        this.damage = damage;
-        this.name = spriteName;
-        this.currentTime = 0;
-        this.isDone = false;
-        this.hitBoxStartTime = hitBoxStartTime;
-    }
 
     /**
      * Create an Action without a Effectbox, e.g. idle, move.
@@ -54,29 +25,18 @@ public class Action {
      * @param isSelfInterruptible   to determine if it can be interrupted by own action
      * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
      */
-    public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
-    int totalFrames, boolean animationLoop, int animationLoopStartFrame) {
-        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
-        this.isSelfInterruptible = isSelfInterruptible;
-        this.isEnemyInterruptible = isEnemyInterruptible;
-        this.duration = duration;
-        this.actionPriority = actionPriority;
-        this.name = spriteName;
+    public Action(ActionProperties p) {
+        this.sprites = new AnimationSprite(p.getTotalFrames(), p.isAnimationLoop(), p.getAnimationLoopStartFrame(), holdFrameLength);
+        this.isSelfInterruptible = p.isSelfInterruptible();
+        this.isEnemyInterruptible = p.isEnemyInterruptible();
+        this.duration = p.getDuration();
+        this.actionPriority = p.getActionPriority();
+        this.name = p.getSpriteName();
+        this.knockback = p.getKnockback();
+        this.hitBox = p.getHitBox();
+        this.hitBoxStartTime = p.getHitBoxStartTime();
         this.currentTime = 0;
         this.isDone = false;
-    }
-
-    public Action(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible,
-    int totalFrames, boolean animationLoop, int animationLoopStartFrame, Vector knockBack) {
-        this.sprites = new AnimationSprite(totalFrames, animationLoop, animationLoopStartFrame, holdFrameLength);
-        this.isSelfInterruptible = isSelfInterruptible;
-        this.isEnemyInterruptible = isEnemyInterruptible;
-        this.duration = duration;
-        this.actionPriority = actionPriority;
-        this.name = spriteName;
-        this.currentTime = 0;
-        this.isDone = false;
-        this.knockback = knockBack;
     }
 
     /**

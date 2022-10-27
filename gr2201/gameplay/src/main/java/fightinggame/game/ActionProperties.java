@@ -8,7 +8,7 @@ public class ActionProperties {
     private boolean isEnemyInterruptible;
     private int totalFrames;
     private Effectbox hitBox;
-    private Vector knockback;
+    private Vector knockback = new Vector(0, 0, 0, 0, 1);
     private boolean animationLoop;
     private int animationLoopStartFrame;
     private int hitBoxStartTime;
@@ -24,7 +24,6 @@ public class ActionProperties {
         this.totalFrames = totalFrames;
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
-        this.knockback = null;
     }
 
     public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
@@ -39,7 +38,6 @@ public class ActionProperties {
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.knockback = knockBack;
 }
-
 
     public ActionProperties(Effectbox hitbox, String spriteName, Vector knockback, int actionPriority, int duration, boolean isSelfInterruptible, 
     boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame,

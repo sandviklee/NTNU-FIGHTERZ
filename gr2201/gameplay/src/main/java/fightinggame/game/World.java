@@ -3,6 +3,7 @@ package fightinggame.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class World {
     private ArrayList<WorldEntity> worldEntities;
@@ -28,9 +29,9 @@ public class World {
         this.worldEntities.add(worldEntity);
     }
 
-    public void updateWorld(String input){
+    public void updateWorld(String input, boolean held){
         //handleCollisions();
-        setActions(input);
+        setActions(input, held);
         applyActions();
     }
 
@@ -44,35 +45,22 @@ public class World {
         }
     }
 
-    private void setActions(String input){
+    private void setActions(String input, boolean held){
         String[] inputArray = input.split("");
         ArrayList<String> keyInputArray = new ArrayList<>(Arrays.asList(inputArray));
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
                 if (keyInputArray.stream().anyMatch(worldEntity.getPredicate())) {
-                    //System.out.println("Held: " + held);
-                    //System.out.println("amountUntilHeld: " + amountUntilHeld);
-                    if (amountUntilHeld >= 10) {
-                        held = true;
-                    } else {
-                        amountUntilHeld += 2;
-                    }
-
+                    String keyInput = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()).get(0);
                     if (held) {
                         if (worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getName().equals("Idle")) {
-                            worldEntity.setCurrentAction(1);
+                            System.out.println(keyInput);
+                            worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(keyInput));
                         }
                     }
 
                 } else {
-                    if (held && amountUntilHeld > 0) {
-                        amountUntilHeld -= 1;
-                    } else if (amountUntilHeld == 0) {
-                        held = false;
-                    }
-                    
                     if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && !held) {
-                        System.out.println("HEI");
                         worldEntity.setCurrentAction(0);
                     }
                 }
