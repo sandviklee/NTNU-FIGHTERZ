@@ -10,4 +10,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WorldTest {
     
+
+    @Test
+    @DisplayName("")
+    public void testConstructor() {
+
+        // must
+    }
+
+    @Test
+    @DisplayName("")
+    public void testAddWorldEntity() {
+
+        // try to add null
+    }
+
+    @Test
+    @DisplayName("")
+    public void testUpdateWorld() {
+
+        // try to add null
+    }
 }
