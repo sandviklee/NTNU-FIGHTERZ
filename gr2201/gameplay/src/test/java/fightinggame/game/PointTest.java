@@ -38,8 +38,10 @@ public class PointTest {
         direction = 1;
         gravityVector = new Vector(Vx, Vy, Ax, Ay, direction);
 
-        origoPoint = new Point();
+        origoPoint = new Point(0, 0);
         positivePoint = new Point(x, y);
+        origoPoint.setGravityVector(gravityVector);
+        positivePoint.setGravityVector(gravityVector);
 
         actionVector1 = new Vector(Vx, Vy, Ax, Ay, direction);
         actionVector2 = new Vector(Vx, Vy, Ax, Ay, direction);
@@ -51,7 +53,7 @@ public class PointTest {
     @DisplayName("Test if the constructor creates correct object with correct fields")
     public void testConstructor() {
         try {
-            origoPoint = new Point();
+            origoPoint = new Point(0, 0);
             positivePoint = new Point(x, y);    
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
@@ -106,21 +108,26 @@ public class PointTest {
         
 
         // check if the speed accelerate with vectors given acceleration.
-        int currentXChange = x + (gravityVector.getVx() + actionVector1.getVx());
-        int currentYChange = y + (gravityVector.getVy() + actionVector1.getVy());
+        double currentXChange = x + (gravityVector.getVx() + actionVector1.getVx());
+        double currentYChange = y + (gravityVector.getVy() + actionVector1.getVy());
         
         positivePoint.move();
-        assertEquals(2 * currentXChange + Ax, positivePoint.getVx(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
-        assertEquals(2 * currentYChange + Ay, positivePoint.getVy(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
+        assertEquals(2 * currentXChange + Ax, positivePoint.getX(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
+        assertEquals(2 * currentYChange + Ay, positivePoint.getY(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
     }
 
     @Test
     public void testAddActionVector() {
         // check if it adds to the vector
-        origoPoint.addActionVector(actionVector2)
+        double changeX = gravityVector.getVx() + actionVector1.getVx() + actionVector2.getVx();
+        double changeY = gravityVector.getVy() + actionVector1.getVy() + actionVector2.getVy();
+
+        origoPoint.setActionVector(actionVector1);
+        origoPoint.addActionVector(actionVector2);
+
         origoPoint.move();
-        assertEquals(gravityVector.getVx() + actionVector1.getVx() + actionVector2.getVx(), origoPoint.getX(), " does not add new vector to the old vector");
-        assertEquals(gravityVector.getVy() + actionVector1.getVy() + actionVector2.getVy(), origoPoint.getY(), " does not add new vector to the old vector");
+        assertEquals(changeX, origoPoint.getX(), " does not add new vector to the old vector");
+        assertEquals(changeY, origoPoint.getY(), " does not add new vector to the old vector");
     }
 
     @Test
@@ -131,8 +138,8 @@ public class PointTest {
         assertEquals(gravityVector.getVx() + actionVector1.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
         assertEquals(gravityVector.getVy() + actionVector1.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
 
-        int currentX = gravityVector.getVx() + actionVector1.getVx();
-        int currentY = gravityVector.getVy() + actionVector1.getVy();
+        double currentX = gravityVector.getVx() + actionVector1.getVx();
+        double currentY = gravityVector.getVy() + actionVector1.getVy();
 
         origoPoint.setActionVector(actionVector2);
         origoPoint.move();
@@ -148,8 +155,8 @@ public class PointTest {
         assertEquals(gravityVector.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
         assertEquals(gravityVector.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
 
-        int currentX = gravityVector.getVx();
-        int currentY = gravityVector.getVy();
+        double currentX = gravityVector.getVx();
+        double currentY = gravityVector.getVy();
 
         origoPoint.setGravityVector(gravityVector);
         origoPoint.move();
