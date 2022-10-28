@@ -6,58 +6,84 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Assertions;
 
 
 public class ActionTest {
-    private String validSpriteName;
+    private Effectbox hitbox;
+    private String spriteName;
+    private Point point;
     private int validDuration;
     private int validActionPriority1;
     private int validActionPriority2;
     private int validActionPriority3;
     private int maxValidActionPriority;
 
-
     private int negNum;
-    private Boolean truthy;
-    private Boolean falsy;
-    private Effectbox box;
     private Vector vec;
 
+    private ActionProperties nonValidActionProperties;
+
+    private ActionProperties apInterruptable;
+    private ActionProperties apSelfInterruptable;
+    private ActionProperties apEnemyInterruptable;
+    private ActionProperties apNotInterruptable;
 
     private Action actionCantBeInterrupted;
     private Action actionCanBeSelfInterrupted;
     private Action actionCanBeEnemyInterrupted;
     private Action actionCanBeInterrupted;
 
-
-
     @BeforeEach
     public void setup() {
-        
+        validDuration = 100;
+        nonValidActionProperties = null;
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(1);
+
+        point = new Point(0, 0);
+        hitbox = new Effectbox(null, point, false, list);
+
+        apInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, true, true, 0, false, 0, 0, 0);
+        apSelfInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, true, false, 0, false, 0, 0, 0);
+        apEnemyInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, false, true, 0, false, 0, 0, 0);
+        apNotInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, false, false, 0, false, 0, 0, 0);
+
+        actionCantBeInterrupted = new Action(apInterruptable);
+        actionCanBeSelfInterrupted = new Action(apSelfInterruptable);
+        actionCanBeEnemyInterrupted = new Action(apEnemyInterruptable);
+        actionCanBeInterrupted = new Action(apNotInterruptable);
     } 
 
     @Test
     @DisplayName("Check if constructor creates correct instances")
     public void testConstructor() {
 
-        // First constructor: with EffectBox
-
+        // First constructor: with Effectbox
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Action(box, validSpriteName, truthy, 
-                truthy, vec, validDuration, actionPriority, 
-                hitBoxStartTime, damage, totalFrames, animationLoop, animationLoopStartTime);
-		}, "This AnimationSprite is not possible");
+            new Action(nonValidActionProperties);
+		}, "This action is not possible");
 
-
-        // Second constructor:
-
+        // clean constructor tests:
+        try {
+            actionCanBeInterrupted = new Action(apInterruptable);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            fail();
+        }
+        assertFalse(actionCanBeInterrupted.getIsDone(), " should not be true as its valid duration is not iterated throug");
     }
 
     @Test
     @DisplayName("Check if nextActionFrame")
     public void testNextActionFrame() {
         // currentTime must increase
-        for (int t = 0; t <= validDuration; t++) {
+        for (int t = 0; t < validDuration; t++) {
             assertEquals(t,  actionCantBeInterrupted.getCurrentFrame(), "check if iterateSprite itterates the sprite of the owner action");
             assertEquals(t,  actionCanBeSelfInterrupted.getCurrentFrame(), "check if iterateSprite itterates the sprite of the owner action");
             assertEquals(t,  actionCanBeEnemyInterrupted.getCurrentFrame(), "check if iterateSprite itterates the sprite of the owner action");
@@ -165,6 +191,5 @@ public class ActionTest {
         assertTrue(actionCanBeEnemyInterrupted.getIsDone(), "maxValidAction should not interrupt this current action");
         assertTrue(actionCanBeInterrupted.getIsDone(), "maxValidAction should interrupt this current action");
     }
-
 
 }
