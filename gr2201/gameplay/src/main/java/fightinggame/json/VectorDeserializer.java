@@ -31,11 +31,10 @@ public class VectorDeserializer extends JsonDeserializer<Vector> {
             JsonNode ayNode = objectNode.get("ay");
             JsonNode directionNode = objectNode.get("direction");
 
-
-            int dx = dxNode.asInt();
-            int dy = dyNode.asInt();
-            int ax = axNode.asInt();
-            int ay = ayNode.asInt();
+            double dx = dxNode.asDouble();
+            double dy = dyNode.asDouble();
+            double ax = axNode.asDouble();
+            double ay = ayNode.asDouble();
             int direction = directionNode.asInt();
             
             Vector vec = new Vector(dx, dy, ax, ay, direction);
