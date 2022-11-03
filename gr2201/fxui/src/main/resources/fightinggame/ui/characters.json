@@ -2,6 +2,7 @@
     {
        "characterName": "Angry Cyclist",
        "weight": 100, 
+       "speed":1,
        "hurtbox": {
             "lenght": 50,
             "height": 100
@@ -21,12 +22,13 @@
                 "damage": 0,
                 "knockback":[
                     0,
+                    0,
+                    0,
                     0
                 ],
                 "duration": 400,
                 "hitBoxStartTime": 0,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
             "hitStun":{
                 "hitBox": {
@@ -42,12 +44,57 @@
                 "damage": 0,
                 "knockback":[
                     0,
-                    0
+                    0,
+                    0,0
                 ],
-                "duration": 400,
+                "duration": 25,
                 "hitBoxStartTime": 0,
+                "isProjectile": false
+            },
+            "jump":{
+                "hitBox": {
+                    "width": 0,
+                    "height": 0,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionpPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    0,
+                    100,
+                    0,
+                    10
+                ],
+                "duration": 10,
+                "hitBoxStartTime": 1,
                 "isProjectile": false,
                 "spirite": ""
+            },
+            "moveRight":{
+                "hitBox": {
+                    "width": 0,
+                    "height": 0,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionpPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    100,
+                    0,
+                    0,
+                    10
+                ],
+                "duration": 10,
+                "hitBoxStartTime": 0,
+                "isProjectile": false
             },
             "neutralSpecial": {
                 "hitBox": {
@@ -67,8 +114,7 @@
                 ],
                 "hitBoxStartTime": 6,
                 "duration": 240,
-                "isProjectile": true,
-                "spirite": ""
+                "isProjectile": true
 
             },
             "sideSpecial":{

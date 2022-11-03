@@ -14,7 +14,13 @@
                 "description": "A character's weight, influencing gravity and knockback factor.",
                 "type": "integer",
                 "exclusiveMinimum": 0,
-                "maximum": 100
+                "maximum": 200
+            },
+            "speed": {
+                "description": "A character's speed, modefying the character's movement",
+                "type": "integer",
+                "exclusiveMinimum":0,
+                "maximum": 10
             },
             "hurtbox": {
                 "description": "The rectangular area where the character will take damage.",
@@ -86,10 +92,10 @@
                                 "exclusiveMinimum": 0
                             },
                             "knockback": {
-                                "description": "Contains the x and y value of a vector describing the knockback from the action.",
+                                "description": "Contains the x and y values of a vector describing both the velocity and acceleration knockback from the action, [vx, vy, ax, ay]",
                                 "type": "array",
-                                "minItems": 2,
-                                "maxItems": 2,
+                                "minItems": 4,
+                                "maxItems": 4,
                                 "items": {
                                     "type": "integer",
                                     "minimum": 0
