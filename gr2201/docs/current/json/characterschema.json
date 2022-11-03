@@ -12,13 +12,13 @@
             },
             "weight": {
                 "description": "A character's weight, influencing gravity and knockback factor.",
-                "type": "integer",
+                "type": "number",
                 "exclusiveMinimum": 0,
                 "maximum": 200
             },
             "speed": {
                 "description": "A character's speed, modefying the character's movement",
-                "type": "integer",
+                "type": "number",
                 "exclusiveMinimum":0,
                 "maximum": 10
             },
