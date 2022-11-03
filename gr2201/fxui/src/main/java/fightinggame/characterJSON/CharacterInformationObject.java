@@ -1,4 +1,4 @@
-package fightinggame.json;
+package fightinggame.characterJSON;
 
 import java.util.HashMap;
 
