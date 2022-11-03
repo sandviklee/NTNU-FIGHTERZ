@@ -95,16 +95,12 @@ public class SingleplayerGameController extends SceneController{
     @FXML
     private void handleKeyPressed(KeyEvent event){
         keyInputs += event.getCode();
-        held = true;
     }
 
     @FXML
     private void handleKeyReleased(KeyEvent event){
-        System.out.println(event.getCode());
-        System.out.println(held);
         keyReleased += event.getCode();
-        held = false;
     }
 }
-
+ 
 

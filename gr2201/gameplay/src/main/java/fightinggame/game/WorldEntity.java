@@ -20,6 +20,10 @@ public abstract class WorldEntity {
 
 	}
 
+	public Action getAction(int actionNumber) {
+        return null;
+    }
+
 	public Predicate<String> getPredicate() {
 		return null;
 	}

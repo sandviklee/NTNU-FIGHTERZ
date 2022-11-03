@@ -57,6 +57,11 @@ public class GameCharacter extends WorldEntity{
         } 
     }
 
+    public Action getAction(int actionNumber) {
+        property = actionHash.get(actionNumber);
+        return new Action(property);
+    }
+
     public void doAction(){
 		this.point.setX(point.getX() + this.getCurrentAction().getKnockback().getVx());
         this.getCurrentAction().getKnockback().addVector(gravityVector);

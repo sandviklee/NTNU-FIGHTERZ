@@ -3,6 +3,9 @@ package fightinggame.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -12,11 +15,11 @@ public class World {
     private GameCharacter gameCharacter2;
     private int amountUntilHeld = 0;
     private boolean held = false;
-    private HashMap<String, Boolean> booleanHash;
+    private HashMap<String, Boolean> booleanHash = new LinkedHashMap<>();
+    private String HeldKey = "Idle";
+    private String NewHeldKey = "Idle";
 
     public World(ArrayList<WorldEntity> worldEntities){
-        booleanHash.put("A", false);
-        booleanHash.put("D", false);
         this.worldEntities = worldEntities;
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
@@ -50,25 +53,55 @@ public class World {
     }
 
     private void setActions(String input, String inputR){
-        ArrayList<String> keyInputArray = getKeyArray(input);
-        ArrayList<String> keyInputRArray = getKeyArray(inputR);
+        String[] inputArray = input.split("");
+        ArrayList<String> keyInputArray =  new ArrayList<>(Arrays.asList(inputArray));
+        String[] inputRArray = inputR.split("");
+        ArrayList<String> keyInputRArray =  new ArrayList<>(Arrays.asList(inputRArray));
+        
+        for (String key : keyInputArray) {
+            if (!booleanHash.keySet().contains(key)) {
+                booleanHash.put(key, true);
+            }
+        }
+
+        for (String key : keyInputRArray) {
+            if (booleanHash.keySet().contains(key)) {
+                booleanHash.remove(key);
+            }
+        }
+
+        if (!booleanHash.isEmpty()) {
+            Map.Entry<String, Boolean> entry = booleanHash.entrySet().iterator().next();
+            NewHeldKey = entry.getKey();
+        } 
+        
+
+
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
-                if (keyInputArray.stream().anyMatch(worldEntity.getPredicate())) {
-                    String keyInput = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()).get(0);
-                    if (held) {
-                        if (worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getName().equals("Idle")) {
-                            //System.out.println(keyInput);
-                            worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(keyInput));
+                if (worldEntity.getAvailKeys().contains(HeldKey)) {
+                    //System.out.println(HeldKey + "New: " + NewHeldKey);
+
+                        if ((worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getActionPriority(). )) {
+                            System.out.println("HEI");
+                            worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(HeldKey));
                         }
-                    }
+
+                    List<String> keyInputList = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()); //Legger alle mulige keyInputs i en liste
+                    //Så iterer og gjør alle som er mulig til true i hashmappet
 
                 } else {
-                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && !held) {
+                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && booleanHash.isEmpty()) {
                         worldEntity.setCurrentAction(0);
                     }
                 }
             }
+            
+        }
+        if (!booleanHash.isEmpty()) {
+            Map.Entry<String, Boolean> entry = booleanHash.entrySet().iterator().next();
+            HeldKey = entry.getKey();
+            
         }
     }
 
@@ -76,10 +109,5 @@ public class World {
         for (WorldEntity worldEntity : worldEntities) {
             worldEntity.doAction();
         }
-    }
-
-    private ArrayList<String> getKeyArray(String input) {
-        String[] inputArray = input.split("");
-        return new ArrayList<>(Arrays.asList(inputArray));
     }
 }
