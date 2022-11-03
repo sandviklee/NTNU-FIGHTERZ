@@ -4,6 +4,7 @@ public class ActionProperties {
     private String spriteName;
     private int actionPriority;
     private int duration;
+    private boolean isProjectile;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
     private int totalFrames;
@@ -37,23 +38,10 @@ public class ActionProperties {
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.knockback = knockBack;
-}
-
-    public ActionProperties(Effectbox hitbox, String spriteName, Vector knockback, int actionPriority, int duration, boolean isSelfInterruptible, 
-    boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame,
-    int hitBoxStartTime, int damage) {
-        this.hitBox = hitbox;
-        this.isSelfInterruptible = isSelfInterruptible;
-        this.isEnemyInterruptible = isEnemyInterruptible;
-        this.knockback = knockback;
-        this.duration = duration;
-        this.actionPriority = actionPriority;
-        this.hitBoxStartTime = hitBoxStartTime;
-        this.damage = damage;
-        this.spriteName = spriteName;
-        this.animationLoop = animationLoop;
-        this.animationLoopStartFrame = animationLoopStartFrame;
     }
+
+    //Add isprojectile constructor
+
 
     public Effectbox getHitBox() {
         return hitBox;

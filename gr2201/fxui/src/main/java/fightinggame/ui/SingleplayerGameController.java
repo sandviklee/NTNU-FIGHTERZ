@@ -3,6 +3,7 @@ package fightinggame.ui;
 import fightinggame.users.User;
 import fightinggame.game.World;
 import fightinggame.game.Action;
+import fightinggame.game.ActionProperties;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
@@ -36,6 +37,7 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400)); //dette blir point
     private SpriteRenderer renderer;
     private String keyInputs = "";
+    private String keyReleased = "";
     private long fps = 10_000_000;
     private boolean held = false;
 
@@ -59,7 +61,9 @@ public class SingleplayerGameController extends SceneController{
         //ArrayList<String> playerParams = new ArrayList<>(); //placeholder
         String[] strSplit = availKeys.split("");
         ArrayList<String> availKeysArray = new ArrayList<>(Arrays.asList(strSplit));
-        return new GameCharacter(character, position, availKeysArray, hitboxProperties); //loaded from json,should maybe have a starting position
+
+
+        return new GameCharacter(character, position, availKeysArray, hitboxProperties, new ArrayList<ActionProperties>(), 1, 1); //loaded from json,should maybe have a starting position
     }
 
     private Terrain loadTerrain(String terrainSprite){
@@ -73,8 +77,8 @@ public class SingleplayerGameController extends SceneController{
             @Override
             public void handle(long now) {
                 if (now - tick >= fps) {
-                    System.out.println(keyInputs);
-                    world.updateWorld(keyInputs, held);
+                    //System.out.println(keyInputs);
+                    world.updateWorld(keyInputs, keyReleased);
                     renderer.update();
                     resetKeyInputs();
                 }
@@ -85,6 +89,7 @@ public class SingleplayerGameController extends SceneController{
 
     private void resetKeyInputs() {
         this.keyInputs = "";
+        this.keyReleased = "";
     }
 
     @FXML
@@ -95,6 +100,9 @@ public class SingleplayerGameController extends SceneController{
 
     @FXML
     private void handleKeyReleased(KeyEvent event){
+        System.out.println(event.getCode());
+        System.out.println(held);
+        keyReleased += event.getCode();
         held = false;
     }
 }

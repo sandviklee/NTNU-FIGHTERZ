@@ -2,6 +2,7 @@ package fightinggame.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,11 @@ public class World {
     private GameCharacter gameCharacter2;
     private int amountUntilHeld = 0;
     private boolean held = false;
+    private HashMap<String, Boolean> booleanHash;
 
     public World(ArrayList<WorldEntity> worldEntities){
+        booleanHash.put("A", false);
+        booleanHash.put("D", false);
         this.worldEntities = worldEntities;
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
@@ -29,9 +33,9 @@ public class World {
         this.worldEntities.add(worldEntity);
     }
 
-    public void updateWorld(String input, boolean held){
+    public void updateWorld(String input, String inputR){
         //handleCollisions();
-        setActions(input, held);
+        setActions(input, inputR);
         applyActions();
     }
 
@@ -45,16 +49,16 @@ public class World {
         }
     }
 
-    private void setActions(String input, boolean held){
-        String[] inputArray = input.split("");
-        ArrayList<String> keyInputArray = new ArrayList<>(Arrays.asList(inputArray));
+    private void setActions(String input, String inputR){
+        ArrayList<String> keyInputArray = getKeyArray(input);
+        ArrayList<String> keyInputRArray = getKeyArray(inputR);
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
                 if (keyInputArray.stream().anyMatch(worldEntity.getPredicate())) {
                     String keyInput = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()).get(0);
                     if (held) {
                         if (worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getName().equals("Idle")) {
-                            System.out.println(keyInput);
+                            //System.out.println(keyInput);
                             worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(keyInput));
                         }
                     }
@@ -72,5 +76,10 @@ public class World {
         for (WorldEntity worldEntity : worldEntities) {
             worldEntity.doAction();
         }
+    }
+
+    private ArrayList<String> getKeyArray(String input) {
+        String[] inputArray = input.split("");
+        return new ArrayList<>(Arrays.asList(inputArray));
     }
 }

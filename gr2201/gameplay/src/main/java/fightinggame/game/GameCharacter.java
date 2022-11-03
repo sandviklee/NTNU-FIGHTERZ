@@ -6,7 +6,8 @@ import java.util.function.Predicate;
 
 public class GameCharacter extends WorldEntity{
     private int weight;
-    private int health;
+    private int speed;
+    private int damage;
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ArrayList<String> availKeys;
     private Predicate<String> availKey = i -> availKeys.contains(i);
@@ -15,10 +16,14 @@ public class GameCharacter extends WorldEntity{
     private Vector gravityVector = new Vector(0, 0, 0, 0, 1);
     private int facingDirection = 1;
 
-    public GameCharacter(String name, ArrayList<Integer> pos, ArrayList<String> availKeys, ArrayList<Integer> hitBoxProperties) {
+    public GameCharacter(String name, ArrayList<Integer> pos, ArrayList<String> availKeys, ArrayList<Integer> hitBoxProperties,
+    ArrayList<ActionProperties> actionP, int weight, int speed) {
         super(name, pos);
         this.availKeys = availKeys;
         this.hurtBox = new Effectbox(this, getPoint(), false, hitBoxProperties);
+        for (ActionProperties p : actionP) {
+            actionHash.put(actionP.indexOf(p), p);
+        }
         actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0));
         actionHash.put(1, new ActionProperties("Run", 0, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, 1)));
         actionHash.put(2, new ActionProperties("Run", 0, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, -1)));
@@ -63,13 +68,4 @@ public class GameCharacter extends WorldEntity{
     public int getFacingDirection() {
         return facingDirection;
     }
-
-    public void heal(int healing){
-        this.health -= healing;
-    }
-
-    public void hurt(int damage){
-        this.health += damage;
-    }
-
 }
