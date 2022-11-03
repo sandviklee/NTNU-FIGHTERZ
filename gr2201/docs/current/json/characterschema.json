@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Character",
+    "title": "Characters",
     "description": "An array of characters and their actions in the game",
     "type": "array",
     "items": {
@@ -41,12 +41,16 @@
             },
             "actions": {
                 "description": "A list of all actions the character has and can be in, with items being action names.",
-                "type": "object",
-                "properties": {
-                    "actionName": {
+                "type": "array",
+                "items": {
+                    "action": {
                         "description": "A specific action object containing all information about an action.",
                         "type": "object",
                         "properties": {
+                            "actionName":{
+                                "description": "The name of an action",
+                                "type": "string"
+                            },
                             "hitBox": {
                                 "description": "The area where the specific action can deal damage.",
                                 "type": "object",
@@ -106,15 +110,19 @@
                                 "type": "integer",
                                 "exclusiveMinimum": 0
                             },
+                            "hitBoxStartTime":{
+                                "description": "Which actionframe the hitBox starts",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
                             "isProjectile": {
                                 "description": "Tells whether the attack itself is a projectile. If yes, the above values will therefore count for the new projectile object created rather than be an extension of the character object.",
                                 "type": "boolean"
                             }
                         },
-                        "required": ["hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "isProjectile"]
+                        "required": ["actionName", "hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "isProjectile"]
                     }
-                },
-                "required": ["actionName"]
+                }
             }
         },
         "required": ["characterName", "weight", "hurtbox", "actions"]

@@ -7,8 +7,9 @@
             "lenght": 50,
             "height": 100
        },
-       "actions":{
-            "idle":{
+       "actions":[
+            {
+                "actionName": "idle",
                 "hitBox": {
                     "width": 0,
                     "height": 0,
@@ -30,7 +31,8 @@
                 "hitBoxStartTime": 0,
                 "isProjectile": false
             },
-            "hitStun":{
+            {
+                "actionName": "hitStun",
                 "hitBox": {
                     "width": 0,
                     "height": 0,
@@ -51,7 +53,8 @@
                 "hitBoxStartTime": 0,
                 "isProjectile": false
             },
-            "jump":{
+            {
+                "actionName": "jump",
                 "hitBox": {
                     "width": 0,
                     "height": 0,
@@ -67,14 +70,14 @@
                     0,
                     100,
                     0,
-                    10
+                    -10
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 1,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "moveRight":{
+            {
+                "actionName": "moveRight",
                 "hitBox": {
                     "width": 0,
                     "height": 0,
@@ -90,13 +93,37 @@
                     100,
                     0,
                     0,
-                    10
+                    0
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 0,
                 "isProjectile": false
             },
-            "neutralSpecial": {
+            {
+                "actionName": "moveLeft",
+                "hitBox": {
+                    "width": 0,
+                    "height": 0,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionpPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    -100,
+                    0,
+                    0,
+                    0
+                ],
+                "duration": 10,
+                "hitBoxStartTime": 0,
+                "isProjectile": false
+            },
+            {
+                "actionName": "neutralSpecial",
                 "hitBox": {
                     "width": 40,
                     "height": 40,
@@ -110,14 +137,16 @@
                 "damage": 13,
                 "knockback":[
                     50,
-                    0
+                    10,
+                    -5,
+                    -1 
                 ],
                 "hitBoxStartTime": 6,
-                "duration": 240,
+                "duration": 10,
                 "isProjectile": true
-
             },
-            "sideSpecial":{
+            {
+                "actionName": "rightSpecial",
                 "hitBox": {
                     "width": 300,
                     "height": 100,
@@ -130,15 +159,40 @@
                 "actionpPriority": 1,
                 "damage": 15,
                 "knockback":[
+                    300,
                     100,
+                    0,
                     0
                 ],
                 "duration": 600,
                 "hitBoxStartTime": 6,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "upSpecial":{
+            {
+                "actionName": "leftSpecial",
+                "hitBox": {
+                    "width": 300,
+                    "height": 100,
+                    "offsetX": 0,
+                    "offsetY": -20,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionpPriority": 1,
+                "damage": 15,
+                "knockback":[
+                    -300,
+                    -100,
+                    0,
+                    0
+                ],
+                "duration": 600,
+                "hitBoxStartTime": 6,
+                "isProjectile": false
+            },
+            {
+                "actionName": "upSpecial",
                 "hitBox": {
                     "width": 200,
                     "height": 50,
@@ -151,15 +205,17 @@
                 "actionpPriority": 1,
                 "damage": 15,
                 "knockback":[
-                    100,
-                    0
+                    200,
+                    1000,
+                    -10,
+                    -50 
                 ],
-                "duration": 600,
+                "duration": 20,
                 "hitBoxStartTime": 6,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "downSpecial":{
+            {
+                "actionName": "downSpecial",
                 "hitBox": {
                     "width": 0,
                     "height": 0,
@@ -173,14 +229,16 @@
                 "damage": 0,
                 "knockback":[
                     0,
+                    0,
+                    0,
                     0
                 ],
                 "duration": 12,
                 "hitBoxStartTime": 1,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "sideNormal":{
+            {
+                "actionName": "rightNormal",
                 "hitBox": {
                     "width": 300,
                     "height": 100,
@@ -194,14 +252,16 @@
                 "damage": 14,
                 "knockback":[
                     400,
-                    0
+                    100,
+                    -40,
+                    -10 
                 ],
                 "duration": 20,
                 "hitBoxStartTime": 5,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "upNormal":{
+            {
+                "actionName": "upNormal",
                 "hitBox": {
                     "width": 200,
                     "height": 50,
@@ -215,14 +275,16 @@
                 "damage": 15,
                 "knockback":[
                     0,
-                    200
+                    200,
+                    0,
+                    -10
                 ],
                 "duration": 15,
                 "hitBoxStartTime": 5,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             },
-            "downNormal":{
+            {
+                "actionName": "downNormal",
                 "hitBox": {
                     "width": 200,
                     "height": 100,
@@ -236,14 +298,15 @@
                 "damage": 13,
                 "knockback":[
                     100,
-                    20
+                    20,
+                    -10,
+                    -2
                 ],
                 "duration": 600,
                 "hitBoxStartTime": 6,
-                "isProjectile": false,
-                "spirite": ""
+                "isProjectile": false
             }
-       }
+        ]
 
     }
 ]
