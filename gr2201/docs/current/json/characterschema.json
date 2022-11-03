@@ -13,8 +13,8 @@
             "weight": {
                 "description": "A character's weight, influencing gravity and knockback factor.",
                 "type": "number",
-                "exclusiveMinimum": 0,
-                "maximum": 200
+                "exclusiveMinimum": 0.0,
+                "maximum": 2.0
             },
             "speed": {
                 "description": "A character's speed, modefying the character's movement",
