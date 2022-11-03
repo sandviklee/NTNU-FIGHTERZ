@@ -10,7 +10,6 @@ public class CharacterInformationObject {
     private HashMap<String, String> specialActions;
 
     public CharacterInformationObject(String name, String description, int difficulty, String playstyle) {
-        System.out.println(name + description + playstyle);
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
@@ -40,5 +39,14 @@ public class CharacterInformationObject {
 
     public void addSpecialAction(String name, String description){
         specialActions.put(name, description);
+    }
+
+    @Override
+    public String toString(){
+        String information = name + "\n" + description + "\n" + String.valueOf(difficulty) + "\n" + playstyle + "\n";
+        for (String action : specialActions.keySet()){
+            information = information + action + ": " + specialActions.get(action) + "\n";
+        }
+        return information;
     }
 }
