@@ -84,6 +84,10 @@
                                 "description": "Tells whether the player can interrupt this action with other inputs.",
                                 "type": "boolean"
                             },
+                            "isEnemyInterruptible":{
+                                "description": "Tells whether enemies can interrupt the action",
+                                "type": "boolean"
+                            },
                             "actionpPriority": {
                                 "description": "Describes the priority of the action, what action it can interrupt/be interrupted by.",
                                 "type": "integer",
@@ -96,10 +100,10 @@
                                 "exclusiveMinimum": 0
                             },
                             "knockback": {
-                                "description": "Contains the x and y values of a vector describing both the velocity and acceleration knockback from the action, [vx, vy, ax, ay]",
+                                "description": "Contains the x and y values of a vector describing both the velocity and acceleration knockback from the action, [vx, vy, ax, ay], and possible a direction",
                                 "type": "array",
                                 "minItems": 4,
-                                "maxItems": 4,
+                                "maxItems": 5,
                                 "items": {
                                     "type": "integer",
                                     "minimum": 0
@@ -120,7 +124,7 @@
                                 "type": "boolean"
                             }
                         },
-                        "required": ["actionName", "hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "isProjectile"]
+                        "required": ["actionName", "hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "hitBoxStartTime", "isProjectile"]
                     }
                 }
             }
