@@ -25,12 +25,17 @@ public class CharacterInformationDAO {
     }
 
     public HashMap<String, String> getAllCharacters() {
+        
         File file = new File("./gr2201/gameplay/src/main/resources/CharacterInformation.json");
         TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
         HashMap<String, String> characters = new HashMap<String, String>();
-        //  TODO: HANDLE EXCEPTIONS IN CONTROLLER INSTEAD, JUST COPY THIS AND FROM HERE SEND ALL EXCEPTIONS
         try {
             characters = mapper.readValue(file, typeRef);
+            Map pls = (Map) characters.get("Sol");
+            System.out.println("pls");
+
+        
+        //  TODO: HANDLE EXCEPTIONS IN CONTROLLER INSTEAD, JUST COPY THIS AND FROM HERE SEND ALL EXCEPTIONS
         } catch (DatabindException e) {
             System.out.println("DatabindException: The input JSON structure does not match expected structure.");
         } catch (StreamReadException e) {
@@ -41,5 +46,10 @@ public class CharacterInformationDAO {
             System.out.println("IOException: Could not read character information.");
         }
         return characters;
+    }
+
+    public static void main(String[] args) {
+        CharacterInformationDAO dao = new CharacterInformationDAO();
+        dao.getAllCharacters();
     }
 }
