@@ -38,7 +38,7 @@ public class World {
     }
 
     public void updateWorld(String input, String inputR){
-        //handleCollisions();
+        handleCollisions();
         setActions(input, inputR);
         applyActions();
     }
@@ -46,8 +46,8 @@ public class World {
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
             for (WorldEntity entity2 : worldEntities) {
-                if(entity1.equals(entity2)){
-                    System.out.println("Collision between" + entity1 + "and" + entity2);
+                if (entity1 instanceof GameCharacter && entity2 instanceof Terrain) {
+                    entity1.setOnGround(entity2.hitboxCollision(entity1.getHurtBox()));
                 }
             }
         }
@@ -80,11 +80,11 @@ public class World {
 
         //System.out.println(clickAction + " ClickAction");
 
-
-        System.out.println(booleanHash + " keyArray: " + keyInputArray);
+        //System.out.println(booleanHash + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
+                //System.out.println(worldEntity.getOnGround());
                 Action currentAction = worldEntity.getCurrentAction();
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
 
@@ -98,15 +98,20 @@ public class World {
                     if (NewHeldKey.equals("W")) {
                         
                         if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
-                        currentAction.getActionPriority()))) {
+                        currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {
                             clickAction = true;
                             HeldKey = NewHeldKey;
                             //System.out.println(worldEntity.getAvailKeys().indexOf(HeldKey) + " Index");
                             worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
+                        } else {
+                            if (currentAction.getIsDone()){
+                                worldEntity.setCurrentAction(0);
+                            }
+                            
                         }
                     } else {
                         
-                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || HeldKey != NewHeldKey)) {
+                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || HeldKey != NewHeldKey) && !clickAction) {
                             
                             HeldKey = NewHeldKey;
                             //System.out.println(actionAvailKeys.indexOf(HeldKey) + " Index");

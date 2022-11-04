@@ -15,6 +15,30 @@ public abstract class WorldEntity {
 		this.name = name;
 		this.point = new Point((double) pos.get(0), (double) pos.get(1));
 	}
+	    
+    public boolean hitboxCollision(Effectbox effectbox) {
+        //NB: SJEKKER BARE FOR UNDER Y AKKURAT NÅ
+        if ((effectbox.getPosY() + effectbox.getHeight()/2 + 5) > (hitBox.getPosY() - hitBox.getHeight()/2)) {
+            if (((hitBox.getPosX() - hitBox.getWidth()/2) < (effectbox.getPosX() + effectbox.getWidth()/2)) && 
+            ((hitBox.getPosX() + hitBox.getWidth()/2) > (effectbox.getPosX() - effectbox.getWidth()/2))) {
+                return true;
+            } else {
+				return false;
+			}
+        } else {
+			return false;
+		}
+    }
+
+	
+    public boolean getOnGround() {
+		return isAlive;
+
+    }
+    
+	public void setOnGround(boolean b) {
+		
+	}
 	
 	public void doAction(){
 
@@ -48,6 +72,10 @@ public abstract class WorldEntity {
         return null;
     }
 
+	public Effectbox getHitBox() {
+        return null;
+    }
+
 	private void setHitBox(Effectbox hitBox) {
 		this.hitBox = hitBox;
 	}
@@ -72,6 +100,10 @@ public abstract class WorldEntity {
 
 	public int getActionPriority() {
         return currentAction.getActionPriority();
+    }
+
+	public int getJumpCounter() {
+        return 0;
     }
 
 }

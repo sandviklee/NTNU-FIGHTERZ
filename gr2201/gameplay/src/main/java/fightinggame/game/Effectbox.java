@@ -15,10 +15,11 @@ public class Effectbox {
         this.owner = owner;
         this.center = center;
         this.isTraversable = isTraversable;
-        posX = center.getX() - (width/2 - 10);
-        posY = center.getY() - (height/2);
         this.width= hitboxProperties.get(0);
         this.height = hitboxProperties.get(1);
+        posX = center.getX() - (width/2 - 10);
+        posY = center.getY() - (height/2);
+
     }
 
     public void updatePos() {

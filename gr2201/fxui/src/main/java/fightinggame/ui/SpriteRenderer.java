@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
+import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
@@ -33,12 +34,14 @@ public class SpriteRenderer {
     }
 
     public void update() {
-        content.drawImage(backgroundImg, 0, 0);
+        content.drawImage(backgroundImg, 0, 0); //Draws the current bg
+        int radius = 10;
         for (WorldEntity entity : entities) {
+            
             if (entity instanceof GameCharacter) {
                 int width = 250;
                 int height = 190;
-                int radius = 10;
+                
     
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
                 double posX = entity.getPoint().getX() - width/2;
@@ -48,6 +51,12 @@ public class SpriteRenderer {
                 content.setFill(Color.RED);
                 content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
                 Effectbox hitbox = entity.getHurtBox();
+                content.strokeRect(hitbox.getPosX(), hitbox.getPosY(), hitbox.getWidth(), hitbox.getHeight());
+            }
+            else if (entity instanceof Terrain) {
+                content.setFill(Color.RED);
+                content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
+                Effectbox hitbox = entity.getHitBox();
                 content.strokeRect(hitbox.getPosX(), hitbox.getPosY(), hitbox.getWidth(), hitbox.getHeight());
             }
         }
