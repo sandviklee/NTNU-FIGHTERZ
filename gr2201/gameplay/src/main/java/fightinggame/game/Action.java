@@ -119,6 +119,10 @@ public class Action {
         return this.knockback;
     }
 
+    public int getActionPriority(){
+        return this.actionPriority;
+    }
+
     /**
      * Getter for damage.
      * @return damage integer.

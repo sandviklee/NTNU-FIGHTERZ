@@ -18,6 +18,7 @@ public class World {
     private HashMap<String, Boolean> booleanHash = new LinkedHashMap<>();
     private String HeldKey = "Idle";
     private String NewHeldKey = "Idle";
+    private boolean clickAction = false;
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = worldEntities;
@@ -77,25 +78,48 @@ public class World {
             NewHeldKey = "+";
         }
 
+        //System.out.println(clickAction + " ClickAction");
+
 
         System.out.println(booleanHash + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
+                Action currentAction = worldEntity.getCurrentAction();
+                ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
+
+                if (currentAction.getIsDone() && clickAction) {
+                    clickAction = false;
+                }
+
                 if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
                     //System.out.println(HeldKey + " New: " + NewHeldKey);
-                    
-                    if (((worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getName().equals("Idle")) || HeldKey != NewHeldKey)) {
 
-                        HeldKey = NewHeldKey;
-                        worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(HeldKey));
+                    if (NewHeldKey.equals("W")) {
+                        
+                        if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
+                        currentAction.getActionPriority()))) {
+                            clickAction = true;
+                            HeldKey = NewHeldKey;
+                            //System.out.println(worldEntity.getAvailKeys().indexOf(HeldKey) + " Index");
+                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
+                        }
+                    } else {
+                        
+                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || HeldKey != NewHeldKey)) {
+                            
+                            HeldKey = NewHeldKey;
+                            //System.out.println(actionAvailKeys.indexOf(HeldKey) + " Index");
+                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
+                        }
                     }
 
-                    List<String> keyInputList = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()); //Legger alle mulige keyInputs i en liste
+
+                    //List<String> keyInputList = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()); //Legger alle mulige keyInputs i en liste
                     //Så iterer og gjør alle som er mulig til true i hashmappet
 
                 } else {
-                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && booleanHash.isEmpty()) {
+                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && booleanHash.isEmpty() && !clickAction) {
                         worldEntity.setCurrentAction(0);
                     }
                 }

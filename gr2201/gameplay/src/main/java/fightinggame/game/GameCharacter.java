@@ -25,8 +25,9 @@ public class GameCharacter extends WorldEntity{
             actionHash.put(actionP.indexOf(p), p);
         }
         actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0));
-        actionHash.put(1, new ActionProperties("Run", 0, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, 1)));
-        actionHash.put(2, new ActionProperties("Run", 0, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, -1)));
+        actionHash.put(1, new ActionProperties("Jump", 2, 5, false, false, 5, true, 0)); 
+        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, 1)));
+        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(7, 0, 0, 0, -1)));
         setCurrentAction(0);
     }
 
@@ -51,7 +52,7 @@ public class GameCharacter extends WorldEntity{
         if (actionNumber != null) {
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
-            if (actionNumber == 1 || actionNumber == 2) {
+            if (actionNumber == 2 || actionNumber == 3) {
                 facingDirection = currentAction.getKnockback().getDirection();
             }
         } 
@@ -69,6 +70,10 @@ public class GameCharacter extends WorldEntity{
         hurtBox.updatePos();
 		this.getCurrentAction().nextActionFrame();
 	}
+
+    public int getActionPriority() {
+        return currentAction.getActionPriority();
+    }
 
     public int getFacingDirection() {
         return facingDirection;

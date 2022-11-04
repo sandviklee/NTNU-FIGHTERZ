@@ -69,4 +69,9 @@ public abstract class WorldEntity {
 	private void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
 	}
+
+	public int getActionPriority() {
+        return currentAction.getActionPriority();
+    }
+
 }

@@ -39,13 +39,13 @@ public class SingleplayerGameController extends SceneController{
     private String keyInputs = "";
     private String keyReleased = "";
     private long fps = 10_000_000;
-    private boolean held = false;
 
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, "WDAS", playerHitBox);
+        GameCharacter player = loadPlayer(character, playerPosition, ".WDAS", playerHitBox);
         playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
         playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
+        playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         //Terrain terrain = loadTerrain(gameStage);
         //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));
