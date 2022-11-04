@@ -59,7 +59,7 @@ public class World {
         ArrayList<String> keyInputRArray =  new ArrayList<>(Arrays.asList(inputRArray));
         
         for (String key : keyInputArray) {
-            if (!booleanHash.keySet().contains(key)) {
+            if (!booleanHash.keySet().contains(key) && key != "") {
                 booleanHash.put(key, true);
             }
         }
@@ -73,19 +73,23 @@ public class World {
         if (!booleanHash.isEmpty()) {
             Map.Entry<String, Boolean> entry = booleanHash.entrySet().iterator().next();
             NewHeldKey = entry.getKey();
-        } 
-        
+        } else {
+            NewHeldKey = "+";
+        }
 
+
+        System.out.println(booleanHash + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
-                if (worldEntity.getAvailKeys().contains(HeldKey)) {
-                    //System.out.println(HeldKey + "New: " + NewHeldKey);
+                if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
+                    //System.out.println(HeldKey + " New: " + NewHeldKey);
+                    
+                    if (((worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getName().equals("Idle")) || HeldKey != NewHeldKey)) {
 
-                        if ((worldEntity.getCurrentAction().getIsDone() || worldEntity.getCurrentAction().getActionPriority(). )) {
-                            System.out.println("HEI");
-                            worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(HeldKey));
-                        }
+                        HeldKey = NewHeldKey;
+                        worldEntity.setCurrentAction(worldEntity.getAvailKeys().indexOf(HeldKey));
+                    }
 
                     List<String> keyInputList = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()); //Legger alle mulige keyInputs i en liste
                     //Så iterer og gjør alle som er mulig til true i hashmappet
@@ -98,11 +102,7 @@ public class World {
             }
             
         }
-        if (!booleanHash.isEmpty()) {
-            Map.Entry<String, Boolean> entry = booleanHash.entrySet().iterator().next();
-            HeldKey = entry.getKey();
-            
-        }
+        HeldKey = NewHeldKey;
     }
 
     private void applyActions(){
