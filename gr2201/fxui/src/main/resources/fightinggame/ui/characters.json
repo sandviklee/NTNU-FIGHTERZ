@@ -10,13 +10,6 @@
        "actions":[
             {
                 "actionName": "idle",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": false,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
@@ -31,13 +24,6 @@
             },
             {
                 "actionName": "hitStun",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": false,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
@@ -52,13 +38,6 @@
             },
             {
                 "actionName": "jump",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": true,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
@@ -79,13 +58,6 @@
             },
             {
                 "actionName": "moveRight",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": true,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
@@ -107,13 +79,6 @@
             },
             {
                 "actionName": "moveLeft",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": true,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
@@ -245,13 +210,6 @@
             },
             {
                 "actionName": "downSpecial",
-                "hitBox": {
-                    "width": 0,
-                    "height": 0,
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "isTraversible": false
-                },
                 "isSelfInterruptible": false,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
