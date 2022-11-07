@@ -119,12 +119,26 @@
                                 "type": "integer",
                                 "exclusiveMinimum": 0
                             },
+                            "totalFrames": {
+                                "description": "How many frames are there in this action`s AnimationSprite",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "animationLoop": {
+                                "description": "Shall this action`s animation loop when done ",
+                                "type": "boolean"
+                            },
+                            "animationLoopStartFrame": {
+                                "description": "When animation and it shall loop what frame will it return to",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
                             "isProjectile": {
                                 "description": "Tells whether the attack itself is a projectile. If yes, the above values will therefore count for the new projectile object created rather than be an extension of the character object.",
                                 "type": "boolean"
                             }
                         },
-                        "required": ["actionName", "hitBox", "isSelfInterruptible", "actionpPriority", "damage", "knockback", "duration", "hitBoxStartTime", "isProjectile"]
+                        "required": ["actionName", "hitBox", "isSelfInterruptible", "isEnemyInterruptible", "actionpPriority", "damage", "knockback", "duration", "hitBoxStartTime", "totalFrames", "animationLoop", "animationLoopStartFrame", "isProjectile"]
                     }
                 }
             }
