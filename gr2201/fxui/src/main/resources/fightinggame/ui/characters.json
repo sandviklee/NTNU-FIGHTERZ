@@ -29,6 +29,9 @@
                 ],
                 "duration": 400,
                 "hitBoxStartTime": 0,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -52,6 +55,9 @@
                 ],
                 "duration": 25,
                 "hitBoxStartTime": 0,
+                "totalFrames": 18,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -75,6 +81,9 @@
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 1,
+                "totalFrames": 5,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -99,6 +108,9 @@
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 0,
+                "totalFrames": 10,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -123,6 +135,9 @@
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 0,
+                "totalFrames": 10,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -146,6 +161,9 @@
                 ],
                 "duration": 10,
                 "hitBoxStartTime": 6,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": true
             },
             {
@@ -170,6 +188,9 @@
                 ],
                 "duration": 600,
                 "hitBoxStartTime": 6,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -194,6 +215,9 @@
                 ],
                 "duration": 600,
                 "hitBoxStartTime": 6,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -217,6 +241,9 @@
                 ],
                 "duration": 20,
                 "hitBoxStartTime": 6,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -240,6 +267,9 @@
                 ],
                 "duration": 2,
                 "hitBoxStartTime": 1,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -264,6 +294,9 @@
                 ],
                 "duration": 20,
                 "hitBoxStartTime": 5,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -288,6 +321,9 @@
                 ],
                 "duration": 20,
                 "hitBoxStartTime": 5,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -311,6 +347,9 @@
                 ],
                 "duration": 15,
                 "hitBoxStartTime": 5,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             },
             {
@@ -334,6 +373,9 @@
                 ],
                 "duration": 12,
                 "hitBoxStartTime": 3,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
                 "isProjectile": false
             }
         ]
@@ -369,6 +411,9 @@
                  ],
                  "duration": 400,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -392,6 +437,9 @@
                  ],
                  "duration": 25,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -415,6 +463,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -439,6 +490,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -463,6 +517,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -486,6 +543,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 6,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": true
              },
              {
@@ -510,6 +570,9 @@
                  ],
                  "duration": 30,
                  "hitBoxStartTime": 10,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -534,6 +597,9 @@
                  ],
                  "duration": 30,
                  "hitBoxStartTime": 10,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -557,6 +623,9 @@
                  ],
                  "duration": 20,
                  "hitBoxStartTime": 4,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -580,6 +649,9 @@
                  ],
                  "duration": 60,
                  "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -604,6 +676,9 @@
                  ],
                  "duration": 15,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -628,6 +703,9 @@
                  ],
                  "duration": 15,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -651,6 +729,9 @@
                  ],
                  "duration": 13,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -674,6 +755,9 @@
                  ],
                  "duration": 12,
                  "hitBoxStartTime": 3,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              }
          ]
@@ -709,6 +793,9 @@
                  ],
                  "duration": 400,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -732,6 +819,9 @@
                  ],
                  "duration": 25,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -755,6 +845,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -779,6 +872,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -803,6 +899,9 @@
                  ],
                  "duration": 10,
                  "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -826,6 +925,9 @@
                  ],
                  "duration": 80,
                  "hitBoxStartTime": 30,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": true
              },
              {
@@ -850,6 +952,9 @@
                  ],
                  "duration": 30,
                  "hitBoxStartTime":20,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -874,6 +979,9 @@
                  ],
                  "duration": 30,
                  "hitBoxStartTime": 20,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -897,6 +1005,9 @@
                  ],
                  "duration": 20,
                  "hitBoxStartTime": 4,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -920,6 +1031,9 @@
                  ],
                  "duration": 60,
                  "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -944,6 +1058,9 @@
                  ],
                  "duration": 15,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -968,6 +1085,9 @@
                  ],
                  "duration": 15,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -991,6 +1111,9 @@
                  ],
                  "duration": 13,
                  "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              },
              {
@@ -1014,6 +1137,9 @@
                  ],
                  "duration": 12,
                  "hitBoxStartTime": 3,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
                  "isProjectile": false
              }
          ]
