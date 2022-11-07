@@ -88,7 +88,7 @@
                                 "description": "Tells whether enemies can interrupt the action",
                                 "type": "boolean"
                             },
-                            "actionpPriority": {
+                            "actionPriority": {
                                 "description": "Describes the priority of the action, what action it can interrupt/be interrupted by.",
                                 "type": "integer",
                                 "minimum": 1,
@@ -138,7 +138,7 @@
                                 "type": "boolean"
                             }
                         },
-                        "required": ["actionName", "hitBox", "isSelfInterruptible", "isEnemyInterruptible", "actionpPriority", "damage", "knockback", "duration", "hitBoxStartTime", "totalFrames", "animationLoop", "animationLoopStartFrame", "isProjectile"]
+                        "required": ["actionName", "hitBox", "isSelfInterruptible", "isEnemyInterruptible", "actionPriority", "damage", "knockback", "duration", "hitBoxStartTime", "totalFrames", "animationLoop", "animationLoopStartFrame", "isProjectile"]
                     }
                 }
             }
