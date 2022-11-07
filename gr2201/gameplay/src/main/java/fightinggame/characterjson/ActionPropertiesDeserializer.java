@@ -28,12 +28,11 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
 
     public ActionProperties deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
+            // Get all required nodes
             ObjectNode objectNode = (ObjectNode) jsonNode;
             JsonNode actionNameNode = objectNode.get("actionName");
-            JsonNode effectboxNode = objectNode.get("hitbox");
             JsonNode isSelfInterruptibleNode = objectNode.get("isSelfInterruptible");
             JsonNode isEnemyInterruptibleNode = objectNode.get("isEnemyInterruptible");
-            JsonNode knockbackNode = objectNode.get("knockback");
             JsonNode actionPriorityNode = objectNode.get("actionPriority");
             JsonNode damageNode = objectNode.get("damage");
             JsonNode durationNode = objectNode.get("duration");
@@ -42,25 +41,46 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
             JsonNode animationLoopStartTimeNode = objectNode.get("animationLoopStartTime");
             JsonNode isAnimationLoopNode = objectNode.get("isAnimationLoop");
             JsonNode isProjectileNode = objectNode.get("isProjectile");
+            JsonNode isMovementNode = objectNode.get("isMovement");
 
+            // Get all values guaranteed by json
             String actionName = actionNameNode.asText();
             int actionPriority = actionPriorityNode.intValue();
             int duration = durationNode.intValue();
             boolean isSelfInterruptible = isSelfInterruptibleNode.asBoolean();
             boolean isEnemyInterruptible = isEnemyInterruptibleNode.asBoolean();
             int totalFrames = totalFramesNode.intValue();
-            int animationLoopStartTime = animationLoopStartTimeNode.intValue()
+            int animationLoopStartTime = animationLoopStartTimeNode.intValue();
             boolean isAnimationLoop = isAnimationLoopNode.asBoolean();
             int damage = damageNode.intValue();
             boolean isProjectile = isProjectileNode.asBoolean();
+            boolean isMovement = isMovementNode.asBoolean();
 
-            Effectbox hitbox = effectboxDeserializer.deserialize(effectboxNode);
-            Vector knockBack = vectorDeserializer.deserialize(knockbackNode);
-            
-            ActionProperties actionProperties = new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, knockBack);
-            // no knockback
-            // ActionProperties actionProperties = new ActionProperties(null, 0, 0, false, false, 0, false, 0);
+            // Check if json contains non required fields
+            boolean hasHitbox = objectNode.has("hitbox");
+            boolean hasKnockback = objectNode.has("knockback");
 
+            Effectbox hitbox;
+            if (hasHitbox) {
+                JsonNode effectboxNode = objectNode.get("hitbox");
+                hitbox = effectboxDeserializer.deserialize(effectboxNode);   
+            }
+            Vector knockBack;
+            if (hasKnockback) {
+                JsonNode knockbackNode = objectNode.get("knockback");
+                knockBack = vectorDeserializer.deserialize(knockbackNode);
+            }
+
+            // Check what type of ActionProperties that shall be initiated
+            if (hasKnockback) {
+                return new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack);
+            }
+
+            if (hasHitbox && hasKnockback) {
+                return new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage);
+            }
+            // no knockback no hitbox
+            ActionProperties actionProperties = new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement);
             return actionProperties;
            }
            
