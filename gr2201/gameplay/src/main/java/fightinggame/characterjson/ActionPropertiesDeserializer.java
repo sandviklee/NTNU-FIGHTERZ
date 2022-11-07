@@ -48,15 +48,16 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
             int duration = durationNode.intValue();
             boolean isSelfInterruptible = isSelfInterruptibleNode.asBoolean();
             boolean isEnemyInterruptible = isEnemyInterruptibleNode.asBoolean();
-            // int totalFrames = totalFramesNode.intValue();
-            // boolean isAnimationLoop = isAnimationLoopNode.asBoolean();
+            int totalFrames = totalFramesNode.intValue();
+            int animationLoopStartTime = animationLoopStartTimeNode.intValue()
+            boolean isAnimationLoop = isAnimationLoopNode.asBoolean();
             int damage = damageNode.intValue();
             boolean isProjectile = isProjectileNode.asBoolean();
 
             Effectbox hitbox = effectboxDeserializer.deserialize(effectboxNode);
             Vector knockBack = vectorDeserializer.deserialize(knockbackNode);
             
-            ActionProperties actionProperties = new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, 0, false, 0, knockBack);
+            ActionProperties actionProperties = new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, knockBack);
             // no knockback
             // ActionProperties actionProperties = new ActionProperties(null, 0, 0, false, false, 0, false, 0);
 
