@@ -29,10 +29,10 @@ public class GameCharacter extends WorldEntity{
         for (ActionProperties p : actionP) {
             actionHash.put(actionP.indexOf(p), p);
         }
-        actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0));
-        actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, new Vector(0, 48, 0 , -4, -1))); 
-        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(8, 0, 0, 0, 1)));
-        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(8, 0, 0, 0, -1)));
+        actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0, true));
+        actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
+        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
+        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
         setCurrentAction(0);
     }
 
@@ -81,11 +81,14 @@ public class GameCharacter extends WorldEntity{
 
     public void clearGravityVector() {
         mainVector.removeVector(gravityVector);
+        
+
     }
 
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround && mainVector.getVy() > 0) {
+            System.out.println("CLEARED!");
             jumpCounter = 0;
             clearGravityVector();
         }
@@ -98,6 +101,7 @@ public class GameCharacter extends WorldEntity{
     }
 
     public void doAction(){
+        System.out.println(onGround);
         if (!onGround && mainVector.getVy() == 0) { //NB DETTE ER BARE FOR TESTING AV NÅR DET SKAL LEGGES TIL GRAVITASJONSVEKTOREN
             mainVector.addVector(gravityVector);
         }
