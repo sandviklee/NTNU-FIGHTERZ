@@ -31,14 +31,19 @@ public class SingleplayerGameController extends SceneController{
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
-    private HashMap<String, Image> terrainSprites;
+    private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", "W", "D", "A", "DW", "AW", "DG"));
+
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(925, 730)); //dette blir point
     private ArrayList<Integer> playerHitBox = new ArrayList<>(Arrays.asList(70, 160));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(1330, 950)); //dette blir point
     private ArrayList<Integer> terrainHitBox = new ArrayList<>(Arrays.asList(900, 280));
     private ArrayList<Integer> terrain2Position = new ArrayList<>(Arrays.asList(1200, 550)); //dette blir point
     private ArrayList<Integer> terrain2HitBox = new ArrayList<>(Arrays.asList(300, 5));
+    private ArrayList<Integer> terrain3Position = new ArrayList<>(Arrays.asList(500, 950)); //dette blir point
+    private ArrayList<Integer> terrain3HitBox = new ArrayList<>(Arrays.asList(500, 280));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400)); //dette blir point
+    
+    
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private String keyReleased = "";
@@ -46,16 +51,19 @@ public class SingleplayerGameController extends SceneController{
 
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, ".WDA", playerHitBox);
+        GameCharacter player = loadPlayer(character, playerPosition, player1Keys, playerHitBox);
         Terrain terrain = loadTerrain("Test", terrainPosition, terrainHitBox);
         Terrain terrain2 = loadTerrain("Test2", terrain2Position, terrain2HitBox);
+        Terrain terrain3 = loadTerrain("Test", terrain3Position, terrain3HitBox);
         playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
         playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
         playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
+        //playerSprites.put(character + "SideSpecial", new Image((getClass().getResource(character + "SideSpecial.png")).toString()));
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         //Terrain terrain = loadTerrain(gameStage);
         //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));
         worldEntities.add(player);
+        worldEntities.add(terrain3);
         worldEntities.add(terrain2);
         worldEntities.add(terrain);
         //worldEntities.add(dummy);
@@ -64,11 +72,10 @@ public class SingleplayerGameController extends SceneController{
         updateWorld();
     }
 
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, String availKeys, ArrayList<Integer> hitboxProperties){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, ArrayList<Integer> hitboxProperties){
         //load user here with serializer
         //ArrayList<String> playerParams = new ArrayList<>(); //placeholder
-        String[] strSplit = availKeys.split("");
-        ArrayList<String> availKeysArray = new ArrayList<>(Arrays.asList(strSplit));
+        ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
 
 
         return new GameCharacter(character, position, availKeysArray, hitboxProperties, new ArrayList<ActionProperties>(), 1, 1); //loaded from json,should maybe have a starting position

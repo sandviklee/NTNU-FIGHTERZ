@@ -6,16 +6,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class World {
     private ArrayList<WorldEntity> worldEntities;
-    private GameCharacter gameCharacter1;
-    private GameCharacter gameCharacter2;
-    private int amountUntilHeld = 0;
-    private boolean held = false;
-    private HashMap<String, Boolean> booleanHash = new LinkedHashMap<>();
+    private ArrayList<String> keysHeld = new ArrayList<>();
+    private HashMap<GameCharacter, Boolean> isOnGroundHash = new HashMap<>();
     private String HeldKey = "Idle";
     private String NewHeldKey = "Idle";
     private boolean clickAction = false;
@@ -24,17 +22,16 @@ public class World {
         this.worldEntities = worldEntities;
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
-                if(gameCharacter1==null){
-                    gameCharacter1 = (GameCharacter) entity;
-                } else {
-                    gameCharacter2 = (GameCharacter) entity;
-                }
+                isOnGroundHash.put((GameCharacter) entity, false);
             }
         }
     }
 
     public void addWorldEntity(WorldEntity worldEntity){
-        this.worldEntities.add(worldEntity);
+        worldEntities.add(worldEntity);
+        if (worldEntity instanceof GameCharacter){
+            isOnGroundHash.put((GameCharacter) worldEntity, false);
+        }
     }
 
     public void updateWorld(String input, String inputR){
@@ -45,16 +42,20 @@ public class World {
 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
-            boolean isOnGround = false;
+            if (entity1 instanceof GameCharacter) {
+                isOnGroundHash.put((GameCharacter) entity1, false);
+            }
             for (WorldEntity entity2 : worldEntities) {
-                
                 if (entity1 instanceof GameCharacter && entity2 instanceof Terrain) {
                     if (entity2.hitboxCollision(entity1.getHurtBox())) {
-                        isOnGround = true;
+                        isOnGroundHash.put((GameCharacter) entity1, true);
                     }
                     
                 }
-                entity1.setOnGround(isOnGround);
+                if (entity1 instanceof GameCharacter) {
+                    entity1.setOnGround(isOnGroundHash.get(entity1));
+                }
+                
             }
         }
         
@@ -67,31 +68,35 @@ public class World {
         ArrayList<String> keyInputRArray =  new ArrayList<>(Arrays.asList(inputRArray));
         
         for (String key : keyInputArray) {
-            if (!booleanHash.keySet().contains(key) && key != "") {
-                booleanHash.put(key, true);
+            if (!keysHeld.contains(key) && key != "") {
+                keysHeld.add(key);
             }
         }
 
         for (String key : keyInputRArray) {
-            if (booleanHash.keySet().contains(key)) {
-                booleanHash.remove(key);
+            if (keysHeld.contains(key)) {
+                keysHeld.remove(key);
             }
-        }
-
-        if (!booleanHash.isEmpty()) {
-            Map.Entry<String, Boolean> entry = booleanHash.entrySet().iterator().next();
-            NewHeldKey = entry.getKey();
-        } else {
-            NewHeldKey = "+";
         }
 
         //System.out.println(clickAction + " ClickAction");
 
-        System.out.println(booleanHash + " keyArray: " + keyInputArray);
+        //System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
-                //System.out.println(worldEntity.getOnGround());
+                
+                if (!keysHeld.isEmpty()) { //get first key
+                    NewHeldKey = "";
+                    for (String key : keysHeld) {
+                        NewHeldKey += key;
+                    }
+                } else {
+                    NewHeldKey = "+";
+                }
+
+                System.out.println(NewHeldKey);
+
                 Action currentAction = worldEntity.getCurrentAction();
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
 
@@ -102,7 +107,7 @@ public class World {
                 if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
                     //System.out.println(HeldKey + " New: " + NewHeldKey);
 
-                    if (NewHeldKey.equals("W")) {
+                    if (NewHeldKey.contains("W")) {
                         
                         if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
                         currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {
@@ -118,7 +123,7 @@ public class World {
                         }
                     } else {
                         
-                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || HeldKey != NewHeldKey) && !clickAction) {
+                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || !HeldKey.equals(NewHeldKey)) && !clickAction) {
                             
                             HeldKey = NewHeldKey;
                             //System.out.println(actionAvailKeys.indexOf(HeldKey) + " Index");
@@ -131,7 +136,7 @@ public class World {
                     //Så iterer og gjør alle som er mulig til true i hashmappet
 
                 } else {
-                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && booleanHash.isEmpty() && !clickAction) {
+                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && !clickAction) {
                         worldEntity.setCurrentAction(0);
                     }
                 }

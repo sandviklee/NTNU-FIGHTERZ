@@ -16,7 +16,7 @@ public class Terrain extends WorldEntity{
     
     public boolean hitboxCollision(Effectbox effectbox) {
         //NB: SJEKKER BARE FOR UNDER Y AKKURAT NÅ
-        if ((effectbox.getPosY() + effectbox.getHeight() + 1) > (hitBox.getPosY())) {
+        if ((effectbox.getPosY() + effectbox.getHeight() + 3) > (hitBox.getPosY()) && (effectbox.getPosY() < (hitBox.getPosY() + hitBox.getHeight()))) {
             if ((hitBox.getPosX() < (effectbox.getPosX() + effectbox.getWidth())) && 
             ((hitBox.getPosX() + hitBox.getWidth()) > (effectbox.getPosX()))) {
                 return true;

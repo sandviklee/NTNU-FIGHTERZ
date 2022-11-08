@@ -33,6 +33,9 @@ public class GameCharacter extends WorldEntity{
         actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
         actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
         actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
+        //RUNJUMP
+        actionHash.put(4, new ActionProperties("Jump", 2, 2, false, false, 10, true, 0, true, new Vector(8, -48, 0, 4, 1)));
+        actionHash.put(5, new ActionProperties("Jump", 2, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
         setCurrentAction(0);
     }
 
@@ -56,12 +59,12 @@ public class GameCharacter extends WorldEntity{
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
             clearVectors();
-            if (actionNumber == 1) {
+            if (getAction(actionNumber).getName().equals("Jump")) {
                 jumpCounter++;
             }
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
-            if (actionNumber == 2 || actionNumber == 3) {
+            if (actionNumber == 2 || actionNumber == 3 || actionNumber == 4 || actionNumber == 5) {
                 facingDirection = currentAction.getKnockback().getDirection();
             }
             applyVectors();
@@ -88,7 +91,6 @@ public class GameCharacter extends WorldEntity{
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround && mainVector.getVy() > 0) {
-            System.out.println("CLEARED!");
             jumpCounter = 0;
             clearGravityVector();
         }
@@ -101,7 +103,6 @@ public class GameCharacter extends WorldEntity{
     }
 
     public void doAction(){
-        System.out.println(onGround);
         if (!onGround && mainVector.getVy() == 0) { //NB DETTE ER BARE FOR TESTING AV NÅR DET SKAL LEGGES TIL GRAVITASJONSVEKTOREN
             mainVector.addVector(gravityVector);
         }
