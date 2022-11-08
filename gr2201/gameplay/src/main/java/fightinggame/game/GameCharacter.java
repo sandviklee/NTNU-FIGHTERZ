@@ -81,11 +81,14 @@ public class GameCharacter extends WorldEntity{
 
     public void clearGravityVector() {
         mainVector.removeVector(gravityVector);
+        
+
     }
 
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround && mainVector.getVy() > 0) {
+            System.out.println("CLEARED!");
             jumpCounter = 0;
             clearGravityVector();
         }
@@ -98,6 +101,7 @@ public class GameCharacter extends WorldEntity{
     }
 
     public void doAction(){
+        System.out.println(onGround);
         if (!onGround && mainVector.getVy() == 0) { //NB DETTE ER BARE FOR TESTING AV NÅR DET SKAL LEGGES TIL GRAVITASJONSVEKTOREN
             mainVector.addVector(gravityVector);
         }

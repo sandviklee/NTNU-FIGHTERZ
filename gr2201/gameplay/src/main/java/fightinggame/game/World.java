@@ -45,12 +45,19 @@ public class World {
 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
+            boolean isOnGround = false;
             for (WorldEntity entity2 : worldEntities) {
+                
                 if (entity1 instanceof GameCharacter && entity2 instanceof Terrain) {
-                    entity1.setOnGround(entity2.hitboxCollision(entity1.getHurtBox()));
+                    if (entity2.hitboxCollision(entity1.getHurtBox())) {
+                        isOnGround = true;
+                    }
+                    
                 }
+                entity1.setOnGround(isOnGround);
             }
         }
+        
     }
 
     private void setActions(String input, String inputR){

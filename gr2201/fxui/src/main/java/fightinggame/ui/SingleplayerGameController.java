@@ -36,6 +36,8 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<Integer> playerHitBox = new ArrayList<>(Arrays.asList(70, 160));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(1330, 950)); //dette blir point
     private ArrayList<Integer> terrainHitBox = new ArrayList<>(Arrays.asList(900, 280));
+    private ArrayList<Integer> terrain2Position = new ArrayList<>(Arrays.asList(1200, 550)); //dette blir point
+    private ArrayList<Integer> terrain2HitBox = new ArrayList<>(Arrays.asList(300, 5));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400)); //dette blir point
     private SpriteRenderer renderer;
     private String keyInputs = "";
@@ -44,8 +46,9 @@ public class SingleplayerGameController extends SceneController{
 
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, ".WDAS", playerHitBox);
+        GameCharacter player = loadPlayer(character, playerPosition, ".WDA", playerHitBox);
         Terrain terrain = loadTerrain("Test", terrainPosition, terrainHitBox);
+        Terrain terrain2 = loadTerrain("Test2", terrain2Position, terrain2HitBox);
         playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
         playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
         playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
@@ -53,6 +56,7 @@ public class SingleplayerGameController extends SceneController{
         //Terrain terrain = loadTerrain(gameStage);
         //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));
         worldEntities.add(player);
+        worldEntities.add(terrain2);
         worldEntities.add(terrain);
         //worldEntities.add(dummy);
         world = new World(worldEntities);

@@ -51,7 +51,7 @@ public class ActionProperties {
      * @param totalFrames              of the animation
      * @param animationLoop            shall it loop
      * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param isMovement               shall this move owner of Action
+     * @param isMovement               shall move the owner of the Action
      * @param knockBack                of character that does action
      */
     public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
