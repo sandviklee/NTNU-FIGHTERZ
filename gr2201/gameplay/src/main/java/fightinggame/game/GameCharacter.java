@@ -29,10 +29,10 @@ public class GameCharacter extends WorldEntity{
         for (ActionProperties p : actionP) {
             actionHash.put(actionP.indexOf(p), p);
         }
-        actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0));
-        actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, new Vector(0, 48, 0 , -4, -1))); 
-        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(8, 0, 0, 0, 1)));
-        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, new Vector(8, 0, 0, 0, -1)));
+        actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0, true));
+        actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
+        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
+        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
         setCurrentAction(0);
     }
 
