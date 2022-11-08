@@ -80,7 +80,7 @@ public class World {
 
         //System.out.println(clickAction + " ClickAction");
 
-        //System.out.println(booleanHash + " keyArray: " + keyInputArray);
+        System.out.println(booleanHash + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
