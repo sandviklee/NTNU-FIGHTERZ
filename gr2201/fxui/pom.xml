@@ -23,39 +23,56 @@
             <version>0.0.1</version>
         </dependency>
         <dependency>
+            <groupId>fightinggame</groupId>
+            <artifactId>gameplay</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.4.2</version> <!-- Unsurten what version the project would gain most from-->
+        </dependency>
+        <dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-core</artifactId>
 			<version>4.0.16-alpha</version>
 			<scope>test</scope>
 		</dependency>
-		
         <dependency>
 			<groupId>org.testfx</groupId>
 			<artifactId>testfx-junit5</artifactId>
 			<version>4.0.16-alpha</version>
 			<scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>18</version>
         </dependency>
-        
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>18</version>
         </dependency>
-    
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>3.13.2</version>
-      </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.13.2</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        @{jaCoCoArgLine} --add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -63,6 +80,19 @@
                 <configuration>
                     <release>11</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <propertyName>jaCoCoArgLine</propertyName>
+                </configuration>
+
+            </plugin>
+            <!-- Run the checkstyle code quality tool -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
