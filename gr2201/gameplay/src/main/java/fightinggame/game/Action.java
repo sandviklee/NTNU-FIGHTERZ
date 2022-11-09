@@ -139,6 +139,14 @@ public class Action {
     public boolean getIsDone() {
         return isDone;
     }
+
+    public boolean startHitBox() {
+        if (currentTime >= hitBoxStartTime) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     /**
      * Check if Action is done
@@ -151,6 +159,7 @@ public class Action {
             return false;
         }
     }
+
 
     /**
      * Make sprite iterate to next frame

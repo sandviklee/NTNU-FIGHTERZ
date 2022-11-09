@@ -50,8 +50,9 @@ public class SpriteRenderer {
                 (entity.getFacingDirection() > 0 ? posX : (posX + 275)), posY, width*entity.getFacingDirection(), height);
                 content.setFill(Color.RED);
                 content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
-                Effectbox hitbox = entity.getHurtBox();
-                content.strokeRect(hitbox.getPosX(), hitbox.getPosY(), hitbox.getWidth(), hitbox.getHeight());
+                Effectbox hurtbox = entity.getHurtBox();
+                content.strokeRect(hurtbox.getPosX(), hurtbox.getPosY(), hurtbox.getWidth(), hurtbox.getHeight());
+
             }
             else if (entity instanceof Terrain) {
                 content.setFill(Color.RED);

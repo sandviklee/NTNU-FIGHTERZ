@@ -17,6 +17,7 @@ public class GameCharacter extends WorldEntity{
     private Vector mainVector = new Vector();
     private Vector gravityVector = new Vector(0, 10, 0, 0, 1);
     private int facingDirection = 1;
+    private int appliedVector;
     private boolean onGround = true;
     private int jumpCounter = 0;
 
@@ -30,12 +31,16 @@ public class GameCharacter extends WorldEntity{
             actionHash.put(actionP.indexOf(p), p);
         }
         actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0, true));
-        actionHash.put(1, new ActionProperties("Jump", 2, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
+        actionHash.put(1, new ActionProperties("Jump", 3, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
         actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
         actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
         //RUNJUMP
-        actionHash.put(4, new ActionProperties("Jump", 2, 2, false, false, 10, true, 0, true, new Vector(8, -48, 0, 4, 1)));
-        actionHash.put(5, new ActionProperties("Jump", 2, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
+        actionHash.put(4, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, -48, 0, 4, 1)));
+        actionHash.put(5, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
+        //actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, false, false, 19, true, 13, true, new Vector(13, 0, 0, 0, 1)));
+
+        actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, 1), new Effectbox(this, new Point(0, 0), false, hitBoxProperties), 10));
+        actionHash.put(7, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, -1), new Effectbox(this, new Point(0, 0), false, hitBoxProperties), 10));
         setCurrentAction(0);
     }
 
@@ -67,7 +72,11 @@ public class GameCharacter extends WorldEntity{
             if (actionNumber == 2 || actionNumber == 3 || actionNumber == 4 || actionNumber == 5) {
                 facingDirection = currentAction.getKnockback().getDirection();
             }
-            applyVectors();
+            appliedVector = 0;
+            if (currentAction.startHitBox()) {
+                appliedVector += 1;
+                applyVectors();
+            }            
         } 
     }
 
@@ -103,6 +112,10 @@ public class GameCharacter extends WorldEntity{
     }
 
     public void doAction(){
+        if (currentAction.startHitBox() && appliedVector == 0) {
+            appliedVector++;
+            applyVectors();
+        }
         if (!onGround && mainVector.getVy() == 0) { //NB DETTE ER BARE FOR TESTING AV NÅR DET SKAL LEGGES TIL GRAVITASJONSVEKTOREN
             mainVector.addVector(gravityVector);
         }

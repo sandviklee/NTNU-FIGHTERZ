@@ -39,6 +39,7 @@ public class ActionProperties {
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.knockback = new Vector(0, 0, 0, 0, 1);
+        this.hitBoxStartTime = 0;
         this.isMovement = isMovement;
     }
 
@@ -67,6 +68,7 @@ public class ActionProperties {
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.isMovement = isMovement;
         this.knockback = knockBack;
+        this.hitBoxStartTime = 0;
     }
 
     /**
@@ -84,7 +86,7 @@ public class ActionProperties {
      * @param hitbox                   of Action, where can this Action effect enteties
      * @param damage                   to apply to WorldEntities in hitbox
      */
-    public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
+    public ActionProperties(String spriteName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible,
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage) {
         this.spriteName = spriteName;
         this.actionPriority = actionPriority;
@@ -97,6 +99,7 @@ public class ActionProperties {
         this.isMovement = isMovement;
         this.knockback = knockBack;
         this.hitBox = hitbox;
+        this.hitBoxStartTime = hitBoxStartTime;
         this.damage = damage;
     }
 
@@ -116,7 +119,7 @@ public class ActionProperties {
      * @param damage                   to apply to WorldEntities in hitbox
      * @param isProjectile             shall it make an Projectile instance
      */
-    public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
+    public ActionProperties(String spriteName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible, 
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage, boolean isProjectile) {
         this.spriteName = spriteName;
         this.actionPriority = actionPriority;
@@ -130,6 +133,7 @@ public class ActionProperties {
         this.knockback = knockBack;
         this.hitBox = hitbox;
         this.damage = damage;
+        this.hitBoxStartTime = hitBoxStartTime;
         this.isProjectile = isProjectile;
     }
 

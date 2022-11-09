@@ -95,7 +95,7 @@ public class World {
                     NewHeldKey = "+";
                 }
 
-                System.out.println(NewHeldKey);
+                //System.out.println(NewHeldKey);
 
                 Action currentAction = worldEntity.getCurrentAction();
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
@@ -107,7 +107,7 @@ public class World {
                 if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
                     //System.out.println(HeldKey + " New: " + NewHeldKey);
 
-                    if (NewHeldKey.contains("W")) {
+                    if (NewHeldKey.contains("W") || NewHeldKey.contains("G")) {
                         
                         if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
                         currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {
