@@ -116,6 +116,34 @@ In desktop style the user's data is implicitly and automatically saved. This doe
 ### Decision Outcome
 **Chosen option:** As the application is quite big and contains a lot of features, some parts of the application pertain to the desktop style while other features fit the app style more. Due to the nature of the game, things such as user details will follow the desktop style, while the game itself will follow the app style.
 
+
+## 6. Presistens The use of DAO pattern
+### Context and Problem Statement
+### Considered Options
+#### **Option 1: Use DAO pattern**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Abstraction for actual database access implementation separates the data access strategy from the user business logic and the UI. Creates a clear access point between persistent level and business logic. | Creates more boilerplate. |
+| Makes the business logic program for the interface rather than the implementation. Witch make it possible to treat the implementation as a black box and changes to implementation does not affect the rest of the program.| The DAO does hide database access calls. These are often very expensive, and it could be cheaper if one makes specific SQL queries.|
+| Easier for others to understand and maintain as the DAO design pattern is well known. | Restricts us to this design |
+
+#### **Option 2: Use DAO and Repository pattern**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Only one access point, the will abstract more and is useful for several datastorages.  | This will increase the complexity of the program. This option will also add the most boilerplate of all the options, as well as making it harder to read. |
+
+#### **Option 3: Only implementation**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Only one access point, no exstra boilerplate code, | On changes need to change how the rest of the program us the implementation. Cant treat it as well as an black box |
+
+### Decision Outcome Option 1
+This project where going to change the format of the storede data, as in first assignment the project were going to use CSV files, afterward it would be changed to JSON files. This will make the DAO pattern very helpful as the rest of the application can be programed for the interface and treat the implementation as an black box.
+
+
 <!---
 ## 5. Issue
 ### Context and Problem Statement
