@@ -13,17 +13,25 @@ public class UserData {
 	 * @throws IllegalArgumentException  on bad input such as no password
 	 */
 	public UserData(String password) throws IllegalArgumentException{
-		valideUserData(password);
+		validUserData(password);
 		this.password = password;
 	}
 
-	private static void valideUserData(String password) throws IllegalArgumentException{
+	private static void validUserData(String password) throws IllegalArgumentException{
 		// Shall detect bad input
 		boolean isEmpty = password.isEmpty();
 		boolean notOnlyContainsLettersAndNumbers = !password.matches("[a-zA-Z0-9]*");
 		if (isEmpty || notOnlyContainsLettersAndNumbers) throw new IllegalArgumentException("Invalid password");
 	}
 
+	/**
+	 * Checks if this userData has the same fields as other UserData
+	 * @param u UserData to compere
+	 * @return true if they are equal
+	 */
+	public boolean equals(UserData u) {
+		return this.getPassword().equals(u.getPassword());
+	}
 	/**
 	 * Makes a string representation of UserData. 
 	 * Where each field is seperated by a seperator.
@@ -36,24 +44,19 @@ public class UserData {
 
 	}
 
-	/**
-	 * Takes a string and convert it to a UserData.
-	 * Must have all UserData fields in correct order and values must be seperated by comma.
-	 * order: [password]
-	 * If data is correct form and have each data field with valide values  make UserData,
-	 * else return null
-	 * @param data  string to interprete
-	 * @return UserData with data or null object if containing non valide input
-	 */
-	public UserData stringToUserData(String data) {
-		// TODO:
-		return new UserData(data);
-	}
-
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void changePassword(final String password) {
+		try {
+			validUserData(password);
+			this.setPassword(password);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Cant change to this password");
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	private void setPassword(String password) {
 		this.password = password;
 	}
 }

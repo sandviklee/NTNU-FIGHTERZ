@@ -1,5 +1,8 @@
 package fightinggame.users;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The User represents a user. It will have all info about the logged in user. 
  */
@@ -7,16 +10,19 @@ public class User {
 	private UserData userData;
 	private UserId userId;
 
-	public User(String id, String password) throws NullPointerException{
-		// uses validaters in classes UserData and UserId 
+	public User(String id, String password) throws IllegalArgumentException{
+		// uses validators in classes UserData and UserId 
 		try {
 			this.userData = new UserData(password);
 			this.userId = new UserId(id);
 			
 		} catch (IllegalArgumentException e) {
-			// TODO: handle exception
-			throw new IllegalArgumentException("Bad input");
+			throw new IllegalArgumentException("Bad input" + e.getLocalizedMessage());
 		}
+	}
+	public User(UserId id, UserData data) {
+		this.userId = id;
+		this.userData = data;
 	}
 
 	/**
@@ -28,18 +34,22 @@ public class User {
 		return this.getUserId().equals(u.getUserId());
 	}
 
+	@JsonGetter
 	public UserId getUserId() {
 		return this.userId;
 	}
 
+	@JsonGetter
 	public UserData getUserData() {
 		return this.userData;
 	}
 	
+	@JsonIgnore
 	public String getUserName() {
 		return this.getUserId().getUserId();
 	}
-	
+
+	@JsonIgnore
 	public String getPassword() {
 		return this.getUserData().getPassword();
 	}
@@ -47,29 +57,19 @@ public class User {
 	/**
 	 * Changes UserId to new userId.
 	 * If {@code userId} cant be constructed with userId, then does not chage userId.
-	 * @param userId  the string to try to change field userId.
+	 * @param userId  the id to try to change field userId.
 	 */
-	public void changeUserId(String userId) {
-		try {
-			UserId id = new UserId(userId);
-			this.setUserId(id);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
+	public void changeUserId(UserId userId) {
+		this.setUserId(userId);
 	}
 
 	/**
 	 * Changes UserData to new userData.
 	 * If {@code userData} cant be constructed with userData, then does not chage userData.
-	 * @param userData  the string to try to change field userData.
+	 * @param userData  the data to try to change field userData.
 	 */
-	public void changeUserData(String userData) {
-		try {
-			UserData data = new UserData(userData);
-			this.setUserData(data);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getLocalizedMessage());
-		}
+	public void changeUserData(UserData userData) {
+		this.setUserData(userData);
 	}
 
 	private void setUserId(UserId userId) {
