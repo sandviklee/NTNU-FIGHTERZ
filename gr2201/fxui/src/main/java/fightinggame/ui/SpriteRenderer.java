@@ -2,11 +2,14 @@ package fightinggame.ui;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.HashMap;
 import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Terrain;
+import fightinggame.game.Vector;
 import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
@@ -42,24 +46,54 @@ public class SpriteRenderer {
                 int width = 250;
                 int height = 190;
                 
-    
+                Effectbox hurtbox = entity.getHurtBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
                 double posX = entity.getPoint().getX() - width/2;
                 double posY = entity.getPoint().getY() - height/2;
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
                 (entity.getFacingDirection() > 0 ? posX : (posX + 275)), posY, width*entity.getFacingDirection(), height);
-                content.setFill(Color.RED);
-                content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
-                Effectbox hurtbox = entity.getHurtBox();
-                content.strokeRect(hurtbox.getPosX(), hurtbox.getPosY(), hurtbox.getWidth(), hurtbox.getHeight());
+                drawCircle(entity, radius, content, Color.RED);
+                drawBox(hurtbox, content, Color.LIGHTBLUE);
+                //drawVector((GameCharacter) entity, content);
+
+                if (entity.getCurrentAction().getHitBox() != null) {
+                    Effectbox hitbox = entity.getCurrentAction().getHitBox();
+                    drawBox(hitbox, content, Color.RED);
+                }
 
             }
             else if (entity instanceof Terrain) {
-                content.setFill(Color.RED);
-                content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
                 Effectbox hitbox = entity.getHitBox();
-                content.strokeRect(hitbox.getPosX(), hitbox.getPosY(), hitbox.getWidth(), hitbox.getHeight());
+                drawCircle(entity, radius, content, Color.RED);
+                drawBox(hitbox, content, Color.BLUE);
             }
         }
     }
+
+    private void drawBox(Effectbox hitbox, GraphicsContext cntn, Color color) {
+        cntn.setStroke(color);
+        cntn.strokeRect(hitbox.getPosX(), hitbox.getPosY(), hitbox.getWidth(), hitbox.getHeight());
+    }
+
+    private void drawCircle(WorldEntity entity, int radius, GraphicsContext cntn, Color color) {
+        content.setFill(color);
+        content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
+    }
+    /* 
+    private void drawVector(GameCharacter entity, GraphicsContext cntn) {
+        cntn.setFill(Color.BLACK);
+
+        double dx = entity.getVector().getVx();
+        double dy = entity.getVector().getVy();
+        double angle = Math.atan2(dy, dx);
+        int len = (int) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+        Transform t = Transform.translate(entity.getPoint().getX(), entity.getPoint().getY());
+        t = t.createConcatenation(Transform.rotate(Math.toDegrees(angle), 0, 0));
+    
+        cntn.strokeLine(entity.getPoint().getX(), entity.getPoint().getY(), entity.getPoint().getX() + len, 0);
+    }
+    */
+
+
 }

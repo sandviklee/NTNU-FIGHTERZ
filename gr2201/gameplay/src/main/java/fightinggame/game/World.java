@@ -81,7 +81,7 @@ public class World {
 
         //System.out.println(clickAction + " ClickAction");
 
-        //System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
+        System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
@@ -107,7 +107,7 @@ public class World {
                 if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
                     //System.out.println(HeldKey + " New: " + NewHeldKey);
 
-                    if (NewHeldKey.contains("W") || NewHeldKey.contains("G")) {
+                    if (NewHeldKey.contains("W") || NewHeldKey.contains("B") || NewHeldKey.contains("V")) {
                         
                         if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
                         currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {

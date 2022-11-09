@@ -8,6 +8,8 @@ public class Effectbox {
     private boolean isTraversable;
     private double posX; //Position is at the left upper corner.
     private double posY;
+    private double offsetX;
+    private double offsetY;
     private int width;
     private int height;
 
@@ -19,6 +21,8 @@ public class Effectbox {
         this.height = hitboxProperties.get(1);
         posX = center.getX() - (width/2 - 10);
         posY = center.getY() - (height/2);
+        offsetX = center.getX();
+        offsetY = center.getY();
 
     }
 
@@ -50,6 +54,20 @@ public class Effectbox {
 
     public double getPosY() {
         return posY;
+    }
+
+    public Point getPoint() {
+        return center;
+    }
+
+    
+
+    public double getOffsetX() {
+        return offsetX;
+    }
+
+    public double getOffsetY() {
+        return offsetY;
     }
 
     private boolean pointInArea(Point p){

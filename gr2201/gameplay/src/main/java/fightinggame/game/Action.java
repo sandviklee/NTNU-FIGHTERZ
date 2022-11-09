@@ -3,6 +3,7 @@ package fightinggame.game;
 public class Action {
     private String name;
     private Effectbox hitBox;
+    private Effectbox temporary;
     private AnimationSprite sprites;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
@@ -14,7 +15,7 @@ public class Action {
     private int damage;
     private boolean isDone;
     private int holdAction = 0;
-    private int holdFrameLength = 4;
+    private int holdFrameLength = 3;
 
 
     /**
@@ -33,7 +34,7 @@ public class Action {
         this.actionPriority = p.getActionPriority();
         this.name = p.getSpriteName();
         this.knockback = p.getKnockback();
-        this.hitBox = p.getHitBox();
+        this.temporary = p.getHitBox();
         this.hitBoxStartTime = p.getHitBoxStartTime();
         this.currentTime = 0;
         this.isDone = false;
@@ -142,6 +143,7 @@ public class Action {
 
     public boolean startHitBox() {
         if (currentTime >= hitBoxStartTime) {
+            this.hitBox = temporary;
             return true;
         } else {
             return false;

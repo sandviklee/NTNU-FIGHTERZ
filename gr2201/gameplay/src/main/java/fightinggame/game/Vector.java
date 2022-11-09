@@ -26,9 +26,15 @@ public class Vector {
      */
     public Vector(double vx, double vy, double ax, double ay, int direction) throws IllegalArgumentException{
         if (vx > 0 && ax > 0) {
-            throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            if (vx%ax != 0) {
+                throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            }
+            
         } else if (vy > 0 && ay > 0) {
-            throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            if (vy%ay != 0) {
+                throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            }
+            
         }
 
         this.direction = direction;
@@ -57,6 +63,10 @@ public class Vector {
         this.vy -= vector.vy;
         this.ax -= vector.ax;
         this.ay -= vector.ay;
+    }
+
+    public void setVy(double vy) {
+        this.vy = vy;
     }
 
     public int getDirection() {

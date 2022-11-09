@@ -31,7 +31,7 @@ public class SingleplayerGameController extends SceneController{
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
-    private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", "W", "D", "A", "DW", "AW", "DG", "AG"));
+    private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", "W", "D", "A", "DW", "AW", "DB", "AB", "DV", "AV"));
 
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(925, 730)); //dette blir point
     private ArrayList<Integer> playerHitBox = new ArrayList<>(Arrays.asList(70, 160));
@@ -59,6 +59,7 @@ public class SingleplayerGameController extends SceneController{
         playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
         playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
         playerSprites.put(character + "SideSpecial", new Image((getClass().getResource(character + "SideSpecial.png")).toString()));
+        playerSprites.put(character + "AttackSlash", new Image((getClass().getResource(character + "AttackSlash.png")).toString()));
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         //Terrain terrain = loadTerrain(gameStage);
         //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));

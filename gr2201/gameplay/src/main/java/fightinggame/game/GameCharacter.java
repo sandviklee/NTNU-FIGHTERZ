@@ -1,6 +1,7 @@
 package fightinggame.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
@@ -15,7 +16,7 @@ public class GameCharacter extends WorldEntity{
     private ActionProperties property;
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
-    private Vector gravityVector = new Vector(0, 10, 0, 0, 1);
+    private Vector gravityVector = new Vector(0, 12, 0, 0, 1);
     private int facingDirection = 1;
     private int appliedVector;
     private boolean onGround = true;
@@ -39,8 +40,12 @@ public class GameCharacter extends WorldEntity{
         actionHash.put(5, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
         //actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, false, false, 19, true, 13, true, new Vector(13, 0, 0, 0, 1)));
 
-        actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, 1), new Effectbox(this, new Point(0, 0), false, hitBoxProperties), 10));
-        actionHash.put(7, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, -1), new Effectbox(this, new Point(0, 0), false, hitBoxProperties), 10));
+        actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, 1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
+        actionHash.put(7, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, -1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
+        actionHash.put(8, new ActionProperties("AttackSlash", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, 1), new Effectbox(this, new Point(65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
+        actionHash.put(9, new ActionProperties("AttackSlash", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, -1), new Effectbox(this, new Point(-65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
+        
+        
         setCurrentAction(0);
     }
 
@@ -92,7 +97,8 @@ public class GameCharacter extends WorldEntity{
     }
 
     public void clearGravityVector() {
-        mainVector.removeVector(gravityVector);
+        mainVector.setVy(0);
+        //mainVector.removeVector(gravityVector);
         
 
     }
@@ -122,9 +128,20 @@ public class GameCharacter extends WorldEntity{
 		point.setX(point.getX() + mainVector.getVx());
 		point.setY(point.getY() + mainVector.getVy());
         hurtBox.updatePos();
+        Effectbox currentHitBox = currentAction.getHitBox();
+        if (currentHitBox != null) {
+            currentHitBox.getPoint().setX(point.getX() + currentHitBox.getOffsetX());
+            currentHitBox.getPoint().setY(point.getY() + currentHitBox.getOffsetY());
+            currentAction.getHitBox().updatePos();
+        }
+        
         mainVector.applyAcceleration();
 		currentAction.nextActionFrame();
 	}
+
+    public Vector getVector() {
+        return mainVector;
+    }
 
     public int getActionPriority() {
         return currentAction.getActionPriority();
@@ -141,4 +158,6 @@ public class GameCharacter extends WorldEntity{
     public int getJumpCounter() {
         return jumpCounter;
     }
+
+
 }
