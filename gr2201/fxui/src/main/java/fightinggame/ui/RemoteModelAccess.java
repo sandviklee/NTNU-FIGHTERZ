@@ -32,7 +32,7 @@ public class RemoteModelAccess {
     }
 
     public boolean putUser(String username, String password, String confirmPassword){
-        HttpRequest request = HttpRequest.newBuilder(uri).headers()
+        HttpRequest request = HttpRequest.newBuilder(uri).headers("username", username, "password", password, "confirmPassword", confirmPassword).GET().build();
     }
 
 
