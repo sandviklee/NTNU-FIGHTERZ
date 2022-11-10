@@ -68,6 +68,7 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
                 
                 hitBoxStartTime = hitBoxStartTimeNode.asInt();
             }
+
             Vector knockBack = null;
             if (hasKnockback) {
                 JsonNode knockbackNode = objectNode.get("knockback");
@@ -75,6 +76,10 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
             }
 
             // Check what type of ActionProperties that shall be initiated
+            if (isProjectile) {
+                return new ActionProperties(actionName, actionPriority, duration, hitBoxStartTime, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage, isProjectile);
+            }
+
             if (hasKnockback) {
                 return new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack);
             }
