@@ -7,7 +7,7 @@ module fightinggame.springboot.rest {
     requires spring.context;
     requires spring.boot.autoconfigure;
 
-    requires fightinggame.core;
+    requires fightinggame.base;
 
     opens fightinggame.springboot.restserver to spring.beans, spring.context, spring.web;
 }
