@@ -32,18 +32,19 @@ public class GameCharacter extends WorldEntity{
             actionHash.put(actionP.indexOf(p), p);
         }
         actionHash.put(0, new ActionProperties("Idle", 0, 18, false, false, 18, true, 0, true));
-        actionHash.put(1, new ActionProperties("Jump", 3, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
-        actionHash.put(2, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
-        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
+        actionHash.put(2, new ActionProperties("Jump", 3, 2, false, false, 5, true, 0, true, new Vector(0, 48, 0 , -4, -1))); 
+        actionHash.put(3, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, 1)));
+        actionHash.put(4, new ActionProperties("Run", 1, 10, false, false, 10, true, 0, true, new Vector(8, 0, 0, 0, -1)));
         //RUNJUMP
-        actionHash.put(4, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, -48, 0, 4, 1)));
-        actionHash.put(5, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
+        actionHash.put(5, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, -48, 0, 4, 1)));
+        actionHash.put(6, new ActionProperties("Jump", 3, 2, false, false, 10, true, 0, true, new Vector(8, 48, 0, -4, -1)));
         //actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, false, false, 19, true, 13, true, new Vector(13, 0, 0, 0, 1)));
 
-        actionHash.put(6, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, 1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
-        actionHash.put(7, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, -1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
-        actionHash.put(8, new ActionProperties("AttackSlash", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, 1), new Effectbox(this, new Point(65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
-        actionHash.put(9, new ActionProperties("AttackSlash", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, -1), new Effectbox(this, new Point(-65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
+        actionHash.put(8, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, 1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
+
+        actionHash.put(9, new ActionProperties("SideSpecial", 2, 100000, 7, false, false, 19, true, 13, true, new Vector(18, 0, 0, 0, -1), new Effectbox(this, new Point(0, -12), false, new ArrayList<>(Arrays.asList(240, 180))), 10));
+        actionHash.put(12, new ActionProperties("SideNormal", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, 1), new Effectbox(this, new Point(65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
+        actionHash.put(13, new ActionProperties("SideNormal", 2, 8, 3, false, false, 10, false, 10, false, new Vector(12, 0, -2, 0, -1), new Effectbox(this, new Point(-65, 0), false, new ArrayList<>(Arrays.asList(60, 80))), 10));
         
         
         setCurrentAction(0);
@@ -74,7 +75,7 @@ public class GameCharacter extends WorldEntity{
             }
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
-            if (actionNumber == 2 || actionNumber == 3 || actionNumber == 4 || actionNumber == 5) {
+            if (actionNumber == 3 || actionNumber == 4 || actionNumber == 5 || actionNumber == 6) {
                 facingDirection = currentAction.getKnockback().getDirection();
             }
             appliedVector = 0;
