@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class PlayerProperties {
     private String characterName;
-    private int weight;
+    private double weight;
     private int length;
     private int width;
-    private int speed;
+    private double speed;
     private ArrayList<ActionProperties> actionP;
 
-    public PlayerProperties(String characterName, int weight, int length, int width, int speed,  ArrayList<ActionProperties> actionP) {
+    public PlayerProperties(String characterName, double weight, int length, int width, double speed,  ArrayList<ActionProperties> actionP) {
         this.characterName = characterName;
         this.weight = weight;
         this.length = length;
@@ -23,7 +23,7 @@ public class PlayerProperties {
         return characterName;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -35,7 +35,7 @@ public class PlayerProperties {
         return width;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
