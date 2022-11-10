@@ -3,9 +3,8 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" fx:id="worldCanvasRoot" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SingleplayerGameController">
    <children>
-      <Canvas fx:id="worldCanvas" height="1080.0" onKeyPressed="#handleUserInput" width="1920.0" />
+      <Canvas fx:id="worldCanvas" height="1080.0" layoutX="10.0" layoutY="10.0" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" width="1920.0" />
    </children>
 </AnchorPane>

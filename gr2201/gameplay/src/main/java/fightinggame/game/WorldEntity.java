@@ -1,30 +1,80 @@
 package fightinggame.game;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
 public abstract class WorldEntity {
 	protected int id;
 	protected Effectbox hitBox;
-	protected Action currentAction;
+	protected Action currentAction = null;
 	protected boolean isAlive;
+	protected String name;
+	protected Point point;
 
-	public WorldEntity() {
+	public WorldEntity(String name, ArrayList<Integer> pos) {
+		this.name = name;
+		this.point = new Point((double) pos.get(0), (double) pos.get(1));
+	}
+	    
+    public boolean hitboxCollision(Effectbox effectbox) {
+        //NB: SJEKKER BARE FOR UNDER Y AKKURAT NÅ
+        if ((effectbox.getPosY() + effectbox.getHeight()/2 + 5) > (hitBox.getPosY() - hitBox.getHeight()/2)) {
+            if (((hitBox.getPosX() - hitBox.getWidth()/2) < (effectbox.getPosX() + effectbox.getWidth()/2)) && 
+            ((hitBox.getPosX() + hitBox.getWidth()/2) > (effectbox.getPosX() - effectbox.getWidth()/2))) {
+                return true;
+            } else {
+				return false;
+			}
+        } else {
+			return false;
+		}
+    }
 
+	
+    public boolean getOnGround() {
+		return isAlive;
+
+    }
+    
+	public void setOnGround(boolean b) {
+		
 	}
 	
 	public void doAction(){
-		this.getCurrentAction().handleAction();
+
 	}
 
-	public int getId() {
-		return id;
+	public Action getAction(int actionNumber) {
+        return null;
+    }
+
+	public Predicate<String> getPredicate() {
+		return null;
 	}
 
-	private void setId(int id) {
-		this.id = id;
+	public ArrayList<String> getAvailKeys() {
+		return null;
 	}
+
+	public int getFacingDirection() {
+        return 0;
+    }
+
+	public String getName() {
+		return name;
+	}
+
+	public Point getPoint() {
+		return point;
+	}
+
+	public Effectbox getHurtBox() {
+        return null;
+    }
 
 	public Effectbox getHitBox() {
-		return hitBox;
-	}
+        return null;
+    }
 
 	private void setHitBox(Effectbox hitBox) {
 		this.hitBox = hitBox;
@@ -34,16 +84,10 @@ public abstract class WorldEntity {
 		return currentAction;
 	}
 
-	private void setCurrentAction(Action currentAction) {
-		this.currentAction = currentAction;
-	}
+	public void setCurrentAction(Integer actionNumber) {}
 
-	private Sprite getSprite() {
-		return sprite;
-	}
-
-	private void setSprite(Sprite sprite) {
-		this.sprite = sprite;
+	public int getCurrentFrame(){
+		return currentAction.getCurrentFrame();
 	}
 
 	public boolean isAlive() {
@@ -53,4 +97,13 @@ public abstract class WorldEntity {
 	private void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
 	}
+
+	public int getActionPriority() {
+        return currentAction.getActionPriority();
+    }
+
+	public int getJumpCounter() {
+        return 0;
+    }
+
 }
