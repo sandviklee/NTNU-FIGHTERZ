@@ -18,7 +18,7 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public CharacterAttributeDAOImpl(){
-		this.path = "../fxui/src/main/resources/fightinggame/ui/";
+		this.path = "../fxui/src/main/resources/fightinggame/ui/";		
 		mapper.registerModule(new GameplayModule());
 	}
 
@@ -40,7 +40,7 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	@Override
 	public PlayerProperties findCharacter(String characterName) {
 		for (PlayerProperties character : getAllCharacters()) {
-			if(character.equals(characterName)) {
+			if(character.getCharacterName().equals(characterName)) {
 				return character;
 			}
 		}
@@ -75,7 +75,7 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	 */
 	private static String readFromFile(String filename) throws IOException {		
 		String characterInfo = "";
-		File userFile = new File(filename + "character.json");
+		File userFile = new File(filename + "characters.json");
 		if (userFile.exists()){
 			Scanner userFileReader = new Scanner(userFile);
 
