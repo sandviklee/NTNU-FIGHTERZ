@@ -21,17 +21,18 @@ import fightinggame.users.User;
  */
 
 @RestController
+@RequestMapping(ServerController.API_USER_SERVICE_PATH)
 public class ServerController {
-    
+    public static final String API_USER_SERVICE_PATH = "api/user";
     private UserDAO dao = new UserDAOImpl();
 
     @Autowired
     private ServerService serverService;
 
+    @Bean
     public ServerService getServerService() {
         return serverService;
     }
-
 
     /**
      * Get the user in data storage that has matching username and password
@@ -39,7 +40,7 @@ public class ServerController {
      * @param password  to match with users in db
      * @return the user with same username and password or null
      */
-    @GetMapping(path = "/user/{username}/{password}")
+    @GetMapping(path = "/{username}/{password}")
     public User getUser(@PathVariable("username") String username, @PathVariable("password") String password) {
         return LoginSignup.logIn(username, password);
     }
@@ -50,16 +51,11 @@ public class ServerController {
      * @param password  to match with users in db
      * @return the user with same username and password or null
      */
-    @GetMapping(path = "/user/{username}/{password}/{confirmPassword}")
+    @GetMapping(path = "/{username}/{password}/{confirmPassword}")
     public User putUser(@PathVariable("username") String username, @PathVariable("password") String password, @PathVariable("confirmPassword") String confirmPassword) {
-        return LoginSignup.signUp(username, password, confirmPassword);
+        User newUser = LoginSignup.signUp(username, password, confirmPassword);
+        
+        return newUser;
     }
-
-
-
-
-
-  
-
 
 }
