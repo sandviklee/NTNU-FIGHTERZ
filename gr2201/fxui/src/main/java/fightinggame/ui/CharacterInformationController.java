@@ -28,7 +28,8 @@ public class CharacterInformationController extends SceneController{
     private static CharacterInformationDAO dao;
 
     public void setCharacter(String character) throws IOException {
-        dao = new CharacterInformationDAO();
+        String path = "./src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
+        dao = new CharacterInformationDAO(path);
         initCharacter(character);
     }
 

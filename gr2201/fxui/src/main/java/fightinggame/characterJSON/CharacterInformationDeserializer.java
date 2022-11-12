@@ -32,10 +32,12 @@ public class CharacterInformationDeserializer extends JsonDeserializer<Character
      * @param jsonNode all json data in given node
      * @return CharacterInformationObject containing containing one character's information
      * @throws IllegalArgumentException if JSON provides invalid data for CharacterInformationObject
+     * @throws NullPointerException if JSON does not provide all necessary fields for character
      */
-    public CharacterInformationObject deserialize(JsonNode jsonNode) throws IllegalArgumentException {
+    public CharacterInformationObject deserialize(JsonNode jsonNode) throws IllegalArgumentException, NullPointerException {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
+
             String characterName = objectNode.get("characterName").asText();
             String characterDescription = objectNode.get("characterDescription").asText();
             int difficulty = objectNode.get("difficulty").asInt();

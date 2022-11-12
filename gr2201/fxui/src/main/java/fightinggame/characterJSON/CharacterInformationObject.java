@@ -21,10 +21,14 @@ public class CharacterInformationObject {
      * @param playstyle a word explaining the general playstyle/archetype this character belongs to
      */
     public CharacterInformationObject(String name, String description, int difficulty, String playstyle) {
-        this.name = name;
-        this.description = description;
-        this.difficulty = difficulty;
-        this.playstyle = playstyle;
+        if (name != null && description != null && difficulty != 0 && playstyle != null) {
+            this.name = name;
+            this.description = description;
+            this.difficulty = difficulty;
+            this.playstyle = playstyle;
+        } else {
+            throw new IllegalArgumentException("Character lacks required fields.");
+        }
     }
 
     /**

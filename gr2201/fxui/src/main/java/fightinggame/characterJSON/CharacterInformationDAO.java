@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * It shall not make the CharacterInformation objects, but allow access to their data.
  */
 public class CharacterInformationDAO {
-    private String path = "./src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
+    private String path;
     private ObjectMapper mapper = new ObjectMapper();
     private HashMap<String, CharacterInformationObject> characters = new HashMap<String, CharacterInformationObject>();
 
@@ -25,7 +25,8 @@ public class CharacterInformationDAO {
 	 * @throws IOException if file containing characters cannot be found or data is otherwise incorrect
 	 * @throws IllegalArgumentException if file containing character contains invalid data and cannot be deserialized
      */
-    public CharacterInformationDAO() throws IOException, IllegalArgumentException {
+    public CharacterInformationDAO(String path) throws IOException, IllegalArgumentException {
+        this.path = path;
         Version version = new Version(1, 0, 0, null, null, null);
         SimpleModule module = new SimpleModule("CharacterInformationDeserializer", version);
         module.addDeserializer(CharacterInformationObject.class, new CharacterInformationDeserializer());
@@ -37,8 +38,9 @@ public class CharacterInformationDAO {
      * Fetches all characters from file in path field provided above, and saves characters in DAO object.
      * @throws IOException if file containing characters cannot be found or data is otherwise incorrect
      * @throws IllegalArgumentException if file containing character contains invalid data and cannot be deserialized
+     * @throws NullPointerException if JSON does not provide all necessary fields for character
      */
-    private void fetchAllCharacters() throws IOException, IllegalArgumentException {
+    private void fetchAllCharacters() throws IOException, IllegalArgumentException, NullPointerException {
         ArrayList<CharacterInformationObject> characters = new ArrayList<CharacterInformationObject>();
         File file = new File(path);
             TypeReference<ArrayList<CharacterInformationObject>> typeRef = new TypeReference<ArrayList<CharacterInformationObject>>() {};
@@ -77,8 +79,23 @@ public class CharacterInformationDAO {
     /**
      * Changes file path of where to find character information, for testing purposes
      * @param path The new path to use instead of standard file path
+     * @throws IOException if new path is invalid
      */
-    public void setPath(String path){
-        this.path = path;
+    public void setPath(String path) throws IOException{
+        String oldpath = this.path;
+        try {
+            this.path = path;
+            fetchAllCharacters();
+        } catch (IOException e) {
+            this.path  = oldpath;
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * @return file path of character information JSON
+     */
+    public String getPath() {
+        return this.path;
     }
 }
