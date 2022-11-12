@@ -240,9 +240,9 @@
                 "damage": 15,
                 "knockback":[
                     200,
-                    1000,
+                    -1000,
                     -10,
-                    -50 
+                    50 
                 ],
                 "duration": 20,
                 "hitBoxStartTime": 6,
@@ -337,9 +337,9 @@
                 "damage": 15,
                 "knockback":[
                     0,
-                    200,
+                    -200,
                     0,
-                    -10
+                    10
                 ],
                 "duration": 15,
                 "hitBoxStartTime": 5,
@@ -364,9 +364,9 @@
                 "damage": 13,
                 "knockback":[
                     100,
-                    20,
+                    -20,
                     -10,
-                    -2
+                    2
                 ],
                 "duration": 12,
                 "hitBoxStartTime": 3,
@@ -540,9 +540,9 @@
                  "damage": 6,
                  "knockback":[
                      10,
-                     3,
+                     -3,
                      -1,
-                     -1 
+                     1 
                  ],
                  "gameCharName": "Jinjer Jink",
                  "duration": 10,
@@ -624,9 +624,9 @@
                  "damage": 10,
                  "knockback":[
                      200,
-                     1000,
+                     -1000,
                      -10,
-                     -50 
+                     50 
                  ],
                  "duration": 20,
                  "hitBoxStartTime": 4,
@@ -678,9 +678,9 @@
                  "damage": 5,
                  "knockback":[
                      100,
-                     50,
+                     -50,
                      -10,
-                     -5,
+                     5,
                      1 
                  ],
                  "duration": 15,
@@ -706,9 +706,9 @@
                  "damage": 5,
                  "knockback":[
                      100,
-                     50,
+                     -50,
                      -10,
-                     -5,
+                     5,
                      -1 
                  ],
                  "duration": 15,
@@ -734,9 +734,9 @@
                  "damage": 11,
                  "knockback":[
                      20,
-                     150,
+                     -150,
                      -2,
-                     -15
+                     15
                  ],
                  "duration": 13,
                  "hitBoxStartTime": 5,
@@ -761,9 +761,9 @@
                  "damage": 13,
                  "knockback":[
                      100,
-                     20,
+                     -20,
                      -10,
-                     -2
+                     2
                  ],
                  "duration": 12,
                  "hitBoxStartTime": 3,
