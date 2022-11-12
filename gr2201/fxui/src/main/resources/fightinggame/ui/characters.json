@@ -544,6 +544,7 @@
                      -1,
                      -1 
                  ],
+                 "gameCharName": "Jinjer Jink",
                  "duration": 10,
                  "hitBoxStartTime": 6,
                  "totalFrames": 0,
@@ -940,6 +941,7 @@
                      -50,
                      -30 
                  ],
+                 "gameCharName": "Priest of Vengeace",
                  "duration": 80,
                  "hitBoxStartTime": 30,
                  "totalFrames": 0,
