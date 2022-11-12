@@ -44,6 +44,25 @@ public class Vector {
         this.ay = ay*direction;
     }
 
+    public Vector(double vx, double vy, double ax, double ay) throws IllegalArgumentException{
+        if (vx > 0 && ax > 0) {
+            if (vx%ax != 0) {
+                throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            }
+            
+        } else if (vy > 0 && ay > 0) {
+            if (vy%ay != 0) {
+                throw new IllegalArgumentException("Acceleration has to be a factor of the velocity");
+            }
+            
+        }
+
+        this.vx = vx;
+        this.vy = vy;
+        this.ax = ax;
+        this.ay = ay;
+    }
+
     public Vector(){
         this.ax = 0;
         this.ay = 0;
@@ -71,6 +90,14 @@ public class Vector {
 
     public int getDirection() {
         return direction;
+    }
+    //This method also resets all the parameters to strictly follow the direction of the move.
+    public void setDirection(int direction) {
+        this.direction = direction;
+        this.vx = Math.abs(this.vx)* direction;
+        this.vy = Math.abs(this.vy)* direction;
+        this.ax = Math.abs(this.ax)* direction;
+        this.ay = Math.abs(this.ay)* direction;
     }
 
     public void applyAcceleration(){

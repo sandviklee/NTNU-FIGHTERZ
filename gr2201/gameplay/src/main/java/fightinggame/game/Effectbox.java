@@ -31,6 +31,10 @@ public class Effectbox {
         posY = center.getY() - (height/2);
     }
 
+    public void updateCenter(Point center) {
+        this.center = center;
+    }
+
     public boolean worldEntityInEffectArea(WorldEntity entity) {
         // TODO:
         return false;
