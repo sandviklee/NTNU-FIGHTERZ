@@ -101,7 +101,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                    @{jaCoCoArgLine} --add-opens fightinggame.springboot.rest/fightinggame.springboot.restserver=ALL-UNNAMED
+                    @{jaCoCoArgLine} --add-opens fightinggame.springboot.restserver/fightinggame.springboot.restserver=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>
@@ -109,12 +109,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-            
-            <!-- Run the spotbugs code quality tool -->
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
             </plugin>
             
             <!-- Configure jacoco code coverage -->
