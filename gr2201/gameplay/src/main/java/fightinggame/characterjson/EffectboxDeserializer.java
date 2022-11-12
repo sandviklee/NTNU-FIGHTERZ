@@ -55,13 +55,8 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
                     isTraversible = isTraversibleNode.booleanValue();
                 }
             }
-                        
-            ArrayList<Integer> hitboxProperties = new ArrayList<>();
-            hitboxProperties.add(width);
-            hitboxProperties.add(length);
 
-            // Effectbox box = (isHurtBox) ? new Effectbox(width, length, isTraversible) : new Effectbox(width, length, offsetX, offsetY, isTraversible);
-            Effectbox box = new Effectbox(null, new Point(offsetX, offsetY), isTraversible, hitboxProperties);
+            Effectbox box = new Effectbox(null, new Point(offsetX, offsetY), isTraversible, width, length);
             return box;
            }
         return null;

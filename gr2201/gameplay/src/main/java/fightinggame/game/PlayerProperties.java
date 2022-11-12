@@ -39,7 +39,7 @@ public class PlayerProperties {
         return speed;
     }
 
-    public ArrayList<ActionProperties> getActionP() {
+    public ArrayList<ActionProperties> getActionProperties() {
         return actionP;
     }
 

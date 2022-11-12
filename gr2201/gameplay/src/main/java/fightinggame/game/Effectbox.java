@@ -1,7 +1,5 @@
 package fightinggame.game;
 
-import java.util.ArrayList;
-
 public class Effectbox {
     private WorldEntity owner;
     private Point center;
@@ -13,12 +11,12 @@ public class Effectbox {
     private int width;
     private int height;
 
-    public Effectbox(WorldEntity owner, Point center, boolean isTraversable, ArrayList<Integer> hitboxProperties) {
+    public Effectbox(WorldEntity owner, Point center, boolean isTraversable, int width, int height) {
         this.owner = owner;
         this.center = center;
         this.isTraversable = isTraversable;
-        this.width = hitboxProperties.get(0);
-        this.height = hitboxProperties.get(1);
+        this.width = width;
+        this.height = height;
         posX = center.getX() - (width/2 - 10);
         posY = center.getY() - (height/2);
         offsetX = center.getX();
