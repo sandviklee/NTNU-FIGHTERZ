@@ -27,7 +27,7 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
     public Effectbox deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
-            JsonNode widthNode = objectNode.get("lenght");
+            JsonNode widthNode = objectNode.get("width");
             JsonNode heightNode = objectNode.get("height");
             JsonNode offsetXNode;
             JsonNode offsetYNode;
