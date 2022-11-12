@@ -1,3 +1,4 @@
+package fightinggame.characterJSON;
 // package fightinggame.json;
 
 // import java.io.File;
