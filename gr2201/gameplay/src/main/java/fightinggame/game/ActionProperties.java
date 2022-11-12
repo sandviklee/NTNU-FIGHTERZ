@@ -1,8 +1,5 @@
 package fightinggame.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class ActionProperties {
     private String spriteName;
     private int actionPriority;
@@ -113,6 +110,7 @@ public class ActionProperties {
     /**
      * Create ActionProperties that shall produce an Projectile.
      * @param spriteName               of the sprite to this ActionProperties
+     * @param gameCharName             of the character worldentity 
      * @param actionPriority           of the ActionProperties
      * @param duration                 of the total time
      * @param isSelfInterruptible      or cant Action owner stop this action

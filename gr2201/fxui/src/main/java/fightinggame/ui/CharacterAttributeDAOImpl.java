@@ -35,8 +35,6 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 		return new ArrayList<PlayerProperties>();
 	}
 
-	
-
 	@Override
 	public PlayerProperties findCharacter(String characterName) {
 		for (PlayerProperties character : getAllCharacters()) {

@@ -52,7 +52,6 @@ public class AnimationSprite {
      */
     public void next(){
         if (currentFrame < totalFrames) {
-            
             if (holdFrame < holdFrameLength) {
                 holdFrame += 1;
             } else {

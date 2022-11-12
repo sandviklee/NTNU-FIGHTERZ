@@ -10,7 +10,7 @@ public class PlayerProperties {
     private double speed;
     private ArrayList<ActionProperties> actionP;
 
-    public PlayerProperties(String characterName, double weight, int length, int width, double speed,  ArrayList<ActionProperties> actionP) {
+    public PlayerProperties(String characterName, double weight, int length, int width, double speed, ArrayList<ActionProperties> actionP) {
         this.characterName = characterName;
         this.weight = weight;
         this.length = length;

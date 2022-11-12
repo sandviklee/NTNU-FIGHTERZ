@@ -3,13 +3,6 @@ package fightinggame.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 public class World {
     private ArrayList<WorldEntity> worldEntities;
     private Projectile projectile;

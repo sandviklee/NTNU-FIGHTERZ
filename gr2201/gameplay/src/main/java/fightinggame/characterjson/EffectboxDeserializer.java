@@ -1,7 +1,6 @@
 package fightinggame.characterjson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
