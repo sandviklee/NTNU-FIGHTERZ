@@ -14,8 +14,8 @@ public class Projectile extends WorldEntity{
         super(name, pos);
         int hitBoxWidth = (int) hitbox.getWidth();
         int hitBoxHeight = (int) hitbox.getHeight();
-        ArrayList<Integer> hitBoxProps = new ArrayList<>(Arrays.asList(hitBoxWidth, hitBoxHeight));
-        this.hitBox = new Effectbox(this, point, false, hitBoxProps);
+        
+        this.hitBox = new Effectbox(this, point, false, hitBoxWidth, hitBoxHeight);
         this.mainVector = new Vector(knockback.getVx(), knockback.getVy(), 0, 0);
         actionHash.put(0, new ActionProperties("Projectile", 20, 2, true, 0, mainVector, hitBox, damage));
         

@@ -77,7 +77,9 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
 
             // Check what type of ActionProperties that shall be initiated
             if (isProjectile) {
-                return new ActionProperties(actionName, actionPriority, duration, hitBoxStartTime, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage, isProjectile);
+                JsonNode gameCharNameNode = objectNode.get("gameCharName");
+                String gameCharName = gameCharNameNode.asText();
+                return new ActionProperties(actionName, gameCharName, actionPriority, duration, hitBoxStartTime, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage, isProjectile);
             }
 
             if (hasKnockback) {
