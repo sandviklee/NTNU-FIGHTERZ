@@ -1,30 +1,20 @@
 package fightinggame.ui;
 
-import fightinggame.users.User;
 import fightinggame.game.World;
-import fightinggame.game.Action;
 import fightinggame.game.ActionProperties;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Pair;
+
 
 public class SingleplayerGameController extends SceneController{
     @FXML private Canvas worldCanvas;
@@ -60,6 +50,8 @@ public class SingleplayerGameController extends SceneController{
         playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
         playerSprites.put(character + "SideSpecial", new Image((getClass().getResource(character + "SideSpecial.png")).toString()));
         playerSprites.put(character + "SideNormal", new Image((getClass().getResource(character + "SideNormal.png")).toString()));
+        playerSprites.put(character + "NeutralSpecial", new Image((getClass().getResource(character + "NeutralSpecial.png")).toString()));
+        playerSprites.put(character + "NeutralSpecialProjectile", new Image((getClass().getResource(character + "NeutralSpecialProjectile.png")).toString()));
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         //Terrain terrain = loadTerrain(gameStage);
         //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));
@@ -94,6 +86,10 @@ public class SingleplayerGameController extends SceneController{
             public void handle(long now) {
                 if (now - tick >= fps) {
                     //System.out.println(keyInputs);
+                    if (world.getWorldEntities().stream().anyMatch(x -> !worldEntities.contains(x))) {
+                        //System.out.println("Oppdatert");
+                        worldEntities = world.getWorldEntities();
+                    }
                     world.updateWorld(keyInputs, keyReleased);
                     renderer.update();
                     resetKeyInputs();

@@ -2,21 +2,15 @@ package fightinggame.ui;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.transform.Affine;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Transform;
-import javafx.scene.transform.Translate;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
+import fightinggame.game.Projectile;
 import fightinggame.game.Terrain;
 import fightinggame.game.Vector;
 import fightinggame.game.WorldEntity;
@@ -26,22 +20,20 @@ public class SpriteRenderer {
     private GraphicsContext content;
     private Image backgroundImg;
     private ArrayList<WorldEntity> entities = new ArrayList<>();
-    private boolean showRect = true;
+    
 
     public SpriteRenderer(Canvas canvas, HashMap<String, Image> sprites, ArrayList<WorldEntity> entities) {
         content = canvas.getGraphicsContext2D();
         backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);
-        for (WorldEntity entity : entities) {
-            this.entities.add(entity);
-        }
+        this.entities = entities;
         this.playerSprites = sprites;
     }
 
     public void update() {
         content.drawImage(backgroundImg, 0, 0); //Draws the current bg
         int radius = 10;
+        
         for (WorldEntity entity : entities) {
-            
             if (entity instanceof GameCharacter) {
                 int width = 250;
                 int height = 190;
@@ -61,8 +53,20 @@ public class SpriteRenderer {
                     drawBox(hitbox, content, Color.RED);
                 }
 
-            }
-            else if (entity instanceof Terrain) {
+            } else if (entity instanceof Projectile) {
+                int width = 80;
+                int height = 80;
+                double posX = entity.getPoint().getX() - width/2;
+                double posY = entity.getPoint().getY() - height/2;
+                //System.out.println("posX: " + posX + " posY: " + posY);
+                Effectbox hitbox = entity.getHitBox();
+                Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
+
+                content.drawImage(spriteImg, 134*entity.getCurrentAction().getCurrentFrame(), 0, 134, 136,
+                posX, posY, width, height);
+                drawCircle(entity, radius, content, Color.RED);
+                drawBox(hitbox, content, Color.RED);
+            } else if (entity instanceof Terrain) {
                 Effectbox hitbox = entity.getHitBox();
                 drawCircle(entity, radius, content, Color.RED);
                 drawBox(hitbox, content, Color.BLUE);
