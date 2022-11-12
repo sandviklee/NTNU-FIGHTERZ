@@ -1,6 +1,4 @@
-module fightinggame.springboot.rest {
-    requires com.fasterxml.jackson.databind;
-
+module fightinggame.springboot.restserver {
     requires spring.web;
     requires spring.beans;
     requires spring.boot;
