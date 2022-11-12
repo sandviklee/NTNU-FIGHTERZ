@@ -117,8 +117,9 @@ In desktop style the user's data is implicitly and automatically saved. This doe
 **Chosen option:** As the application is quite big and contains a lot of features, some parts of the application pertain to the desktop style while other features fit the app style more. Due to the nature of the game, things such as user details will follow the desktop style, while the game itself will follow the app style.
 
 
-## 6. Presistens The use of DAO pattern
+## 6. Presistens and how to access it
 ### Context and Problem Statement
+How shall the program access data from presistence layer? There are several diffrent ways to accomplice this and it is important to seperate the diffrent layers.
 ### Considered Options
 #### **Option 1: Use DAO pattern**
 Description.
@@ -142,6 +143,83 @@ Description.
 
 ### Decision Outcome Option 1
 This project where going to change the format of the storede data, as in first assignment the project were going to use CSV files, afterward it would be changed to JSON files. This will make the DAO pattern very helpful as the rest of the application can be programed for the interface and treat the implementation as an black box.
+
+
+## 7. Issue what framework to use for rest server API
+### Context and Problem Statement
+### Considered Options
+#### **Option 1: Spring MVC**
+Description.
+|Pros | Cons|
+|---- | ----|
+| | |
+
+#### **Option 2: Spring boot**
+Description.
+|Pros | Cons|
+|---- | ----|
+| | |
+
+
+### Decision Outcome
+Spring boot does much of the hevy lifting and stops us from reinventing the wheel when we already have an amazing framework to use.
+
+## 8. How to design User
+### Context and Problem Statement
+### Considered Options
+How are the program going to represent a User. The User shall contain at least a username and password, however it is planned for achivements and playerstats such as amount of wins and losses and MMR being included in later stages of development.
+What shall identify a User, in current iteration the username is going to be the unique primary key of each user but this might change to UUID or to epost.
+#### **Option 1: User class containg all data**
+Description.
+|Pros | Cons|
+|---- | ----|
+| All is in the same class increeses leanness of the entire system | Changes can make maintenace harder. |
+| All in one place and lower fan-out| Reusebiliy is lower as if the id or data is diffrent one must change most of the User class|
+|| less extensibility changes to some part will effect the rest of the user class|
+
+#### **Option 2: User class being made from UserId and UserData**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Id fields are often subjected to change. Having a seperat class that is responsible for handling what identify Users will make changes easier later on | if there are no changes to what identifies a user then this can create more unnecessary code|
+| What a user is going to contain is going to change therefor adding a sepperate class for the data inside a user can make changes easier. ||
+| Higher fan-in as other classes can use only the part of the User class it needs and not wrestle with the entire class. For example if one is going to seach for a spesific user in DB then one can use the UserId and check that instead of using the entire User class with non relevant details.| However this also makes it higer fan out (User class using more classes) this can add more complexity|
+| Higher extensibility as changes to UserData will not affect UserId and vice versa | Creates more code to maintain such as the serializers and deserializers, need to have more of them, but changes will only effect smaller units instead of all of them|
+
+
+
+
+### Decision Outcome
+
+## 9. Issue what framework to use for rest server API
+### Context and Problem Statement
+### Considered Options
+#### **Option 1: Jersey**
+Description.
+|Pros | Cons|
+|---- | ----|
+| | |
+
+
+#### **Option 1: Jetty**
+Description.
+|Pros | Cons|
+|---- | ----|
+| | |
+
+### Decision Outcome
+
+<!-- 
+## 10. Issue
+### Context and Problem Statement
+### Considered Options
+#### **Option 1: Option**
+Description.
+|Pros | Cons|
+|---- | ----|
+| | |
+### Decision Outcome
+-->
 
 
 <!---
