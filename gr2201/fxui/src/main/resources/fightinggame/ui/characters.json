@@ -155,11 +155,12 @@
                 "actionPriority": 1,
                 "damage": 13,
                 "knockback":[
-                    50,
-                    10,
-                    -5,
-                    -1 
+                    20,
+                    0,
+                    0,
+                    0 
                 ],
+                "gameCharName": "Angry Cyclist",
                 "duration": 10,
                 "hitBoxStartTime": 6,
                 "totalFrames": 0,
