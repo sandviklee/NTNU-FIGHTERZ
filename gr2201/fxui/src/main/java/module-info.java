@@ -1,4 +1,5 @@
 module fightinggame.ui {
+    requires com.fasterxml.jackson.databind;
     requires java.net.http;
     requires javafx.controls;
     requires javafx.fxml;
