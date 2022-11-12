@@ -32,6 +32,13 @@ public class RemoteModelAccess {
         return URLEncoder.encode(param, StandardCharsets.UTF_8);
     }
     // headers to http request might need to be added
+
+    /**
+     * Sends a HTTP request with the given username and password. The response will be a User.
+     * @param username
+     * @param password
+     * @return A User. The user might be null if password is incorrect or username invalid
+     */
     public User getUser(String username, String password){
         HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username) + "/").resolve(uriParam(password))).GET().build();
         try {
@@ -44,6 +51,14 @@ public class RemoteModelAccess {
           }       
     }
     // headers to http request might need to be added
+
+    /**
+     * Sends a HTTP request with the given username, passwords and confirm passwords. The response will be a User.
+     * @param username
+     * @param password
+     * @param confirmPassword
+     * @return A User. The user might be null if password is incorrect, username invalid or passwords not matching
+     */
     public User putUser(String username, String password, String confirmPassword){
         HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)))
         .PUT(BodyPublishers.ofString(username + "." + password + "." + confirmPassword)).build();
