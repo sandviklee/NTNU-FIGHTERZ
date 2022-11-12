@@ -1,5 +1,8 @@
 package fightinggame.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ActionProperties {
     private String spriteName;
     private int actionPriority;
@@ -10,12 +13,13 @@ public class ActionProperties {
     private int totalFrames;
     private Effectbox hitBox;
     private Vector knockback;
+    private Projectile projectile;
     private boolean animationLoop;
     private int animationLoopStartFrame;
     private int hitBoxStartTime;
     private int damage;
     private boolean isMovement;
-
+    
     /**
      * Create ActionProperties without hitbox or knockback, e.g. "idle", "stunlock"
      * @param spriteName               of the sprite to this ActionProperties
@@ -40,6 +44,7 @@ public class ActionProperties {
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.knockback = new Vector(0, 0, 0, 0, 1);
         this.hitBoxStartTime = 0;
+        this.isProjectile = false;
         this.isMovement = isMovement;
     }
 
@@ -68,6 +73,7 @@ public class ActionProperties {
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.isMovement = isMovement;
         this.knockback = knockBack;
+        this.isProjectile = false;
         this.hitBoxStartTime = 0;
     }
 
@@ -99,6 +105,7 @@ public class ActionProperties {
         this.isMovement = isMovement;
         this.knockback = knockBack;
         this.hitBox = hitbox;
+        this.isProjectile = false;
         this.hitBoxStartTime = hitBoxStartTime;
         this.damage = damage;
     }
@@ -119,7 +126,7 @@ public class ActionProperties {
      * @param damage                   to apply to WorldEntities in hitbox
      * @param isProjectile             shall it make an Projectile instance
      */
-    public ActionProperties(String spriteName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible, 
+    public ActionProperties(String spriteName, String gameCharName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible, 
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage, boolean isProjectile) {
         this.spriteName = spriteName;
         this.actionPriority = actionPriority;
@@ -135,6 +142,24 @@ public class ActionProperties {
         this.damage = damage;
         this.hitBoxStartTime = hitBoxStartTime;
         this.isProjectile = isProjectile;
+    }
+
+    //ActionProperties made for Projectile itself
+    public ActionProperties(String spriteName, int duration, int totalFrames, boolean animationLoop, int animationLoopStartFrame, Vector knockBack, Effectbox hitbox, int damage) {
+        this.spriteName = spriteName;
+        this.actionPriority = 0;
+        this.duration = duration;
+        this.isSelfInterruptible = false;
+        this.isEnemyInterruptible = false;
+        this.totalFrames = totalFrames;
+        this.animationLoop = animationLoop;
+        this.animationLoopStartFrame = animationLoopStartFrame;
+        this.isMovement = false;
+        this.knockback = knockBack;
+        this.hitBox = hitbox;
+        this.damage = damage;
+        this.hitBoxStartTime = 0;
+        this.isProjectile = false;
     }
 
     public Effectbox getHitBox() {
@@ -191,5 +216,10 @@ public class ActionProperties {
 
     public boolean getIsMovement() {
         return isMovement;
-    }    
+    }
+
+    public Projectile getProjectile() {
+        return projectile;
+    }  
+
 }

@@ -12,11 +12,13 @@ import java.util.stream.Collectors;
 
 public class World {
     private ArrayList<WorldEntity> worldEntities;
+    private Projectile projectile;
     private ArrayList<String> keysHeld = new ArrayList<>();
     private HashMap<GameCharacter, Boolean> isOnGroundHash = new HashMap<>();
     private String HeldKey = "Idle";
     private String NewHeldKey = "Idle";
     private boolean clickAction = false;
+    private boolean spawnProjectile = false;
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = worldEntities;
@@ -81,7 +83,7 @@ public class World {
 
         //System.out.println(clickAction + " ClickAction");
 
-        System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
+        //System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {
@@ -113,8 +115,13 @@ public class World {
                         currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {
                             clickAction = true;
                             HeldKey = NewHeldKey;
-                            //System.out.println(worldEntity.getAvailKeys().indexOf(HeldKey) + " Index");
+                            //System.out.println(worldEntity.getAvailKeys().indexOf(HeldKey) + " Index");¨
+                            
                             worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
+                            //SPAWNS PROJECTILE
+                            if (worldEntity.getCurrentAction().isProjectile()) {
+                                spawnProjectile = true;
+                            }
                         } else {
                             if (currentAction.getIsDone()){
                                 worldEntity.setCurrentAction(0);
@@ -140,10 +147,34 @@ public class World {
                         worldEntity.setCurrentAction(0);
                     }
                 }
+                projectile = worldEntity.getCurrentAction().getProjectile();
+            }
+            else if (worldEntity instanceof Projectile) {
+                if (worldEntity.getCurrentAction() == null) {
+                    worldEntity.setCurrentAction(0);
+                }
             }
             
         }
         HeldKey = NewHeldKey;
+        
+        if (spawnProjectile && (projectile != null)) {
+            ArrayList<Projectile> finishedProjectiles = new ArrayList<>();
+            for (WorldEntity entity  : worldEntities) {
+                if (entity instanceof Projectile) {
+                    if (entity.getCurrentAction().getIsDone()) {
+                        finishedProjectiles.add((Projectile) entity);
+                    }
+                }
+            }
+            for (Projectile finishedProjectile : finishedProjectiles) {
+                worldEntities.remove(finishedProjectile);
+            }
+            projectile.setCurrentAction(0);
+            worldEntities.add(projectile);
+            spawnProjectile = false;
+        }
+        
     }
 
     private void applyActions(){
@@ -151,4 +182,10 @@ public class World {
             worldEntity.doAction();
         }
     }
+
+    public ArrayList<WorldEntity> getWorldEntities() {
+        return worldEntities;
+    }
+
+    
 }

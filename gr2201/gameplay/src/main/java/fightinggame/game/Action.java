@@ -1,10 +1,14 @@
 package fightinggame.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Action {
     private String name;
     private Effectbox hitBox;
     private Effectbox temporary;
     private AnimationSprite sprites;
+    private Projectile projectile;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
     private int actionPriority;
@@ -15,7 +19,10 @@ public class Action {
     private int damage;
     private boolean isDone;
     private int holdAction = 0;
-    private int holdFrameLength = 3;
+    private int holdFrameLength = 3;        
+    private boolean Movement;
+    private boolean isProjectile;
+    private boolean createProjectile = true;
 
 
     /**
@@ -37,7 +44,10 @@ public class Action {
         this.temporary = p.getHitBox();
         this.hitBoxStartTime = p.getHitBoxStartTime();
         this.currentTime = 0;
+        this.Movement = p.getIsMovement();
         this.isDone = false;
+        this.isProjectile = p.getIsProjectile();
+        this.projectile = p.getProjectile();
     }
 
     /**
@@ -144,12 +154,34 @@ public class Action {
     public boolean startHitBox() {
         if (currentTime >= hitBoxStartTime) {
             this.hitBox = temporary;
+            if ((isProjectile && currentTime == (hitBoxStartTime + 1)) && createProjectile) { //hitboxStartTime + 1 because the projectile cant be made in the same tick, and therefore causes problems with rendering.
+                int hitboxX = (int) hitBox.getPoint().getX();
+                int hitboxY = (int) hitBox.getPoint().getY();
+                ArrayList<Integer> pos = new ArrayList<>(Arrays.asList(hitboxX, hitboxY));
+
+                System.out.println(knockback.getVx() + " " + knockback.getVy());
+                this.projectile = new Projectile("Angry Cyclist" + name, pos, knockback, hitBox, damage);
+                createProjectile = false;
+            }
+
             return true;
         } else {
             return false;
         }
     }
-    
+
+    public Projectile getProjectile() {
+        return projectile;
+    }
+
+    public boolean isProjectile() {
+        return isProjectile;
+    }
+
+    public boolean isMovement() {
+        return Movement;
+    }
+
     /**
      * Check if Action is done
      * @return true if currentTime equal or larger then duration
@@ -169,5 +201,7 @@ public class Action {
     private void iterateSprite() {
         sprites.next();
     }
+
+
 
 }
