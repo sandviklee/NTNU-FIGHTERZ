@@ -6,8 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,20 +25,11 @@ public class CharacterInformationMenuController extends SceneController{
         try {
             controller.setCharacter(image.getId());
             super.changeSceneMouseEvent("NTNU Fighterz", root, event);
-        } catch (IllegalArgumentException e) {
-            showError("Error: Could not find character.", "Something went wrong and character information files could not be found.");
-        } catch (NullPointerException e){
-            showError("Error: Could not load character data.", "Something went wrong and the character information files could not be found,");
+        } catch (IllegalArgumentException | NullPointerException e) {
+            showError("Error: Could not instantiate character.", "Something went wrong and character information files could not be found or contained wrong information.");
+        } catch (IOException e) {
+            showError("Error: Invalid game characters file path.", "Something went wrong and character game files could not be found.");
         }
-    }
-    
-    @FXML
-    private void showError(String headerText, String contentText){
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        alert.showAndWait();
     }
 
     @FXML

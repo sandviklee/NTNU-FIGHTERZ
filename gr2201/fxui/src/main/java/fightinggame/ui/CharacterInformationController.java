@@ -25,9 +25,10 @@ public class CharacterInformationController extends SceneController{
     @FXML private GridPane characterSpecials;
     @FXML private Button goBack;
 
-    private static CharacterInformationDAO dao = new CharacterInformationDAO();
+    private static CharacterInformationDAO dao;
 
-    public void setCharacter(String character) {
+    public void setCharacter(String character) throws IOException {
+        dao = new CharacterInformationDAO();
         initCharacter(character);
     }
 
