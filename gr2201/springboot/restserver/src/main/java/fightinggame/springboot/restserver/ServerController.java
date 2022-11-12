@@ -8,28 +8,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fightinggame.dbaccess.UserDAO;
-import fightinggame.dbaccess.UserDAOImpl;
-import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
+import fightinggame.users.UserId;
 
 /**
- * The service implementation.
+ * The ServerController to the server rest api.
  */
 
 @RestController
 @RequestMapping(ServerController.API_USER_SERVICE_PATH)
 public class ServerController {
-    public static final String API_USER_SERVICE_PATH = "api/user";
-    private UserDAO dao = new UserDAOImpl();
+    public static final String API_USER_SERVICE_PATH = "api/v1/user";
 
     @Autowired
     private ServerService serverService;
 
-    @Bean
+    /**
+     * The Serverservice that gets all the methods required to change db
+     * @return Serverservice
+     */
     public ServerService getServerService() {
         return serverService;
     }
@@ -42,7 +41,7 @@ public class ServerController {
      */
     @GetMapping(path = "/{username}/{password}")
     public User getUser(@PathVariable("username") String username, @PathVariable("password") String password) {
-        return LoginSignup.logIn(username, password);
+        return getServerService().getUser(username, password);
     }
 
     /**
@@ -51,11 +50,30 @@ public class ServerController {
      * @param password  to match with users in db
      * @return the user with same username and password or null
      */
-    @GetMapping(path = "/{username}/{password}/{confirmPassword}")
-    public User putUser(@PathVariable("username") String username, @PathVariable("password") String password, @PathVariable("confirmPassword") String confirmPassword) {
-        User newUser = LoginSignup.signUp(username, password, confirmPassword);
-        
-        return newUser;
+    @PostMapping(path = "/{username}/{password}/{confirmPassword}")
+    public User postUser(@PathVariable("username") String username, @PathVariable("password") String password, @PathVariable("confirmPassword") String confirmPassword) {
+        return getServerService().postUser(username, password, confirmPassword);
+    }
+
+    /**
+     * Update user in db if corrensponding id can be found
+     * @param id    the id to check with    
+     * @param user  to change the user data with
+     * @return whether the update was successful
+     */
+    @PutMapping(path = "/{id}")
+    public boolean putUser(@PathVariable("id") UserId id, @RequestBody User user) {
+        return getServerService().updateUser(id, user);
+    }
+
+    /**
+     * Delete user in db if corrensponding id can be found
+     * @param id  the id to check with
+     * @return whether the deletion was successful
+     */
+    @DeleteMapping("/{id}")
+    public boolean deleteUser(@PathVariable("id") UserId id) {
+        return getServerService().deleteUser(id);
     }
 
 }
