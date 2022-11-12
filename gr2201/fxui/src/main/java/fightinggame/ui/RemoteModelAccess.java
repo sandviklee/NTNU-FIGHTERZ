@@ -22,43 +22,39 @@ public class RemoteModelAccess {
     private User user = null;
     private ObjectMapper mapper;
     
-
     public RemoteModelAccess (URI uriBase){
         this.uriBase = uriBase;
         this.mapper = new ObjectMapper();
         mapper.registerModule(new UserModule());
-        
     }
 
     private String uriParam(String param) {
         return URLEncoder.encode(param, StandardCharsets.UTF_8);
-      }
-    // headers to http request might be added
+    }
+    // headers to http request might need to be added
     public User getUser(String username, String password){
         HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username) + "/").resolve(uriParam(password))).GET().build();
         try {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
-            this.user = mapper.readValue(userString, User.class);
+            return mapper.readValue(userString, User.class);
           }
            catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
-          }
-        return this.user;
+          }       
     }
-
+    // headers to http request might need to be added
     public User putUser(String username, String password, String confirmPassword){
         HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)))
         .PUT(BodyPublishers.ofString(username + "." + password + "." + confirmPassword)).build();
         try {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
-            this.user = mapper.readValue(userString, User.class);
+            return mapper.readValue(userString, User.class);
 
         } catch (IOException| InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return this.user;
     }
 
 
