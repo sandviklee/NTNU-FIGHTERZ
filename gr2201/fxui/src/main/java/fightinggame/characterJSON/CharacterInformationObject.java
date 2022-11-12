@@ -7,14 +7,13 @@ public class CharacterInformationObject {
     private String description;
     private int difficulty;
     private String playstyle;
-    private HashMap<String, String> specialActions;
+    private HashMap<String, String> specialActions = new HashMap<String, String>();
 
     public CharacterInformationObject(String name, String description, int difficulty, String playstyle) {
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
         this.playstyle = playstyle;
-        this.specialActions = new HashMap<String, String>();
     }
 
     public String getName() {

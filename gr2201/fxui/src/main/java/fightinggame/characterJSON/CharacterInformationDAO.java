@@ -14,14 +14,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class CharacterInformationDAO {
-    private String path;
-    private ObjectMapper mapper;
-    private HashMap<String, CharacterInformationObject> characters;
+    private String path = "./src/main/resources/fightinggame/characterJSON/";
+    private ObjectMapper mapper = new ObjectMapper();
+    private HashMap<String, CharacterInformationObject> characters = new HashMap<String, CharacterInformationObject>();
 
     public CharacterInformationDAO() {
-        this.path = "./gr2201/gameplay/src/main/resources/fightinggame/json/";
-        this.mapper = new ObjectMapper();
-        this.characters = new HashMap<String, CharacterInformationObject>();
         Version version = new Version(1, 0, 0, null, null, null);
         SimpleModule module = new SimpleModule("CharacterInformationDeserializer", version);
         module.addDeserializer(CharacterInformationObject.class, new CharacterInformationDeserializer());
@@ -60,5 +57,10 @@ public class CharacterInformationDAO {
             throw new IllegalArgumentException("Could not load character, name does not exist.");
         }
         return this.characters.get(name);
+    }
+
+    public static void main(String[] args) {
+        CharacterInformationDAO dao = new CharacterInformationDAO();
+        System.out.println(dao.getCharacter("Ram"));
     }
 }
