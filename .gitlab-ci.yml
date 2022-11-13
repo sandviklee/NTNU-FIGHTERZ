@@ -1,0 +1,16 @@
+image: maven:3.8.3-openjdk-17
+
+stages:
+  - build
+  - test
+
+maven-build:
+  stage: build
+  script:
+    - echo "Check if the program will run and compile properly"
+    - "cd gr2201; mvn clean install -DskipTests -DskipUITests; mvn compile;"
+
+maven-test:
+  stage: test
+  script:
+    - "cd gr2201; mvn clean test -DskipUITests;"
