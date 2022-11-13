@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class Action {
     private String name;
+    private String gameCharName;
     private Effectbox hitBox;
     private Effectbox temporary;
     private AnimationSprite sprites;
@@ -26,35 +27,31 @@ public class Action {
 
 
     /**
-     * Create an Action without a Effectbox, e.g. idle, move.
-     * @param spriteName            of the sprite to the action
-     * @param actionPriority        of the action
-     * @param duration              of the action
-     * @param isSelfInterruptible   to determine if it can be interrupted by own action
-     * @param isEnemyInterruptible  to determine if it can be interrupted by enemy action
+     * Create an Action for GameCharacter or Projectile.
+     * @param properties  of the action it is making
      */
-    public Action(ActionProperties p) {
-        this.sprites = new AnimationSprite(p.getTotalFrames(), p.isAnimationLoop(), p.getAnimationLoopStartFrame(), holdFrameLength);
-        this.isSelfInterruptible = p.isSelfInterruptible();
-        this.isEnemyInterruptible = p.isEnemyInterruptible();
-        this.duration = p.getDuration();
-        this.actionPriority = p.getActionPriority();
-        this.name = p.getSpriteName();
-        this.knockback = p.getKnockback();
-        this.temporary = p.getHitBox();
-        this.hitBoxStartTime = p.getHitBoxStartTime();
+    public Action(ActionProperties properties) {
+        this.sprites = new AnimationSprite(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame());
+        this.isSelfInterruptible = properties.isSelfInterruptible();
+        this.isEnemyInterruptible = properties.isEnemyInterruptible();
+        this.duration = properties.getDuration();
+        this.actionPriority = properties.getActionPriority();
+        this.name = properties.getSpriteName();
+        this.gameCharName = properties.getGameCharName();
+        this.knockback = properties.getKnockback();
+        this.temporary = properties.getHitBox();
+        this.hitBoxStartTime = properties.getHitBoxStartTime();
         this.currentTime = 0;
-        this.Movement = p.getIsMovement();
+        this.Movement = properties.getIsMovement();
         this.isDone = false;
-        this.isProjectile = p.getIsProjectile();
-        this.projectile = p.getProjectile();
+        this.isProjectile = properties.getIsProjectile();
+        this.projectile = properties.getProjectile();
     }
 
     /**
-     * Shall manipulate hitbox, 
-     * Make Sprites iterate, 
-     * update currentTime and stop action either when interrupte or when action is done
-     * changes isDone to true if action is interrupted or done.
+     * Iterates the sprite when the tick has reached holdFrameLength,
+     * updates currentTime.
+     * Asserts isDone true if action is done.
      */
     public void nextActionFrame(){
         if (!isDone()) {
@@ -63,8 +60,8 @@ public class Action {
             } else {
                 holdAction = 0;
                 currentTime += 1;
+                iterateSprite();
             }
-            iterateSprite();
         } else {
             this.isDone = true;
         }
@@ -76,12 +73,13 @@ public class Action {
      * 
      * @param otherSelfActionPriority  the value to compare with own actionPriority
      */
-    public void trySelfInterrupt(int otherSelfActionPriority) {
+    public boolean trySelfInterrupt(Action otherSelfAction) {
         if (isSelfInterruptible) {
-            if (actionPriority <= otherSelfActionPriority) {
-                currentTime = duration;
+            if (actionPriority < otherSelfAction.getActionPriority()) {
+                return true;
             } 
         }
+        return false;
     }
 
     /**
@@ -130,11 +128,6 @@ public class Action {
         return this.knockback;
     }
 
-    
-    public int getActionPriority(){
-        return this.actionPriority;
-    }
-
     /**
      * Getter for damage.
      * @return damage integer.
@@ -158,9 +151,7 @@ public class Action {
                 int hitboxX = (int) hitBox.getPoint().getX();
                 int hitboxY = (int) hitBox.getPoint().getY();
                 ArrayList<Integer> pos = new ArrayList<>(Arrays.asList(hitboxX, hitboxY));
-
-                System.out.println(knockback.getVx() + " " + knockback.getVy());
-                this.projectile = new Projectile("Angry Cyclist" + name, pos, knockback, hitBox, damage);
+                this.projectile = new Projectile(gameCharName + name, pos, knockback, hitBox, damage);
                 createProjectile = false;
             }
 
@@ -194,6 +185,9 @@ public class Action {
         }
     }
 
+    private int getActionPriority(){
+        return this.actionPriority;
+    }
 
     /**
      * Make sprite iterate to next frame

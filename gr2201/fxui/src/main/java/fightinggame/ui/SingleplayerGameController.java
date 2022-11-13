@@ -7,6 +7,7 @@ import fightinggame.game.Point;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,14 +23,15 @@ public class SingleplayerGameController extends SceneController{
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
+    private boolean paused;
+     
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "B", "DB", "AB", "WB", "SB", "DV", "AV", "WV", "SV"));
 
     // Should switch to Point
-    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(925, 730));
-    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(1330, 950));
-    private ArrayList<Integer> terrain2Position = new ArrayList<>(Arrays.asList(1200, 550));
-    private ArrayList<Integer> terrain3Position = new ArrayList<>(Arrays.asList(500, 950));
-    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(400, 400));
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(500, 500));
+    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(800, 910));
+
+    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1100, 500));
 
     // private Point playerPosition = new Point(925, 730);
     // private Point terrainPosition = new Point(1330, 950);
@@ -46,28 +48,19 @@ public class SingleplayerGameController extends SceneController{
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys);
-
-        Terrain terrain = loadTerrain("Test", terrainPosition, 900, 280);
-        Terrain terrain2 = loadTerrain("Test2", terrain2Position, 300, 5);
-        Terrain terrain3 = loadTerrain("Test", terrain3Position, 500, 280);
-
-        playerSprites.put(character + "Idle", new Image((getClass().getResource(character + "Idle.png")).toString()));
-        playerSprites.put(character + "Run", new Image((getClass().getResource(character + "Run.png")).toString()));
-        playerSprites.put(character + "Jump", new Image((getClass().getResource(character + "Jump.png")).toString()));
-        playerSprites.put(character + "SideSpecial", new Image((getClass().getResource(character + "SideSpecial.png")).toString()));
-        playerSprites.put(character + "SideNormal", new Image((getClass().getResource(character + "SideNormal.png")).toString()));
-        playerSprites.put(character + "NeutralSpecial", new Image((getClass().getResource(character + "NeutralSpecial.png")).toString()));
-        playerSprites.put(character + "NeutralSpecialProjectile", new Image((getClass().getResource(character + "NeutralSpecialProjectile.png")).toString()));
-        //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        //Terrain terrain = loadTerrain(gameStage);
-        //player.setCurrentAction(new Action("Idle", 0, 100000, false, false, 18, true, 0));
+        GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1300, 200);
+        loadCharacterSprite(character, playerSprites);
+        loadCharacterSprite("Dummy", playerSprites);
+        loadCharacterSprite("Assets", playerSprites);
+        
+        //System.out.println(playerSprites);
         worldEntities.add(player);
-        worldEntities.add(terrain3);
-        worldEntities.add(terrain2);
+        worldEntities.add(dummy);
         worldEntities.add(terrain);
-        //worldEntities.add(dummy);
+
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, playerSprites, worldEntities);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites);
         updateWorld();
     }
 
@@ -84,7 +77,10 @@ public class SingleplayerGameController extends SceneController{
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
 
         return new GameCharacter(playerProperties, position, availKeysArray); //loaded from json,should maybe have a starting position
+    }
 
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
+        return new GameCharacter(character, position); 
     }
 
     private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
@@ -93,14 +89,13 @@ public class SingleplayerGameController extends SceneController{
     }
 
     private void updateWorld() {
+        
         new AnimationTimer() {
             private long tick = 0;
             @Override
             public void handle(long now) {
                 if (now - tick >= fps) {
-                    //System.out.println(keyInputs);
                     if (world.getWorldEntities().stream().anyMatch(x -> !worldEntities.contains(x))) {
-                        //System.out.println("Oppdatert");
                         worldEntities = world.getWorldEntities();
                     }
                     world.updateWorld(keyInputs, keyReleased);
@@ -112,10 +107,20 @@ public class SingleplayerGameController extends SceneController{
         }.start();
     }
 
+    private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
+        File[] spriteFiles = new File("gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        for (File sprite : spriteFiles) {
+            spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
+            
+        }
+    }
+
     private void resetKeyInputs() {
         this.keyInputs = "";
         this.keyReleased = "";
     }
+
+    private 
 
     @FXML
     private void handleKeyPressed(KeyEvent event){
@@ -126,6 +131,8 @@ public class SingleplayerGameController extends SceneController{
     private void handleKeyReleased(KeyEvent event){
         keyReleased += event.getCode();
     }
+
+    
 }
  
 

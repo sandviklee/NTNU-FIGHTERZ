@@ -2,6 +2,7 @@ package fightinggame.game;
 
 public class ActionProperties {
     private String spriteName;
+    private String gameCharName;
     private int actionPriority;
     private int duration;
     private boolean isProjectile;
@@ -39,7 +40,7 @@ public class ActionProperties {
         this.totalFrames = totalFrames;
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
-        this.knockback = new Vector(0, 0, 0, 0, 1);
+        this.knockback = new Vector(0, 0, 0, 0);
         this.hitBoxStartTime = 0;
         this.isProjectile = false;
         this.isMovement = isMovement;
@@ -127,6 +128,7 @@ public class ActionProperties {
     public ActionProperties(String spriteName, String gameCharName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible, 
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage, boolean isProjectile) {
         this.spriteName = spriteName;
+        this.gameCharName = gameCharName;
         this.actionPriority = actionPriority;
         this.duration = duration;
         this.isSelfInterruptible = isSelfInterruptible;
@@ -140,6 +142,7 @@ public class ActionProperties {
         this.damage = damage;
         this.hitBoxStartTime = hitBoxStartTime;
         this.isProjectile = isProjectile;
+
     }
 
     //ActionProperties made for Projectile itself
@@ -178,6 +181,10 @@ public class ActionProperties {
 
     public String getSpriteName() {
         return spriteName;
+    }
+
+    public String getGameCharName() {
+        return gameCharName;
     }
 
     public int getActionPriority() {
