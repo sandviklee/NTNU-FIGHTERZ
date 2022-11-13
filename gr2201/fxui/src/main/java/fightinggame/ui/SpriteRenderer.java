@@ -22,7 +22,7 @@ public class SpriteRenderer {
     private ArrayList<WorldEntity> entities = new ArrayList<>();
     
 
-    public SpriteRenderer(Canvas canvas, HashMap<String, Image> sprites, ArrayList<WorldEntity> entities) {
+    public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> sprites) {
         content = canvas.getGraphicsContext2D();
         backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);
         this.entities = entities;
@@ -35,17 +35,29 @@ public class SpriteRenderer {
         
         for (WorldEntity entity : entities) {
             if (entity instanceof GameCharacter) {
-                int width = 250;
-                int height = 190;
+                int width = 260;
+                int height = 200;
                 
                 Effectbox hurtbox = entity.getHurtBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
+                int playerInt = 0;
+
+                if (!entity.getAvailKeys().isEmpty()) {
+                    if (entity.getAvailKeys().get(2) == "W") {
+                        playerInt = 1;
+                    }
+                }
+
+                Image playerIntImg = playerSprites.get("Assetsplayer" + playerInt);
+                //System.out.println(spriteImg);
                 double posX = entity.getPoint().getX() - width/2;
                 double posY = entity.getPoint().getY() - height/2;
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
                 (entity.getFacingDirection() > 0 ? posX : (posX + 275)), posY, width*entity.getFacingDirection(), height);
+                content.drawImage(playerIntImg, posX + 110, posY - 45, 60, 65);
                 drawCircle(entity, radius, content, Color.RED);
                 drawBox(hurtbox, content, Color.LIGHTBLUE);
+
                 //drawVector((GameCharacter) entity, content);
 
                 if (entity.getCurrentAction().getHitBox() != null) {
@@ -56,8 +68,8 @@ public class SpriteRenderer {
             } else if (entity instanceof Projectile) {
                 int width = 80;
                 int height = 80;
-                double posX = entity.getPoint().getX() - width/2;
-                double posY = entity.getPoint().getY() - height/2;
+                double posX = entity.getPoint().getX() - (width/2 - 10);
+                double posY = entity.getPoint().getY() - (height/2);
                 //System.out.println("posX: " + posX + " posY: " + posY);
                 Effectbox hitbox = entity.getHitBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
