@@ -5,19 +5,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 public class World {
     private ArrayList<WorldEntity> worldEntities;
-    private Projectile projectile;
     private ArrayList<String> keysHeld = new ArrayList<>();
+    private ArrayList<Projectile> projectileReadyList = new ArrayList<>();
     private HashMap<GameCharacter, Boolean> isOnGroundHash = new HashMap<>();
-    private String HeldKey = "Idle";
+    private HashMap<GameCharacter, Boolean> clickActionHash = new HashMap<>();
+    private HashMap<GameCharacter, ArrayList<String>> heldKeyHash = new HashMap<>();
+    private HashMap<GameCharacter, Boolean> spawnProjectileHash = new HashMap<>();
     private String NewHeldKey = "Idle";
-    private boolean clickAction = false;
-    private boolean spawnProjectile = false;
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = worldEntities;
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
                 isOnGroundHash.put((GameCharacter) entity, false);
+                clickActionHash.put((GameCharacter) entity, false);
+                spawnProjectileHash.put((GameCharacter) entity, false);
+                ArrayList<String> heldKeysList = new ArrayList<>(Arrays.asList("Idle", "Idle"));
+                heldKeyHash.put((GameCharacter) entity, heldKeysList);
             }
         }
     }
@@ -49,11 +53,9 @@ public class World {
                 }
                 if (entity1 instanceof GameCharacter) {
                     entity1.setOnGround(isOnGroundHash.get(entity1));
-                }
-                
+                }       
             }
         }
-        
     }
 
     private void setActions(String input, String inputR){
@@ -74,74 +76,75 @@ public class World {
             }
         }
 
-        //System.out.println(clickAction + " ClickAction");
-
         //System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
 
         for (WorldEntity worldEntity : worldEntities) {
-            if (worldEntity instanceof GameCharacter) {
-                
-                if (!keysHeld.isEmpty()) { //get first key
-                    NewHeldKey = "";
-                    for (String key : keysHeld) {
-                        NewHeldKey += key;
-                    }
-                } else {
-                    NewHeldKey = "+";
-                }
-
-                //System.out.println(NewHeldKey);
-
+            if (worldEntity instanceof GameCharacter) {     
                 Action currentAction = worldEntity.getCurrentAction();
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
 
-                if (currentAction.getIsDone() && clickAction) {
-                    clickAction = false;
+                if (!keysHeld.isEmpty()) { //get first key
+                    heldKeyHash.get(worldEntity).set(0, "");
+                    NewHeldKey = "";    
+                    for (String key : keysHeld) {
+                        NewHeldKey += key;    
+                    }
+                    
+                    heldKeyHash.get(worldEntity).set(0, NewHeldKey);
+                } else {
+                    heldKeyHash.get(worldEntity).set(0, "+");
                 }
 
-                if (worldEntity.getAvailKeys().contains(NewHeldKey)) {
-                    //System.out.println(HeldKey + " New: " + NewHeldKey);
+                if (currentAction.getIsDone() && clickActionHash.get(worldEntity)) {
+                    clickActionHash.put((GameCharacter) worldEntity, false);
+                }
 
-                    if (NewHeldKey.contains("W") || NewHeldKey.contains("B") || NewHeldKey.contains("V")) {
-                        
-                        if (((worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)).getActionPriority() > 
-                        currentAction.getActionPriority()) && worldEntity.getJumpCounter() <= 1)) {
-                            clickAction = true;
-                            HeldKey = NewHeldKey;
-                            //System.out.println(worldEntity.getAvailKeys().indexOf(HeldKey) + " Index");¨
+                NewHeldKey = heldKeyHash.get(worldEntity).get(0); //Get the GameCharacters NewHeldKey
+                if (actionAvailKeys.contains(NewHeldKey)) {
+                    if (NewHeldKey.contains(actionAvailKeys.get(2)) || NewHeldKey.contains(actionAvailKeys.get(7)) || NewHeldKey.contains(actionAvailKeys.get(15).substring(1))) {
+                        if (((NewHeldKey.contains(actionAvailKeys.get(2)) && currentAction.trySelfInterrupt(worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)))) && worldEntity.getJumpCounter() <= 1)) {
+                            clickActionHash.put((GameCharacter) worldEntity, true);
+                            heldKeyHash.get(worldEntity).set(1, NewHeldKey);
+                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(heldKeyHash.get(worldEntity).get(1)));
+                        }
+                        else if (((NewHeldKey.contains(actionAvailKeys.get(7)) && !NewHeldKey.contains(actionAvailKeys.get(2))) || NewHeldKey.contains(actionAvailKeys.get(15).substring(1))) && !clickActionHash.get(worldEntity)) {
+                            clickActionHash.put((GameCharacter) worldEntity, true);
+
+                            heldKeyHash.get(worldEntity).set(1, NewHeldKey);
+                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(heldKeyHash.get(worldEntity).get(1)));
                             
-                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
-                            //SPAWNS PROJECTILE
                             if (worldEntity.getCurrentAction().isProjectile()) {
-                                spawnProjectile = true;
+                                spawnProjectileHash.put((GameCharacter) worldEntity, true);
                             }
                         } else {
                             if (currentAction.getIsDone()){
                                 worldEntity.setCurrentAction(0);
                             }
-                            
                         }
                     } else {
-                        
-                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || !HeldKey.equals(NewHeldKey)) && !clickAction) {
-                            
-                            HeldKey = NewHeldKey;
-                            //System.out.println(actionAvailKeys.indexOf(HeldKey) + " Index");
-                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(HeldKey));
+                        if (((currentAction.getIsDone() || currentAction.getName().equals("Idle")) || !heldKeyHash.get(worldEntity).get(1).equals(NewHeldKey)) && !clickActionHash.get(worldEntity)) {
+                            heldKeyHash.get(worldEntity).set(1, NewHeldKey);
+                            worldEntity.setCurrentAction(actionAvailKeys.indexOf(heldKeyHash.get(worldEntity).get(1)));
                         }
                     }
-
-
-                    //List<String> keyInputList = keyInputArray.stream().filter(worldEntity.getPredicate()).collect(Collectors.toList()); //Legger alle mulige keyInputs i en liste
-                    //Så iterer og gjør alle som er mulig til true i hashmappet
-
                 } else {
-                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && !clickAction) {
+                    if ((worldEntity.getCurrentAction().getIsDone() || !worldEntity.getCurrentAction().getName().equals("Idle")) && !clickActionHash.get(worldEntity)) {
                         worldEntity.setCurrentAction(0);
                     }
                 }
-                projectile = worldEntity.getCurrentAction().getProjectile();
+            
+                if (spawnProjectileHash.get((GameCharacter) worldEntity)) {
+                    Projectile projectile = worldEntity.getCurrentAction().getProjectile();
+                    if (!projectileReadyList.contains(projectile) && projectile != null) {
+                        projectileReadyList.add(projectile);
+                    }
+                    
+                
+                } 
+                heldKeyHash.get(worldEntity).set(1, NewHeldKey);
+                
             }
+
             else if (worldEntity instanceof Projectile) {
                 if (worldEntity.getCurrentAction() == null) {
                     worldEntity.setCurrentAction(0);
@@ -149,9 +152,8 @@ public class World {
             }
             
         }
-        HeldKey = NewHeldKey;
-        
-        if (spawnProjectile && (projectile != null)) {
+
+        if (spawnProjectileHash.values().stream().anyMatch(x -> x == true) && !projectileReadyList.isEmpty()) {
             ArrayList<Projectile> finishedProjectiles = new ArrayList<>();
             for (WorldEntity entity  : worldEntities) {
                 if (entity instanceof Projectile) {
@@ -163,11 +165,24 @@ public class World {
             for (Projectile finishedProjectile : finishedProjectiles) {
                 worldEntities.remove(finishedProjectile);
             }
-            projectile.setCurrentAction(0);
-            worldEntities.add(projectile);
-            spawnProjectile = false;
+            
+            for (Projectile projectile : projectileReadyList) {
+                if (projectile != null) {
+                    projectile.setCurrentAction(0);
+                    worldEntities.add(projectile);
+                }
+
+            }
+            
+            projectileReadyList.clear();
+            
+            for (WorldEntity worldEntity : worldEntities) {
+                if (worldEntity instanceof GameCharacter) {
+                    spawnProjectileHash.put((GameCharacter) worldEntity, false);
+                }
+            }
+            
         }
-        
     }
 
     private void applyActions(){

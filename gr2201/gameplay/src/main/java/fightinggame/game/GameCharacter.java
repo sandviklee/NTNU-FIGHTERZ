@@ -34,8 +34,15 @@ public class GameCharacter extends WorldEntity{
         setCurrentAction(0);
     }
 
-    public boolean canMove(){
-        return true;
+    public GameCharacter(String name, ArrayList<Integer> pos) {
+        super(name, pos);
+        this.weight = 0;
+        this.speed = 0;
+        this.hurtBox = new Effectbox(this, point, false, 80, 172);
+        this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
+        this.availKeys = new ArrayList<>();
+        this.facingDirection = -1;
+        setCurrentAction(0);
     }
 
     @Override
@@ -54,18 +61,19 @@ public class GameCharacter extends WorldEntity{
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
             clearVectors();
-            if (getAction(actionNumber).getName().equals("Jump")) {
+            Action newAction = getAction(actionNumber);
+            if (newAction.getKnockback().getVy() != 0 && newAction.isMovement()) {
                 jumpCounter++;
             }
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
 
-            if (actionNumber == 3 || actionNumber == 4 || actionNumber == 5 || actionNumber == 6) {
-                facingDirection = currentAction.getKnockback().getDirection();
-            }
-            
             if (currentAction.isProjectile()) {
                 currentAction.getKnockback().setDirection(facingDirection);
+            }
+
+            if (currentAction.getKnockback().getDirection() != 0 && currentAction.getKnockback().getVy() == 0) {
+                facingDirection = currentAction.getKnockback().getDirection();
             }
             
             appliedVector = 0;   
@@ -141,10 +149,6 @@ public class GameCharacter extends WorldEntity{
 
     public Vector getVector() {
         return mainVector;
-    }
-
-    public int getActionPriority() {
-        return currentAction.getActionPriority();
     }
 
     public int getFacingDirection() {
