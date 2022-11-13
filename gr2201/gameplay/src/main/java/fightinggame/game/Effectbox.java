@@ -62,8 +62,6 @@ public class Effectbox {
         return center;
     }
 
-    
-
     public double getOffsetX() {
         return offsetX;
     }

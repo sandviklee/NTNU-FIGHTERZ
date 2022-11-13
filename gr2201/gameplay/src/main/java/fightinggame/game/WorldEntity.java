@@ -98,10 +98,6 @@ public abstract class WorldEntity {
 		this.isAlive = isAlive;
 	}
 
-	public int getActionPriority() {
-        return currentAction.getActionPriority();
-    }
-
 	public int getJumpCounter() {
         return 0;
     }

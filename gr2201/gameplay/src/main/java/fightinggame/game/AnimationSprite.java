@@ -4,8 +4,6 @@ package fightinggame.game;
  */
 public class AnimationSprite {
     private int currentFrame = 0;
-    private int holdFrame = 0;
-    private int holdFrameLength;
     private int totalFrames;
     private int animationLoopStartFrame;
     private boolean animationLoop;
@@ -16,7 +14,7 @@ public class AnimationSprite {
      * @param animationLoop
      * @param animationLoopStartFrame
      */
-    public AnimationSprite(int totalFrames, boolean animationLoop, int animationLoopStartFrame, int holdFrameLength){
+    public AnimationSprite(int totalFrames, boolean animationLoop, int animationLoopStartFrame){
         if (validUserInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
@@ -24,7 +22,6 @@ public class AnimationSprite {
             this.animationLoopStartFrame = animationLoopStartFrame;
         }
         this.animationLoop = animationLoop;
-        this.holdFrameLength = holdFrameLength;
         
     }
     /**
@@ -52,12 +49,7 @@ public class AnimationSprite {
      */
     public void next(){
         if (currentFrame < totalFrames) {
-            if (holdFrame < holdFrameLength) {
-                holdFrame += 1;
-            } else {
-                holdFrame = 0;
-                this.currentFrame += 1;
-            }
+            this.currentFrame += 1;
         }
 
         if (animationLoop && !hasNext()) {
