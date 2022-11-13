@@ -5,16 +5,20 @@ import java.util.Arrays;
 import java.util.HashMap;
 public class World {
     private ArrayList<WorldEntity> worldEntities;
+    private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
     private ArrayList<String> keysHeld = new ArrayList<>();
-    private ArrayList<Projectile> projectileReadyList = new ArrayList<>();
+    
+    private ArrayList<Projectile> finishedProjectiles;
     private HashMap<GameCharacter, Boolean> isOnGroundHash = new HashMap<>();
     private HashMap<GameCharacter, Boolean> clickActionHash = new HashMap<>();
     private HashMap<GameCharacter, ArrayList<String>> heldKeyHash = new HashMap<>();
+    private HashMap<GameCharacter, ArrayList<String>> inputPerEntity = new HashMap<>();
+    private HashMap<GameCharacter, Projectile> projectileReady = new HashMap<>();
     private HashMap<GameCharacter, Boolean> spawnProjectileHash = new HashMap<>();
     private String NewHeldKey = "Idle";
 
     public World(ArrayList<WorldEntity> worldEntities){
-        this.worldEntities = worldEntities;
+        this.worldEntities = new ArrayList<>(worldEntities);
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
                 isOnGroundHash.put((GameCharacter) entity, false);
@@ -22,6 +26,9 @@ public class World {
                 spawnProjectileHash.put((GameCharacter) entity, false);
                 ArrayList<String> heldKeysList = new ArrayList<>(Arrays.asList("Idle", "Idle"));
                 heldKeyHash.put((GameCharacter) entity, heldKeysList);
+                projectileReady.put((GameCharacter) entity, null);
+                inputPerEntity.put((GameCharacter) entity, new ArrayList<>());
+                gameCharacters.add((GameCharacter) entity);
             }
         }
     }
@@ -82,11 +89,21 @@ public class World {
             if (worldEntity instanceof GameCharacter) {     
                 Action currentAction = worldEntity.getCurrentAction();
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
+                
+                ArrayList<String> keys = new ArrayList<>();
+                for (String key : keysHeld) {
+                    if (worldEntity.getPredicate().test(key)) {
+                        keys.add(key);
+                    }
+                }
 
-                if (!keysHeld.isEmpty()) { //get first key
+                
+                inputPerEntity.put((GameCharacter) worldEntity, keys);
+
+                if (!inputPerEntity.get(worldEntity).isEmpty()) { //get first key
                     heldKeyHash.get(worldEntity).set(0, "");
                     NewHeldKey = "";    
-                    for (String key : keysHeld) {
+                    for (String key : inputPerEntity.get(worldEntity)) {
                         NewHeldKey += key;    
                     }
                     
@@ -98,9 +115,11 @@ public class World {
                 if (currentAction.getIsDone() && clickActionHash.get(worldEntity)) {
                     clickActionHash.put((GameCharacter) worldEntity, false);
                 }
+                
 
                 NewHeldKey = heldKeyHash.get(worldEntity).get(0); //Get the GameCharacters NewHeldKey
-                if (actionAvailKeys.contains(NewHeldKey)) {
+
+                if (actionAvailKeys.contains(NewHeldKey) && actionAvailKeys.indexOf(NewHeldKey) <= 15) {
                     if (NewHeldKey.contains(actionAvailKeys.get(2)) || NewHeldKey.contains(actionAvailKeys.get(7)) || NewHeldKey.contains(actionAvailKeys.get(15).substring(1))) {
                         if (((NewHeldKey.contains(actionAvailKeys.get(2)) && currentAction.trySelfInterrupt(worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)))) && worldEntity.getJumpCounter() <= 1)) {
                             clickActionHash.put((GameCharacter) worldEntity, true);
@@ -135,8 +154,8 @@ public class World {
             
                 if (spawnProjectileHash.get((GameCharacter) worldEntity)) {
                     Projectile projectile = worldEntity.getCurrentAction().getProjectile();
-                    if (!projectileReadyList.contains(projectile) && projectile != null) {
-                        projectileReadyList.add(projectile);
+                    if (projectile != null && projectileReady.get(worldEntity) != projectile) {
+                        projectileReady.put((GameCharacter) worldEntity, projectile);
                     }
                     
                 
@@ -152,36 +171,27 @@ public class World {
             }
             
         }
+        
+        for (GameCharacter character : gameCharacters) {
+            if (spawnProjectileHash.get(character) && projectileReady.get(character) != null) {
+                projectileReady.get(character).setCurrentAction(0);
+                worldEntities.add(projectileReady.get(character));
+                spawnProjectileHash.put(character, false);
+                projectileReady.put(character, null);
+            }
+        }
 
-        if (spawnProjectileHash.values().stream().anyMatch(x -> x == true) && !projectileReadyList.isEmpty()) {
-            ArrayList<Projectile> finishedProjectiles = new ArrayList<>();
-            for (WorldEntity entity  : worldEntities) {
-                if (entity instanceof Projectile) {
-                    if (entity.getCurrentAction().getIsDone()) {
-                        finishedProjectiles.add((Projectile) entity);
-                    }
+        finishedProjectiles = new ArrayList<>();
+        for (WorldEntity projectile  : worldEntities) {
+            if (projectile instanceof Projectile) {
+                if (projectile.getCurrentAction().getIsDone()) {
+                    finishedProjectiles.add((Projectile) projectile);
                 }
             }
-            for (Projectile finishedProjectile : finishedProjectiles) {
-                worldEntities.remove(finishedProjectile);
-            }
-            
-            for (Projectile projectile : projectileReadyList) {
-                if (projectile != null) {
-                    projectile.setCurrentAction(0);
-                    worldEntities.add(projectile);
-                }
-
-            }
-            
-            projectileReadyList.clear();
-            
-            for (WorldEntity worldEntity : worldEntities) {
-                if (worldEntity instanceof GameCharacter) {
-                    spawnProjectileHash.put((GameCharacter) worldEntity, false);
-                }
-            }
-            
+        }
+        
+        for (Projectile finishedProjectile : finishedProjectiles) {
+            worldEntities.remove(finishedProjectile);
         }
     }
 
