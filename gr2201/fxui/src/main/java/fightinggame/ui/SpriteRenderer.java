@@ -42,14 +42,19 @@ public class SpriteRenderer {
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
                 int playerInt = 0;
 
-                if (!entity.getAvailKeys().isEmpty()) {
-                    if (entity.getAvailKeys().get(2) == "W") {
-                        playerInt = 1;
+                ArrayList<String> availKeys = entity.getAvailKeys();
+                if (!availKeys.isEmpty()) {
+                    switch (availKeys.get(2)) {
+                        case "W":
+                            playerInt = 1;
+                            break;
+                        case "I":
+                            playerInt = 2;
+                            break;
                     }
                 }
 
                 Image playerIntImg = playerSprites.get("Assetsplayer" + playerInt);
-                //System.out.println(spriteImg);
                 double posX = entity.getPoint().getX() - width/2;
                 double posY = entity.getPoint().getY() - height/2;
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
@@ -84,6 +89,10 @@ public class SpriteRenderer {
                 drawBox(hitbox, content, Color.BLUE);
             }
         }
+    }
+
+    public void updateRendererWorldEntities(ArrayList<WorldEntity> worldEntities) {
+        this.entities = worldEntities;
     }
 
     private void drawBox(Effectbox hitbox, GraphicsContext cntn, Color color) {
