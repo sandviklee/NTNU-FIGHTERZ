@@ -34,6 +34,7 @@ public class UserDAOImpl implements UserDAO {
 		mapper.registerModule(new UserModule());
 	}
 
+	@Override
 	public ArrayList<User> getAllUsers() {
 		try {
 			String fileJson = readFromFile(this.getPath());
@@ -46,6 +47,7 @@ public class UserDAOImpl implements UserDAO {
 		return new ArrayList<User>();
 	}
 	
+	@Override
 	public User findUser(User targetUser) {
 		for (User user : getAllUsers()) {
 			if(user.equals(targetUser)) {
@@ -55,7 +57,8 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	public void updateUser(UserId id, UserData data) {
+	@Override
+	public boolean updateUser(UserId id, UserData data) {
 		List<User> tempList = getAllUsers();
 
 		for (int i = 0; i < tempList.size(); i++) {
@@ -68,34 +71,42 @@ public class UserDAOImpl implements UserDAO {
 		}
 		try {
 			storeToFile(this.getPath(), userListToJson(tempList));
+			return true;
 			
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
+		return false;
 	}
 
-	public void deleteUser(UserId id) {
+	@Override
+	public boolean deleteUser(UserId id) {
 		List<User> changedList = getAllUsers();
 
 		Predicate<User> deleteCondition = user -> user.getUserId().equals(id);
 		changedList.removeIf(deleteCondition);
 		try {
 			storeToFile(this.getPath(), userListToJson(changedList));
+			return true;
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
+		return false;
 	}
 
-	public void addUser(User user) {
+	@Override
+	public boolean addUser(User user) {
 		try {
 			ArrayList<User> users = getAllUsers();
-			if (users.stream().anyMatch((u) -> u.equals(user))) return;
+			if (users.stream().anyMatch((u) -> u.equals(user))) return false;
 
 			users.add(user);
 			storeToFile(this.getPath(), userListToJson(users));
+			return true;
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
+		return false;
 	}
 
 	private String userListToJson(List<User> userList) {
