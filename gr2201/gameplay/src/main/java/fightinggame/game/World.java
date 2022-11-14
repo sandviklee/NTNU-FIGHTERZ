@@ -7,36 +7,36 @@ public class World {
     private ArrayList<WorldEntity> worldEntities;
     private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
     private ArrayList<String> keysHeld = new ArrayList<>();
-    
+    private ArrayList<String> Sides = new ArrayList<>(Arrays.asList("Top", "Bottom", "Left", "Right"));
     private ArrayList<Projectile> finishedProjectiles;
-    private HashMap<GameCharacter, Boolean> isOnGroundHash = new HashMap<>();
+    
+    private HashMap<GameCharacter, HashMap<String, Boolean>> CollisionHash = new HashMap<>();
     private HashMap<GameCharacter, Boolean> clickActionHash = new HashMap<>();
     private HashMap<GameCharacter, ArrayList<String>> heldKeyHash = new HashMap<>();
     private HashMap<GameCharacter, ArrayList<String>> inputPerEntity = new HashMap<>();
     private HashMap<GameCharacter, Projectile> projectileReady = new HashMap<>();
     private HashMap<GameCharacter, Boolean> spawnProjectileHash = new HashMap<>();
+
     private String NewHeldKey = "Idle";
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = new ArrayList<>(worldEntities);
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
-                isOnGroundHash.put((GameCharacter) entity, false);
+                HashMap<String, Boolean> CollideSideHash = new HashMap<>();
+                
+                ArrayList<String> heldKeysList = new ArrayList<>(Arrays.asList("Idle", "Idle"));
+                for (String side : Sides) {
+                    CollideSideHash.put(side, false);
+                }
+                CollisionHash.put((GameCharacter) entity, CollideSideHash);
                 clickActionHash.put((GameCharacter) entity, false);
                 spawnProjectileHash.put((GameCharacter) entity, false);
-                ArrayList<String> heldKeysList = new ArrayList<>(Arrays.asList("Idle", "Idle"));
                 heldKeyHash.put((GameCharacter) entity, heldKeysList);
                 projectileReady.put((GameCharacter) entity, null);
                 inputPerEntity.put((GameCharacter) entity, new ArrayList<>());
                 gameCharacters.add((GameCharacter) entity);
             }
-        }
-    }
-
-    public void addWorldEntity(WorldEntity worldEntity){
-        worldEntities.add(worldEntity);
-        if (worldEntity instanceof GameCharacter){
-            isOnGroundHash.put((GameCharacter) worldEntity, false);
         }
     }
 
@@ -48,41 +48,54 @@ public class World {
 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
-            if (entity1 instanceof GameCharacter) {
-                isOnGroundHash.put((GameCharacter) entity1, false);
+            for (String side : Sides) {
+                if (entity1 instanceof GameCharacter) {
+                    CollisionHash.get((GameCharacter) entity1).put(side, false);
+                }
             }
             for (WorldEntity entity2 : worldEntities) {
                 if (entity1 instanceof GameCharacter && entity2 instanceof Terrain) {
-                    switch (entity1.getHurtBox().EffectBoxInEffectBox(entity2.getHitBox())) {
+                    String currentSide = entity1.getHurtBox().EffectBoxInEffectBox(entity2.getHitBox());
+                    if (entity2.getName().equals("Test")) {
+                        //System.out.println(currentSide);
+                    }
+                    
+                    if (Sides.contains(currentSide)) {
+                        CollisionHash.get((GameCharacter) entity1).put(currentSide, true);
+                    }
+
+                    switch (currentSide) {
                         case "Top":
-                        isOnGroundHash.put((GameCharacter) entity1, true);
+                        entity1.setOnGround(CollisionHash.get((GameCharacter) entity1).get(currentSide));
                         break;
 
                         case "Bottom":
-                        //TODO:
+                        entity1.setOnTop(CollisionHash.get((GameCharacter) entity1).get(currentSide));
                         break;
 
                         case "Left":
-                        //TODO:
+                        entity1.setOnLeft(CollisionHash.get((GameCharacter) entity1).get(currentSide));
                         break;
 
                         case "Right":
-                        //TODO:
+                        entity1.setOnRight(CollisionHash.get((GameCharacter) entity1).get(currentSide));
                         break;
-                    }
-                    /*
-                    if (entity2.hitboxCollision(entity1.getHurtBox())) {
-                        isOnGroundHash.put((GameCharacter) entity1, true);
-                    }
-                    */
+
+                        case "Outside":
+                        entity1.setOnGround(CollisionHash.get((GameCharacter) entity1).get("Top"));
+                        entity1.setOnTop(CollisionHash.get((GameCharacter) entity1).get("Bottom"));
+                        entity1.setOnRight(CollisionHash.get((GameCharacter) entity1).get("Right"));
+                        entity1.setOnLeft(CollisionHash.get((GameCharacter) entity1).get("Left"));
+                        break;
+                    } 
+                    //System.out.println(CollisionHash);   
                     
                 }
                 
-                if (entity1 instanceof GameCharacter) {
-                    entity1.setOnGround(isOnGroundHash.get(entity1));
-                }   
             }
+            
         }
+        //System.out.println(CollisionHash);    
     }
 
     private void setActions(String input, String inputR){
@@ -104,7 +117,7 @@ public class World {
         }
 
         //System.out.println("Keys Held: " + keysHeld + " keyArray: " + keyInputArray);
-
+        
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {     
                 Action currentAction = worldEntity.getCurrentAction();
@@ -137,7 +150,7 @@ public class World {
 
                 NewHeldKey = heldKeyHash.get(worldEntity).get(0); //Get the GameCharacters NewHeldKey
 
-                if (actionAvailKeys.contains(NewHeldKey) && actionAvailKeys.indexOf(NewHeldKey) <= 15) {
+                if (actionAvailKeys.contains(NewHeldKey) && actionAvailKeys.indexOf(NewHeldKey) <= 15 && actionAvailKeys.indexOf(NewHeldKey) >= 2) {
                     if (NewHeldKey.contains(actionAvailKeys.get(2)) || NewHeldKey.contains(actionAvailKeys.get(7)) || NewHeldKey.contains(actionAvailKeys.get(15).substring(1))) {
                         if (((NewHeldKey.contains(actionAvailKeys.get(2)) && currentAction.trySelfInterrupt(worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey)))) && worldEntity.getJumpCounter() <= 1)) {
                             clickActionHash.put((GameCharacter) worldEntity, true);
@@ -193,7 +206,7 @@ public class World {
         for (GameCharacter character : gameCharacters) {
             if (spawnProjectileHash.get(character) && projectileReady.get(character) != null) {
                 projectileReady.get(character).setCurrentAction(0);
-                worldEntities.add(projectileReady.get(character));
+                addWorldEntity(projectileReady.get(character));
                 spawnProjectileHash.put(character, false);
                 projectileReady.put(character, null);
             }
@@ -222,6 +235,9 @@ public class World {
     public ArrayList<WorldEntity> getWorldEntities() {
         return worldEntities;
     }
-
     
+    private void addWorldEntity(WorldEntity worldEntity){
+        worldEntities.add(worldEntity);
+    }
+
 }

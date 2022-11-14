@@ -29,7 +29,9 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(500, 500));
-    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(800, 910));
+    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
+    private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 560));
+    private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(280, 560));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1100, 500));
     
     private SpriteRenderer renderer;
@@ -40,9 +42,11 @@ public class SingleplayerGameController extends SceneController{
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys);
-        //GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
+        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain("Test", terrainPosition, 1300, 200);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1150, 150);
+        Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 250, 70);
+        Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 250, 70);
         loadCharacterSprite(character, playerSprites);
         //loadCharacterSprite("Dummy", playerSprites);
         loadCharacterSprite("Assets", playerSprites);
@@ -50,9 +54,13 @@ public class SingleplayerGameController extends SceneController{
         //System.out.println(playerSprites);
         worldEntities.add(player);
 
-        //worldEntities.add(player2);
+        worldEntities.add(player2);
         //worldEntities.add(dummy);
+        worldEntities.add(terrain3);
+        worldEntities.add(terrain2);
         worldEntities.add(terrain);
+        
+        
 
         world = new World(worldEntities);
         renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites);
@@ -102,7 +110,7 @@ public class SingleplayerGameController extends SceneController{
     }
 
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        File[] spriteFiles = new File("gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             

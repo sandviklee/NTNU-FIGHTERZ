@@ -55,19 +55,40 @@ public class Effectbox {
         double thisLeft = this.center.getX() - this.getWidth()/2;
         double otherLeft = otherBox.center.getX() - otherBox.getWidth()/2;
         
+        if (otherBox.getOwner().getName().equals("Test2")) {
+            //System.out.println(dy + " " + halfHeightSum);
+        }
+        
         //Top means that this effectbox is on top of the other.
         if (dx <= halfWidthSum && dy <= halfHeightSum){
+            /*Had to configure the priority because if Top and Bottom was tested before left and right, you could just go through the terrain.
+            This code is made so that if you are on top of a hitbox, you are still at the top, if your characters bottom coordinate
+            is over (in programming case under) the top of the terrain hitbox you are still on top, even if its checked that 
+            you are technically on the left or right of the terrain hitbox.
+            The random +10 is there so that when the gravity takes the character a bit into the terrain hitbox, it still counts the bottom
+            of the character hurtbox as "over" the terrain hitbox.
+            */
+            if (thisLeft <= otherLeft){
+                if (thisBottom <= otherBoxTop + 10){
+                    return "Top";
+                } else {
+                    return "Left";
+                }
+                
+            }
+            if (thisRight >= otherRight){
+                if (thisBottom <= otherBoxTop + 10){
+                    return "Top";
+                } else {
+                    return "Right";
+                }
+            }
+
             if (thisTop <= otherBoxTop){
                 return "Top";
             }
             if (thisBottom >= otherBoxBottom){
                 return "Bottom";
-            }
-            if (thisLeft <= otherLeft){
-                return "Left";
-            }
-            if (thisRight >= otherRight){
-                return "Right";
             }
 
             return "Contained";
@@ -117,6 +138,10 @@ public class Effectbox {
 
     public double getOffsetY() {
         return offsetY;
+    }
+
+    public WorldEntity getOwner() {
+        return owner;
     }
 
 

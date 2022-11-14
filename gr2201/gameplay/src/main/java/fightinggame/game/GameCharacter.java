@@ -11,6 +11,7 @@ public class GameCharacter extends WorldEntity{
     private int facingDirection = 1;
     private int appliedVector;
     private int jumpCounter = 0;
+    private int noLongerCollision = 1;
     
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ArrayList<String> availKeys;
@@ -20,7 +21,7 @@ public class GameCharacter extends WorldEntity{
     private Vector mainVector = new Vector();
     private Vector gravityVector = new Vector(0, 12, 0, 0, 1);
 
-    private boolean onGround = true;
+    private boolean onGround = false;
     private boolean onRight = false;
     private boolean onLeft = false;
     private boolean onTop = false; 
@@ -50,26 +51,15 @@ public class GameCharacter extends WorldEntity{
         setCurrentAction(0);
     }
 
-    @Override
-    public ArrayList<String> getAvailKeys() {
-        return availKeys;
-    }
-
-    public Predicate<String> getPredicate() {
-        return availKey;
-    }
-
-    public Effectbox getHurtBox() {
-        return hurtBox;
-    }
-
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
             clearVectors();
             Action newAction = getAction(actionNumber);
+
             if (newAction.getKnockback().getVy() != 0 && newAction.isMovement()) {
                 jumpCounter++;
             }
+            
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
 
@@ -91,37 +81,6 @@ public class GameCharacter extends WorldEntity{
         } 
     }
 
-    public Action getAction(int actionNumber) {
-        property = actionHash.get(actionNumber);
-        return new Action(property);
-    }
-
-    public void applyVectors() {
-        Vector knockback = this.currentAction.getKnockback();
-        mainVector.addVector(knockback);
-
-    }
-
-    public void setOnGround(boolean onGround) {
-		this.onGround = onGround;
-        if (onGround && mainVector.getVy() > 0) {
-            jumpCounter = 0;
-            clearGravityVector();
-        }
-        //mainVector = new Vector(mainVector.getVx(), 0, 0, 0, facingDirection);
-	}
-
-    public void setOnRight(boolean onRight) {
-        this.onRight = onRight;
-        if (onRight && mainVector.getVx() > 0) {
-            clearHorisontalVector();
-        }
-    }
-
-    private void clearVectors() {
-        mainVector = new Vector();
-    }
-
     public void doAction(){
         if (currentAction.startHitBox() && appliedVector == 0) {
             appliedVector++;
@@ -129,9 +88,31 @@ public class GameCharacter extends WorldEntity{
                 applyVectors();
             }
         }
-        if (!onGround && mainVector.getVy() == 0) { //NB DETTE ER BARE FOR TESTING AV NÅR DET SKAL LEGGES TIL GRAVITASJONSVEKTOREN
-            mainVector.addVector(gravityVector);
+
+        if (onTop) {
+            clearVerticalVector();
         }
+
+        if (onGround) {
+            if (mainVector.getVy() > 0) {
+                clearVerticalVector();
+                jumpCounter = 0;
+            }
+        } else {
+            if (mainVector.getVy() == 0) {
+                mainVector.addVector(gravityVector);
+            }
+        }
+
+        if (mainVector.getVx() < 0 && onRight) {
+            clearHorisontalVector();
+            noLongerCollision = 0;
+        } else if (mainVector.getVx() > 0 && onLeft) {
+            clearHorisontalVector();
+            noLongerCollision = 0;
+        } 
+
+
 		point.setX(point.getX() + mainVector.getVx());
 		point.setY(point.getY() + mainVector.getVy());
         hurtBox.updatePos();
@@ -144,13 +125,57 @@ public class GameCharacter extends WorldEntity{
             if (!currentAction.isProjectile()) { //If the current action is a projectile action, dont update the hitbox of the gamechar action.
                 currentAction.getHitBox().updatePos();
             }
-            
-            //System.out.println(currentHitBox.getPosX());
         }
 
         mainVector.applyAcceleration();
 		currentAction.nextActionFrame();
 	}
+
+    public void applyVectors() {
+        Vector knockback = this.currentAction.getKnockback();
+        mainVector.addVector(knockback);
+
+    }
+
+    public void setOnGround(boolean onGround) {
+		this.onGround = onGround;
+        if (onGround) {
+            if (mainVector.getVy() > 0) {
+                clearVerticalVector();
+                jumpCounter = 0;
+            }
+        } 
+	}
+
+    public void setOnTop(boolean onTop) {
+		this.onTop = onTop;
+	}
+
+    public void setOnLeft(boolean onLeft) {
+        this.onLeft = onLeft;
+    }
+
+    public void setOnRight(boolean onRight) {
+        this.onRight = onRight;
+    }
+
+    @Override
+    public ArrayList<String> getAvailKeys() {
+        return availKeys;
+    }
+
+    public Predicate<String> getPredicate() {
+        return availKey;
+    }
+
+    public Effectbox getHurtBox() {
+        return hurtBox;
+    }
+
+    public Action getAction(int actionNumber) {
+        property = actionHash.get(actionNumber);
+        return new Action(property);
+    }
 
     public Vector getVector() {
         return mainVector;
@@ -164,13 +189,16 @@ public class GameCharacter extends WorldEntity{
         return jumpCounter;
     }
 
-    private void clearGravityVector() {
-        mainVector.setVy(0);
-        //mainVector.removeVector(gravityVector);
+    private void clearVectors() {
+        mainVector = new Vector();
     }
 
     private void clearHorisontalVector() {
         mainVector.setVx(0);
+    }
+
+    private void clearVerticalVector() {
+        mainVector.setVy(0);
     }
 
 

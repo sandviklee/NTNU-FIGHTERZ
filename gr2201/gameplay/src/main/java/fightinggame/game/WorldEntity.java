@@ -16,27 +16,17 @@ public abstract class WorldEntity {
 		this.point = new Point((double) pos.get(0), (double) pos.get(1));
 	}
 	    
-    public boolean hitboxCollision(Effectbox effectbox) {
-        //NB: SJEKKER BARE FOR UNDER Y AKKURAT NÅ
-        if ((effectbox.getPosY() + effectbox.getHeight()/2 + 5) > (hitBox.getPosY() - hitBox.getHeight()/2)) {
-            if (((hitBox.getPosX() - hitBox.getWidth()/2) < (effectbox.getPosX() + effectbox.getWidth()/2)) && 
-            ((hitBox.getPosX() + hitBox.getWidth()/2) > (effectbox.getPosX() - effectbox.getWidth()/2))) {
-                return true;
-            } else {
-				return false;
-			}
-        } else {
-			return false;
-		}
-    }
- 
-	public void setOnGround(boolean b) {
-		
-	}
+	public void setOnGround(boolean b) {}
 	
-	public void doAction(){
+	public void setOnRight(boolean b) {}
 
-	}
+	public void setOnLeft(boolean b) {}
+
+	public void setOnTop(boolean b) {}
+
+	public void setCurrentAction(Integer actionNumber) {}
+
+	public void doAction(){}
 
 	public Action getAction(int actionNumber) {
         return null;
@@ -77,8 +67,6 @@ public abstract class WorldEntity {
 	public Action getCurrentAction() {
 		return currentAction;
 	}
-
-	public void setCurrentAction(Integer actionNumber) {}
 
 	public int getCurrentFrame(){
 		return currentAction.getCurrentFrame();
