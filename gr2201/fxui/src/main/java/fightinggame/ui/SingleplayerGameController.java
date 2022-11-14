@@ -40,17 +40,17 @@ public class SingleplayerGameController extends SceneController{
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys);
-        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
+        //GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         Terrain terrain = loadTerrain("Test", terrainPosition, 1300, 200);
         loadCharacterSprite(character, playerSprites);
-        loadCharacterSprite("Dummy", playerSprites);
+        //loadCharacterSprite("Dummy", playerSprites);
         loadCharacterSprite("Assets", playerSprites);
         
         //System.out.println(playerSprites);
         worldEntities.add(player);
 
-        worldEntities.add(player2);
+        //worldEntities.add(player2);
         //worldEntities.add(dummy);
         worldEntities.add(terrain);
 
@@ -102,7 +102,7 @@ public class SingleplayerGameController extends SceneController{
     }
 
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        File[] spriteFiles = new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             

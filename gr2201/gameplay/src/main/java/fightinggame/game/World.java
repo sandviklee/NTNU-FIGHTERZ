@@ -53,14 +53,34 @@ public class World {
             }
             for (WorldEntity entity2 : worldEntities) {
                 if (entity1 instanceof GameCharacter && entity2 instanceof Terrain) {
+                    switch (entity1.getHurtBox().EffectBoxInEffectBox(entity2.getHitBox())) {
+                        case "Top":
+                        isOnGroundHash.put((GameCharacter) entity1, true);
+                        break;
+
+                        case "Bottom":
+                        //TODO:
+                        break;
+
+                        case "Left":
+                        //TODO:
+                        break;
+
+                        case "Right":
+                        //TODO:
+                        break;
+                    }
+                    /*
                     if (entity2.hitboxCollision(entity1.getHurtBox())) {
                         isOnGroundHash.put((GameCharacter) entity1, true);
                     }
+                    */
                     
                 }
+                
                 if (entity1 instanceof GameCharacter) {
                     entity1.setOnGround(isOnGroundHash.get(entity1));
-                }       
+                }   
             }
         }
     }
@@ -96,8 +116,6 @@ public class World {
                         keys.add(key);
                     }
                 }
-
-                
                 inputPerEntity.put((GameCharacter) worldEntity, keys);
 
                 if (!inputPerEntity.get(worldEntity).isEmpty()) { //get first key

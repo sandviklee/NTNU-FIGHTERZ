@@ -7,14 +7,6 @@ public class Vector {
     private double ay;
     private int direction;
 
-    public double getVx(){
-        return this.vx;
-    }
-
-    public double getVy(){
-        return this.vy;
-    }
-
     /**
      * Constructors for a vector in a specific directions. Will throw an exeption if velocity if not 
      * @param vx
@@ -86,6 +78,18 @@ public class Vector {
 
     public void setVy(double vy) {
         this.vy = vy;
+    }
+
+    public void setVx(double vx) {
+        this.vx = vx;
+    }
+
+    public double getVx(){
+        return this.vx;
+    }
+
+    public double getVy(){
+        return this.vy;
     }
 
     public int getDirection() {

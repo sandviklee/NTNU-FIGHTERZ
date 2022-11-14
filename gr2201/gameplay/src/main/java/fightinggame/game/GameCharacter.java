@@ -8,6 +8,10 @@ public class GameCharacter extends WorldEntity{
     private double weight;
     private double speed;
     private int damage;
+    private int facingDirection = 1;
+    private int appliedVector;
+    private int jumpCounter = 0;
+    
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ArrayList<String> availKeys;
     private Predicate<String> availKey = i -> availKeys.contains(i);
@@ -15,10 +19,11 @@ public class GameCharacter extends WorldEntity{
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
     private Vector gravityVector = new Vector(0, 12, 0, 0, 1);
-    private int facingDirection = 1;
-    private int appliedVector;
+
     private boolean onGround = true;
-    private int jumpCounter = 0;
+    private boolean onRight = false;
+    private boolean onLeft = false;
+    private boolean onTop = false; 
 
     public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys) {
         super(playerProperties.getCharacterName(), pos);
@@ -97,21 +102,21 @@ public class GameCharacter extends WorldEntity{
 
     }
 
-    public void clearGravityVector() {
-        mainVector.setVy(0);
-        //mainVector.removeVector(gravityVector);
-    
-    }
-    
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround && mainVector.getVy() > 0) {
             jumpCounter = 0;
             clearGravityVector();
         }
-        
         //mainVector = new Vector(mainVector.getVx(), 0, 0, 0, facingDirection);
 	}
+
+    public void setOnRight(boolean onRight) {
+        this.onRight = onRight;
+        if (onRight && mainVector.getVx() > 0) {
+            clearHorisontalVector();
+        }
+    }
 
     private void clearVectors() {
         mainVector = new Vector();
@@ -155,12 +160,17 @@ public class GameCharacter extends WorldEntity{
         return facingDirection;
     }
 
-    public boolean getOnGround() {
-        return onGround;
-    }
-
     public int getJumpCounter() {
         return jumpCounter;
+    }
+
+    private void clearGravityVector() {
+        mainVector.setVy(0);
+        //mainVector.removeVector(gravityVector);
+    }
+
+    private void clearHorisontalVector() {
+        mainVector.setVx(0);
     }
 
 

@@ -29,13 +29,7 @@ public abstract class WorldEntity {
 			return false;
 		}
     }
-
-	
-    public boolean getOnGround() {
-		return isAlive;
-
-    }
-    
+ 
 	public void setOnGround(boolean b) {
 		
 	}
