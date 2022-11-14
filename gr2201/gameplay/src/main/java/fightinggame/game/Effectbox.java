@@ -75,8 +75,13 @@ public class Effectbox {
         return false;
     }
     
-    private boolean EffectBoxInEffectBox(Effectbox otherBox){
-        // TODO:
+    private String EffectBoxInEffectBox(Effectbox otherBox){
+        double dx = Math.abs(this.center.getX() - otherBox.center.getX());
+        double dy = Math.abs(this.center.getY() - otherBox.center.getY());
+
+        double halfHeightSum = this.getHeight()/2 + otherBox.getHeight()/2;
+        double halfWidthSum = this.getWidth()/2 + otherBox.getWidth()/2;
+
         return false;
     }
 
