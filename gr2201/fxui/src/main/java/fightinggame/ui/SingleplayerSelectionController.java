@@ -1,5 +1,6 @@
 package fightinggame.ui;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -8,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,10 +21,21 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
+    Media audio = new Media(new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.mp3").toURI().toString());
+    MediaPlayer audioPlayer = new MediaPlayer(audio);
 
     @FXML
     private void initialize(){
         lockIn.setDisable(true);
+        audioPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+              audioPlayer.seek(Duration.ZERO);
+            }
+        });
+       audioPlayer.play();
+        audioPlayer.onRepeatProperty();
+        audioPlayer.play();;
+        
     }
 
     public ImageView getCharacterSelected(){
@@ -44,6 +59,7 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
+        audioPlayer.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
@@ -55,6 +71,7 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
+        audioPlayer.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
