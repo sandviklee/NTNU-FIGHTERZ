@@ -78,7 +78,7 @@ public class Effectbox {
      * Checks if an EffectBox intersects with an other Effectbox. 
      * @param otherBox
      * @return Returns a string describing if the Effectboxes intercect and if so how. Will return the side which is not contained, prioritizing top and bottom 
-     * over left and right
+     * over left and right. If the Effectbox is fully contained it will return "Contained"
      */
     private String EffectBoxInEffectBox(Effectbox otherBox) {
         //Variables for the x and y distances of the two Effectboxes and the required distances for them to intersect
