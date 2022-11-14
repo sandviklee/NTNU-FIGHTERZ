@@ -34,21 +34,21 @@ public class CharacterInformationMenuControllerTest extends ApplicationTest {
     public void testClickRam(){
         clickOn("#Ram");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Ram INFO", title, "Not correct title");
+        Assertions.assertEquals("Ram", title, "Not correct title");
     }
 
     @Test
     public void testClickSly(){
         clickOn("#Sly");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Sly INFO", title, "Not correct title");
+        Assertions.assertEquals("Sly", title, "Not correct title");
     }
 
     @Test
     public void testClickSol(){
         clickOn("#Sol");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Sol INFO", title, "Not correct title");
+        Assertions.assertEquals("Sol", title, "Not correct title");
     }
 
     @Test

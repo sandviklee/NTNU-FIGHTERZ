@@ -22,10 +22,16 @@ public class CharacterInformationMenuController extends SceneController{
         Parent root = loader.load();
         CharacterInformationController controller = loader.getController();
         controller.setUser(super.getUser());
-        controller.setCharacter(image.getId());
-        super.changeSceneMouseEvent("NTNU Fighterz", root, event);
+        try {
+            controller.setCharacter(image.getId());
+            super.changeSceneMouseEvent("NTNU Fighterz", root, event);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            showError("Error: Could not instantiate character.", "Something went wrong and character information files could not be found or contained wrong information.");
+        } catch (IOException e) {
+            showError("Error: Invalid game characters file path.", "Something went wrong and character game files could not be found.");
+        }
     }
-    
+
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
