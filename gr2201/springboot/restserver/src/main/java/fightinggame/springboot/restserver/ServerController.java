@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fightinggame.users.User;
@@ -50,8 +51,11 @@ public class ServerController {
      * @param password  to match with users in db
      * @return the user with same username and password or null
      */
-    @PostMapping(path = "/{username}/{password}/{confirmPassword}")
-    public User postUser(@PathVariable("username") String username, @PathVariable("password") String password, @PathVariable("confirmPassword") String confirmPassword) {
+    @PostMapping(path = "/{username}")
+    public User postUser(@RequestParam("userData") String userData) {
+        String username = userData.split(".")[0];
+        String password = userData.split(".")[1];
+        String confirmPassword = userData.split(".")[2];
         return getServerService().postUser(username, password, confirmPassword);
     }
 
