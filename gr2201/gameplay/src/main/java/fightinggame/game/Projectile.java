@@ -8,7 +8,8 @@ public class Projectile extends WorldEntity{
     private ActionProperties property;
     private Effectbox hitBox;
     private Vector mainVector;
-
+    private int facingDirection;
+    
     public Projectile(String name, ArrayList<Integer> pos, Vector knockback, Effectbox hitbox, int damage) {
         super(name, pos);
         int hitBoxWidth = (int) hitbox.getWidth();
@@ -29,6 +30,11 @@ public class Projectile extends WorldEntity{
     }
 
     public void doAction() {
+        if (currentAction.getKnockback().getVx() > 0) {
+            facingDirection = 1;
+        } else {
+            facingDirection = -1;
+        }
         if (currentAction != null && !currentAction.getIsDone()) {
             point.setX(point.getX() + currentAction.getKnockback().getVx());
             point.setY(point.getY() + currentAction.getKnockback().getVy());
@@ -40,6 +46,10 @@ public class Projectile extends WorldEntity{
 
     public Effectbox getHitBox() {
         return hitBox;
+    }
+
+    public int getFacingDirection() {
+        return facingDirection;
     }
 
 

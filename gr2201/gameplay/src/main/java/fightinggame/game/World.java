@@ -122,7 +122,6 @@ public class World {
                         }
                     }
                 }
-
             }
         }
     }
@@ -277,6 +276,7 @@ public class World {
         Vector vec2 = worldCharacter2.getVector();
 
         vec2.setVx(Math.abs(vec1.getVx())*worldCharacter1.getFacingDirection());
+
         vec2.setVy(vec1.getVy() - 24);
 
         if (vec2.getVx() != 0) {
