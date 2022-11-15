@@ -26,11 +26,15 @@ public abstract class WorldEntity {
 
 	public void setCurrentAction(Integer actionNumber) {}
 
-	public void doAction(){}
-
+	public void doAction() {}
+	
 	public Action getAction(int actionNumber) {
         return null;
     }
+
+	public Vector getVector() {
+		return null;
+	}
 
 	public Predicate<String> getPredicate() {
 		return null;
@@ -40,16 +44,28 @@ public abstract class WorldEntity {
 		return null;
 	}
 
+    public double getX() {
+		return point.getX();
+	}
+
+	public double getY() {
+		return point.getY();
+	}
+
+	public double getStartX() {
+		return 0;
+	}
+
+	public double getStartY() {
+		return 0;
+	}
+
 	public int getFacingDirection() {
         return 0;
     }
 
 	public String getName() {
 		return name;
-	}
-
-	public Point getPoint() {
-		return point;
 	}
 
 	public Effectbox getHurtBox() {

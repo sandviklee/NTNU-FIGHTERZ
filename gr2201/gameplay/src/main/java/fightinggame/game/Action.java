@@ -88,12 +88,13 @@ public class Action {
      * Needs to be specified when the other action is aquired (if it is an enemy or self)
      * @param otherEnemyActionPriority  the value to compare with own actionPriority
      */
-    public void tryEnemyInterrupt(int otherEnemyActionPriority) {
+    public boolean tryEnemyInterrupt(Action otherSelfAction) {
         if (isEnemyInterruptible) {
-            if (actionPriority <= otherEnemyActionPriority) {
-                currentTime = duration;
+            if (actionPriority < otherSelfAction.getActionPriority()) {
+                return true;
             } 
         }
+        return false;
     }
 
     /**

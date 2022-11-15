@@ -55,10 +55,6 @@ public class Effectbox {
         double thisLeft = this.center.getX() - this.getWidth()/2;
         double otherLeft = otherBox.center.getX() - otherBox.getWidth()/2;
         
-        if (otherBox.getOwner().getName().equals("Test2")) {
-            //System.out.println(dy + " " + halfHeightSum);
-        }
-        
         //Top means that this effectbox is on top of the other.
         if (dx <= halfWidthSum && dy <= halfHeightSum){
             /*Had to configure the priority because if Top and Bottom was tested before left and right, you could just go through the terrain.

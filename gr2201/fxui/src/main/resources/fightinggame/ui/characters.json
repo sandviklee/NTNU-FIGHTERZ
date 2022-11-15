@@ -25,10 +25,10 @@
             {
                 "actionName": "HitStun",
                 "isSelfInterruptible": false,
-                "isEnemyInterruptible": true,
+                "isEnemyInterruptible": false,
                 "actionPriority": 4,
                 "damage": 0,
-                "duration": 10,
+                "duration": 8,
                 "hitBoxStartTime": 0,
                 "totalFrames": 8,
                 "isAnimationLoop": false,
@@ -155,7 +155,7 @@
                 "actionPriority": 2,
                 "damage": 13,
                 "knockback":[
-                    20,
+                    30,
                     0,
                     0,
                     0 
@@ -183,7 +183,7 @@
                 "actionPriority": 2,
                 "damage": 15,
                 "knockback":[
-                    18,
+                    20,
                     0,
                     0,
                     0,
@@ -211,7 +211,7 @@
                 "actionPriority": 2,
                 "damage": 15,
                 "knockback":[
-                    18,
+                    20,
                     0,
                     0,
                     0,
@@ -281,9 +281,9 @@
                 "actionPriority": 4,
                 "damage": 10,
                 "knockback":[
-                    12,
+                    20,
                     0,
-                    -2,
+                    0,
                     0,
                     1 
                 ],
@@ -309,9 +309,9 @@
                 "actionPriority": 4,
                 "damage": 10,
                 "knockback":[
-                    12,
+                    20,
                     0,
-                    -2,
+                    0,
                     0,
                     -1 
                 ],
@@ -361,13 +361,13 @@
                 },
                 "isSelfInterruptible": true,
                 "isEnemyInterruptible": true,
-                "actionPriority": 4,
+                "actionPriority": 1,
                 "damage": 13,
                 "knockback":[
-                    60,
-                    -10,
-                    -10,
-                    2
+                    32,
+                    -8,
+                    0,
+                    0
                 ],
                 "duration": 9,
                 "hitBoxStartTime": 2,

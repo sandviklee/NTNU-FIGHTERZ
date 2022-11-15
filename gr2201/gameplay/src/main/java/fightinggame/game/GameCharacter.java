@@ -8,10 +8,12 @@ public class GameCharacter extends WorldEntity{
     private double weight;
     private double speed;
     private int damage;
+    private double startX;
+    private double startY;
     private int facingDirection = 1;
     private int appliedVector;
     private int jumpCounter = 0;
-    private int noLongerCollision = 1;
+    private int deathCounter = 0;
     
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ArrayList<String> availKeys;
@@ -26,12 +28,15 @@ public class GameCharacter extends WorldEntity{
     private boolean onLeft = false;
     private boolean onTop = false; 
 
-    public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys) {
+    public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
+        this.startX = getX();
+        this.startY = getY();
         this.availKeys = availKeys;
-        this.hurtBox = new Effectbox(this, super.getPoint(), false, playerProperties.getWidth(), playerProperties.getLength());
+        this.hurtBox = new Effectbox(this, this.point, false, playerProperties.getWidth(), playerProperties.getLength());
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
+        this.facingDirection = facingDirection;
 
         // Add all action found in playerproperties to a hashmap that maps them to a number
         for (ActionProperties property : playerProperties.getActionProperties()) {
@@ -106,10 +111,8 @@ public class GameCharacter extends WorldEntity{
 
         if (mainVector.getVx() < 0 && onRight) {
             clearHorisontalVector();
-            noLongerCollision = 0;
         } else if (mainVector.getVx() > 0 && onLeft) {
             clearHorisontalVector();
-            noLongerCollision = 0;
         } 
 
 
@@ -118,6 +121,10 @@ public class GameCharacter extends WorldEntity{
         hurtBox.updatePos();
         Effectbox currentHitBox = currentAction.getHitBox();
 
+        if (currentAction.getName().equals("HitStun")) {
+            System.out.println(mainVector.getVx());
+        }
+        
 
         if (currentHitBox != null) {
             currentHitBox.getPoint().setX(point.getX() + Math.abs(currentHitBox.getOffsetX())*facingDirection);
@@ -135,6 +142,11 @@ public class GameCharacter extends WorldEntity{
         Vector knockback = this.currentAction.getKnockback();
         mainVector.addVector(knockback);
 
+    }
+
+    public void setPosition(double x, double y) {
+        this.point.setX(x);
+        this.point.setY(y);
     }
 
     public void setOnGround(boolean onGround) {
@@ -157,6 +169,18 @@ public class GameCharacter extends WorldEntity{
 
     public void setOnRight(boolean onRight) {
         this.onRight = onRight;
+    }
+
+    public void resetDamage() {
+        this.damage = 0;
+    }
+
+    public void resetAction() {
+        setCurrentAction(0);
+    }
+
+    public void iterateDeathCounter() {
+        this.deathCounter++;
     }
 
     @Override
@@ -189,16 +213,30 @@ public class GameCharacter extends WorldEntity{
         return jumpCounter;
     }
 
+    public int getDeathCounter() {
+        return deathCounter;
+    }
+
+    public double getStartX() {
+		return startX;
+	}
+
+	public double getStartY() {
+		return startY;
+	}
+
     private void clearVectors() {
         mainVector = new Vector();
     }
 
     private void clearHorisontalVector() {
         mainVector.setVx(0);
+        mainVector.setAx(0);
     }
 
     private void clearVerticalVector() {
         mainVector.setVy(0);
+        mainVector.setAy(0);
     }
 
 

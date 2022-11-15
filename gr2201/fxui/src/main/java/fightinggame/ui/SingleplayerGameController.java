@@ -28,11 +28,12 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
-    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(500, 500));
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(280, 200));
+    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 200));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
     private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 560));
     private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(280, 560));
-    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1100, 500));
+    
     
     private SpriteRenderer renderer;
     private String keyInputs = "";
@@ -41,8 +42,8 @@ public class SingleplayerGameController extends SceneController{
 
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, player1Keys);
-        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
+        GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1);
+        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, -1);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         Terrain terrain = loadTerrain("Test", terrainPosition, 1150, 150);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 250, 70);
@@ -53,14 +54,11 @@ public class SingleplayerGameController extends SceneController{
         
         //System.out.println(playerSprites);
         worldEntities.add(player);
-
         worldEntities.add(player2);
         //worldEntities.add(dummy);
         worldEntities.add(terrain3);
         worldEntities.add(terrain2);
         worldEntities.add(terrain);
-        
-        
 
         world = new World(worldEntities);
         renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites);
@@ -74,12 +72,12 @@ public class SingleplayerGameController extends SceneController{
      * @param availKeys  that shall controll the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int facingDirection){
         CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
         PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
 
-        return new GameCharacter(playerProperties, position, availKeysArray); //loaded from json,should maybe have a starting position
+        return new GameCharacter(playerProperties, position, availKeysArray, facingDirection); //loaded from json,should maybe have a starting position
     }
 
     private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character

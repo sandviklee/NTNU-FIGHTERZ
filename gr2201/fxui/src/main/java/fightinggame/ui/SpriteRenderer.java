@@ -55,8 +55,8 @@ public class SpriteRenderer {
                 }
 
                 Image playerIntImg = playerSprites.get("Assetsplayer" + playerInt);
-                double posX = entity.getPoint().getX() - width/2;
-                double posY = entity.getPoint().getY() - height/2;
+                double posX = entity.getX() - width/2;
+                double posY = entity.getY() - height/2;
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
                 (entity.getFacingDirection() > 0 ? posX : (posX + 275)), posY, width*entity.getFacingDirection(), height);
                 content.drawImage(playerIntImg, posX + 110, posY - 45, 60, 65);
@@ -73,8 +73,8 @@ public class SpriteRenderer {
             } else if (entity instanceof Projectile) {
                 int width = 80;
                 int height = 80;
-                double posX = entity.getPoint().getX() - (width/2 - 10);
-                double posY = entity.getPoint().getY() - (height/2);
+                double posX = entity.getX() - (width/2 - 10);
+                double posY = entity.getY() - (height/2);
                 //System.out.println("posX: " + posX + " posY: " + posY);
                 Effectbox hitbox = entity.getHitBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
@@ -102,7 +102,7 @@ public class SpriteRenderer {
 
     private void drawCircle(WorldEntity entity, int radius, GraphicsContext cntn, Color color) {
         content.setFill(color);
-        content.fillOval(entity.getPoint().getX() + radius/2, entity.getPoint().getY(), radius, radius);
+        content.fillOval(entity.getX() + radius/2, entity.getY(), radius, radius);
     }
     /* 
     private void drawVector(GameCharacter entity, GraphicsContext cntn) {

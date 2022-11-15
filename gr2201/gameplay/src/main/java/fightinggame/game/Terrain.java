@@ -7,7 +7,7 @@ public class Terrain extends WorldEntity{
 
     public Terrain(String name, ArrayList<Integer> pos, int width, int height) {
         super(name, pos);
-        this.hitBox = new Effectbox(this, getPoint(), false, width, height);
+        this.hitBox = new Effectbox(this, point, false, width, height);
     }
 
     public Effectbox getHitBox() {
