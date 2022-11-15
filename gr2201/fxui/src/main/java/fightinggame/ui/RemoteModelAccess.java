@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -23,7 +24,12 @@ public class RemoteModelAccess {
     private ObjectMapper mapper;
     
     public RemoteModelAccess (URI uriBase){
-        this.uriBase = uriBase;
+        try {
+            this.uriBase =  new URI("http://localhost:8080/api/v1/user");
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+        
         this.mapper = new ObjectMapper();
         mapper.registerModule(new UserModule());
     }
@@ -40,7 +46,7 @@ public class RemoteModelAccess {
      * @return A User. The user might be null if password is incorrect or username invalid
      */
     public User getUser(String username, String password){
-        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username) + "/").resolve(uriParam(password))).GET().build();
+        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)).resolve(uriParam(password))).GET().build();
         try {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
@@ -59,9 +65,9 @@ public class RemoteModelAccess {
      * @param confirmPassword
      * @return A User. The user might be null if password is incorrect, username invalid or passwords not matching
      */
-    public User putUser(String username, String password, String confirmPassword){
+    public User postUser(String username, String password, String confirmPassword){
         HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)))
-        .PUT(BodyPublishers.ofString(username + "." + password + "." + confirmPassword)).build();
+        .POST(BodyPublishers.ofString(username + "." + password + "." + confirmPassword)).build();
         try {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();

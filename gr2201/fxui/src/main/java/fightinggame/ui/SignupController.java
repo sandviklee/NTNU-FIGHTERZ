@@ -26,7 +26,7 @@ public class SignupController extends SceneController{
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        User tempUser = remoteModelAccess.putUser(username, password, confirmPassword);
+        User tempUser = remoteModelAccess.postUser(username, password, confirmPassword);
 
         if (tempUser == null){
             if (password.equals(confirmPassword)){
