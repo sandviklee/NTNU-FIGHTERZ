@@ -90,9 +90,4 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	private String getPath() {
 		return this.path;
 	}
-
-	public static void main(String[] args) {
-		CharacterAttributeDAO dao = new CharacterAttributeDAOImpl();
-		System.out.println(dao.getAllCharacters());
-	}
 }
