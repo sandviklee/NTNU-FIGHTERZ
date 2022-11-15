@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Character",
+    "description": "An array of characters and their actions in the game",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "characterName": {
+                "description": "A character's ingame name.",
+                "type": "string"
+            },
+            "characterDescription": {
+                "description": "A description of the character's story and gameplay.",
+                "type": "string"
+            },
+            "difficulty": {
+                "description": "A number describing how hard this character is to learn to use properly.",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+            },
+            "playstyle": {
+                "description": "A word describing the type of character this character is.",
+                "type": "string"
+            },
+            "specialActions": {
+                "description": "An array of the character's special moves.",
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "specialActionName": {
+                            "description": "The name of the special action.",
+                            "type": "string"
+                        },
+                        "specialActionDescription": {
+                            "description": "The description of the special action.",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["specialActionName", "specialActionDescription"]
+            }
+        },
+        "required": ["characterName", "characterDescription", "difficulty", "specialActions"]
+    }
+}
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "characterName": "Ram",
+        "characterDescription": "Two braids and a quick punch.",
+        "difficulty": 3,
+        "playstyle": "Rusher",
+        "specialActions": [
+            {
+                "specialActionName": "Hair punch",
+                "specialActionDescription": "Punches with hair"
+            },
+            {
+                "specialActionName": "Double hair punch",
+                "specialActionDescription": "Punches with both braids!"
+            },
+            {
+                "specialActionName": "Hair grab",
+                "specialActionDescription": "Grabs with hair"
+            },
+            {
+                "specialActionName": "Hair slap",
+                "specialActionDescription": "SLAPSLAPSLAP"
+            }
+        ]
+    },
+    {
+        "characterName": "Sol",
+        "characterDescription": "Two beards and a quick punch.",
+        "difficulty": 2,
+        "playstyle": "Fighter",
+        "specialActions": [
+            {
+                "specialActionName": "beard punch",
+                "specialActionDescription": "Punches with beard"
+            },
+            {
+                "specialActionName": "Double beard punch",
+                "specialActionDescription": "Punches with both beards!"
+            },
+            {
+                "specialActionName": "beard grab",
+                "specialActionDescription": "Grabs with beard"
+            },
+            {
+                "specialActionName": "beard slap",
+                "specialActionDescription": "SLAPSLAPSLAP"
+            }
+        ]
+    },
+    {
+        "characterName": "Sly",
+        "characterDescription": "Two mustaches and a quick punch.",
+        "difficulty": 1,
+        "playstyle": "Allrounder",
+        "specialActions": [
+            {
+                "specialActionName": "mustache punch",
+                "specialActionDescription": "Punches with mustache"
+            },
+            {
+                "specialActionName": "Double mustache punch",
+                "specialActionDescription": "Punches with both mustaches!"
+            },
+            {
+                "specialActionName": "mustache grab",
+                "specialActionDescription": "Grabs with mustache"
+            },
+            {
+                "specialActionName": "mustache slap",
+                "specialActionDescription": "SLAPSLAPSLAP"
+            }
+        ]
+    }
+]

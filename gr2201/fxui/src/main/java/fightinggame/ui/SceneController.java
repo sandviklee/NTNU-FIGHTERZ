@@ -2,9 +2,10 @@ package fightinggame.ui;
 
 import fightinggame.users.User;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -50,5 +51,13 @@ public class SceneController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    protected void showError(String headerText, String contentText){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 }
