@@ -34,6 +34,7 @@ public class Action {
         this.sprites = new AnimationSprite(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame());
         this.isSelfInterruptible = properties.isSelfInterruptible();
         this.isEnemyInterruptible = properties.isEnemyInterruptible();
+        this.damage = properties.getDamage();
         this.duration = properties.getDuration();
         this.actionPriority = properties.getActionPriority();
         this.name = properties.getSpriteName();

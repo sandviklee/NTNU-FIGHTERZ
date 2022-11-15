@@ -92,18 +92,10 @@ public class Effectbox {
         return "Outside";
     }
 
-    private void expandEffectBox(int length, int height) {
-    }
-
     public void updateCenter(Point center) {
         this.center = center;
     }
-
-    public boolean worldEntityInEffectArea(WorldEntity entity) {
-        // TODO:
-        return false;
-    }
-
+    
     public void setIsTraversable(boolean state){
         this.isTraversable = state;
     }
