@@ -1,20 +1,25 @@
 .popup {
     -fx-background-color: rgb(166, 19, 8, 1); /* pane background color */
     -fx-padding: 1em 1em 1em 1em;
+    -fx-font-family: "Impact";
+    -fx-width: 2000;
+    -fx-height: 2000;
 }
 
 .popup > .content.label {
     -fx-padding: 0.5em 0.5em 0.5em 0.5em; /* text padding */
-    -fx-background-color: rgb(124, 136, 156, 0.25); /* text background */
+    -fx-background-color: rgba(255, 255, 255, 0.25); /* text background */
     -fx-background-opacity: 0.5; /* text background opacity */
     -fx-text-fill:white; /* Color for  */
     -fx-font-size:30.0px; /* font size content text */
-    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Impact";
+    /* Arial Rounded MT Bold */
  }
  
  /**Costumization of DialogPane Header**/
  .popup:header .header-panel {
    -fx-background-color: yellow;
+   -fx-font-family: "Impact";
  }
  
  .popup:header .header-panel .label{
@@ -22,6 +27,7 @@
    -fx-background-radius:10px;
    -fx-text-fill:green;
    -fx-font-size:15.0px;
+   -fx-font-family: "Impact";
  }
  
  
@@ -32,6 +38,7 @@
     -fx-wrap-text: true;
     -fx-effect: dropshadow( three-pass-box, red, 10.0, 0.0, 0.0, 0.0);
     -fx-cursor:hand;
+    -fx-font-family: "Impact";
   }
  
  .popup .button:hover{     

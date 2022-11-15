@@ -12,12 +12,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Popup;
 
 
@@ -55,12 +57,16 @@ public class SignupController extends SceneController{
         alert.setHeaderText("Welcome to NTNU Fighterz!");
         Label label = new Label("Label\nthat\nactually\nfucking\nworks");
         label.setWrapText(true);
+        Font font = new Font("Comic Sans MS", 30);
+        label.setFont(font);
         alert.getDialogPane().setContent(label);
 
         DialogPane dialogPane = alert.getDialogPane();
         String cssPath = getClass().getResource("css/popup.css").toExternalForm();
         dialogPane.getStylesheets().add(cssPath);
         dialogPane.getStyleClass().add("popup");
+        dialogPane.setPrefSize(1080, 640);;
+        ((Button) dialogPane.lookupButton(ButtonType.OK)).setFont(font);
 
         alert.showAndWait();
 
