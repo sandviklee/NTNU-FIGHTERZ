@@ -46,7 +46,9 @@ public class RemoteModelAccess {
      * @return A User. The user might be null if password is incorrect or username invalid
      */
     public User getUser(String username, String password){
-        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)).resolve("/" + uriParam(password))).GET().build();
+        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)).resolve("/" + uriParam(password)))
+        .header("Accept", "application/json")
+        .GET().build();
         try {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
