@@ -3,14 +3,22 @@ import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
 
 import java.io.IOException;
+import java.net.URL;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
+import javafx.stage.Popup;
 
 
 public class SignupController extends SceneController{
@@ -37,6 +45,25 @@ public class SignupController extends SceneController{
             }
             return;
         }
+
+        // URL cssPath = getClass().getResource("css/popup.css");
+        // Scene scene = usernameField.getScene();
+        // scene.getStylesheets().add(cssPath.toString());
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Welcome to NTNU Fighterz!");
+        alert.setHeaderText("Welcome to NTNU Fighterz!");
+        Label label = new Label("Label\nthat\nactually\nfucking\nworks");
+        label.setWrapText(true);
+        alert.getDialogPane().setContent(label);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        String cssPath = getClass().getResource("css/popup.css").toExternalForm();
+        dialogPane.getStylesheets().add(cssPath);
+        dialogPane.getStyleClass().add("popup");
+
+        alert.showAndWait();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
