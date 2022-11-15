@@ -276,18 +276,20 @@ public class World {
         Vector vec1 = new Vector(worldCharacter1.getCurrentAction().getKnockback());
         Vector vec2 = worldCharacter2.getVector();
 
-        vec2.setVx(Math.floor(((worldCharacter2.getPrecentage()/100))*Math.abs(vec1.getVx()))*worldCharacter1.getFacingDirection());
+
+
+        vec2.setVx((((worldCharacter2.getPrecentage()/100))*Math.abs(vec1.getVx()))*worldCharacter1.getFacingDirection());
         
     
-        vec2.setVy(Math.floor(((worldCharacter2.getPrecentage()/100))*(vec1.getVy() - 24)));
-        System.out.println(vec2.getVy());
+        //vec2.setVy(((worldCharacter2.getPrecentage()/100)*(vec1.getVy() - 24)));
+        //System.out.println(vec2.getVy());
         if (vec2.getVx() != 0) {
-            vec2.setAx(vec1.getVx() > 0 ? -2 : 2);
+            vec2.setAx(vec1.getVx() > 0 ? -1*(worldCharacter2.getPrecentage()/100) : 1*(worldCharacter2.getPrecentage()/100));
         }
         if (vec2.getVy() != 0) {
-            vec2.setAy(vec1.getVy() > 0 ? -2 : 2);
+            vec2.setAy(vec1.getVy() > 0 ? -1*(worldCharacter2.getPrecentage()/100) : 1*(worldCharacter2.getPrecentage()/100));
         }
-    
+        System.out.println(vec2.getVx() + " " + vec2.getAx());
         worldCharacter2.addPrecentage(damage);
         //System.out.println(worldCharacter2.getPrecentage());
         clickActionHash.put((GameCharacter) worldCharacter2, true);
