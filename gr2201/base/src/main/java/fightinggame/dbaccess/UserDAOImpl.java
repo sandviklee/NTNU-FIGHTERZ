@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public UserDAOImpl(){
-		this.path = "../base/src/main/resources/fightinggame/dbaccess/";
+		this.path = "../../base/src/main/resources/fightinggame/dbaccess/";
 		mapper.registerModule(new UserModule());
 	}
 
