@@ -20,7 +20,7 @@ public class LoginController extends SceneController{
     @FXML private Label errorMessage;
     @FXML private Hyperlink swichToSignUp;
     @FXML private Button login;
-    private RemoteModelAccess remoteModelAccess;
+    private RemoteModelAccess remoteModelAccess = new RemoteModelAccess();
 
     @FXML
     private void handleLogIn(ActionEvent event) throws IOException {

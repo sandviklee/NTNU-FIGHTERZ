@@ -19,7 +19,7 @@ public class SignupController extends SceneController{
     @FXML private Button createAccount, goBack;
     @FXML private Label nonValidCredentials;
     @FXML private Label nonMatchingPasswords;
-    private RemoteModelAccess remoteModelAccess;
+    private RemoteModelAccess remoteModelAccess = new RemoteModelAccess();
 
     @FXML
     private void handleCreateAccount (ActionEvent event) throws IOException{

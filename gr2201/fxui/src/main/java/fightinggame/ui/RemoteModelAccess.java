@@ -20,12 +20,12 @@ import fightinggame.users.User;
 public class RemoteModelAccess {
 
     private URI uriBase;
-    private User user = null;
     private ObjectMapper mapper;
     
-    public RemoteModelAccess (URI uriBase){
+    public RemoteModelAccess (){
         try {
             this.uriBase =  new URI("http://localhost:8080/api/v1/user/");
+            //this.uriBase = new URI("https://8080-it1901groups2022-gr2201-iyc01r01ajd.ws.gitpod.stud.ntnu.no");
         } catch (URISyntaxException e) {
             System.err.println(e);
         }
@@ -53,7 +53,8 @@ public class RemoteModelAccess {
             return mapper.readValue(userString, User.class);
           }
            catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            System.err.println(e);
+            return null;
           }       
     }
     // headers to http request might need to be added
@@ -68,20 +69,24 @@ public class RemoteModelAccess {
     public User postUser(String username, String password, String confirmPassword){
         try {
             HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)))
-            .POST(BodyPublishers.ofString(username + "." + password + "." + confirmPassword)).build();
-        
-             HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .POST(BodyPublishers.ofString("userData="+username + "." + password + "." + confirmPassword)).build();
+            
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
             return mapper.readValue(userString, User.class);
 
         } catch (IOException| InterruptedException e) {
-            throw new RuntimeException(e);
+            System.err.println(e);
+            return null;
         }
     }
 
     public boolean putUser(User user){
         try {
             HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/"+user.getUserName())).PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
+            
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
             Boolean updated = mapper.readValue(responseString, Boolean.class);
