@@ -23,16 +23,17 @@ public class SingleplayerGameController extends SceneController{
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
+    private HashMap<String, Image> assetSprites = new HashMap<>();
     private boolean paused;
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
-    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(280, 200));
-    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 200));
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(180, 300));
+    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1780, 300));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
-    private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 560));
-    private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(280, 560));
+    private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1740, 500));
+    private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(180, 500));
     
     
     private SpriteRenderer renderer;
@@ -45,12 +46,14 @@ public class SingleplayerGameController extends SceneController{
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1);
         GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, -1);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain("Test", terrainPosition, 1150, 150);
-        Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 250, 70);
-        Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 250, 70);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
+        Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
+        Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
         //loadCharacterSprite("Dummy", playerSprites);
-        loadCharacterSprite("Assets", playerSprites);
+        loadCharacterSprite("Assets", assetSprites);
+        loadCharacterSprite("Background", assetSprites);
+        System.out.println(assetSprites.get("Backgroundbackground"));
         
         //System.out.println(playerSprites);
         worldEntities.add(player);
@@ -61,7 +64,7 @@ public class SingleplayerGameController extends SceneController{
         worldEntities.add(terrain);
 
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites);
         updateWorld();
     }
 

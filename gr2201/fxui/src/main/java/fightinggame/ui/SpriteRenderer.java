@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+import fightinggame.game.AnimationSprite;
 import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Projectile;
@@ -17,20 +17,33 @@ import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
     private HashMap<String, Image> playerSprites;
+    private HashMap<String, Image> assetSprites;
+
     private GraphicsContext content;
     private Image backgroundImg;
     private ArrayList<WorldEntity> entities = new ArrayList<>();
-    
+    private AnimationSprite background = new AnimationSprite(16, true, 0);
 
-    public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> sprites) {
+    private int heldFrame = 0;
+
+    public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
         backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);
         this.entities = entities;
-        this.playerSprites = sprites;
+        this.playerSprites = playerSprites;
+        this.assetSprites = assetSprites;
+        this.backgroundImg = assetSprites.get("Backgroundspritesheet");
     }
 
     public void update() {
-        content.drawImage(backgroundImg, 0, 0); //Draws the current bg
+        content.drawImage(backgroundImg, 500*background.getCurrentFrame(), 0, 420, 252, 0, 0, 1920, 1080);
+        if (heldFrame > 4) {
+            background.next();
+            heldFrame = 0;
+        } else {
+            heldFrame++;
+        }
+        
         int radius = 10;
         
         for (WorldEntity entity : entities) {
@@ -54,7 +67,7 @@ public class SpriteRenderer {
                     }
                 }
 
-                Image playerIntImg = playerSprites.get("Assetsplayer" + playerInt);
+                Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 double posX = entity.getX() - width/2;
                 double posY = entity.getY() - height/2;
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
@@ -85,6 +98,7 @@ public class SpriteRenderer {
                 drawBox(hitbox, content, Color.RED);
             } else if (entity instanceof Terrain) {
                 Effectbox hitbox = entity.getHitBox();
+                content.drawImage(assetSprites.get("BackgroundTerrain"), 0, 0, 963, 278, entity.getHitBox().getPosX(), entity.getHitBox().getPosY(), entity.getHitBox().getWidth(), entity.getHitBox().getHeight());
                 drawCircle(entity, radius, content, Color.RED);
                 drawBox(hitbox, content, Color.BLUE);
             }
