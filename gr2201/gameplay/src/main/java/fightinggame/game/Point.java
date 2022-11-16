@@ -39,8 +39,6 @@ public class Point {
         this.x += gravityVector.getVx();
         this.y += gravityVector.getVy();
     }
-    
-
 
     public void setActionVector(Vector vector){
         this.actionVector = vector;
