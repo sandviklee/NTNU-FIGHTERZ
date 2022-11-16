@@ -9,12 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class MainMenuController extends SceneController {
-    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, exit;
+    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, achievements, tutorial, exit;
 
     @FXML
     private void initialize(){
         playMultiplayer.setDisable(true);
         settings.setDisable(true);
+        achievements.setDisable(true);
     }
     
     @FXML
@@ -45,6 +46,17 @@ public class MainMenuController extends SceneController {
     private void handleSettings(ActionEvent event){
         //todo
         return;
+    }
+
+    @FXML
+    private void handleAchievements(ActionEvent event) {
+        return;
+    }
+
+    @FXML
+    private void handleTutorial(ActionEvent event) {
+        TutorialComponent tutorial = new TutorialComponent();
+        tutorial.popupTutorial();
     }
 
     @FXML
