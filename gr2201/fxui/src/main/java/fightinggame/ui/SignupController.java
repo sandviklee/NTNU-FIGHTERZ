@@ -2,8 +2,10 @@ package fightinggame.ui;
 import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,21 +50,26 @@ public class SignupController extends SceneController{
             return;
         }
 
-        // URL cssPath = getClass().getResource("css/popup.css");
-        // Scene scene = usernameField.getScene();
-        // scene.getStylesheets().add(cssPath.toString());
-
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Welcome to NTNU Fighterz!");
         alert.setHeaderText("Welcome to NTNU Fighterz!");
-        Label label = new Label("Label\nthat\nactually\nfucking\nworks");
+
+        File tutorialText = new File(getClass().getResource("Tutorial.txt").toExternalForm());
+        Scanner reader = new Scanner(tutorialText);
+        String tutorial = "";
+        while (reader.hasNextLine()){
+            tutorial = tutorial + reader.nextLine();
+        }
+        reader.close();
+
+        Label label = new Label(tutorial);
         label.setWrapText(true);
         Font font = new Font("Comic Sans MS", 30);
         label.setFont(font);
         alert.getDialogPane().setContent(label);
 
         DialogPane dialogPane = alert.getDialogPane();
-        String cssPath = getClass().getResource("css/popup.css").toExternalForm();
+        String cssPath = getClass().getResource("css/popup.css").toString();
         dialogPane.getStylesheets().add(cssPath);
         dialogPane.getStyleClass().add("popup");
         dialogPane.setPrefSize(1080, 640);;

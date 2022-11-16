@@ -1,0 +1,12 @@
+In NTNU Fighterz you will be pinned up against your peers in a brawl to the death!
+
+Before trying your luck on the battlefield, you can hone your skills in the singleplayer mode.
+Here you can try out characters and their movesets against a dummy.
+The controls to control your character is by default:
+* W to jump, A to go left, and D to go right.
+* C to attack. You can attack in different directions using the WASD keys.
+* V to use special attack. The special attack varies depending on what other keys you hold:
+    * Neutral special if no other key is pressed.
+    * Side special if A or D is pressed.
+    * Up special if W is pressed.
+    * Down special if S is pressed.
