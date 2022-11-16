@@ -51,7 +51,4 @@ public class Projectile extends WorldEntity{
     public int getFacingDirection() {
         return facingDirection;
     }
-
-
-    
 }

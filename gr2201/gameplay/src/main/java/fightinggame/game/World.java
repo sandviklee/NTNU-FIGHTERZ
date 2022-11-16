@@ -102,7 +102,7 @@ public class World {
                         String currentSide;
                         currentSide = entity1.getHitBox().EffectBoxInEffectBox(entity2.getHurtBox());
                         
-                        if (Sides.contains(currentSide) || currentSide.equals("Contains")) {
+                        if (Sides.contains(currentSide) || currentSide.equals("Contained")) {
                             if (entity2.getCurrentAction().tryEnemyInterrupt(entity2.getAction(1))) {
                                 setHitStun(entity1, entity2);
                             }
@@ -115,7 +115,7 @@ public class World {
                         String currentSide;
                         currentSide = entity1.getCurrentAction().getHitBox().EffectBoxInEffectBox(entity2.getHurtBox());
                         
-                        if (Sides.contains(currentSide) || currentSide.equals("Contains")) {
+                        if (Sides.contains(currentSide) || currentSide.equals("Contained")) {
                             if (entity2.getCurrentAction().tryEnemyInterrupt(entity2.getAction(1))) {
                                 setHitStun(entity1, entity2);
                             }
@@ -271,21 +271,21 @@ public class World {
 
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
         worldCharacter2.setCurrentAction(1);
+        int damage = worldCharacter1.getCurrentAction().getDamage();
         
         Vector vec1 = new Vector(worldCharacter1.getCurrentAction().getKnockback());
         Vector vec2 = worldCharacter2.getVector();
 
-        vec2.setVx(Math.abs(vec1.getVx())*worldCharacter1.getFacingDirection());
-
-        vec2.setVy(vec1.getVy() - 24);
+        vec2.setVx((((worldCharacter2.getPrecentage()/100))*Math.abs(vec1.getVx()))*worldCharacter1.getFacingDirection());
+        vec2.setVy((2*(worldCharacter2.getPrecentage()/100)*(vec1.getVy() - 16)));
 
         if (vec2.getVx() != 0) {
-            vec2.setAx(vec1.getVx() > 0 ? -2 : 2);
+            vec2.setAx(vec1.getVx() > 0 ? -(worldCharacter2.getPrecentage()/100) : (worldCharacter2.getPrecentage()/100));
         }
         if (vec2.getVy() != 0) {
-            vec2.setAy(vec1.getVy() > 0 ? -2 : 2);
+            vec2.setAy(vec1.getVy() > 0 ? -2*(worldCharacter2.getPrecentage()/100) : 2*(worldCharacter2.getPrecentage()/100));
         }
-
+        worldCharacter2.addPrecentage(damage);
         clickActionHash.put((GameCharacter) worldCharacter2, true);
     }
 
@@ -293,7 +293,7 @@ public class World {
         if (worldCharacter.getDeathCounter() < 2) {
             worldCharacter.resetAction();
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
-            worldCharacter.resetDamage();
+            worldCharacter.resetPrecentage();
             worldCharacter.iterateDeathCounter();
         }
     }

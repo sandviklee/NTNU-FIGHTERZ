@@ -1,5 +1,8 @@
 package fightinggame.game;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class Vector {
     private double vx;
     private double vy;
@@ -141,11 +144,13 @@ public class Vector {
 
     public void applyAcceleration(){
         this.vx += this.ax;
+        this.vx = Math.round(this.vx * 10000d)/10000d;
         if (this.vx == 0){
             this.ax = 0;
         }
 
         this.vy += this.ay;
+        this.vy = Math.round(this.vy * 10000d)/10000d;
         if (this.vy == 0){
             this.ay = 0;
         }

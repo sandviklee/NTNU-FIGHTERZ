@@ -237,7 +237,7 @@
                 "isSelfInterruptible": false,
                 "isEnemyInterruptible": true,
                 "actionPriority": 1,
-                "damage": 15,
+                "damage": 30,
                 "knockback":[
                     0,
                     40,

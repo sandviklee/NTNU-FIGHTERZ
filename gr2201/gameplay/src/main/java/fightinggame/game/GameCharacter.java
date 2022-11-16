@@ -7,7 +7,8 @@ import java.util.function.Predicate;
 public class GameCharacter extends WorldEntity{
     private double weight;
     private double speed;
-    private int damage;
+    private double damageModifier;
+    private double precentage = 0;
     private double startX;
     private double startY;
     private int facingDirection = 1;
@@ -115,17 +116,11 @@ public class GameCharacter extends WorldEntity{
             clearHorisontalVector();
         } 
 
-
 		point.setX(point.getX() + mainVector.getVx());
 		point.setY(point.getY() + mainVector.getVy());
         hurtBox.updatePos();
         Effectbox currentHitBox = currentAction.getHitBox();
-
-        if (currentAction.getName().equals("HitStun")) {
-            System.out.println(mainVector.getVx());
-        }
         
-
         if (currentHitBox != null) {
             currentHitBox.getPoint().setX(point.getX() + Math.abs(currentHitBox.getOffsetX())*facingDirection);
             currentHitBox.getPoint().setY(point.getY() + currentHitBox.getOffsetY());
@@ -171,8 +166,12 @@ public class GameCharacter extends WorldEntity{
         this.onRight = onRight;
     }
 
-    public void resetDamage() {
-        this.damage = 0;
+    public void resetPrecentage() {
+        this.precentage = 0;
+    }
+
+    public void addPrecentage(int precentage) {
+        this.precentage += precentage;
     }
 
     public void resetAction() {
@@ -203,6 +202,10 @@ public class GameCharacter extends WorldEntity{
 
     public Vector getVector() {
         return mainVector;
+    }
+
+    public double getPrecentage() {
+        return precentage;
     }
 
     public int getFacingDirection() {

@@ -24,6 +24,8 @@ public abstract class WorldEntity {
 
 	public void setOnTop(boolean b) {}
 
+	public void addPrecentage(int precentage) {}
+
 	public void setCurrentAction(Integer actionNumber) {}
 
 	public void doAction() {}
@@ -60,6 +62,10 @@ public abstract class WorldEntity {
 		return 0;
 	}
 
+	public double getPrecentage() {
+		return 0;
+	}
+
 	public int getFacingDirection() {
         return 0;
     }
@@ -92,12 +98,12 @@ public abstract class WorldEntity {
 		return isAlive;
 	}
 
-	private void setAlive(boolean isAlive) {
-		this.isAlive = isAlive;
-	}
-
 	public int getJumpCounter() {
         return 0;
     }
+
+	private void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
 
 }

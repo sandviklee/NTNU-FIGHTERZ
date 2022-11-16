@@ -95,12 +95,7 @@ public class Effectbox {
     public void updateCenter(Point center) {
         this.center = center;
     }
-
-    public boolean worldEntityInEffectArea(WorldEntity entity) {
-        // TODO:
-        return false;
-    }
-
+    
     public void setIsTraversable(boolean state){
         this.isTraversable = state;
     }
