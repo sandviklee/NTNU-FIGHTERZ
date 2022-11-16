@@ -2,8 +2,10 @@ package fightinggame.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-public class Projectile extends WorldEntity{
+/**
+ * the class {@code Projectile} will represents all projectiles types. 
+ */
+public class Projectile extends WorldEntity {
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ActionProperties property;
     private Effectbox hitBox;

@@ -2,7 +2,10 @@ package fightinggame.game;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
-
+/**
+ * The class {@code WorldEntity} is meant to represent all enities in the game and will have all commen attributes and methods.
+ * 
+ */
 public abstract class WorldEntity {
 	protected int id;
 	protected Effectbox hitBox;

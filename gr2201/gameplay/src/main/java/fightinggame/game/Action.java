@@ -21,7 +21,7 @@ public class Action {
     private boolean isDone;
     private int holdAction = 0;
     private int holdFrameLength = 3;        
-    private boolean Movement;
+    private boolean movement;
     private boolean isProjectile;
     private boolean createProjectile = true;
 
@@ -43,7 +43,7 @@ public class Action {
         this.temporary = properties.getHitBox();
         this.hitBoxStartTime = properties.getHitBoxStartTime();
         this.currentTime = 0;
-        this.Movement = properties.getIsMovement();
+        this.movement = properties.getIsMovement();
         this.isDone = false;
         this.isProjectile = properties.getIsProjectile();
         this.projectile = properties.getProjectile();
@@ -172,7 +172,7 @@ public class Action {
     }
 
     public boolean isMovement() {
-        return Movement;
+        return movement;
     }
 
     /**

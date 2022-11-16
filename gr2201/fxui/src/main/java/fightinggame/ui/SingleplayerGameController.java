@@ -3,7 +3,6 @@ package fightinggame.ui;
 import fightinggame.game.World;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.PlayerProperties;
-import fightinggame.game.Point;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
@@ -41,6 +40,12 @@ public class SingleplayerGameController extends SceneController{
     private String keyReleased = "";
     private long fps = 10_000_000;
 
+    /**
+     * {@link #loadWorld(String, String)} will make an {@code World} with all players and terrain that the game shall have.
+     * 
+     * @param character  the name of the character loaded
+     * @param gameStage  of the World
+     */
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
@@ -53,9 +58,7 @@ public class SingleplayerGameController extends SceneController{
         //loadCharacterSprite("Dummy", playerSprites);
         loadCharacterSprite("Assets", assetSprites);
         loadCharacterSprite("Background", assetSprites);
-        System.out.println(assetSprites.get("Backgroundbackground"));
         
-        //System.out.println(playerSprites);
         worldEntities.add(player);
         worldEntities.add(player2);
         //worldEntities.add(dummy);
