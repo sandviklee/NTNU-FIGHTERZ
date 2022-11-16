@@ -1,0 +1,1177 @@
+[
+    {
+       "characterName": "AngryCyclist",
+       "weight": 1.0, 
+       "speed": 1.0,
+       "hurtbox": {
+            "width": 80,
+            "height": 172
+       },
+       "actions":[
+            {
+                "actionName": "Idle",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 0,
+                "damage": 0,
+                "duration": 18,
+                "hitBoxStartTime": 0,
+                "totalFrames": 18,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "HitStun",
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": false,
+                "actionPriority": 4,
+                "damage": 0,
+                "duration": 8,
+                "hitBoxStartTime": 0,
+                "totalFrames": 8,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "Jump",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 3,
+                "damage": 0,
+                "knockback":[
+                    0,
+                    48,
+                    0,
+                    -4,
+                    -1
+                ],
+                "duration": 2,
+                "hitBoxStartTime": 0,
+                "totalFrames": 5,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "Run",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    8,
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "duration": 10,
+                "hitBoxStartTime": 0,
+                "totalFrames": 10,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "Run",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 0,
+                "knockback":[
+                    8,
+                    0,
+                    0,
+                    0,
+                    -1
+                ],
+                "duration": 10,
+                "hitBoxStartTime": 0,
+                "totalFrames": 10,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "Jump",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 3,
+                "damage": 0,
+                "knockback":[
+                    8,
+                    -48,
+                    0,
+                    4,
+                    1
+                ],
+                "duration": 2,
+                "hitBoxStartTime": 0,
+                "totalFrames": 5,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "Jump",
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 3,
+                "damage": 0,
+                "knockback":[
+                    8,
+                    48,
+                    0,
+                    -4,
+                    -1
+                ],
+                "duration": 2,
+                "hitBoxStartTime": 0,
+                "totalFrames": 5,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "NeutralSpecial",
+                "hitBox": {
+                    "width": 80,
+                    "height": 80,
+                    "offsetX": 100,
+                    "offsetY": -40,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 2,
+                "damage": 30,
+                "knockback":[
+                    30,
+                    0,
+                    0,
+                    0 
+                ],
+                "gameCharName": "AngryCyclist",
+                "duration": 18,
+                "hitBoxStartTime": 10,
+                "totalFrames": 18,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": true,
+                "isMovement": false
+            },
+            {
+                "actionName": "SideSpecial",
+                "hitBox": {
+                    "width": 240,
+                    "height": 180,
+                    "offsetX": 0,
+                    "offsetY": -12,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": false,
+                "actionPriority": 2,
+                "damage": 20,
+                "knockback":[
+                    20,
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "duration": 10000,
+                "hitBoxStartTime": 7,
+                "totalFrames": 19,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 13,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "SideSpecial",
+                "hitBox": {
+                    "width": 240,
+                    "height": 180,
+                    "offsetX": 0,
+                    "offsetY": -12,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": false,
+                "actionPriority": 2,
+                "damage": 15,
+                "knockback":[
+                    20,
+                    0,
+                    0,
+                    0,
+                    -1
+                ],
+                "duration": 10000,
+                "hitBoxStartTime": 7,
+                "totalFrames": 19,
+                "isAnimationLoop": true,
+                "animationLoopStartTime": 13,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "UpSpecial",
+                "hitBox": {
+                    "width": 200,
+                    "height": 50,
+                    "offsetX": 0,
+                    "offsetY": -50,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 30,
+                "knockback":[
+                    0,
+                    40,
+                    0,
+                    -1,
+                    -1 
+                ],
+                "duration": 8,
+                "hitBoxStartTime": 0,
+                "totalFrames": 8,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": true
+            },
+            {
+                "actionName": "DownSpecial",
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 0,
+                "duration": 2,
+                "hitBoxStartTime": 1,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "SideNormal",
+                "hitBox": {
+                    "width": 60,
+                    "height": 80,
+                    "offsetX": 65,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 4,
+                "damage": 10,
+                "knockback":[
+                    20,
+                    0,
+                    0,
+                    0,
+                    1 
+                ],
+                "duration": 8,
+                "hitBoxStartTime": 3,
+                "totalFrames": 10,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "SideNormal",
+                "hitBox": {
+                    "width": 60,
+                    "height": 80,
+                    "offsetX": -65,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 4,
+                "damage": 10,
+                "knockback":[
+                    20,
+                    0,
+                    0,
+                    0,
+                    -1 
+                ],
+                "duration": 8,
+                "hitBoxStartTime": 3,
+                "totalFrames": 10,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "UpNormal",
+                "hitBox": {
+                    "width": 200,
+                    "height": 50,
+                    "offsetX": 0,
+                    "offsetY": 50,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": false,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 15,
+                "knockback":[
+                    0,
+                    -200,
+                    0,
+                    10
+                ],
+                "duration": 15,
+                "hitBoxStartTime": 5,
+                "totalFrames": 0,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            },
+            {
+                "actionName": "DownNormal",
+                "hitBox": {
+                    "width": 160,
+                    "height": 90,
+                    "offsetX": 65,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
+                "isSelfInterruptible": true,
+                "isEnemyInterruptible": true,
+                "actionPriority": 1,
+                "damage": 20,
+                "knockback":[
+                    26,
+                    -8,
+                    0,
+                    0
+                ],
+                "duration": 9,
+                "hitBoxStartTime": 4,
+                "totalFrames": 9,
+                "isAnimationLoop": false,
+                "animationLoopStartTime": 0,
+                "isProjectile": false,
+                "isMovement": false
+            }
+        ]
+
+    },
+    {
+        "characterName": "Jinjer Jink",
+        "weight": 0.7, 
+        "speed": 1.4,
+        "hurtbox": {
+             "width": 70,
+             "height": 160
+        },
+        "actions":[
+             {
+                 "actionName": "idle",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 400,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "hitStun",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 25,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "jump",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     100,
+                     0,
+                     -10
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "moveRight",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     100,
+                     0,
+                     0,
+                     0,
+                     1
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "moveLeft",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     100,
+                     0,
+                     0,
+                     0,
+                     -1
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "neutralSpecial",
+                 "hitBox": {
+                     "width": 10,
+                     "height": 10,
+                     "offsetX": 20,
+                     "offsetY": 20,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 6,
+                 "knockback":[
+                     10,
+                     -3,
+                     -1,
+                     1 
+                 ],
+                 "gameCharName": "Jinjer Jink",
+                 "duration": 10,
+                 "hitBoxStartTime": 6,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": true,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "rightSpecial",
+                 "hitBox": {
+                     "width": 300,
+                     "height": 20,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 8,
+                 "knockback":[
+                     200,
+                     0,
+                     -20,
+                     0,
+                     1
+                 ],
+                 "duration": 30,
+                 "hitBoxStartTime": 10,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "leftSpecial",
+                 "hitBox": {
+                     "width": 300,
+                     "height": 20,
+                     "offsetX": -50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 15,
+                 "knockback":[
+                     200,
+                     0,
+                     -20,
+                     0,
+                     -1
+                 ],
+                 "duration": 30,
+                 "hitBoxStartTime": 10,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "upSpecial",
+                 "hitBox": {
+                     "width": 150,
+                     "height": 20,
+                     "offsetX": 0,
+                     "offsetY": 50,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 10,
+                 "knockback":[
+                     200,
+                     -1000,
+                     -10,
+                     50 
+                 ],
+                 "duration": 20,
+                 "hitBoxStartTime": 4,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "downSpecial",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 60,
+                 "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "rightNormal",
+                 "hitBox": {
+                     "width": 50,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 5,
+                 "knockback":[
+                     100,
+                     -50,
+                     -10,
+                     5,
+                     1 
+                 ],
+                 "duration": 15,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "leftNormal",
+                 "hitBox": {
+                     "width": 50,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 5,
+                 "knockback":[
+                     100,
+                     -50,
+                     -10,
+                     5,
+                     -1 
+                 ],
+                 "duration": 15,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "upNormal",
+                 "hitBox": {
+                     "width": 90,
+                     "height": 50,
+                     "offsetX": 10,
+                     "offsetY": 50,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 11,
+                 "knockback":[
+                     20,
+                     -150,
+                     -2,
+                     15
+                 ],
+                 "duration": 13,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "downNormal",
+                 "hitBox": {
+                     "width": 200,
+                     "height": 100,
+                     "offsetX": 50,
+                     "offsetY": -20,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 13,
+                 "knockback":[
+                     100,
+                     -20,
+                     -10,
+                     2
+                 ],
+                 "duration": 12,
+                 "hitBoxStartTime": 3,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             }
+         ]
+ 
+     },
+     {
+        "characterName": "Priest of Vengeace",
+        "weight": 1.5, 
+        "speed": 0.6,
+        "hurtbox": {
+             "width": 70,
+             "height": 160
+        },
+        "actions":[
+             {
+                 "actionName": "idle",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 400,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "hitStun",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 25,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "jump",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     100,
+                     0,
+                     -10
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "moveRight",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     100,
+                     0,
+                     0,
+                     0,
+                     1
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "moveLeft",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": true,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     100,
+                     0,
+                     0,
+                     0,
+                     -1
+                 ],
+                 "duration": 10,
+                 "hitBoxStartTime": 0,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "neutralSpecial",
+                 "hitBox": {
+                     "width": 200,
+                     "height": 200,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 30,
+                 "knockback":[
+                     500,
+                     300,
+                     -50,
+                     -30 
+                 ],
+                 "gameCharName": "Priest of Vengeace",
+                 "duration": 80,
+                 "hitBoxStartTime": 30,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": true,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "rightSpecial",
+                 "hitBox": {
+                     "width": 250,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 8,
+                 "knockback":[
+                     -100,
+                     0,
+                     50,
+                     0,
+                     1
+                 ],
+                 "duration": 30,
+                 "hitBoxStartTime":20,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "leftSpecial",
+                 "hitBox": {
+                     "width": 250,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 15,
+                 "knockback":[
+                     -100,
+                     0,
+                     50,
+                     0,
+                     -1
+                 ],
+                 "duration": 30,
+                 "hitBoxStartTime": 20,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "upSpecial",
+                 "hitBox": {
+                     "width": 150,
+                     "height": 20,
+                     "offsetX": 0,
+                     "offsetY": 50,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 10,
+                 "knockback":[
+                     200,
+                     1000,
+                     -10,
+                     -50 
+                 ],
+                 "duration": 20,
+                 "hitBoxStartTime": 4,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": true
+             },
+             {
+                 "actionName": "downSpecial",
+                 "hitBox": {
+                     "width": 0,
+                     "height": 0,
+                     "offsetX": 0,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 0,
+                 "knockback":[
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 "duration": 60,
+                 "hitBoxStartTime": 1,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "rightNormal",
+                 "hitBox": {
+                     "width": 50,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 5,
+                 "knockback":[
+                     100,
+                     50,
+                     -10,
+                     -5,
+                     1 
+                 ],
+                 "duration": 15,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "leftNormal",
+                 "hitBox": {
+                     "width": 50,
+                     "height": 50,
+                     "offsetX": 50,
+                     "offsetY": 0,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 5,
+                 "knockback":[
+                     100,
+                     50,
+                     -10,
+                     -5,
+                     -1 
+                 ],
+                 "duration": 15,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "upNormal",
+                 "hitBox": {
+                     "width": 90,
+                     "height": 50,
+                     "offsetX": 10,
+                     "offsetY": 50,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 11,
+                 "knockback":[
+                     20,
+                     150,
+                     -2,
+                     -15
+                 ],
+                 "duration": 13,
+                 "hitBoxStartTime": 5,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             },
+             {
+                 "actionName": "downNormal",
+                 "hitBox": {
+                     "width": 200,
+                     "height": 100,
+                     "offsetX": 50,
+                     "offsetY": -20,
+                     "isTraversible": false
+                 },
+                 "isSelfInterruptible": false,
+                 "isEnemyInterruptible": true,
+                 "actionPriority": 1,
+                 "damage": 13,
+                 "knockback":[
+                     100,
+                     20,
+                     -10,
+                     -2
+                 ],
+                 "duration": 12,
+                 "hitBoxStartTime": 3,
+                 "totalFrames": 0,
+                 "isAnimationLoop": false,
+                 "animationLoopStartTime": 0,
+                 "isProjectile": false,
+                 "isMovement": false
+             }
+         ]
+ 
+     }
+]

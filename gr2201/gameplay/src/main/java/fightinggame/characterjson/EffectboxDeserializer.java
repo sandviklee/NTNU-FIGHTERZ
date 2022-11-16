@@ -1,7 +1,6 @@
 package fightinggame.characterjson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +27,7 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
     public Effectbox deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
-            JsonNode widthNode = objectNode.get("lenght");
+            JsonNode widthNode = objectNode.get("width");
             JsonNode heightNode = objectNode.get("height");
             JsonNode offsetXNode;
             JsonNode offsetYNode;
@@ -55,13 +54,8 @@ public class EffectboxDeserializer extends JsonDeserializer<Effectbox> {
                     isTraversible = isTraversibleNode.booleanValue();
                 }
             }
-                        
-            ArrayList<Integer> hitboxProperties = new ArrayList<>();
-            hitboxProperties.add(width);
-            hitboxProperties.add(length);
 
-            // Effectbox box = (isHurtBox) ? new Effectbox(width, length, isTraversible) : new Effectbox(width, length, offsetX, offsetY, isTraversible);
-            Effectbox box = new Effectbox(null, new Point(offsetX, offsetY), isTraversible, hitboxProperties);
+            Effectbox box = new Effectbox(null, new Point(offsetX, offsetY), isTraversible, width, length);
             return box;
            }
         return null;

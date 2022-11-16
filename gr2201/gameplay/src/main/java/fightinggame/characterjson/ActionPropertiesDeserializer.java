@@ -57,28 +57,38 @@ public class ActionPropertiesDeserializer extends JsonDeserializer<ActionPropert
             boolean isMovement = isMovementNode.asBoolean();
 
             // Check if json contains non required fields
-            boolean hasHitbox = objectNode.has("hitbox");
+            boolean hasHitbox = objectNode.has("hitBox");
             boolean hasKnockback = objectNode.has("knockback");
 
-            Effectbox hitbox;
+            Effectbox hitbox = null;
+            int hitBoxStartTime = hitBoxStartTimeNode.asInt();
             if (hasHitbox) {
-                JsonNode effectboxNode = objectNode.get("hitbox");
+                JsonNode effectboxNode = objectNode.get("hitBox");
                 hitbox = effectboxDeserializer.deserialize(effectboxNode);   
+                
             }
-            Vector knockBack;
+
+            Vector knockBack = null;
             if (hasKnockback) {
                 JsonNode knockbackNode = objectNode.get("knockback");
                 knockBack = vectorDeserializer.deserialize(knockbackNode);
             }
 
             // Check what type of ActionProperties that shall be initiated
+            if (isProjectile) {
+                JsonNode gameCharNameNode = objectNode.get("gameCharName");
+                String gameCharName = gameCharNameNode.asText();
+                return new ActionProperties(actionName, gameCharName, actionPriority, duration, hitBoxStartTime, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage, isProjectile);
+            }
+            
+            if (hasHitbox && hasKnockback) {
+                return new ActionProperties(actionName, actionPriority, duration, hitBoxStartTime, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage);
+            }
+
             if (hasKnockback) {
                 return new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack);
             }
 
-            if (hasHitbox && hasKnockback) {
-                return new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement, knockBack, hitbox, damage);
-            }
             // no knockback no hitbox
             ActionProperties actionProperties = new ActionProperties(actionName, actionPriority, duration, isSelfInterruptible, isEnemyInterruptible, totalFrames, isAnimationLoop, animationLoopStartTime, isMovement);
             return actionProperties;
