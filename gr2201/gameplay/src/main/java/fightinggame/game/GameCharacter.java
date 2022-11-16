@@ -15,6 +15,7 @@ public class GameCharacter extends WorldEntity{
     private int appliedVector;
     private int jumpCounter = 0;
     private int deathCounter = 0;
+    private int playerNumb;
     
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private ArrayList<String> availKeys;
@@ -29,11 +30,12 @@ public class GameCharacter extends WorldEntity{
     private boolean onLeft = false;
     private boolean onTop = false; 
 
-    public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int facingDirection) {
+    public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
         this.startX = getX();
         this.startY = getY();
         this.availKeys = availKeys;
+        this.playerNumb = playerNumb;
         this.hurtBox = new Effectbox(this, this.point, false, playerProperties.getWidth(), playerProperties.getLength());
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
@@ -218,6 +220,10 @@ public class GameCharacter extends WorldEntity{
 
     public int getDeathCounter() {
         return deathCounter;
+    }
+
+    public int getPlayerNumb() {
+        return playerNumb;
     }
 
     public double getStartX() {

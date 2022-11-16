@@ -39,6 +39,7 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         Scene scene = new Scene(root);
+        //scene.getStylesheets().add("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/fontstyle.css");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

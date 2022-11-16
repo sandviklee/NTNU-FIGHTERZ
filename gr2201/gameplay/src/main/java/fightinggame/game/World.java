@@ -159,12 +159,12 @@ public class World {
                 inputPerEntity.put((GameCharacter) worldEntity, keys);
 
                 if (!inputPerEntity.get(worldEntity).isEmpty()) { //get first key
-                    heldKeyHash.get(worldEntity).set(0, "");
+                    heldKeyHash.get(worldEntity).set(0, ""); //clears the current held key of the game character.
                     NewHeldKey = "";    
                     for (String key : inputPerEntity.get(worldEntity)) {
                         NewHeldKey += key;    
                     }
-                    heldKeyHash.get(worldEntity).set(0, NewHeldKey);
+                    heldKeyHash.get(worldEntity).set(0, NewHeldKey); //sets the current eld key of the game character.
 
                 } else {
                     heldKeyHash.get(worldEntity).set(0, "+");

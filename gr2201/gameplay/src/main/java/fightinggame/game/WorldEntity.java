@@ -66,9 +66,17 @@ public abstract class WorldEntity {
 		return 0;
 	}
 
+	public int getDeathCounter() {
+        return 0;
+    }
+
 	public int getFacingDirection() {
         return 0;
     }
+
+	public int getPlayerNumb() {
+		return 0;
+	}
 
 	public String getName() {
 		return name;
