@@ -65,7 +65,7 @@ public class Effectbox {
             of the character hurtbox as "over" the terrain hitbox.
             */
             if (thisLeft <= otherLeft){
-                if (thisBottom <= otherBoxTop + 10){
+                if (thisBottom <= otherBoxTop + 20){
                     return "Top";
                 } else {
                     return "Left";
@@ -73,7 +73,7 @@ public class Effectbox {
                 
             }
             if (thisRight >= otherRight){
-                if (thisBottom <= otherBoxTop + 10){
+                if (thisBottom <= otherBoxTop + 20){
                     return "Top";
                 } else {
                     return "Right";
