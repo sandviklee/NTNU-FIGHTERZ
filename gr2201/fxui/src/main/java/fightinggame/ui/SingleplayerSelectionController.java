@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
@@ -46,15 +44,13 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        // Future content
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("singleplayer.fxml"));
-        // Parent root = loader.load();
-        // SignUpController signUpController = loader.getController();
-        // SceneController.changeScene("NTNU Fighterz", root, event);
-
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setContentText("This part of the game is not implemented yet :)");
-        alert.showAndWait();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
+        Parent root = loader.load();
+        SingleplayerGameController singleplayerGameController = loader.getController();
+        singleplayerGameController.setUser(super.getUser());
+        singleplayerGameController.loadWorld("AngryCyclist", null);
+        super.changeSceneFullscreen("NTNU Fighterz", root, event);
+    
     }
 
     @FXML

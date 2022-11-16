@@ -16,7 +16,7 @@ public class GameApp extends Application  {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("NTNU Fighterz");
-		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Login.fxml"))));
+		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("MainMenu.fxml"))));
 		primaryStage.setMaximized(false);
 		primaryStage.show();
 	}
