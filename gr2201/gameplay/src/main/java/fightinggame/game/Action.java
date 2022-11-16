@@ -8,7 +8,7 @@ public class Action {
     private String gameCharName;
     private Effectbox hitBox;
     private Effectbox temporary;
-    private AnimationSprite sprites;
+    private AnimationSpritePlayer sprites;
     private Projectile projectile;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
@@ -31,7 +31,7 @@ public class Action {
      * @param properties  of the action it is making
      */
     public Action(ActionProperties properties) {
-        this.sprites = new AnimationSprite(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame());
+        this.sprites = new AnimationSpritePlayer(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame() , 0);
         this.isSelfInterruptible = properties.isSelfInterruptible();
         this.isEnemyInterruptible = properties.isEnemyInterruptible();
         this.damage = properties.getDamage();

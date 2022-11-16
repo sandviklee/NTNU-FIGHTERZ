@@ -13,7 +13,7 @@ import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fightinggame.game.AnimationSprite;
+import fightinggame.game.AnimationSpritePlayer;
 import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Projectile;
@@ -29,8 +29,7 @@ public class SpriteRenderer {
     private GraphicsContext content;
     private Image backgroundImg;
     private ArrayList<WorldEntity> entities = new ArrayList<>();
-    private AnimationSprite background = new AnimationSprite(16, true, 0);
-    private Thread updatePrecent;
+    private AnimationSpritePlayer backgroundSpritePlayer = new AnimationSpritePlayer(16, true, 0, 4);
 
     private int heldFrame = 0;
 
@@ -48,13 +47,8 @@ public class SpriteRenderer {
     }
 
     public void update() {
-        content.drawImage(backgroundImg, 500*background.getCurrentFrame(), 0, 420, 252, 0, 0, 1920, 1080);
-        if (heldFrame > 4) {
-            background.next();
-            heldFrame = 0;
-        } else {
-            heldFrame++;
-        }
+        content.drawImage(backgroundImg, 500*backgroundSpritePlayer.getCurrentFrame(), 0, 420, 252, 0, 0, 1920, 1080);
+        backgroundSpritePlayer.next();
         
         int radius = 10;
         
