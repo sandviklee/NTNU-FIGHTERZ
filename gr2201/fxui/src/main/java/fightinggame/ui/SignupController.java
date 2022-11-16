@@ -4,26 +4,20 @@ import fightinggame.users.User;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.stage.Popup;
 
 
 public class SignupController extends SceneController{
@@ -67,6 +61,7 @@ public class SignupController extends SceneController{
         alert.setHeaderText("Welcome to NTNU Fighterz!");
         
         // get tutorial
+        //TODO: Fix persistence
         String tutorial = "";
         try {
             File tutorialText = new File("../fxui/src/main/resources/fightinggame/ui/Tutorial.txt");
@@ -81,7 +76,6 @@ public class SignupController extends SceneController{
         TextArea area = new TextArea(tutorial);
         area.setId("TutorialContent");
         alert.getDialogPane().setContent(area);
-        TextArea content = (TextArea) alert.getDialogPane().lookup("TutorialContent");
 
         area.setWrapText(true);
         area.setEditable(false);
