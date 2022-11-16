@@ -76,7 +76,7 @@ public class ServerController {
      * @param id  the id to check with
      * @return whether the deletion was successful
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path = "/{id}")
     public boolean deleteUser(@PathVariable("id") UserId id) {
         return getServerService().deleteUser(id);
     }

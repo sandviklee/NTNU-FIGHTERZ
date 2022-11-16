@@ -40,7 +40,7 @@ public class RemoteModelAccess {
     // headers to http request might need to be added
 
     /**
-     * Sends a HTTP request with the given username and password. The response will be a User.
+     * Sends a HTTP GET() request with the given username and password. The response will be a User.
      * @param username
      * @param password
      * @return A User. The user might be null if password is incorrect or username invalid
@@ -59,10 +59,11 @@ public class RemoteModelAccess {
             return null;
           }       
     }
+    
     // headers to http request might need to be added
 
     /**
-     * Sends a HTTP request with the given username, passwords and confirm passwords. The response will be a User.
+     * Sends a HTTP POST() request with the given username, passwords and confirm passwords. The response will be a User.
      * @param username
      * @param password
      * @param confirmPassword
@@ -85,19 +86,41 @@ public class RemoteModelAccess {
         }
     }
 
+    /**
+     * Sends a HTTP PUT() request with a given User. The response will be a boolean describing if the user was updated or not.
+     * @param user
+     * @return A boolean describing if the User was updated
+     */
     public boolean putUser(User user){
         try {
-            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/"+user.getUserName())).PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/"+user.getUserId())).PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
             
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
             Boolean updated = mapper.readValue(responseString, Boolean.class);
             return updated;
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
+            System.err.println(e);
             return false;
         }
-        
     }
+    /**
+     * Sends a HTTP DELETE() request with a given userId. The response will be a boolean describing if the user was updated or not.
+     * @param user
+     * @return
+     */
+    public boolean deleteUser(User user){
+        try {
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/"+user.getUserId())).DELETE().build();
 
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            Boolean deleted = mapper.readValue(responseString, Boolean.class);
+            return deleted;
+        } catch (IOException | InterruptedException e) {
+            System.err.println(e);
+            return false;
+        }
+    }
 
 }
