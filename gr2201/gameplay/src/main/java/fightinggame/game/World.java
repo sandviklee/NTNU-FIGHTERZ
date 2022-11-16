@@ -23,7 +23,7 @@ public class World {
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = new ArrayList<>(worldEntities);
-        this.worldBox = new Effectbox(null, new Point(screensize[0]/2, screensize[1]/2), false, screensize[0] + 500, screensize[1] + 1000);
+        this.worldBox = new Effectbox(null, new Point(screensize[0]/2, screensize[1]/2), false, screensize[0] + 1000, screensize[1] + 1000);
 
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
@@ -131,18 +131,21 @@ public class World {
         ArrayList<String> keyInputArray =  new ArrayList<>(Arrays.asList(inputArray));
         String[] inputRArray = inputR.split("");
         ArrayList<String> keyInputRArray =  new ArrayList<>(Arrays.asList(inputRArray));
+
         
         for (String key : keyInputArray) {
             if (!keysHeld.contains(key) && key != "") {
                 keysHeld.add(key);
             }
         }
-
+        
         for (String key : keyInputRArray) {
             if (keysHeld.contains(key)) {
                 keysHeld.remove(key);
             }
         }
+
+        
         
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {     
@@ -155,6 +158,8 @@ public class World {
                         keys.add(key);
                     }
                 }
+
+               //System.out.println(keys);
 
                 inputPerEntity.put((GameCharacter) worldEntity, keys);
 
@@ -173,6 +178,9 @@ public class World {
                 if (currentAction.getIsDone() && clickActionHash.get(worldEntity)) {
                     clickActionHash.put((GameCharacter) worldEntity, false);
                 }
+
+ 
+                
                 
                 NewHeldKey = heldKeyHash.get(worldEntity).get(0); //Get the GameCharacters NewHeldKey
 
@@ -276,21 +284,22 @@ public class World {
         Vector vec1 = new Vector(worldCharacter1.getCurrentAction().getKnockback());
         Vector vec2 = worldCharacter2.getVector();
 
-        vec2.setVx((((worldCharacter2.getPrecentage()/100))*Math.abs(vec1.getVx()))*worldCharacter1.getFacingDirection());
-        vec2.setVy((2*(worldCharacter2.getPrecentage()/100)*(vec1.getVy() - 16)));
+        //TODO: WRITE VARIABLES FOR CERTAIN SCALING.
+        vec2.setVx((((worldCharacter2.getPrecentage() / 100)) * Math.abs(vec1.getVx())) * worldCharacter1.getFacingDirection());
+        vec2.setVy((2 * (worldCharacter2.getPrecentage() / 100)*(vec1.getVy() - 16)));
 
         if (vec2.getVx() != 0) {
-            vec2.setAx(vec1.getVx() > 0 ? -(worldCharacter2.getPrecentage()/100) : (worldCharacter2.getPrecentage()/100));
+            vec2.setAx(vec2.getVx() > 0 ? -(worldCharacter2.getPrecentage() / 100) : (worldCharacter2.getPrecentage() / 100));
         }
         if (vec2.getVy() != 0) {
-            vec2.setAy(vec1.getVy() > 0 ? -2*(worldCharacter2.getPrecentage()/100) : 2*(worldCharacter2.getPrecentage()/100));
+            vec2.setAy(vec2.getVy() > 0 ? -2 * (worldCharacter2.getPrecentage() / 100) : 2 * (worldCharacter2.getPrecentage() / 100));
         }
         worldCharacter2.addPrecentage(damage);
         clickActionHash.put((GameCharacter) worldCharacter2, true);
     }
 
     private void characterReset(GameCharacter worldCharacter) {
-        if (worldCharacter.getDeathCounter() < 2) {
+        if (worldCharacter.getDeathCounter() < 2) { //TODO: WRITE VARIABLE FOR HOW MANY TIMES A CHARACTER CAN DIE.
             worldCharacter.resetAction();
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
             worldCharacter.resetPrecentage();

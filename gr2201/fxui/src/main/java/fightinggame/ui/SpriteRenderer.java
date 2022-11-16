@@ -6,8 +6,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Projectile;
 import fightinggame.game.Terrain;
-import fightinggame.game.Vector;
 import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
@@ -83,7 +80,7 @@ public class SpriteRenderer {
                 int height = 80;
                 double posX = entity.getX() - (width/2 - 10);
                 double posY = entity.getY() - (height/2);
-                //System.out.println("posX: " + posX + " posY: " + posY);
+        
                 Effectbox hitbox = entity.getHitBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
 
@@ -112,14 +109,26 @@ public class SpriteRenderer {
          
                 ArrayList<String> availKeys = entity.getAvailKeys();
                 playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
-
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
-                content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.
+                Image playerIntImgFlip = assetSprites.get("Assetsplayer" + playerInt + "Flip");
 
+            
+                if ((playerPosY + playerProperties[1]) <= 0) {
+                    content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 80, -60, -65); //draws the player number over the head of the character.
+                } else if (playerPosX  + playerProperties[0] + 20 <= 0) {
+                    content.drawImage(playerIntImgFlip, 10, playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.
+                } else if (playerPosX - 20 >= 1920) {
+                    content.drawImage(playerIntImgFlip, 1910, playerPosY + playerIntOffset[1], -60, 65); //draws the player number over the head of the character.
+                } else if (playerPosY >= 1080) {
+                    content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 1000, 60, 65); //draws the player number over the head of the character.
+                } else {
+                    content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.
+                }
+         
                 content.drawImage(assetSprites.get("Assets" + entity.getName() + "P" + entity.getPlayerNumb()), 0, 0, 730, 379, entity.getPlayerNumb() == 1 ? hud1PosX : hud2PosX, hudPosY, hudProperties[0], hudProperties[1]); //draws the players HUD.
                 
                 
-                drawText(entity, entity.getPlayerNumb() == 1 ? hud1PosX + 315 : hud2PosX + 125, hudPosY + 100, 200, 50, content, Color.WHITE, Color.BLACK, "" + i + "%"); //draws the precentage to the hud.
+                drawText(entity, entity.getPlayerNumb() == 1 ? hud1PosX + 315 : hud2PosX + 125, hudPosY + 100, 200, i%5 == 0 ? 45 : 50, content, i < 255 ? Color.rgb(255, (int) (255 - i), (int) (255 - i)) : Color.RED, Color.BLACK, "" + i + "%"); //draws the precentage to the hud.
                 
                 if (i < entity.getPrecentage()) {
                     lastPrecentage.put(entity, lastPrecentage.get(entity) + 1);
@@ -127,7 +136,7 @@ public class SpriteRenderer {
                     lastPrecentage.put(entity, 0.0);
                 }
 
-                drawText(entity, entity.getPlayerNumb() == 1 ? hud1PosX + 317 : hud2PosX + 123, hudPosY + 35, 200, 30, content, Color.WHITE, Color.BLACK, "Deaths: " + entity.getDeathCounter()); //draws the deathcounter to the hud.
+                drawText(entity, entity.getPlayerNumb() == 1 ? hud1PosX + 310 : hud2PosX + 123, hudPosY + 35, 200, 28, content, entity.getDeathCounter() < 2 ? Color.WHITE : Color.RED, Color.BLACK, "Deaths: " + entity.getDeathCounter()); //draws the deathcounter to the hud.
 
             }
         }
