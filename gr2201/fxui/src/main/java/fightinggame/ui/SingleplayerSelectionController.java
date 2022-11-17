@@ -68,16 +68,21 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        mainAudioPlayer.stop();
-        mainAudioPlayer = new MediaPlayer(audioGame);
-        mainAudioPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-              mainAudioPlayer.seek(Duration.ZERO);
-            }
-        });
-        mainAudioPlayer.setVolume(0.1);
-        mainAudioPlayer.play();
-        
+        try {
+            mainAudioPlayer.stop();
+            mainAudioPlayer = new MediaPlayer(audioGame);
+            mainAudioPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                  mainAudioPlayer.seek(Duration.ZERO);
+                }
+            });
+            mainAudioPlayer.setVolume(0.1);
+            mainAudioPlayer.play();
+    
+        } catch (MediaException e) {
+            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
