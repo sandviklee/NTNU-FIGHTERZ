@@ -54,6 +54,7 @@ public class GameCharacter extends WorldEntity{
         this.speed = 0;
         this.hurtBox = new Effectbox(this, point, false, 80, 172);
         this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
+        this.actionHash.put(1, new ActionProperties("HitStun", 4, 7, false, true, 7, false, 0, true));
         this.availKeys = new ArrayList<>();
         this.facingDirection = -1;
         setCurrentAction(0);

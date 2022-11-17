@@ -111,7 +111,10 @@ public class SpriteRenderer {
          
                 ArrayList<String> availKeys = entity.getAvailKeys();
                 
-                playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
+                if (!entity.getName().equals("Dummy")) {
+                    playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
+
+                }
 
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.

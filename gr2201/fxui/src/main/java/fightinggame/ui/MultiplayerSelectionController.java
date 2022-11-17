@@ -46,7 +46,7 @@ public class MultiplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvasMulti.fxml"));
         Parent root = loader.load();
         MultiplayerGameController multiplayerGameController = loader.getController();
         multiplayerGameController.setUser(super.getUser());

@@ -13,7 +13,6 @@ public class MainMenuController extends SceneController {
 
     @FXML
     private void initialize(){
-        playMultiplayer.setDisable(true);
     }
     
     @FXML
@@ -27,10 +26,10 @@ public class MainMenuController extends SceneController {
 
     @FXML
     private void handlePlayMultiplayer(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectSingle.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectMulti.fxml"));
         Parent root = loader.load();
-        SingleplayerSelectionController singleplayerSelectionController = loader.getController();
-        singleplayerSelectionController.setUser(super.getUser());
+        MultiplayerSelectionController multiplayerSelectionController = loader.getController();
+        multiplayerSelectionController.setUser(super.getUser());
         super.changeScene("NTNU Fighterz", root, event);
     }
     
