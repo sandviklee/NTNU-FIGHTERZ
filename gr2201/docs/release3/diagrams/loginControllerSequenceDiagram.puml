@@ -1,0 +1,23 @@
+@startuml
+
+  Actor User
+  participant  LoginController as a
+  participant  RemoteModelAccess as b
+  database  ServerController as c
+  
+  User -> a: Pressed Login after filling out incorrect credentials
+  a -> b: handleLogin()
+  b -> c: getUser() (HTTP GET)
+  c -->b: Null
+  b --> a: Null
+  
+  a -->User: Shows an error messeges 
+  
+  User -> a: Pressed Login after filling out correct credentials
+  a -> b: handleLogin()
+  b -> c: getUser() (HTTP GET)
+  c -->b: User
+  b ->a: User
+  a -->User: Changes sceen to MainMenu 
+  
+@enduml
