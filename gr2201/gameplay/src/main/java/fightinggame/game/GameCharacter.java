@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 
 public class GameCharacter extends WorldEntity{
@@ -269,11 +270,17 @@ public class GameCharacter extends WorldEntity{
     }
 
     private void loadAudio() {
-        File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
-        for (File audio : audioFiles) {
-            audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
-            
+        try {
+            File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
+            for (File audio : audioFiles) {
+                audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
+                
+            }
+    
+        } catch (MediaException e) {
+            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
         }
+
     }
 
 
