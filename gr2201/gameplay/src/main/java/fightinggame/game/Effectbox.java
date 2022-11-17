@@ -13,8 +13,16 @@ public class Effectbox {
 
     public Effectbox(WorldEntity owner, Point center, boolean isTraversable, int width, int height) {
         this.owner = owner;
+
+        if (center == null){
+            throw new IllegalArgumentException("Center point cannot be null");
+        }
         this.center = center;
         this.isTraversable = isTraversable;
+
+        if (width <= 0 || height <= 0){
+            throw new IllegalArgumentException("Width or height cannot be negative");
+        }
         this.width = width;
         this.height = height;
         posX = center.getX() - (width/2 - 10);

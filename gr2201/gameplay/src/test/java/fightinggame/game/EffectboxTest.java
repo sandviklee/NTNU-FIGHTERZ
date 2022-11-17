@@ -36,16 +36,17 @@ public class EffectboxTest {
         validLength = 10;
         zero = 0;
         negNum = -10;
+        validPoint = new Point();
+        otherValidPoint = new Point(0, 1);
+        nonValidPoint = null;
 
         nonValidWorldEntity = null;
-        validWorldEntity = new WorldEntity();
+        //validWorldEntity = new WorldEntity();
         traversableEffectbox = new Effectbox(validWorldEntity, validPoint, true, validLength, validHeight);
         otherTraversableEffectbox = new Effectbox(validWorldEntity, otherValidPoint, true, validLength, validHeight);
         nonTraversableEffectbox = new Effectbox(validWorldEntity, validPoint, false, validLength, validHeight);
         otherNonTraversableEffectbox = new Effectbox(validWorldEntity, otherValidPoint, false, validLength, validHeight);
-
     }
-    
 
     @Test
     @DisplayName("Check if the Constructor works ")        
@@ -80,12 +81,6 @@ public class EffectboxTest {
             new Effectbox(validWorldEntity, validPoint, false, zero, validHeight);
 		}, "This Effectbox is not possible, should not allow zero values as height or length");
 
-        // bad owner
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Effectbox(nonValidWorldEntity, validPoint, true, validLength, validHeight);
-            new Effectbox(nonValidWorldEntity, validPoint, false, validLength, validHeight);
-		}, "This Effectbox is not possible, should not allow owner to be null");
-
         // bad point
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Effectbox(validWorldEntity, nonValidPoint, true, validLength, validHeight);
@@ -96,10 +91,8 @@ public class EffectboxTest {
     @Test
     @DisplayName("Check if the WorldEntityInEffectArea works ")    
     public void testWorldEntityInEffectArea() {
-        assertTrue(traversableEffectbox.worldEntityInEffectArea(validWorldEntity), " traversableEffectbox should not be in validWorldEntity");
-        assertFalse(otherTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " otherTraversableEffectbox should be in validWorldEntity");
-        assertTrue(nonTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " nonTraversableEffectbox should not be in validWorldEntity");
-        assertFalse(otherNonTraversableEffectbox.worldEntityInEffectArea(validWorldEntity), " otherNonTraversableEffectbox should be in validWorldEntity");
+        assertEquals(traversableEffectbox.EffectBoxInEffectBox(otherNonTraversableEffectbox), "Top", " traversableEffectbox should not be in validWorldEntity");
+        assertEquals(traversableEffectbox.EffectBoxInEffectBox(traversableEffectbox), "Top"," otherTraversableEffectbox should be in validWorldEntity");
     }
 
 }
