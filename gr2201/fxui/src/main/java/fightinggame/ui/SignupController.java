@@ -3,6 +3,7 @@ import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
 
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,11 +38,19 @@ public class SignupController extends SceneController{
             }
             return;
         }
+
+        showTutorial();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
         mainMenuController.setUser(tempUser);
         super.changeScene("NTNU Fighterz", root, event);
+    }
+
+    private void showTutorial() {
+        TutorialComponent tutorial = new TutorialComponent();
+        tutorial.popupTutorial();
     }
 
     @FXML 
