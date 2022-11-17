@@ -9,42 +9,58 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class MainMenuController extends SceneController {
-    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, achievements, tutorial, exit;
+    @FXML
+    private Button playSingleplayer, playMultiplayer, characterInfo, settings, achievements, tutorial, exit;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         playMultiplayer.setDisable(true);
         settings.setDisable(true);
         achievements.setDisable(true);
     }
-    
+
     @FXML
-    private void handlePlaySingleplayer(ActionEvent event) throws IOException{
+    private void handlePlaySingleplayer(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectSingle.fxml"));
-        Parent root = loader.load();
-        SingleplayerSelectionController singleplayerSelectionController = loader.getController();
-        singleplayerSelectionController.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event);
+        Parent root;
+        try {
+            root = loader.load();
+            SingleplayerSelectionController singleplayerSelectionController = loader.getController();
+            singleplayerSelectionController.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid Singleplayer path",
+                    "Something went wrong and Singleplayer page could not be found.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handlePlayMultiplayer(ActionEvent event){
-        //todo
+    private void handlePlayMultiplayer(ActionEvent event) {
+        // todo
         return;
     }
-    
+
     @FXML
-    private void handleCharacterInfo(ActionEvent event) throws IOException{
+    private void handleCharacterInfo(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
-        Parent root = loader.load();
-        CharacterInformationMenuController characterInformationMenuController = loader.getController();
-        characterInformationMenuController.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event);
+        Parent root;
+        try {
+            root = loader.load();
+            CharacterInformationMenuController characterInformationMenuController = loader.getController();
+            characterInformationMenuController.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+
+        } catch (IOException e) {
+            showError("Error: Invalid characterInfo path",
+                    "Something went wrong and Character Info page could not be found.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void handleSettings(ActionEvent event){
-        //todo
+    private void handleSettings(ActionEvent event) {
+        // todo
         return;
     }
 
@@ -60,7 +76,7 @@ public class MainMenuController extends SceneController {
     }
 
     @FXML
-    private void handleExit(ActionEvent event){
+    private void handleExit(ActionEvent event) {
         Platform.exit();
     }
 

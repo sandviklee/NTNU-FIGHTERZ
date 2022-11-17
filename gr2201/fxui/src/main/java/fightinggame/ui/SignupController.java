@@ -13,27 +13,32 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class SignupController extends SceneController{
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
-    @FXML private PasswordField confirmPasswordField;
-    @FXML private Button createAccount, goBack;
-    @FXML private Label nonValidCredentials;
-    @FXML private Label nonMatchingPasswords;
+public class SignupController extends SceneController {
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private Button createAccount, goBack;
+    @FXML
+    private Label nonValidCredentials;
+    @FXML
+    private Label nonMatchingPasswords;
     private RemoteModelAccess remoteModelAccess = new RemoteModelAccess();
 
     @FXML
-    private void handleCreateAccount (ActionEvent event) throws IOException{
+    private void handleCreateAccount(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         User tempUser = remoteModelAccess.postUser(username, password, confirmPassword);
 
-        if (tempUser == null){
-            if (password.equals(confirmPassword)){
+        if (tempUser == null) {
+            if (password.equals(confirmPassword)) {
                 nonValidCredentials.setText("Username already exists or password/username do not fit criteria.");
-            }
-            else{
+            } else {
                 nonMatchingPasswords.setText("Passwords do not match.");
             }
             return;
@@ -42,10 +47,17 @@ public class SignupController extends SceneController{
         showTutorial();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-        Parent root = loader.load();
-        MainMenuController mainMenuController = loader.getController();
-        mainMenuController.setUser(tempUser);
-        super.changeScene("NTNU Fighterz", root, event);
+        Parent root;
+        try {
+            root = loader.load();
+            MainMenuController mainMenuController = loader.getController();
+            mainMenuController.setUser(tempUser);
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid main menu path",
+                    "Something went wrong and main menu page could not be found.");
+            e.printStackTrace();
+        }
     }
 
     private void showTutorial() {
@@ -53,11 +65,18 @@ public class SignupController extends SceneController{
         tutorial.popupTutorial();
     }
 
-    @FXML 
-    private void handleBackToLogin(ActionEvent event) throws IOException{
+    @FXML
+    private void handleBackToLogin(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        Parent root = loader.load();
-        super.changeScene("NTNU Fighterz", root, event);
+        Parent root;
+        try {
+            root = loader.load();
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid go back path",
+                    "Something went wrong and Login page could not be found.");
+            e.printStackTrace();
+        }
     }
 
 }

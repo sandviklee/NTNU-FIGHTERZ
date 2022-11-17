@@ -17,50 +17,53 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
-public class SingleplayerGameController extends SceneController{
-    @FXML private Canvas worldCanvas;
+public class SingleplayerGameController extends SceneController {
+    @FXML
+    private Canvas worldCanvas;
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> assetSprites = new HashMap<>();
-     
-    private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
-    private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
+
+    private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V",
+            "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
+    private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N",
+            "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(200, 300));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 300));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
     private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 500));
     private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(200, 500));
-    
-    
+
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private String keyReleased = "";
     private long fps = 10_000_000;
 
     /**
-     * {@link #loadWorld(String, String)} will make an {@code World} with all players and terrain that the game shall have.
+     * {@link #loadWorld(String, String)} will make an {@code World} with all
+     * players and terrain that the game shall have.
      * 
-     * @param character  the name of the character loaded
-     * @param gameStage  of the World
+     * @param character the name of the character loaded
+     * @param gameStage of the World
      */
-    public void loadWorld(String character, String gameStage){
+    public void loadWorld(String character, String gameStage) {
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
-        //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+        // GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 300);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
-        //loadCharacterSprite("Dummy", playerSprites);
+        // loadCharacterSprite("Dummy", playerSprites);
         loadCharacterSprite("Assets", assetSprites);
         loadCharacterSprite("Background", assetSprites);
-        
+
         worldEntities.add(player);
         worldEntities.add(player2);
-        //worldEntities.add(dummy);
+        // worldEntities.add(dummy);
         worldEntities.add(terrain3);
         worldEntities.add(terrain2);
         worldEntities.add(terrain);
@@ -72,31 +75,39 @@ public class SingleplayerGameController extends SceneController{
 
     /**
      * Load the character from presistens with given characterName
-     * @param character  name of the WorldEntity
-     * @param position   of the character
-     * @param availKeys  that shall controll the character
+     * 
+     * @param character name of the WorldEntity
+     * @param position  of the character
+     * @param availKeys that shall controll the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int playerNumb, int facingDirection){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys,
+            int playerNumb, int facingDirection) {
         CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
         PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
 
-        return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
+        return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); // loaded
+                                                                                                           // from
+                                                                                                           // json,should
+                                                                                                           // maybe have
+                                                                                                           // a starting
+                                                                                                           // position
     }
 
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
-        return new GameCharacter(character, position); 
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position) { // Dummy character
+        return new GameCharacter(character, position);
     }
 
-    private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
+    private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth) {
         return new Terrain(name, position, width, heigth);
-        //load terrain here with serializer
+        // load terrain here with serializer
     }
 
     private void updateWorld() {
         new AnimationTimer() {
             private long tick = 0;
+
             @Override
             public void handle(long now) {
                 if (now - tick >= fps) {
@@ -107,7 +118,7 @@ public class SingleplayerGameController extends SceneController{
                     renderer.update();
                     resetKeyInputs();
                 }
-            tick = now;
+                tick = now;
             }
         }.start();
     }
@@ -116,8 +127,9 @@ public class SingleplayerGameController extends SceneController{
         File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             System.out.println(sprite.getName());
-            spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
-            
+            spriteHash.put((character + sprite.getName()).split("\\.")[0],
+                    new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
+
         }
     }
 
@@ -127,16 +139,13 @@ public class SingleplayerGameController extends SceneController{
     }
 
     @FXML
-    private void handleKeyPressed(KeyEvent event){
+    private void handleKeyPressed(KeyEvent event) {
         keyInputs += event.getCode();
     }
 
     @FXML
-    private void handleKeyReleased(KeyEvent event){
+    private void handleKeyReleased(KeyEvent event) {
         keyReleased += event.getCode();
     }
 
-    
 }
- 
-
