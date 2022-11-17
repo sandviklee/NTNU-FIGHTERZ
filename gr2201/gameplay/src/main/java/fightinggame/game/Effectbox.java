@@ -103,6 +103,10 @@ public class Effectbox {
     public void updateCenter(Point center) {
         this.center = center;
     }
+
+    public boolean getIsTraversable(){
+        return this.isTraversable;
+    }
     
     public void setIsTraversable(boolean state){
         this.isTraversable = state;
