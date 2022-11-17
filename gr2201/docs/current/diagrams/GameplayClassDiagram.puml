@@ -1,5 +1,5 @@
-@startuml ClassDiagram
-'This class is good to go, all that is required is figuring out visibility of hasNext
+@startuml GameplayClassDiagram
+
 class AnimationSprite {
     - currentFrame: integer
     - totalFrames: integer
@@ -10,7 +10,7 @@ class AnimationSprite {
     - jump(int frame): void
     + hasNext(): boolean
 }
-'First draft
+
 class SinglePlayerController {
     '- world: World
     + loadWorld(User user, String character, String gameStage): void
