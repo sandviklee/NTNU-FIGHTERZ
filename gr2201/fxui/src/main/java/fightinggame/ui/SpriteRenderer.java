@@ -4,16 +4,10 @@ import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Transform;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,7 +16,6 @@ import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Projectile;
 import fightinggame.game.Terrain;
-import fightinggame.game.World;
 import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
@@ -38,6 +31,14 @@ public class SpriteRenderer {
 
     private boolean rectOn = false;
 
+    /**
+     * T
+     * 
+     * @param canvas
+     * @param entities
+     * @param playerSprites
+     * @param assetSprites
+     */
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
         backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);

@@ -1,5 +1,7 @@
 package fightinggame.game;
-
+/**
+ * The {@code ActionProperties} class represents an ActionProperties.
+ */
 public class ActionProperties {
     private String spriteName;
     private String gameCharName;
@@ -145,7 +147,18 @@ public class ActionProperties {
 
     }
 
-    //ActionProperties made for Projectile itself
+      /**
+     * Create ActionProperties for the Projectile.
+     * @param spriteName               of the sprite to this ActionProperties
+     * @param actionPriority           of the ActionProperties
+     * @param duration                 of the total time
+     * @param totalFrames              of the animation
+     * @param animationLoop            shall it loop
+     * @param animationLoopStartFrame  if it loops what frame shall it start at
+     * @param knockBack                of character that does Action
+     * @param hitbox                   of Action, where can this Action effect enteties
+     * @param damage                   to apply to WorldEntities in hitbox
+     */
     public ActionProperties(String spriteName, int duration, int totalFrames, boolean animationLoop, int animationLoopStartFrame, Vector knockBack, Effectbox hitbox, int damage) {
         this.spriteName = spriteName;
         this.actionPriority = 0;
@@ -163,54 +176,108 @@ public class ActionProperties {
         this.isProjectile = false;
     }
 
+    /**
+     * Getter for hitBox
+     * @return hitBox Effectbox
+     */
     public Effectbox getHitBox() {
         return hitBox;
     }
 
+    /**
+     * Getter for knockback
+     * @return knockback Vector
+     */
     public Vector getKnockback() {
         return knockback;
     }
 
+    /**
+     * Getter for hitBoxStartTime
+     * @return hitBoxStartTime Integer.
+     */
     public int getHitBoxStartTime() {
         return hitBoxStartTime;
     }
 
+    /**
+     * Getter for damage
+     * @return damage Integer.
+     */
     public int getDamage() {
         return damage;
     }
+    /**
+     * Getter for spriteName
+     * @return spriteName String
+     */
 
     public String getSpriteName() {
         return spriteName;
     }
 
+    /**
+     * Getter for gameCharName
+     * @return gameCharName String
+     */
     public String getGameCharName() {
         return gameCharName;
     }
 
+    /**
+     * Getter for actionPriority
+     * @return actionPriority Integer
+     */
     public int getActionPriority() {
         return actionPriority;
     }
 
+    /**
+     * Getter for duration
+     * @return duration Integer
+     */
     public int getDuration() {
         return duration;
-    }
+    }  
+
+    /**
+     * Getter for isSelfInterruptible
+     * @return isSelfInterruptible boolean
+     */
 
     public boolean isSelfInterruptible() {
         return isSelfInterruptible;
     }
 
+    /**
+     * Getter for isEnemyInterruptible
+     * @return isEnemyInterruptible boolean
+     */
+
     public boolean isEnemyInterruptible() {
         return isEnemyInterruptible;
     }
 
+    /**
+     * Getter for totalFrames
+     * @return totalFrames Integer
+     */
     public int getTotalFrames() {
         return totalFrames;
     }
 
+    /**
+     * Getter for animationLoop
+     * @return animationLoop boolean
+     */
     public boolean isAnimationLoop() {
         return animationLoop;
     }
 
+    /**
+     * Getter for animationLoopStartFrame
+     * @return
+     */
     public int getAnimationLoopStartFrame() {
         return animationLoopStartFrame;
     }

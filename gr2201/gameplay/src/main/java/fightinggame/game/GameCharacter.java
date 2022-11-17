@@ -9,6 +9,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 
+
+
 public class GameCharacter extends WorldEntity{
     private double weight;
     private double speed;
@@ -37,6 +39,14 @@ public class GameCharacter extends WorldEntity{
     private boolean onLeft = false;
     private boolean onTop = false; 
 
+    /**
+     * Makes a GameCharacter.
+     * @param playerProperties
+     * @param pos
+     * @param availKeys
+     * @param playerNumb
+     * @param facingDirection
+     */
     public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
         this.startX = getX();
@@ -54,7 +64,11 @@ public class GameCharacter extends WorldEntity{
         }
         setCurrentAction(0);
     }
-
+    /**
+     * Makes a Character.
+     * @param name
+     * @param pos
+     */
     public GameCharacter(String name, ArrayList<Integer> pos) {
         super(name, pos);
         this.weight = 0;
@@ -66,7 +80,10 @@ public class GameCharacter extends WorldEntity{
         loadAudio();
         setCurrentAction(0);
     }
-
+    /** 
+     * Sets the current action to the character
+     * @param actionNumber sets the correct action, mapped like in the HashMap of Actionproperties.
+     */
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
             clearVectors();
@@ -116,7 +133,10 @@ public class GameCharacter extends WorldEntity{
             }  
         } 
     }
-
+    /**
+     * Exectues the current action the player has gotten from setCurrentAction.
+     * Checks different variables like onTop to set the correct updating position.
+     */
     public void doAction(){
         if (currentAction.startHitBox() && appliedVector == 0) {
             appliedVector++;
@@ -163,17 +183,27 @@ public class GameCharacter extends WorldEntity{
 		currentAction.nextActionFrame();
 	}
 
+    /**
+     * Applies the vector from the action.
+     */
     public void applyVectors() {
         Vector knockback = this.currentAction.getKnockback();
         mainVector.addVector(knockback);
 
     }
-
+    /**
+     * Sets the position of the character.
+     * @param x
+     * @param y
+     */
     public void setPosition(double x, double y) {
         this.point.setX(x);
         this.point.setY(y);
     }
-
+    /**
+     * Sets the onGround property to true or false if character touches the ground.
+     * @param boolean
+     */
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround) {
@@ -183,11 +213,18 @@ public class GameCharacter extends WorldEntity{
             }
         } 
 	}
-
+    /**
+     * Setter for onTop
+     * @param onTop boolean
+     */
     public void setOnTop(boolean onTop) {
 		this.onTop = onTop;
 	}
 
+    /**
+     * Setter for onLeft
+     * @param onLeft boolean
+     */
     public void setOnLeft(boolean onLeft) {
         this.onLeft = onLeft;
     }
@@ -276,6 +313,10 @@ public class GameCharacter extends WorldEntity{
         mainVector.setAy(0);
     }
 
+    /**
+     * Loads the all the audios in the audio folder for the game character.
+     * @throws MediaException if the computer doesnt suppoert MediaPlayer codec.
+     */
     private void loadAudio() {
         try {
             File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();

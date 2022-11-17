@@ -22,6 +22,11 @@ public class World {
     private String NewHeldKey = "Idle";
     private Effectbox worldBox;
 
+    /**
+     * Creates a world object.
+     * @param worldEntities ArrayList<WorldEntity> 
+     */
+
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = new ArrayList<>(worldEntities);
         this.worldBox = new Effectbox(null, new Point(screensize[0]/2, screensize[1]/2), false, screensize[0] + 1000, screensize[1] + 1000);
@@ -45,11 +50,22 @@ public class World {
         }
     }
 
+    /**
+     * Updates the world with the current keyInput clicked and keyInput released.
+     * @param input
+     * @param inputR
+     */
     public void updateWorld(String input, String inputR){
         handleCollisions();
         setActions(input, inputR);
         applyActions();
     }
+    /**
+     * Handles the collision like:
+     * Checks between gameCharacter hurtbox and Terrain hitbox,
+     * Checks between gameCharacter hitbox and gameCharacter hurtbox,
+     * Checks between Projectiles hitbox and gameCharacter hurtbox.
+     */
 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
@@ -133,7 +149,12 @@ public class World {
             }
         }
     }
-
+    /**
+     * Sets the current action to the character with input and inputR.
+     * Uses the keyinputs to decide which character to move, and applies the action to the 
+     * correct gameCharacter.
+     * Also spawns a projectile and adds it to the worldEntities arraylist.
+     */
     private void setActions(String input, String inputR){
         String[] inputArray = input.split("");
         ArrayList<String> keyInputArray =  new ArrayList<>(Arrays.asList(inputArray));
@@ -243,7 +264,7 @@ public class World {
             }
             
         }
-        
+        //Does the projectile spawning.
         for (GameCharacter character : gameCharacters) {
             if (spawnProjectileHash.get(character) && projectileReady.get(character) != null) {
                 projectileReady.get(character).setCurrentAction(0);
@@ -267,6 +288,9 @@ public class World {
         }
     }
 
+    /**
+     * Applies all the actions to the worldEntities.
+     */
     private void applyActions(){
         for (WorldEntity worldEntity : worldEntities) {
             worldEntity.doAction();
@@ -281,6 +305,13 @@ public class World {
         worldEntities.add(worldEntity);
     }
 
+    /**
+     * Sets the hitStun to a character and 
+     * calculates how much the knockback the character gettign hit
+     * shoudl have.
+     * @param worldCharacter1
+     * @param worldCharacter2
+     */
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
         worldCharacter2.setCurrentAction(1);
         int damage = worldCharacter1.getCurrentAction().getDamage();
@@ -288,7 +319,6 @@ public class World {
         Vector vec1 = new Vector(worldCharacter1.getCurrentAction().getKnockback());
         Vector vec2 = worldCharacter2.getVector();
 
-        //TODO: WRITE VARIABLES FOR CERTAIN SCALING.
         vec2.setVx((((worldCharacter2.getPrecentage() / 100)) * Math.abs(vec1.getVx())) * worldCharacter1.getFacingDirection());
         vec2.setVy((2 * (worldCharacter2.getPrecentage() / 100)*(vec1.getVy() - 16)));
 
@@ -302,8 +332,13 @@ public class World {
         clickActionHash.put((GameCharacter) worldCharacter2, true);
     }
 
+    /**
+     * Kills the current gamecharacter and iterates the information and properties
+     * needed to finish the game.
+     * @param worldCharacter
+     */
     private void characterReset(GameCharacter worldCharacter) {
-        if (worldCharacter.getDeathCounter() < 2) { //TODO: WRITE VARIABLE FOR HOW MANY TIMES A CHARACTER CAN DIE.
+        if (worldCharacter.getDeathCounter() < 2) {
             worldCharacter.resetAction();
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
             worldCharacter.resetPrecentage();

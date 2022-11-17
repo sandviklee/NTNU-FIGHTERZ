@@ -91,11 +91,19 @@ public class Effectbox {
         }
         return "Outside";
     }
-
+    
+    /**
+     * Updates the center of the point.
+     * @param center Point
+     */
     public void updateCenter(Point center) {
         this.center = center;
     }
     
+    /**
+     * Sets the Traversability of the Effectbox
+     * @param isTraversable boolean
+     */
     public void setIsTraversable(boolean state){
         this.isTraversable = state;
     }
