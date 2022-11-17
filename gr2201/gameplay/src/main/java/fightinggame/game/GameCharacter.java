@@ -47,7 +47,7 @@ public class GameCharacter extends WorldEntity{
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
         this.facingDirection = facingDirection;
-        //loadAudio(); //loads the characters audiofiles
+        loadAudio(); //loads the characters audiofiles
         // Add all action found in playerproperties to a hashmap that maps them to a number
         for (ActionProperties property : playerProperties.getActionProperties()) {
             actionHash.put(playerProperties.getActionProperties().indexOf(property), property);
@@ -63,7 +63,7 @@ public class GameCharacter extends WorldEntity{
         this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
         this.availKeys = new ArrayList<>();
         this.facingDirection = -1;
-        //loadAudio();
+        loadAudio();
         setCurrentAction(0);
     }
 
@@ -85,14 +85,19 @@ public class GameCharacter extends WorldEntity{
                 jumpCounter = 0;
             }
 
-            /* 
+            
             if (audioHash.get(this.currentAction.getName()) != null) {
-                playerAudioPlayer = new MediaPlayer(audioHash.get(this.currentAction.getName()));
-                playerAudioPlayer.setVolume(0.7);
-                playerAudioPlayer.play();
-    
+                try {
+                    playerAudioPlayer = new MediaPlayer(audioHash.get(this.currentAction.getName()));
+                    playerAudioPlayer.setVolume(0.7);
+                    playerAudioPlayer.play();
+        
+                } catch (MediaException e) {
+                    System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+                }
+
             }
-            */
+            
   
             if (currentAction.isProjectile()) {
                 currentAction.getKnockback().setDirection(facingDirection);

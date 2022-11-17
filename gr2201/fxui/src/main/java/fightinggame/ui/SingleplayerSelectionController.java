@@ -68,11 +68,11 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        try {
-
-            mainAudioPlayer = new MediaPlayer(audioGame);
-            mainAudioPlayer.play();
+        if (mainAudioPlayer != null) {
             mainAudioPlayer.stop();
+        }
+        
+        try {
             mainAudioPlayer = new MediaPlayer(audioGame);
             mainAudioPlayer.setOnEndOfMedia(new Runnable() {
                 public void run() {
@@ -97,7 +97,10 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
-        mainAudioPlayer.stop();
+        if (mainAudioPlayer != null) {
+            mainAudioPlayer.stop();
+        }
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();
