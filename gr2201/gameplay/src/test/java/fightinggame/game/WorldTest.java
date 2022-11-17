@@ -18,13 +18,12 @@ public class WorldTest {
     @DisplayName("Tests for World constructor")
     public void testConstructor() {
         Terrain terrain = new Terrain("test", new ArrayList<>(Arrays.asList(0, 0)), 10, 10);
-
         ArrayList<WorldEntity> worldEntities = new ArrayList<>();
         worldEntities.add(terrain);
-
         World world = new World(worldEntities);
 
-        assertEquals("test", world.getWorldEntities().get(0).getName());
-        
+        assertEquals("test", world.getWorldEntities().get(0).getName());   
     }
+
+
 }
