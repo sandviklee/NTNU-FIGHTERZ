@@ -160,7 +160,7 @@ Description.
 Description.
 |Pros | Cons|
 |---- | ----|
-| | |
+| Easier to setup| Less freedom |
 
 ### Decision Outcome
 **Chosen option:** Option 2, spring boot. Spring boot does much of the heavy lifting and stops us from reinventing the wheel when we already have an amazing framework to use, and we were recommended to use this framework.
