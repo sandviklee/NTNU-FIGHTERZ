@@ -46,8 +46,9 @@ public class ActionTest {
         list.add(1);
         list.add(1);
 
+
         point = new Point(0, 0);
-        hitbox = new Effectbox(null, point, false, list);
+        hitbox = new Effectbox(null, point, true, 100, 100);
 
         apInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, true, true, 0, false, 0, 0, 0);
         apSelfInterruptable = new ActionProperties(hitbox, spriteName, vec, validActionPriority1, validDuration, true, false, 0, false, 0, 0, 0);
