@@ -26,9 +26,9 @@ public class CharacterInformationMenuController extends SceneController{
             controller.setCharacter(image.getId());
             super.changeSceneMouseEvent("NTNU Fighterz", root, event);
         } catch (IllegalArgumentException | NullPointerException e) {
-            showError("Error: Could not instantiate character.", "Something went wrong and character information files could not be found or contained wrong information.");
+            showError("Error: Could not instantiate character.", "Something went wrong and character information files could not be found or contained wrong information." + image.getId() + "image");
         } catch (IOException e) {
-            showError("Error: Invalid game characters file path.", "Something went wrong and character game files could not be found.");
+            showError("Error: Invalid game characters file path.", "Something went wrong and character game files could not be found." + image.getId() + "image");
         }
     }
 
