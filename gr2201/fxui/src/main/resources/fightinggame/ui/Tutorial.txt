@@ -1,6 +1,6 @@
 In NTNU Fighterz you will be pinned up against your peers in a brawl to the death!
 
-Before trying your luck on the battlefield, you can read about the characters on the character information page. Here you will find important information about their movesets, as well as some lore behind the characters.
+Before trying your luck on the battlefield, you can read about the characters on the character information page. Here you will find important information about their movesets, as well as some lore behind the characters. To read about a character's special moves, hover over the icon for the move.
 
 After choosing your preferred fighter, you can hone your skills in the singleplayer mode. Here you can try out characters and their movesets against a dummy. The controls to control your character is by default:
 * W to jump, A to go left, and D to go right.
@@ -10,11 +10,12 @@ After choosing your preferred fighter, you can hone your skills in the singlepla
     * Side special if A or D is pressed.
     * Up special if W is pressed.
     * Down special if S is pressed.
+You can at any moment pause the game using the "Esc" key. To unpause, just press the "Esc" key again or the "Resume" button, or leave the game by pressing the "Exit to main menu" button.
 
 After some practice you can try to play against your friends in our local multiplayer mode! For player 1 use WASD, C and V, and for player 2 use IJKL, N and M. You can also change these controls in the settings menu.
 
-When playing against your friends, you can also unlock achievements. The achievements you have unlocked and the unlock conditions for other achievements can be found under the achievements tab.
+When playing against your friends, you can unlock achievements. The achievements you have unlocked and the unlock conditions for other achievements can be found under the achievements tab.
 
-Lastly, you can also change audio, controls and account details in the settings menu.
+Lastly, you can change audio, controls and account details in the settings menu.
 
 Good luck!
