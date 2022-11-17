@@ -69,6 +69,9 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
         try {
+
+            mainAudioPlayer = new MediaPlayer(audioGame);
+            mainAudioPlayer.play();
             mainAudioPlayer.stop();
             mainAudioPlayer = new MediaPlayer(audioGame);
             mainAudioPlayer.setOnEndOfMedia(new Runnable() {
