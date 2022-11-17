@@ -1,6 +1,50 @@
-[{"UserId":{"id":"Sverre"},"UserData":{"password":"pass"}},
-{"UserId":{"id":"Sverre1"},"UserData":{"password":"pass"}},
-{"UserId":{"id":"s"},"UserData":{"password":"s"}},
-{"UserId":{"id":"Kris"},"UserData":{"password":"k"}},
-{"UserId":{"id":"Elin"},"UserData":{"password":"h"}},
-{"UserId":{"id":"t"},"UserData":{"password":"t"}}]
+[
+	{
+		"userId": {
+			"id": "Sverre"
+		},
+		"userData": {
+			"password": "pass"
+		}
+	},
+	{
+		"userId": {
+			"id": "Sverre1"
+		},
+		"userData": {
+			"password": "pass"
+		}
+	},
+	{
+		"userId": {
+			"id": "s"
+		},
+		"userData": {
+			"password": "s"
+		}
+	},
+	{
+		"userId": {
+			"id": "Kris"
+		},
+		"userData": {
+			"password": "k"
+		}
+	},
+	{
+		"userId": {
+			"id": "Elin"
+		},
+		"userData": {
+			"password": "h"
+		}
+	},
+	{
+		"userId": {
+			"id": "t"
+		},
+		"userData": {
+			"password": "t"
+		}
+	}
+]
