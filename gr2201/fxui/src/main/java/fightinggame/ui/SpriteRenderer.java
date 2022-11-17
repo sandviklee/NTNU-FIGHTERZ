@@ -4,10 +4,16 @@ import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,19 +22,24 @@ import fightinggame.game.Effectbox;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.Projectile;
 import fightinggame.game.Terrain;
+import fightinggame.game.World;
 import fightinggame.game.WorldEntity;
 
 public class SpriteRenderer {
     private HashMap<String, Image> playerSprites;
     private HashMap<String, Image> assetSprites;
+    private HashMap<WorldEntity, Boolean> isPlaying = new HashMap<>();
     private HashMap<WorldEntity, Double> lastPrecentage = new HashMap<>();
 
     private GraphicsContext content;
     private Image backgroundImg;
     private ArrayList<WorldEntity> entities = new ArrayList<>();
     private AnimationSpritePlayer backgroundSpritePlayer = new AnimationSpritePlayer(16, true, 0, 4);
+    private AnimationSpritePlayer effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 3); 
+    private MediaPlayer effectAudioPlayer;
+    private Media audioCounter = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/Counter.mp3").toURI().toString());
 
-    private int heldFrame = 0;
+    private boolean rectOn = false;
 
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
@@ -37,9 +48,12 @@ public class SpriteRenderer {
         this.playerSprites = playerSprites;
         this.assetSprites = assetSprites;
         this.backgroundImg = assetSprites.get("Backgroundspritesheet");
+        effectAudioPlayer = new MediaPlayer(audioCounter);
+        effectAudioPlayer.setVolume(0.5);
 
         for (WorldEntity worldEntity : entities) {
             lastPrecentage.put(worldEntity, 0.0);
+            isPlaying.put(worldEntity, false);
         }
     }
 
@@ -62,19 +76,27 @@ public class SpriteRenderer {
                 content.drawImage(spriteImg, 500*entity.getCurrentAction().getCurrentFrame(), 0, 500, 402,
                 (entity.getFacingDirection() > 0 ? posX : (posX + 275)), posY, width*entity.getFacingDirection(), height); //draws the player itself.
 
-                drawCircle(entity, radius, content, Color.RED);
-                drawBox(hurtbox, content, Color.LIGHTBLUE);
+                if (rectOn) {
+                    drawCircle(entity, radius, content, Color.RED);
+                    drawBox(hurtbox, content, Color.LIGHTBLUE);
 
-                if (entity.getCurrentAction().getHitBox() != null) {
-                    Effectbox hitbox = entity.getCurrentAction().getHitBox();
-                    drawBox(hitbox, content, Color.RED);
+                    if (entity.getCurrentAction().getHitBox() != null) {
+                        Effectbox hitbox = entity.getCurrentAction().getHitBox();
+                        drawBox(hitbox, content, Color.RED);
+                    }
+    
                 }
+
+
 
             } else if (entity instanceof Terrain) {
                 Effectbox hitbox = entity.getHitBox();
                 content.drawImage(assetSprites.get("BackgroundTerrain"), 0, 0, 963, 278, entity.getHitBox().getPosX(), entity.getHitBox().getPosY(), entity.getHitBox().getWidth(), entity.getHitBox().getHeight());
-                drawCircle(entity, radius, content, Color.RED);
-                drawBox(hitbox, content, Color.BLUE);
+                if (rectOn) {
+                    drawCircle(entity, radius, content, Color.RED);
+                    drawBox(hitbox, content, Color.BLUE);
+                }    
+
             } else if (entity instanceof Projectile) {
                 int width = 80;
                 int height = 80;
@@ -86,13 +108,17 @@ public class SpriteRenderer {
 
                 content.drawImage(spriteImg, 134*entity.getCurrentAction().getCurrentFrame(), 0, 134, 136,
                 posX, posY, width, height);
-                drawCircle(entity, radius, content, Color.RED);
-                drawBox(hitbox, content, Color.RED);
+                if (rectOn) {
+                    drawCircle(entity, radius, content, Color.RED);
+                    drawBox(hitbox, content, Color.RED);
+                }
+
             }
 
         }
         for (WorldEntity entity : entities) {
             if (entity instanceof GameCharacter) {
+                int[] screenSize = {1920, 1080};
                 int[] playerProperties = {260, 200};
                 double playerPosX = entity.getX() - playerProperties[0]/2;
                 double playerPosY = entity.getY() - playerProperties[1]/2;
@@ -111,27 +137,46 @@ public class SpriteRenderer {
                 playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 Image playerIntImgFlip = assetSprites.get("Assetsplayer" + playerInt + "Flip");
+                Image playerDeath = assetSprites.get("AssetsDeath");
 
-            
+                
+                if (!entity.getAlive()) {
+                    double angle = Math.toDegrees(Math.atan(Math.abs(playerPosY - screenSize[1] / 2) / Math.abs(playerPosX - screenSize[0] / 2)));
+
+                    if (!isPlaying.get(entity)) {
+                        isPlaying.put(entity, true);
+                        effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 2);
+                        
+                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) playerPosX, (int) playerPosY, (int) (angle + 180));
+                        effectSpritePlayer.next();
+                    } else {
+                        if (entity.getPlayerNumb() == 1) {
+                            System.out.println(angle);
+                        }
+                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) (playerPosX + 200), (int) (playerPosY - 200), (int) (angle + 180));
+                        effectSpritePlayer.next();    
+                    }
+                } else {
+                    isPlaying.put(entity, false);
+                }
+
                 if ((playerPosY + playerProperties[1]) <= 0) {
                     content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 80, -60, -65); //draws the player number over the head of the character.
                 } else if (playerPosX  + playerProperties[0] + 20 <= 0) {
                     content.drawImage(playerIntImgFlip, 10, playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.
                 } else if (playerPosX - 20 >= 1920) {
                     content.drawImage(playerIntImgFlip, 1910, playerPosY + playerIntOffset[1], -60, 65); //draws the player number over the head of the character.
-                } else if (playerPosY >= 1080) {
-                    content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 1000, 60, 65); //draws the player number over the head of the character.
                 } else {
                     content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], playerPosY + playerIntOffset[1], 60, 65); //draws the player number over the head of the character.
                 }
          
                 content.drawImage(assetSprites.get("Assets" + entity.getName() + "P" + entity.getPlayerNumb()), 0, 0, 730, 379, entity.getPlayerNumb() == 1 ? hud1PosX : hud2PosX, hudPosY, hudProperties[0], hudProperties[1]); //draws the players HUD.
-                
-                
+            
                 drawText(entity, entity.getPlayerNumb() == 1 ? hud1PosX + 315 : hud2PosX + 125, hudPosY + 100, 200, i%5 == 0 ? 45 : 50, content, i < 255 ? Color.rgb(255, (int) (255 - i), (int) (255 - i)) : Color.RED, Color.BLACK, "" + i + "%"); //draws the precentage to the hud.
                 
                 if (i < entity.getPrecentage()) {
                     lastPrecentage.put(entity, lastPrecentage.get(entity) + 1);
+                    
                 } else if (i > entity.getPrecentage()) {
                     lastPrecentage.put(entity, 0.0);
                 }
@@ -168,6 +213,18 @@ public class SpriteRenderer {
         cntn.fillText(text, hudPosX, hudPosY, maxWidth); //draws the players precentage.
         cntn.strokeText(text, hudPosX, hudPosY, maxWidth);
 
+    }
+
+    private void rotate(GraphicsContext cntn, double angle, double pivotX, double pivotY) {
+        Rotate rotate = new Rotate(angle, 1920/2, 1080/2);
+        cntn.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
+    }
+
+    private void drawRotatedImage(GraphicsContext cntn, Image image, int currentFrame, int posX, int posY, int angle) {
+        cntn.save(); //Saves the current state on a stack, including the current transformation.
+        rotate(cntn, angle, posX, posY);
+        cntn.drawImage(image, 256*currentFrame, 0, 256, 256, posX, posY, 700, 1000);
+        cntn.restore();
     }
 
 }

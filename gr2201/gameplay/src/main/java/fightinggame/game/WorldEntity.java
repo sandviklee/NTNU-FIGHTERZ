@@ -10,9 +10,9 @@ public abstract class WorldEntity {
 	protected int id;
 	protected Effectbox hitBox;
 	protected Action currentAction = null;
-	protected boolean isAlive;
 	protected String name;
 	protected Point point;
+	private boolean isAlive = true;
 
 	public WorldEntity(String name, ArrayList<Integer> pos) {
 		this.name = name;
@@ -36,6 +36,7 @@ public abstract class WorldEntity {
 	public Action getAction(int actionNumber) {
         return null;
     }
+
 
 	public Vector getVector() {
 		return null;
@@ -93,8 +94,8 @@ public abstract class WorldEntity {
         return null;
     }
 
-	private void setHitBox(Effectbox hitBox) {
-		this.hitBox = hitBox;
+	public boolean getAlive() {
+		return isAlive;
 	}
 
 	public Action getCurrentAction() {
@@ -113,7 +114,7 @@ public abstract class WorldEntity {
         return 0;
     }
 
-	private void setAlive(boolean isAlive) {
+	public void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
 	}
 

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 public class World {
     private int[] screensize = {1920, 1080};
+    private int deathTimer = 0;
     private ArrayList<WorldEntity> worldEntities;
     private ArrayList<GameCharacter> gameCharacters = new ArrayList<>();
     private ArrayList<String> keysHeld = new ArrayList<>();
@@ -54,7 +55,14 @@ public class World {
         for (WorldEntity entity1 : worldEntities) {
             if (entity1 instanceof GameCharacter) {
                 if (entity1.getHurtBox().EffectBoxInEffectBox(worldBox).equals("Outside")) {
-                    characterReset((GameCharacter) entity1);
+                    entity1.setAlive(false);
+                    if (deathTimer > 22) {
+                        characterReset((GameCharacter) entity1);
+                        deathTimer = 0;
+                    } else {
+                        deathTimer++;
+                    }
+                    
                 }
             }
 
@@ -175,7 +183,7 @@ public class World {
                     heldKeyHash.get(worldEntity).set(0, "+");
                 }
 
-                if (currentAction.getIsDone() && clickActionHash.get(worldEntity)) {
+                if ((currentAction.getIsDone() && clickActionHash.get(worldEntity))) {
                     clickActionHash.put((GameCharacter) worldEntity, false);
                 }
 
@@ -304,6 +312,7 @@ public class World {
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
             worldCharacter.resetPrecentage();
             worldCharacter.iterateDeathCounter();
+            worldCharacter.setAlive(true);
         }
     }
 
