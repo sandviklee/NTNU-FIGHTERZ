@@ -2,7 +2,6 @@ package fightinggame.ui;
 
 import fightinggame.users.User;
 import javafx.event.ActionEvent;
-import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -10,9 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.scene.Node;
-
 
 /**
  * The {@code SceneController} class will is a base controller that gives all child classes methods:
@@ -58,7 +55,6 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/fontstyle.css");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

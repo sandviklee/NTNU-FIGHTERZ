@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -21,22 +22,29 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
-    private Media audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.wav").toURI().toString());
-    private Media audioGame = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.wav").toURI().toString());
+    private Media audioSelect;
+    private Media audioGame;
     
 
     @FXML
     private void initialize(){
         lockIn.setDisable(true);
-        mainAudioPlayer = new MediaPlayer(audioSelect);
-        mainAudioPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-              mainAudioPlayer.seek(Duration.ZERO);
-            }
-        });
-        mainAudioPlayer.setVolume(0.1);
-        mainAudioPlayer.play();
-
+        try {
+            audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.wav").toURI().toString());
+            audioGame = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.wav").toURI().toString());
+            mainAudioPlayer = new MediaPlayer(audioSelect);
+            mainAudioPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                  mainAudioPlayer.seek(Duration.ZERO);
+                }
+            });
+            mainAudioPlayer.setVolume(0.1);
+            mainAudioPlayer.play();
+    
+        } catch (MediaException e) {
+            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+        }
+        
     }
 
     public ImageView getCharacterSelected(){

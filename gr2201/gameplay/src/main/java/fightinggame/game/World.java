@@ -152,8 +152,6 @@ public class World {
                 keysHeld.remove(key);
             }
         }
-
-        
         
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {     
@@ -166,8 +164,6 @@ public class World {
                         keys.add(key);
                     }
                 }
-
-               //System.out.println(keys);
 
                 inputPerEntity.put((GameCharacter) worldEntity, keys);
 

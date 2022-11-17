@@ -35,12 +35,8 @@ public class SpriteRenderer {
     private Image backgroundImg;
     private ArrayList<WorldEntity> entities = new ArrayList<>();
     private AnimationSpritePlayer backgroundSpritePlayer = new AnimationSpritePlayer(16, true, 0, 4);
-    private AnimationSpritePlayer effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 3); 
 
     private boolean rectOn = false;
-    private double spawnDeathPosX;
-    private double spawnDeathPosY;
-    private double spawnDeathAngle;
 
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
