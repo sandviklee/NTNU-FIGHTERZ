@@ -111,7 +111,7 @@
       </ImageView>
       <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="647.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@PriestOfVenganceSplashArt.png" />
+            <Image url="@PriestOfVengeanceSplashArt.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="469.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">

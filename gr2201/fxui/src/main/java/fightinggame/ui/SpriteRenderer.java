@@ -35,7 +35,6 @@ public class SpriteRenderer {
 
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
-        backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);
         this.entities = entities;
         this.playerSprites = playerSprites;
         this.assetSprites = assetSprites;
@@ -148,7 +147,7 @@ public class SpriteRenderer {
     }
 
     private void drawText(WorldEntity entity, int hudPosX, int hudPosY, int maxWidth, int fontSize, GraphicsContext cntn, Color color, Color strokeColor, String text) {
-        Font font = Font.loadFont("file:gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
+        Font font = Font.loadFont("file:../fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
         cntn.setFill(color);
         cntn.setStroke(strokeColor);
         

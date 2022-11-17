@@ -17,6 +17,7 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
+    private ImageView currentImage;
 
     @FXML
     private void initialize(){
@@ -37,6 +38,7 @@ public class SingleplayerSelectionController extends SceneController{
     private void handleSelectCharacter(MouseEvent event) {
         resetCharacterImageOpacity();
         ImageView image = (ImageView) event.getSource();
+        currentImage = image;
         characterSelected.setImage(new Image(getClass().getResource(image.getId() + "SplashArt.png").toString()));
         image.setOpacity(0.7);
         lockIn.setDisable(false);
@@ -48,7 +50,7 @@ public class SingleplayerSelectionController extends SceneController{
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
         singleplayerGameController.setUser(super.getUser());
-        singleplayerGameController.loadWorld("AngryCyclist", null);
+        singleplayerGameController.loadWorld(currentImage.getId(), null);
         super.changeSceneFullscreen("NTNU Fighterz", root, event);
     
     }

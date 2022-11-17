@@ -59,7 +59,7 @@
       </ImageView>
       <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="637.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@PriestOfVenganceSplashArt.png" />
+            <Image url="@PriestOfVengeanceSplashArt.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="459.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
