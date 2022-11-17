@@ -30,10 +30,9 @@ public class UserDataDeserializer extends JsonDeserializer<UserData> {
             String passwordField = "password";
             if (objectNode.has(passwordField)) {
                 JsonNode passwordNode = objectNode.get(passwordField);
-                System.out.println(passwordNode.);
-                
+
                 if (passwordNode instanceof TextNode) {
-                    String password = passwordNode.get(passwordField);
+                    String password = passwordNode.asText();
                     UserData data = new UserData(password);
                     return data;
                 }
