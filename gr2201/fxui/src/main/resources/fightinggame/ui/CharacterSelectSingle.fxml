@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:id="characterSelectSingleRoot" fx:controller="fightinggame.ui.SingleplayerSelectionController">
+<AnchorPane fx:id="characterSelectSingleRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SingleplayerSelectionController">
    <children>
       <ImageView fitHeight="739.0" fitWidth="1460.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,7 +23,7 @@
             <Image url="@CharSelectCover.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSelected" fitHeight="672.0" fitWidth="576.0" layoutX="366.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="characterSelected" fitHeight="886.0" fitWidth="842.0" layoutX="242.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="278.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCoverSmall.png" />
@@ -39,7 +39,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="Ram" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="AngryCyclist" fitHeight="217.0" fitWidth="251.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Char1Select.png" />
                </image>
@@ -47,7 +47,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sly" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="PriestOfVengance" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@Char2Select.png" />
                </image>
@@ -55,7 +55,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sol" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="JinjierJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>

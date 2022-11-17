@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainMenuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
    <children>
       <ImageView fitHeight="729.0" fitWidth="1309.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Main%20Menu.png" />
+            <Image url="@Background.png" />
          </image>
       </ImageView>
-      <Button fx:id="playSingleplayer" layoutX="90.0" layoutY="240.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+      <Button fx:id="playSingleplayer" layoutX="52.0" layoutY="262.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="90.0" layoutY="300.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
+      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="52.0" layoutY="342.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="characterInfo" layoutX="90.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="settings" layoutX="90.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="SETTINGS" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="exit" layoutX="90.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
+      <Button fx:id="exit" layoutX="52.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -42,16 +39,33 @@
          <image>
             <Image url="@Logo.png" />
          </image>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
       </ImageView>
-      <Button fx:id="achievements" layoutX="90.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleAchievements" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="ACHIEVEMENTS" textFill="WHITE">
+      <Button fx:id="tutorial" layoutX="52.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="TUTORIAL" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="tutorial" layoutX="90.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="45.0" prefWidth="460.0" style="-fx-background-color: #597BCE; round: ;" text="TUTORIAL" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
-         </font>
-      </Button>
+      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="432.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AngryCyclistSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="637.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@PriestOfVenganceSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="459.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@JinjierJinkSplashArt.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
