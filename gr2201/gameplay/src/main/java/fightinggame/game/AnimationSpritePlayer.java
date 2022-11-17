@@ -21,8 +21,14 @@ public class AnimationSpritePlayer {
         if (validUserInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
+        else {
+            throw new IllegalArgumentException("Can not have negativ total frames");
+        }
         if (validUserInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
             this.animationLoopStartFrame = animationLoopStartFrame;
+        }
+        else {
+            throw new IllegalArgumentException("Can not have negativ total frames");
         }
         this.animationLoop = animationLoop;
         this.holdFrame = holdFrame;
