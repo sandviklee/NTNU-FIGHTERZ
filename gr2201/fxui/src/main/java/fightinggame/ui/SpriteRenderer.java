@@ -37,9 +37,12 @@ public class SpriteRenderer {
     private AnimationSpritePlayer backgroundSpritePlayer = new AnimationSpritePlayer(16, true, 0, 4);
     private AnimationSpritePlayer effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 3); 
     private MediaPlayer effectAudioPlayer;
-    private Media audioCounter = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/Counter.mp3").toURI().toString());
+    private Media audioCounter = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Counter.mp3").toURI().toString());
 
     private boolean rectOn = false;
+    private double spawnDeathPosX;
+    private double spawnDeathPosY;
+    private double spawnDeathAngle;
 
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
@@ -137,28 +140,33 @@ public class SpriteRenderer {
                 playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 Image playerIntImgFlip = assetSprites.get("Assetsplayer" + playerInt + "Flip");
+                /* 
                 Image playerDeath = assetSprites.get("AssetsDeath");
-
                 
-                if (!entity.getAlive()) {
-                    double angle = Math.toDegrees(Math.atan(Math.abs(playerPosY - screenSize[1] / 2) / Math.abs(playerPosX - screenSize[0] / 2)));
+                double angle = Math.toDegrees(Math.atan((playerPosY - screenSize[1] / 2) / (playerPosX - screenSize[0] / 2)));
+                System.out.println(angle);
 
+                if (!entity.getAlive()) {
                     if (!isPlaying.get(entity)) {
+                        spawnDeathAngle = angle;
+                        spawnDeathPosX = playerPosX;
+                        spawnDeathPosY = playerPosY;
                         isPlaying.put(entity, true);
                         effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 2);
                         
-                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) playerPosX, (int) playerPosY, (int) (angle + 180));
+                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) spawnDeathPosX, (int) spawnDeathPosY, (int) (spawnDeathAngle));
                         effectSpritePlayer.next();
                     } else {
-                        if (entity.getPlayerNumb() == 1) {
-                            System.out.println(angle);
-                        }
-                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) (playerPosX + 200), (int) (playerPosY - 200), (int) (angle + 180));
+                        
+
+                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) (spawnDeathPosX), (int) (spawnDeathPosY), (int) (spawnDeathAngle));
                         effectSpritePlayer.next();    
-                    }
+                    } 
                 } else {
                     isPlaying.put(entity, false);
                 }
+
+                */
 
                 if ((playerPosY + playerProperties[1]) <= 0) {
                     content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 80, -60, -65); //draws the player number over the head of the character.
@@ -202,7 +210,7 @@ public class SpriteRenderer {
     }
 
     private void drawText(WorldEntity entity, int hudPosX, int hudPosY, int maxWidth, int fontSize, GraphicsContext cntn, Color color, Color strokeColor, String text) {
-        Font font = Font.loadFont("file:gr2201/fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
+        Font font = Font.loadFont("file:../fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
         cntn.setFill(color);
         cntn.setStroke(strokeColor);
         
@@ -216,7 +224,7 @@ public class SpriteRenderer {
     }
 
     private void rotate(GraphicsContext cntn, double angle, double pivotX, double pivotY) {
-        Rotate rotate = new Rotate(angle, 1920/2, 1080/2);
+        Rotate rotate = new Rotate(angle, pivotX, pivotY);
         cntn.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
     }
 

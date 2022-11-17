@@ -21,8 +21,8 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
-    private Media audioSelect = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.mp3").toURI().toString());
-    private Media audioGame = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/Game.mp3").toURI().toString());
+    private Media audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.mp3").toURI().toString());
+    private Media audioGame = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.mp3").toURI().toString());
     
 
     @FXML

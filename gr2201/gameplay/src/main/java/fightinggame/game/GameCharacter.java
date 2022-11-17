@@ -269,9 +269,9 @@ public class GameCharacter extends WorldEntity{
     }
 
     private void loadAudio() {
-        File[] audioFiles = new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
+        File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
         for (File audio : audioFiles) {
-            audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
+            audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
             
         }
     }
