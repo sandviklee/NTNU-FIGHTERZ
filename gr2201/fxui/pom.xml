@@ -64,6 +64,14 @@
             <artifactId>assertj-core</artifactId>
             <version>3.13.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.tagtraum.ffmpeg/libavcodec -->
+        <dependency>
+            <groupId>com.tagtraum.ffmpeg</groupId>
+            <artifactId>libavcodec</artifactId>
+            <version>57.64.100</version>
+            <type>pom</type>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
