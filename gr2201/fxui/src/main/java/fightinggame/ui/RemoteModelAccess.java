@@ -25,7 +25,6 @@ public class RemoteModelAccess {
     public RemoteModelAccess (){
         try {
             this.uriBase =  new URI("http://localhost:8080/api/v1/user/");
-            //this.uriBase = new URI("https://8080-it1901groups2022-gr2201-iyc01r01ajd.ws.gitpod.stud.ntnu.no");
         } catch (URISyntaxException e) {
             System.err.println(e);
         }
@@ -37,7 +36,6 @@ public class RemoteModelAccess {
     private String uriParam(String param) {
         return URLEncoder.encode(param, StandardCharsets.UTF_8);
     }
-    // headers to http request might need to be added
 
     /**
      * Sends a HTTP GET() request with the given username and password. The response will be a User.
@@ -46,7 +44,7 @@ public class RemoteModelAccess {
      * @return A User. The user might be null if password is incorrect or username invalid
      */
     public User getUser(String username, String password){
-        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username)).resolve("/" + uriParam(password)))
+        HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(username) + "/" + uriParam(password)))
         .header("Accept", "application/json")
         .GET().build();
         try {
@@ -54,13 +52,11 @@ public class RemoteModelAccess {
             String userString = response.body();
             return mapper.readValue(userString, User.class);
           }
-           catch (IOException | InterruptedException e) {
+           catch (IOException | InterruptedException | IllegalArgumentException e) {
             System.err.println(e);
             return null;
           }       
     }
-    
-    // headers to http request might need to be added
 
     /**
      * Sends a HTTP POST() request with the given username, passwords and confirm passwords. The response will be a User.
@@ -80,7 +76,7 @@ public class RemoteModelAccess {
             String userString = response.body();
             return mapper.readValue(userString, User.class);
 
-        } catch (IOException| InterruptedException e) {
+        } catch (IOException| InterruptedException | IllegalArgumentException e) {
             System.err.println(e);
             return null;
         }

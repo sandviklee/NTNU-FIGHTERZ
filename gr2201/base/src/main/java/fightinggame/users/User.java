@@ -21,6 +21,9 @@ public class User {
 		}
 	}
 	public User(UserId id, UserData data) {
+		if (id == null || data == null){
+			throw new IllegalArgumentException("Bad input, id or data is null");
+		}
 		this.userId = id;
 		this.userData = data;
 	}
