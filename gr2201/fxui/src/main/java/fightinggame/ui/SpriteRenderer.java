@@ -151,7 +151,7 @@ public class SpriteRenderer {
     }
 
     private void drawText(WorldEntity entity, int hudPosX, int hudPosY, int maxWidth, int fontSize, GraphicsContext cntn, Color color, Color strokeColor, String text) {
-        Font font = Font.loadFont("file:gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
+        Font font = Font.loadFont("file:../fxui/src/main/resources/fightinggame/ui/Fonts/KabelBold.ttf", fontSize);
         cntn.setFill(color);
         cntn.setStroke(strokeColor);
         

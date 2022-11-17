@@ -7,22 +7,33 @@ import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 
 public class MultiplayerGameController extends SceneController{
     @FXML private Canvas worldCanvas;
+    @FXML private Button resumeButton;
+    @FXML private Button exitButton;
+    @FXML private Text textField;
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> assetSprites = new HashMap<>();
+    private AnimationTimer worldAnimationTimer;
     private boolean paused;
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
@@ -90,28 +101,72 @@ public class MultiplayerGameController extends SceneController{
     }
 
     private void updateWorld() {
-        new AnimationTimer() {
+        this.worldAnimationTimer = new AnimationTimer() {
             private long tick = 0;
             @Override
             public void handle(long now) {
                 if (now - tick >= fps) {
-                    if (world.getWorldEntities().stream().anyMatch(x -> !worldEntities.contains(x))) {
-                        renderer.updateRendererWorldEntities(world.getWorldEntities());
+                    if (!world.getGameOver()) {
+                        if (world.getWorldEntities().stream().anyMatch(x -> !worldEntities.contains(x))) {
+                            renderer.updateRendererWorldEntities(world.getWorldEntities());
+                        }
+                        world.updateWorld(keyInputs, keyReleased);
+                        renderer.update();
+                        resetKeyInputs();
+                    } else {
+                        gameOver();
                     }
-                    world.updateWorld(keyInputs, keyReleased);
-                    renderer.update();
-                    resetKeyInputs();
+
                 }
             tick = now;
             }
-        }.start();
+        };
+
+        worldAnimationTimer.start();
+        worldCanvas.toFront();
+        textField.setText("");
+        worldCanvas.setFocusTraversable(true);
+        resumeButton.setFocusTraversable(false);
+        exitButton.setFocusTraversable(false);
+
     }
 
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             
+        }
+    }
+
+    private void gameOver() {
+        paused = true;
+        worldAnimationTimer.stop();
+        resumeButton.setDisable(true);
+        textField.setText("GameOver! \n Winner: Player" + world.getGameWinner());
+        openCloseMenu();
+    }
+
+
+    private void resumeGame() {
+        paused = false;
+        worldAnimationTimer.start();
+        textField.setText("");
+        openCloseMenu();
+    }
+
+    private void pauseGame() {
+        paused = true;
+        textField.setText("Game Paused \n Resume the game?");
+        worldAnimationTimer.stop();
+        openCloseMenu();
+    }
+
+    private void openCloseMenu() {
+        if (paused) {
+            worldCanvas.toBack();
+        } else {
+            worldCanvas.toFront();
         }
     }
 
@@ -122,12 +177,35 @@ public class MultiplayerGameController extends SceneController{
 
     @FXML
     private void handleKeyPressed(KeyEvent event){
+        if(event.getCode()== KeyCode.ESCAPE) {
+            if(paused){
+                resumeGame();
+            }
+            else {
+                pauseGame();
+            }
+        }
         keyInputs += event.getCode();
     }
 
     @FXML
     private void handleKeyReleased(KeyEvent event){
         keyReleased += event.getCode();
+    }
+
+
+    @FXML
+    private void handleExit(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
+    }
+
+    @FXML
+    private void handleResume(ActionEvent event) {
+        resumeGame();
     }
 
     
