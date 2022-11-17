@@ -79,7 +79,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>${skipUITests}</skipTests>
+                    <!-- <skipTests>${skipUITests}</skipTests> -->
                     <argLine>
                         @{jaCoCoArgLine} --add-opens app/app=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
