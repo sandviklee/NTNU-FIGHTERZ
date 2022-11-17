@@ -50,18 +50,17 @@ public class MultiplayerGameController extends SceneController{
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
-        //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
-        //loadCharacterSprite("Dummy", playerSprites);
+
         loadCharacterSprite("Assets", assetSprites);
         loadCharacterSprite("Background", assetSprites);
         
         worldEntities.add(player);
         worldEntities.add(player2);
-        //worldEntities.add(dummy);
         worldEntities.add(terrain3);
         worldEntities.add(terrain2);
         worldEntities.add(terrain);
@@ -86,13 +85,8 @@ public class MultiplayerGameController extends SceneController{
         return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
     }
 
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
-        return new GameCharacter(character, position); 
-    }
-
     private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
         return new Terrain(name, position, width, heigth);
-        //load terrain here with serializer
     }
 
     private void updateWorld() {

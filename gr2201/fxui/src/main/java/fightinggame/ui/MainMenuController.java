@@ -26,9 +26,12 @@ public class MainMenuController extends SceneController {
     }
 
     @FXML
-    private void handlePlayMultiplayer(ActionEvent event){
-        //todo
-        return;
+    private void handlePlayMultiplayer(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectSingle.fxml"));
+        Parent root = loader.load();
+        SingleplayerSelectionController singleplayerSelectionController = loader.getController();
+        singleplayerSelectionController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
     
     @FXML
