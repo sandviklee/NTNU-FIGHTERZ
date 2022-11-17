@@ -3,7 +3,6 @@ package fightinggame.ui;
 import fightinggame.game.World;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.PlayerProperties;
-import fightinggame.game.Point;
 import fightinggame.game.Terrain;
 import fightinggame.game.WorldEntity;
 
@@ -23,39 +22,52 @@ public class SingleplayerGameController extends SceneController{
     private World world;
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
+    private HashMap<String, Image> assetSprites = new HashMap<>();
     private boolean paused;
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
-    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(500, 500));
-    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(800, 910));
-    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1100, 500));
+    private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(200, 300));
+    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 300));
+    private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
+    private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 500));
+    private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(200, 500));
+    
     
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private String keyReleased = "";
     private long fps = 10_000_000;
 
+    /**
+     * {@link #loadWorld(String, String)} will make an {@code World} with all players and terrain that the game shall have.
+     * 
+     * @param character  the name of the character loaded
+     * @param gameStage  of the World
+     */
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
-        GameCharacter player = loadPlayer(character, playerPosition, player1Keys);
-        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys);
+        GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
+        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain("Test", terrainPosition, 1300, 200);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
+        Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
+        Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
-        loadCharacterSprite("Dummy", playerSprites);
-        loadCharacterSprite("Assets", playerSprites);
+        //loadCharacterSprite("Dummy", playerSprites);
+        loadCharacterSprite("Assets", assetSprites);
+        loadCharacterSprite("Background", assetSprites);
         
-        //System.out.println(playerSprites);
         worldEntities.add(player);
-
         worldEntities.add(player2);
         //worldEntities.add(dummy);
+        worldEntities.add(terrain3);
+        worldEntities.add(terrain2);
         worldEntities.add(terrain);
 
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites);
         updateWorld();
     }
 
@@ -66,12 +78,12 @@ public class SingleplayerGameController extends SceneController{
      * @param availKeys  that shall controll the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys){
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int playerNumb, int facingDirection){
         CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
         PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
 
-        return new GameCharacter(playerProperties, position, availKeysArray); //loaded from json,should maybe have a starting position
+        return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
     }
 
     private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
@@ -102,7 +114,7 @@ public class SingleplayerGameController extends SceneController{
     }
 
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             System.out.println(sprite.getName());
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));

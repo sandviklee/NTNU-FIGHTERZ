@@ -2,7 +2,10 @@ package fightinggame.game;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
-
+/**
+ * The class {@code WorldEntity} is meant to represent all enities in the game and will have all commen attributes and methods.
+ * 
+ */
 public abstract class WorldEntity {
 	protected int id;
 	protected Effectbox hitBox;
@@ -16,37 +19,27 @@ public abstract class WorldEntity {
 		this.point = new Point((double) pos.get(0), (double) pos.get(1));
 	}
 	    
-    public boolean hitboxCollision(Effectbox effectbox) {
-        //NB: SJEKKER BARE FOR UNDER Y AKKURAT NÅ
-        if ((effectbox.getPosY() + effectbox.getHeight()/2 + 5) > (hitBox.getPosY() - hitBox.getHeight()/2)) {
-            if (((hitBox.getPosX() - hitBox.getWidth()/2) < (effectbox.getPosX() + effectbox.getWidth()/2)) && 
-            ((hitBox.getPosX() + hitBox.getWidth()/2) > (effectbox.getPosX() - effectbox.getWidth()/2))) {
-                return true;
-            } else {
-				return false;
-			}
-        } else {
-			return false;
-		}
-    }
-
+	public void setOnGround(boolean b) {}
 	
-    public boolean getOnGround() {
-		return isAlive;
+	public void setOnRight(boolean b) {}
 
-    }
-    
-	public void setOnGround(boolean b) {
-		
-	}
+	public void setOnLeft(boolean b) {}
+
+	public void setOnTop(boolean b) {}
+
+	public void addPrecentage(int precentage) {}
+
+	public void setCurrentAction(Integer actionNumber) {}
+
+	public void doAction() {}
 	
-	public void doAction(){
-
-	}
-
 	public Action getAction(int actionNumber) {
         return null;
     }
+
+	public Vector getVector() {
+		return null;
+	}
 
 	public Predicate<String> getPredicate() {
 		return null;
@@ -56,16 +49,40 @@ public abstract class WorldEntity {
 		return null;
 	}
 
+    public double getX() {
+		return point.getX();
+	}
+
+	public double getY() {
+		return point.getY();
+	}
+
+	public double getStartX() {
+		return 0;
+	}
+
+	public double getStartY() {
+		return 0;
+	}
+
+	public double getPrecentage() {
+		return 0;
+	}
+
+	public int getDeathCounter() {
+        return 0;
+    }
+
 	public int getFacingDirection() {
         return 0;
     }
 
-	public String getName() {
-		return name;
+	public int getPlayerNumb() {
+		return 0;
 	}
 
-	public Point getPoint() {
-		return point;
+	public String getName() {
+		return name;
 	}
 
 	public Effectbox getHurtBox() {
@@ -84,8 +101,6 @@ public abstract class WorldEntity {
 		return currentAction;
 	}
 
-	public void setCurrentAction(Integer actionNumber) {}
-
 	public int getCurrentFrame(){
 		return currentAction.getCurrentFrame();
 	}
@@ -94,12 +109,12 @@ public abstract class WorldEntity {
 		return isAlive;
 	}
 
-	private void setAlive(boolean isAlive) {
-		this.isAlive = isAlive;
-	}
-
 	public int getJumpCounter() {
         return 0;
     }
+
+	private void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
 
 }

@@ -1,8 +1,11 @@
 package fightinggame.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-
+import fightinggame.characterJSON.CharacterInformationDAO;
+import fightinggame.characterJSON.CharacterInformationObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -21,29 +25,39 @@ public class CharacterInformationController extends SceneController{
     @FXML private GridPane characterSpecials;
     @FXML private Button goBack;
 
-    public void setCharacter(String character) {
+    private static CharacterInformationDAO dao;
+
+    public void setCharacter(String character) throws IOException {
+        String path = "./src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
+        dao = new CharacterInformationDAO(path);
         initCharacter(character);
     }
 
     private void initCharacter(String character) {
-        int i = 0;
-        title.setText(character + " INFO");
-        Image characterSplashArt = new Image((getClass().getResource(character + "SplashArt.png")).toString());
-       
+        CharacterInformationObject characterObject = dao.getCharacter(character);
+        // Set title
+        title.setText(characterObject.getName());
+        // Set character image
+        Image characterSplashArt = new Image((getClass().getResource(characterObject.getName() + "SplashArt.png")).toString());
         this.characterSplashArt.setImage(characterSplashArt);
-        // temporary difficulty image, same for all characters
-        Image difficulty = new Image((getClass().getResource("Difficulty.png")).toString());
+        // Set chaacter difficulty
+        Image difficulty = new Image((getClass().getResource("Difficulty" + characterObject.getDifficulty() + ".png")).toString());
         this.difficulty.setImage(difficulty);
-        //title.setText("Ram" + " INFO");
-        description.setText("Lorem ipsum comes later.");
+        // Set character description
+        description.setText(characterObject.getDescription());
+        // Set character moves
+        HashMap<String, String> specialActions = characterObject.getSpecialActions();
+        ArrayList<String> specialActionNames = new ArrayList<>(specialActions.keySet());
+        int i = 0;
         for (Node Imageview : characterSpecials.getChildren()) {
-            i += 1;
             if (Imageview instanceof ImageView) {
-                ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + i + ".jpeg")).toString()));
+                String actionName = specialActionNames.get(i);
+                ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + (i+1) + ".jpeg")).toString()));
+                Tooltip.install(Imageview, new Tooltip(actionName + "\n" + specialActions.get(actionName)));
             }
+            i += 1;
         }
     }
-
 
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {

@@ -8,7 +8,7 @@ public class Action {
     private String gameCharName;
     private Effectbox hitBox;
     private Effectbox temporary;
-    private AnimationSprite sprites;
+    private AnimationSpritePlayer sprites;
     private Projectile projectile;
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
@@ -21,7 +21,7 @@ public class Action {
     private boolean isDone;
     private int holdAction = 0;
     private int holdFrameLength = 3;        
-    private boolean Movement;
+    private boolean movement;
     private boolean isProjectile;
     private boolean createProjectile = true;
 
@@ -31,9 +31,10 @@ public class Action {
      * @param properties  of the action it is making
      */
     public Action(ActionProperties properties) {
-        this.sprites = new AnimationSprite(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame());
+        this.sprites = new AnimationSpritePlayer(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame() , 0);
         this.isSelfInterruptible = properties.isSelfInterruptible();
         this.isEnemyInterruptible = properties.isEnemyInterruptible();
+        this.damage = properties.getDamage();
         this.duration = properties.getDuration();
         this.actionPriority = properties.getActionPriority();
         this.name = properties.getSpriteName();
@@ -42,7 +43,7 @@ public class Action {
         this.temporary = properties.getHitBox();
         this.hitBoxStartTime = properties.getHitBoxStartTime();
         this.currentTime = 0;
-        this.Movement = properties.getIsMovement();
+        this.movement = properties.getIsMovement();
         this.isDone = false;
         this.isProjectile = properties.getIsProjectile();
         this.projectile = properties.getProjectile();
@@ -88,12 +89,13 @@ public class Action {
      * Needs to be specified when the other action is aquired (if it is an enemy or self)
      * @param otherEnemyActionPriority  the value to compare with own actionPriority
      */
-    public void tryEnemyInterrupt(int otherEnemyActionPriority) {
+    public boolean tryEnemyInterrupt(Action otherSelfAction) {
         if (isEnemyInterruptible) {
-            if (actionPriority <= otherEnemyActionPriority) {
-                currentTime = duration;
+            if (actionPriority < otherSelfAction.getActionPriority()) {
+                return true;
             } 
         }
+        return false;
     }
 
     /**
@@ -170,7 +172,7 @@ public class Action {
     }
 
     public boolean isMovement() {
-        return Movement;
+        return movement;
     }
 
     /**

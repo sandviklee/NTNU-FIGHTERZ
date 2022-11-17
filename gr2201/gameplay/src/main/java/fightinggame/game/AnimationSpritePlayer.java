@@ -1,11 +1,13 @@
 package fightinggame.game;
 /**
- * AnimationSprite shall represent a sprite and its change for 
+ * The {@code AnimationSprite} class represents an AnimationPlayer 
  */
-public class AnimationSprite {
+public class AnimationSpritePlayer {
     private int currentFrame = 0;
     private int totalFrames;
     private int animationLoopStartFrame;
+    private int holdFrame;
+    private int frameCounter = 0;
     private boolean animationLoop;
 
     /**
@@ -13,8 +15,9 @@ public class AnimationSprite {
      * @param totalFrames
      * @param animationLoop
      * @param animationLoopStartFrame
+     * @param holdFrame
      */
-    public AnimationSprite(int totalFrames, boolean animationLoop, int animationLoopStartFrame){
+    public AnimationSpritePlayer(int totalFrames, boolean animationLoop, int animationLoopStartFrame, int holdFrame){
         if (validUserInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
@@ -22,6 +25,7 @@ public class AnimationSprite {
             this.animationLoopStartFrame = animationLoopStartFrame;
         }
         this.animationLoop = animationLoop;
+        this.holdFrame = holdFrame;
         
     }
     /**
@@ -49,7 +53,18 @@ public class AnimationSprite {
      */
     public void next(){
         if (currentFrame < totalFrames) {
-            this.currentFrame += 1;
+            if (holdFrame != 0) {
+                if (frameCounter <= holdFrame) {
+                    frameCounter++;
+                } else {
+                    this.currentFrame++;
+                    frameCounter = 0; 
+                }
+            } else {
+                this.currentFrame++;
+            }
+
+            
         }
 
         if (animationLoop && !hasNext()) {

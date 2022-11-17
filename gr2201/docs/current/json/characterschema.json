@@ -134,7 +134,11 @@
                                 "exclusiveMinimum": 0
                             },
                             "isProjectile": {
-                                "description": "Tells whether the attack itself is a projectile. If yes, the above values will therefore count for the new projectile object created rather than be an extension of the character object.",
+                                "description": "Tells whether the attack itself is a projectile. If true, the above values will therefore count for the new projectile object created rather than be an extension of the character object.",
+                                "type": "boolean"
+                            },
+                            "isMovement": {
+                                "description": "Tells if the character should be affected by the knockback provided. If true, the above knockback will also affect the character.",
                                 "type": "boolean"
                             }
                         },

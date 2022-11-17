@@ -73,15 +73,15 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	 */
 	private static String readFromFile(String filename) throws IOException {		
 		String characterInfo = "";
-		File userFile = new File(filename + "characters.json");
-		if (userFile.exists()){
-			Scanner userFileReader = new Scanner(userFile);
+		File characterFile = new File(filename + "characters.json");
+		if (characterFile.exists()){
+			Scanner characterFileReader = new Scanner(characterFile);
 
-			while(userFileReader.hasNextLine()) {
-				String line = userFileReader.nextLine();
+			while(characterFileReader.hasNextLine()) {
+				String line = characterFileReader.nextLine();
 				characterInfo += line;
 			}
-			userFileReader.close();
+			characterFileReader.close();
 		}
 		else throw new FileNotFoundException("The file could not be found.");
 		return characterInfo;
