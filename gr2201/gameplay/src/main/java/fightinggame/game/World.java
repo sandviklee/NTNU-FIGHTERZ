@@ -20,6 +20,8 @@ public class World {
 
     private String NewHeldKey = "Idle";
     private Effectbox worldBox;
+    private boolean gameOver = false;
+    private int playerNumbWinner;
 
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = new ArrayList<>(worldEntities);
@@ -50,11 +52,23 @@ public class World {
         applyActions();
     }
 
+    public ArrayList<WorldEntity> getWorldEntities() {
+        return worldEntities;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
+    }
+
+    public int getGameWinner() {
+        return playerNumbWinner;
+    }
+
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
             if (entity1 instanceof GameCharacter) {
                 if (entity1.getHurtBox().EffectBoxInEffectBox(worldBox).equals("Outside")) {
-                    characterReset((GameCharacter) entity1);
+                    characterReset((GameCharacter) entity1);         
                 }
             }
 
@@ -260,13 +274,17 @@ public class World {
             worldEntity.doAction();
         }
     }
-
-    public ArrayList<WorldEntity> getWorldEntities() {
-        return worldEntities;
-    }
     
     private void addWorldEntity(WorldEntity worldEntity){
         worldEntities.add(worldEntity);
+    }
+
+    private void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    private void setGameWinner(int playerNumb) {
+        this.playerNumbWinner = playerNumb;
     }
 
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
@@ -295,7 +313,10 @@ public class World {
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
             worldCharacter.resetPrecentage();
             worldCharacter.iterateDeathCounter();
+        } else {
+            worldCharacter.iterateDeathCounter();
+            setGameWinner(worldCharacter.getPlayerNumb() == 1 ? 2 : 1);
+            setGameOver(true);
         }
     }
-
 }
