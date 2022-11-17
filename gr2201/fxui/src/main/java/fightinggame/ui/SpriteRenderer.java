@@ -83,7 +83,6 @@ public class SpriteRenderer {
                 int height = 80;
                 double posX = entity.getX() - (width/2 - 10);
                 double posY = entity.getY() - (height/2);
-                //System.out.println("posX: " + posX + " posY: " + posY);
                 Effectbox hitbox = entity.getHitBox();
                 Image spriteImg = playerSprites.get(entity.getName() + entity.getCurrentAction().getName());
 

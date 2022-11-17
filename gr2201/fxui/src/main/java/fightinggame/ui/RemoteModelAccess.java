@@ -53,9 +53,6 @@ public class RemoteModelAccess {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
-
-            System.out.println("The uri is: " + (response.uri().toString()));
-            System.out.println("The string Json: " + userString);
             return mapper.readValue(userString, User.class);
         } catch (IOException | InterruptedException | IllegalArgumentException e) {
             System.err.println(e);

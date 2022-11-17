@@ -53,7 +53,6 @@ public class ServerController {
      */
     @PostMapping(path = "/{username}")
     public User postUser(@RequestParam("userData") String userData) {
-        System.out.println(userData);
         String username = userData.split("\\.")[0];
         String password = userData.split("\\.")[1];
         String confirmPassword = userData.split("\\.")[2];
