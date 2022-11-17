@@ -29,7 +29,7 @@ SceneController in each controller.
 <br />
 
 ### Decision Outcome
-**Chosen option:** Inheritance. It might seem like unnecessary complexity if we only have a few controllers and methods, but will pay off in the long run as the app keeps expanding. It will encapsulate these methods and only allow access for the relevant Controller classes. This will also allow us to share fields between controllers, such as users.
+**Chosen option:** Option 1, Inheritance. It might seem like unnecessary complexity if we only have a few controllers and methods, but will pay off in the long run as the app keeps expanding. It will encapsulate these methods and only allow access for the relevant Controller classes. This will also allow us to share fields between controllers, such as users.
 
 ## **2. Save character information in JSON file**
 ### Context and Problem Statement
@@ -72,9 +72,9 @@ This option suggests using the JSON file format for saving character information
 | Does not create many unnecessary classes. |  |
 
 ### Decision Outcome
-**Chosen option:** Option 3, combining JSON for general stats and individual classes for character specific traits. The current "Player/Character" object will now be a superclass for specific classes with character names. The characters 
+**Chosen option:** Option 2, only JSON files. Originally option 3 was chosen, but after further work on the JSON format, it was deemed that combining JSON for general stats and individual classes for character specific traits would not be necessary. In the original plan, the current "Player/Character" object would be a superclass for specific classes with character names. After creating the first character however, we saw that the extra classes were not needed and decided to go with option 2, where all data is saved in JSON.
 
-## 3. Where to throw exceptions
+## **3. Where to throw exceptions**
 ### Context and Problem Statement
 Where to throw exceptions and where to catch them should be defined to ensure that exceptions are properly handled. 
 ### Considered Options
@@ -92,7 +92,7 @@ In this option all handling of exceptions will happen in the model classes, and 
 | All exception handling and logic is done inside the model. | Ambigious what the controller will take in to show the different errors: will it take in a string and output it? What if the app completely crashes due to this? Will it consist of many if else statements, or will more catch statements be required in the controller as well to prevent the app from crashing? |
 | Handle all exceptions as they happen without any middlemen. | |
 ### Decision Outcome
-**Chosen option:** Throw exceptions in model, catch exceptions in controller.
+**Chosen option:** Option 1, throw exceptions in model, catch exceptions in controller. This will make it easier to have all exceptions in one layer.
 
 ## 4. Module VS package VS class
 ### Context and Problem Statement
@@ -103,7 +103,7 @@ There were no specific "options" considered during this design choice, but rathe
 * Module "fxui": The GUI, visuals and controllers in the app. No mdoels, only related to what is shown on screen. Consists currently only of the "ui" package.
 * Module "base": Includes packages related to "users", "dbAccess"/database and JSON reading. Consists of core logic and functionality of the app that is related to data handling and not gameplay.
 * Module "gameplay": Contains all gameplay logic classes.
-* Module "rest": Consists of the REST API and server.
+* Module "springboot": Consists of the REST API and server.
 
 ## 5. Document metaphor
 ### Context and Problem Statement
@@ -116,8 +116,81 @@ In desktop style the user's data is implicitly and automatically saved. This doe
 ### Decision Outcome
 **Chosen option:** As the application is quite big and contains a lot of features, some parts of the application pertain to the desktop style while other features fit the app style more. Due to the nature of the game, things such as user details will follow the desktop style, while the game itself will follow the app style.
 
+
+## 6. Persistence and how to access it
+### Context and Problem Statement
+How shall the program access data from persistence layer? There are several different ways to accomplish this and it is important to separate the different layers.
+### Considered Options
+#### **Option 1: Use DAO pattern**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Abstraction for actual database access implementation separates the data access strategy from the user business logic and the UI. Creates a clear access point between the persistent level and business logic. | Creates more boilerplate. |
+| Makes the business logic program for the interface rather than the implementation. This makes it possible to treat the implementation as a black box and any changes to implementation does not affect the rest of the program. | The DAO hides database access calls. These are often very expensive, and it could be cheaper if one makes specific SQL queries. |
+| Easier for others to understand and maintain as the DAO design pattern is well known. |  |
+
+#### **Option 2: Use DAO and Repository pattern**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Only one access point, which will abstract away more of the implementation details that are not important to see and is useful when dealing with several data storages. | This will increase the complexity of the program.
+| | This option will also add the most boilerplate of all the options, as well as making it harder to read. |
+
+#### **Option 3: Only implementation**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Only one access point with no extra boilerplate code. | If new changes are implemented, will need to change how the rest of the program uses the implementation.
+| | Can't treat it as a well-defined black box where you only need to care about the input/output. |
+
+### Decision Outcome
+**Chosen option:** Option 1, using the DAO pattern. In this project, we're going to change the format of the stored data and might have to make new changes along the way. This happened in the first assignment, where the project originally used CSV files, but afterwards changed it to JSON files. This will make the DAO pattern very helpful as the rest of the application can be programed for the interface and treat the implementation as an black box.
+
+
+## 7. Framework to use for rest server API
+### Context and Problem Statement
+### Considered Options
+#### **Option 1: Spring MVC**
+Description.
+|Pros | Cons|
+|---- | ----|
+| More freedom. | Meant for lower level servers. |
+
+#### **Option 2: Spring boot**
+Description.
+|Pros | Cons|
+|---- | ----|
+| Easier to setup| Less freedom |
+
+### Decision Outcome
+**Chosen option:** Option 2, spring boot. Spring boot does much of the heavy lifting and stops us from reinventing the wheel when we already have an amazing framework to use, and we were recommended to use this framework.
+
+## 8. How to implement users
+### Context and Problem Statement
+How is the program going to represent a user? The User shall contain at least a username and password, however future iterations might include achievements and player statistics, such as amount of wins, losses and Matchmaking Rating (MMR). As such it is nice to have an easily changeable user object that allows easy implementation of new features and fields. What should identify different users is also a part of the discussion, and as of the current implementation, it is planned that the username is going to be the unique primary key of each user.
+### Considered Options
+#### **Option 1: User class containg all data**
+Description.
+|Pros | Cons|
+|---- | ----|
+| All information about the user in one class increases the leanness of the project and removes duplicate code. | Changes can make maintenace harder. |
+| All in one place and high fan-out, which is beneficial for high level classes. | Reusability is lower as if the user id or user data is different, one must change most of the User class. |
+| | Changes to this class will affect all classes using this or parts of the user class. |
+| | Harder to test, as the User class will contain many different parts, none of which are separated, making it harder to track where the error is coming from. |
+
+#### **Option 2: User class being made from UserId and UserData**
+Description.
+|Pros | Cons|
+|---- | ----|
+| ID fields and data fields are often subject to change. Having a separate class that is responsible for handling what identifies users, will make changes easier later on as new changes/fields are implemented. | If there are no changes to what identifies a user then this can create more unnecessary code. However, for future iterations, new fields and changes to identification has been discussed. |
+| Higher fan-out as other classes can choose to use only the specific parts of the User class that they need, and not have to wrestle with all checks for the entire class. I.e. if one is going to search for a specific user in the database, then one can use only the UserId and check for that instead of using the entire User class with non relevant details. | Creates more code to maintain, such as the serializers and deserializers for the UserId and UserData classes. These are however easier to maintain as they split up the different parts of the user, and changes to certain parts will only affect certain deserializers and serializers, instead of all of them. |
+| Easier to make changes to UserData and UserId as they will not affect each other. | |
+
+
+### Decision Outcome
+
 <!---
-## 5. Issue
+## 11. Issue
 ### Context and Problem Statement
 ### Considered Options
 #### **Option 1: Option**

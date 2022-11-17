@@ -19,17 +19,28 @@ public class UserDeserializer extends JsonDeserializer<User> {
 
     @Override
     public User deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-       TreeNode treeNode = p.getCodec().readTree(p);
-       if (treeNode instanceof ObjectNode) {
-        ObjectNode objectNode = (ObjectNode) treeNode;
-        JsonNode idNode = objectNode.get("UserId");
-        JsonNode dataNode = objectNode.get("UserData");
+        TreeNode treeNode = p.getCodec().readTree(p);
+        if (treeNode instanceof ObjectNode) {
+            ObjectNode objectNode = (ObjectNode) treeNode;
+            String userIdField = "userId";
+            String userDataField = "userData";
 
-        UserId id = userIdDeserializer.deserialize(idNode);
-        UserData data = userDataDeserializer.deserialize(dataNode);
+            if (objectNode.has(userIdField) &&  objectNode.has(userDataField)) {
+                JsonNode idNode = objectNode.get(userIdField);
+                JsonNode dataNode = objectNode.get(userDataField);
 
-        return new User(id, data);
-       }
-       return null;
+
+                UserId id = userIdDeserializer.deserialize(idNode);
+                UserData data = userDataDeserializer.deserialize(dataNode);
+                if (id == null ) {
+                    System.out.println("ID IS NULL");
+                }
+                if (data == null ) {
+                    System.out.println("DATA IS NULL");
+                }
+                return new User(id, data);
+            }
+        }
+    return null;
     }    
 }

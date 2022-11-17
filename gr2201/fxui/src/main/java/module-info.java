@@ -1,4 +1,5 @@
 module fightinggame.ui {
+    requires java.net.http;
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.media;
