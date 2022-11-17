@@ -32,28 +32,28 @@ public class CharacterInformationMenuControllerTest extends ApplicationTest {
 
     @Test
     public void testClickRam(){
-        clickOn("#Ram");
+        clickOn("#AngryCyclist");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Ram", title, "Not correct title");
+        Assertions.assertEquals("AngryCyclist", title, "Not correct title");
     }
 
     @Test
     public void testClickSly(){
-        clickOn("#Sly");
+        clickOn("#PriestOfVengeance");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Sly", title, "Not correct title");
+        Assertions.assertEquals("PriestOfVengeance", title, "Not correct title");
     }
 
     @Test
     public void testClickSol(){
-        clickOn("#Sol");
+        clickOn("#JinjerJink");
         String title = getLabelText("#title");
-        Assertions.assertEquals("Sol", title, "Not correct title");
+        Assertions.assertEquals("JinjerJink", title, "Not correct title");
     }
 
     @Test
     public void testGoBack(){
-        clickOn("#Sol");
+        clickOn("#JinjerJink");
         clickOn("#goBack");
         Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"), "Wrong root when pressing goBack button");
     }

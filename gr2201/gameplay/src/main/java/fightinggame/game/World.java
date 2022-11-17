@@ -21,6 +21,8 @@ public class World {
 
     private String NewHeldKey = "Idle";
     private Effectbox worldBox;
+    private boolean gameOver = false;
+    private int playerNumbWinner;
 
     /**
      * Creates a world object.
@@ -66,6 +68,18 @@ public class World {
      * Checks between gameCharacter hitbox and gameCharacter hurtbox,
      * Checks between Projectiles hitbox and gameCharacter hurtbox.
      */
+
+    public ArrayList<WorldEntity> getWorldEntities() {
+        return worldEntities;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
+    }
+
+    public int getGameWinner() {
+        return playerNumbWinner;
+    }
 
     private void handleCollisions(){
         for (WorldEntity entity1 : worldEntities) {
@@ -296,22 +310,19 @@ public class World {
             worldEntity.doAction();
         }
     }
-
-    public ArrayList<WorldEntity> getWorldEntities() {
-        return worldEntities;
-    }
     
     private void addWorldEntity(WorldEntity worldEntity){
         worldEntities.add(worldEntity);
     }
 
-    /**
-     * Sets the hitStun to a character and 
-     * calculates how much the knockback the character gettign hit
-     * shoudl have.
-     * @param worldCharacter1
-     * @param worldCharacter2
-     */
+    private void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    private void setGameWinner(int playerNumb) {
+        this.playerNumbWinner = playerNumb;
+    }
+
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
         worldCharacter2.setCurrentAction(1);
         int damage = worldCharacter1.getCurrentAction().getDamage();
@@ -343,8 +354,10 @@ public class World {
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
             worldCharacter.resetPrecentage();
             worldCharacter.iterateDeathCounter();
-            worldCharacter.setAlive(true);
+        } else {
+            worldCharacter.iterateDeathCounter();
+            setGameWinner(worldCharacter.getPlayerNumb() == 1 ? 2 : 1);
+            setGameOver(true);
         }
     }
-
 }

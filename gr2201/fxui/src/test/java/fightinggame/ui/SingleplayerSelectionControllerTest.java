@@ -28,17 +28,17 @@ public class SingleplayerSelectionControllerTest extends ApplicationTest{
 
     @Test
     public void testSelectCharacter(){
-        String pathRam = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/RamSplashArt.png";
-        String pathSly = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/SlySplashArt.png";
-        String pathSol = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/SolSplashArt.png";
+        String pathRam = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/AngryCyclistSplashArt.png";
+        String pathSly = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/PriestOfVengeanceSplashArt.png";
+        String pathSol = "file:/workspace/gr2201/gr2201/fxui/target/classes/fightinggame/ui/JinjerJinkSplashArt.png";
         String selectedImage;
-        clickOn("#Ram");
+        clickOn("#AngryCyclist");
         selectedImage = controller.getCharacterSelected().getImage().getUrl();
         Assertions.assertEquals(pathRam.substring(pathRam.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
-        clickOn("#Sly");
+        clickOn("#PriestOfVengeance");
         selectedImage = controller.getCharacterSelected().getImage().getUrl();
         Assertions.assertEquals(pathSly.substring(pathSly.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
-        clickOn("#Sol");
+        clickOn("#JinjerJink");
         selectedImage = controller.getCharacterSelected().getImage().getUrl();
         Assertions.assertEquals(pathSol.substring(pathSol.lastIndexOf("/") + 1), selectedImage.substring(selectedImage.lastIndexOf("/") + 1), "Wrong image");
     }

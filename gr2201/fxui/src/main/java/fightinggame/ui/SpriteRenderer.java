@@ -41,7 +41,6 @@ public class SpriteRenderer {
      */
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
         content = canvas.getGraphicsContext2D();
-        backgroundImg = new Image((getClass().getResource("trainingstage.jpeg")).toString(), 1920, 1080, false, false);
         this.entities = entities;
         this.playerSprites = playerSprites;
         this.assetSprites = assetSprites;
@@ -130,7 +129,12 @@ public class SpriteRenderer {
                 double i = lastPrecentage.get(entity);
          
                 ArrayList<String> availKeys = entity.getAvailKeys();
-                playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
+                
+                if (!entity.getName().equals("Dummy")) {
+                    playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
+
+                }
+
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 Image playerIntImgFlip = assetSprites.get("Assetsplayer" + playerInt + "Flip");
 

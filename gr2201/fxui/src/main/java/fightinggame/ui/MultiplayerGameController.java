@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
-public class SingleplayerGameController extends SceneController{
+public class MultiplayerGameController extends SceneController{
     @FXML private Canvas worldCanvas;
     @FXML private Button resumeButton;
     @FXML private Button exitButton;
@@ -35,9 +34,10 @@ public class SingleplayerGameController extends SceneController{
     private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> assetSprites = new HashMap<>();
     private AnimationTimer worldAnimationTimer;
-    private boolean paused = false;
+    private boolean paused;
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
+    private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(200, 300));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 300));
@@ -60,17 +60,18 @@ public class SingleplayerGameController extends SceneController{
     public void loadWorld(String character, String gameStage){
         worldCanvas.setFocusTraversable(true);
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
-        GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
+
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
-        loadCharacterSprite("Dummy", playerSprites);
+
         loadCharacterSprite("Assets", assetSprites);
         loadCharacterSprite("Background", assetSprites);
         
         worldEntities.add(player);
-        worldEntities.add(dummy);
+        worldEntities.add(player2);
         worldEntities.add(terrain3);
         worldEntities.add(terrain2);
         worldEntities.add(terrain);
@@ -95,28 +96,9 @@ public class SingleplayerGameController extends SceneController{
         return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
     }
 
-     /**
-     * Load the character dummy character without any special properties.
-     * @param character  name of the WorldEntity
-     * @param position   of the character
-     * @return the character with given name
-     */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
-        return new GameCharacter(character, position); 
-    }
-
-     /**
-     * Load the Terrain.
-     * @param name     of the Terrain
-     * @param position of the Terrain
-     * @param width    of the Terrain
-     * @param height   of the Terrain
-     * @return the Terrain with given name and attributes.
-     */
     private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
         return new Terrain(name, position, width, heigth);
     }
-
 
     private void updateWorld() {
         this.worldAnimationTimer = new AnimationTimer() {
@@ -152,15 +134,9 @@ public class SingleplayerGameController extends SceneController{
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
         File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
-            System.out.println(sprite.getName());
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             
         }
-    }
-
-    private void resetKeyInputs() {
-        this.keyInputs = "";
-        this.keyReleased = "";
     }
 
     private void gameOver() {
@@ -194,6 +170,11 @@ public class SingleplayerGameController extends SceneController{
         }
     }
 
+    private void resetKeyInputs() {
+        this.keyInputs = "";
+        this.keyReleased = "";
+    }
+
     @FXML
     private void handleKeyPressed(KeyEvent event){
         if(event.getCode()== KeyCode.ESCAPE) {
@@ -211,6 +192,7 @@ public class SingleplayerGameController extends SceneController{
     private void handleKeyReleased(KeyEvent event){
         keyReleased += event.getCode();
     }
+
 
     @FXML
     private void handleExit(ActionEvent event) throws IOException {

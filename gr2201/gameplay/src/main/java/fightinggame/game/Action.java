@@ -224,7 +224,4 @@ public class Action {
     private void iterateSprite() {
         sprites.next();
     }
-
-
-
 }
