@@ -58,8 +58,6 @@ public class SceneController {
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/fontstyle.css");
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setResizable(true);
         stage.setMaximized(true);
         stage.show();
        

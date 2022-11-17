@@ -23,7 +23,7 @@ public class GameCharacter extends WorldEntity{
     private ActionProperties property;
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
-    private Vector gravityVector = new Vector(0, 12, 0, 0, 1);
+    private Vector gravityVector = new Vector(0, 8, 0, 0, 1);
 
     private boolean onGround = false;
     private boolean onRight = false;

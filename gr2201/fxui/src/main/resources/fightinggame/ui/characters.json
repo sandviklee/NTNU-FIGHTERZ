@@ -255,17 +255,31 @@
             },
             {
                 "actionName": "DownSpecial",
-                "isSelfInterruptible": false,
+                "isSelfInterruptible": true,
                 "isEnemyInterruptible": true,
+                "hitBox": {
+                    "width": 200,
+                    "height": 200,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "isTraversible": false
+                },
                 "actionPriority": 1,
-                "damage": 0,
-                "duration": 2,
-                "hitBoxStartTime": 1,
-                "totalFrames": 0,
+                "damage": 25,
+                "knockback":[
+                    0,
+                    24,
+                    0,
+                    0,
+                    1 
+                ],
+                "duration": 3,
+                "hitBoxStartTime": 0,
+                "totalFrames": 3,
                 "isAnimationLoop": false,
                 "animationLoopStartTime": 0,
                 "isProjectile": false,
-                "isMovement": false
+                "isMovement": true
             },
             {
                 "actionName": "SideNormal",
@@ -326,10 +340,10 @@
             {
                 "actionName": "UpNormal",
                 "hitBox": {
-                    "width": 200,
+                    "width": 150,
                     "height": 50,
                     "offsetX": 0,
-                    "offsetY": 50,
+                    "offsetY": -50,
                     "isTraversible": false
                 },
                 "isSelfInterruptible": false,
@@ -338,13 +352,13 @@
                 "damage": 15,
                 "knockback":[
                     0,
-                    -200,
+                    -20,
                     0,
-                    10
+                    0
                 ],
-                "duration": 15,
-                "hitBoxStartTime": 5,
-                "totalFrames": 0,
+                "duration": 8,
+                "hitBoxStartTime": 1,
+                "totalFrames": 8,
                 "isAnimationLoop": false,
                 "animationLoopStartTime": 0,
                 "isProjectile": false,
