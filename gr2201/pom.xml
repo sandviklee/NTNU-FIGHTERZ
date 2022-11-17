@@ -149,5 +149,6 @@
         <module>base</module>
         <module>fxui</module>
         <module>gameplay</module>
+        <module>springboot/restserver</module>
     </modules>
 </project>

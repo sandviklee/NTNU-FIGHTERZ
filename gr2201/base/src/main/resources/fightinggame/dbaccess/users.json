@@ -1,6 +1,8 @@
-[{"UserId":{"id":"Sverre"},"UserData":{"password":"pass"}},
-{"UserId":{"id":"Sverre1"},"UserData":{"password":"pass"}},
-{"UserId":{"id":"s"},"UserData":{"password":"s"}},
-{"UserId":{"id":"Kris"},"UserData":{"password":"k"}},
-{"UserId":{"id":"Elin"},"UserData":{"password":"h"}},
-{"UserId":{"id":"t"},"UserData":{"password":"t"}}]
+[{"userId":{"userId":"Sverre"},"userData":{"password":"pass"}},
+{"userId":{"userId":"Sverre1"},"userData":{"password":"pass"}},
+{"userId":{"userId":"s"},"userData":{"password":"s"}},
+{"userId":{"userId":"Kris"},"userData":{"password":"k"}},
+{"userId":{"userId":"Elin"},"userData":{"password":"h"}},
+{"userId":{"userId":"t"},"userData":{"password":"t"}},
+{"userId":{"userId":"ElinErKul"},"userData":{"password":"sss"}},
+{"userId":{"userId":"Elin"},"userData":{"password":"Haugum"}}]

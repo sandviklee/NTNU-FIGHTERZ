@@ -23,8 +23,8 @@ public class UserSerializer extends JsonSerializer<User> {
         jsonGen.writeStartObject();
         
         // Use serializers for objects UserId and UserData
-        jsonGen.writeObjectField("UserId", user.getUserId());
-        jsonGen.writeObjectField("UserData", user.getUserData());
+        jsonGen.writeObjectField("userId", user.getUserId());
+        jsonGen.writeObjectField("userData", user.getUserData());
 
         jsonGen.writeEndObject();
     }
