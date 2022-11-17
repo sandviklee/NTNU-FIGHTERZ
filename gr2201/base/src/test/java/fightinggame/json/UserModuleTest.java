@@ -15,7 +15,6 @@ import fightinggame.users.User;
 import fightinggame.users.UserData;
 import fightinggame.users.UserId;
 
-
 public class UserModuleTest {
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -24,12 +23,11 @@ public class UserModuleTest {
 
     private final UserId userId = new UserId(validUserIdParam);
     private final UserData userData = new UserData(validUserDataParam);
-	private final User user = new User(userId, userData);
+    private final User user = new User(userId, userData);
 
-    private final String userJsonResult = "{\"UserId\":{\"id\":\"UserId123\"},\"UserData\":{\"password\":\"UserData123\"}}";
-    private final String userIdJsonResult = "{\"id\":\"UserId123\"}";
+    private final String userJsonResult = "{\"userId\":{\"userId\":\"UserId123\"},\"userData\":{\"password\":\"UserData123\"}}";
+    private final String userIdJsonResult = "{\"userId\":\"UserId123\"}";
     private final String userDataJsonResult = "{\"password\":\"UserData123\"}";
-
 
     @BeforeEach
     public void setup() {
@@ -82,7 +80,8 @@ public class UserModuleTest {
             User pojoUser = mapper.readValue(userJsonResult, User.class);
             assertTrue(user.equals(pojoUser), "The Deserialization did not work");
             assertTrue(pojoUser.getUserId().equals(userId), "The Deserialization did not work");
-            assertTrue(pojoUser.getUserData().getPassword().equals(userData.getPassword()), "The Deserialization did not work");
+            assertTrue(pojoUser.getUserData().getPassword().equals(userData.getPassword()),
+                    "The Deserialization did not work");
 
         } catch (JsonMappingException e) {
             fail("Did not Map correctly");
@@ -125,4 +124,3 @@ public class UserModuleTest {
         }
     }
 }
- 

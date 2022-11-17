@@ -29,18 +29,18 @@ public interface UserDAO {
 	 * @param id    that is used for search
 	 * @param data  to change to
 	 */
-	public void updateUser(UserId id, UserData data); 
+	public boolean updateUser(UserId id, UserData data); 
 	/**
 	 * Deletes the user with given {@code id}.
 	 * If there are no user with userId in data storage do nothing.
 	 * @param id  that is used for search
 	 */
-	public void deleteUser(UserId id); 
+	public boolean deleteUser(UserId id); 
 	/**
 	 * Adds user with this userId and data to data storage.
 	 * If there already exist a user with same id do nothing.
 	 * @param id is search value and added in new data storage entry
 	 * @param data added to data storage entry
 	 */
-	public void addUser(User user); 
+	public boolean addUser(User user); 
 }

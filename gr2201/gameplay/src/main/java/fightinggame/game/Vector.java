@@ -161,7 +161,10 @@ public class Vector {
         this.ax = Math.abs(this.ax) * direction;
         this.ay = Math.abs(this.ay) * direction;
     }
-
+    /**
+     * Applies the acceleration that has been applied when the 
+     * Vector was initiated. 
+     */
     public void applyAcceleration(){
         this.vx += this.ax;
         this.vx = Math.round(this.vx * 10000d) / 10000d;

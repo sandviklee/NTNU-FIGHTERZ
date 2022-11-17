@@ -22,10 +22,29 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>com.tagtraum.ffmpeg</groupId>
+                <artifactId>ffmpeg</artifactId>
+                <version>3.4.2</version>
+                <type>pom</type>
+            </dependency>
+        <!-- https://mvnrepository.com/artifact/com.tagtraum.ffmpeg/libavcodec -->
+            <dependency>
+                <groupId>com.tagtraum.ffmpeg</groupId>
+                <artifactId>libavcodec</artifactId>
+                <version>57.64.100</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>5.4.2</version>
                 <scope>test</scope>
+            </dependency>
+             <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-media</artifactId>
+                <version>12.0.1</version>
+                <classifier>${javafx.platform}</classifier>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -130,5 +149,6 @@
         <module>base</module>
         <module>fxui</module>
         <module>gameplay</module>
+        <module>springboot/restserver</module>
     </modules>
 </project>

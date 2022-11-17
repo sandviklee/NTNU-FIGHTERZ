@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+
 
 import fightinggame.users.UserId;
 
@@ -23,10 +25,17 @@ public class UserIdDeserializer extends JsonDeserializer<UserId> {
     public UserId deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
-            JsonNode textNode = objectNode.get("id");
-            UserId id = new UserId(textNode.asText());
-            return id;
-           }
-           return null;
+            String idField = "userId";
+
+            if (objectNode.has(idField)) {
+                JsonNode idNode = objectNode.get(idField);
+                if (idNode instanceof TextNode) {
+                    String id = idNode.asText();
+                    UserId userid = new UserId(id);
+                    return userid;
+                }
+            }
+        }
+        return null;
     }
 }

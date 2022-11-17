@@ -11,7 +11,7 @@ public class AnimationSpritePlayer {
     private boolean animationLoop;
 
     /**
-     * Make AnimationSprite with given attributes
+     * Make AnimationSpritePlayer with given attributes
      * @param totalFrames
      * @param animationLoop
      * @param animationLoopStartFrame

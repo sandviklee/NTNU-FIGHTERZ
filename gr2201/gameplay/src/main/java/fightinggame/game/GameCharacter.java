@@ -1,8 +1,15 @@
 package fightinggame.game;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
+
+
 
 public class GameCharacter extends WorldEntity{
     private double weight;
@@ -18,18 +25,28 @@ public class GameCharacter extends WorldEntity{
     private int playerNumb;
     
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
+    private HashMap<String, Media> audioHash = new HashMap<>();
     private ArrayList<String> availKeys;
     private Predicate<String> availKey = i -> availKeys.contains(i);
     private ActionProperties property;
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
-    private Vector gravityVector = new Vector(0, 12, 0, 0, 1);
+    private Vector gravityVector = new Vector(0, 8, 0, 0, 1);
+    private MediaPlayer playerAudioPlayer;
 
     private boolean onGround = false;
     private boolean onRight = false;
     private boolean onLeft = false;
     private boolean onTop = false; 
 
+    /**
+     * Makes a GameCharacter.
+     * @param playerProperties
+     * @param pos
+     * @param availKeys
+     * @param playerNumb
+     * @param facingDirection
+     */
     public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
         this.startX = getX();
@@ -40,14 +57,18 @@ public class GameCharacter extends WorldEntity{
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
         this.facingDirection = facingDirection;
-
+        loadAudio(); //loads the characters audiofiles
         // Add all action found in playerproperties to a hashmap that maps them to a number
         for (ActionProperties property : playerProperties.getActionProperties()) {
             actionHash.put(playerProperties.getActionProperties().indexOf(property), property);
         }
         setCurrentAction(0);
     }
-
+    /**
+     * Makes a Character.
+     * @param name
+     * @param pos
+     */
     public GameCharacter(String name, ArrayList<Integer> pos) {
         super(name, pos);
         this.weight = 0;
@@ -57,9 +78,13 @@ public class GameCharacter extends WorldEntity{
         this.actionHash.put(1, new ActionProperties("HitStun", 4, 7, false, true, 7, false, 0, true));
         this.availKeys = new ArrayList<>();
         this.facingDirection = -1;
+        loadAudio();
         setCurrentAction(0);
     }
-
+    /** 
+     * Sets the current action to the character
+     * @param actionNumber sets the correct action, mapped like in the HashMap of Actionproperties.
+     */
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
             clearVectors();
@@ -72,6 +97,26 @@ public class GameCharacter extends WorldEntity{
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
 
+            if (currentAction.getName().equals("DownSpecial") && onGround == true) {
+                property = actionHash.get(0);
+                this.currentAction = new Action(property);
+                jumpCounter = 0;
+            }
+
+            
+            if (audioHash.get(this.currentAction.getName()) != null) {
+                try {
+                    playerAudioPlayer = new MediaPlayer(audioHash.get(this.currentAction.getName()));
+                    playerAudioPlayer.setVolume(0.7);
+                    playerAudioPlayer.play();
+        
+                } catch (MediaException e) {
+                    System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+                }
+
+            }
+            
+  
             if (currentAction.isProjectile()) {
                 currentAction.getKnockback().setDirection(facingDirection);
             }
@@ -89,7 +134,10 @@ public class GameCharacter extends WorldEntity{
             }  
         } 
     }
-
+    /**
+     * Exectues the current action the player has gotten from setCurrentAction.
+     * Checks different variables like onTop to set the correct updating position.
+     */
     public void doAction(){
         if (currentAction.startHitBox() && appliedVector == 0) {
             appliedVector++;
@@ -136,17 +184,27 @@ public class GameCharacter extends WorldEntity{
 		currentAction.nextActionFrame();
 	}
 
+    /**
+     * Applies the vector from the action.
+     */
     public void applyVectors() {
         Vector knockback = this.currentAction.getKnockback();
         mainVector.addVector(knockback);
 
     }
-
+    /**
+     * Sets the position of the character.
+     * @param x
+     * @param y
+     */
     public void setPosition(double x, double y) {
         this.point.setX(x);
         this.point.setY(y);
     }
-
+    /**
+     * Sets the onGround property to true or false if character touches the ground.
+     * @param boolean
+     */
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
         if (onGround) {
@@ -156,11 +214,18 @@ public class GameCharacter extends WorldEntity{
             }
         } 
 	}
-
+    /**
+     * Setter for onTop
+     * @param onTop boolean
+     */
     public void setOnTop(boolean onTop) {
 		this.onTop = onTop;
 	}
 
+    /**
+     * Setter for onLeft
+     * @param onLeft boolean
+     */
     public void setOnLeft(boolean onLeft) {
         this.onLeft = onLeft;
     }
@@ -247,6 +312,24 @@ public class GameCharacter extends WorldEntity{
     private void clearVerticalVector() {
         mainVector.setVy(0);
         mainVector.setAy(0);
+    }
+
+    /**
+     * Loads the all the audios in the audio folder for the game character.
+     * @throws MediaException if the computer doesnt suppoert MediaPlayer codec.
+     */
+    private void loadAudio() {
+        try {
+            File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
+            for (File audio : audioFiles) {
+                audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
+                
+            }
+    
+        } catch (MediaException e) {
+            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+        }
+
     }
 
 

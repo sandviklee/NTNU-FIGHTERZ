@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
 
 /**
  * The {@code SceneController} class will is a base controller that gives all child classes methods:
@@ -19,6 +19,7 @@ import javafx.scene.Node;
  */
 public class SceneController {
     private User user;
+    public static MediaPlayer mainAudioPlayer;
 
     protected User getUser(){
         return this.user;
@@ -54,7 +55,6 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/fontstyle.css");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

@@ -6,7 +6,11 @@ public class Point {
     private double x;
     private double y;
 
-    
+    /**
+     * Makes a point for a worldEntity.
+     * @param x
+     * @param y
+     */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
