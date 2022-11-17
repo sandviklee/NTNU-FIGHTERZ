@@ -192,21 +192,15 @@ Description.
 ## 9. Issue what framework to use for rest server API
 ### Context and Problem Statement
 ### Considered Options
-#### **Option 1: Jersey**
-Description.
-|Pros | Cons|
-|---- | ----|
-| | |
 
-
-#### **Option 2: Jetty**
+#### **Option 1: Jetty**
 Description.
 |Pros | Cons|
 |---- | ----|
 | Can act as an HTTP server. | |
 
 ### Decision Outcome
-**Chosen option:* Option 2, Jetty. Jetty is often used alongside spring boot, and can act as an HTTP server, and as such, we were recommended to use Jetty for this project.
+**Chosen option:* Option 1, Jetty. Jetty is often used alongside spring boot, and can act as an HTTP server, and as such, we were recommended to use Jetty for this project.
 
 <!---
 ## 11. Issue
