@@ -18,6 +18,7 @@ public class GameApp extends Application  {
 		primaryStage.setTitle("NTNU Fighterz");
 		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Login.fxml"))));
 		primaryStage.setMaximized(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 }

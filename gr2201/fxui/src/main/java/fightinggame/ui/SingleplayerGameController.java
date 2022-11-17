@@ -23,7 +23,6 @@ public class SingleplayerGameController extends SceneController{
     private ArrayList<WorldEntity> worldEntities = new ArrayList<>();
     private HashMap<String, Image> playerSprites = new HashMap<>();
     private HashMap<String, Image> assetSprites = new HashMap<>();
-    private boolean paused;
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
@@ -51,7 +50,7 @@ public class SingleplayerGameController extends SceneController{
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 300);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
@@ -116,6 +115,7 @@ public class SingleplayerGameController extends SceneController{
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
         File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
+            System.out.println(sprite.getName());
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             
         }
