@@ -90,4 +90,5 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	private String getPath() {
 		return this.path;
 	}
+
 }
