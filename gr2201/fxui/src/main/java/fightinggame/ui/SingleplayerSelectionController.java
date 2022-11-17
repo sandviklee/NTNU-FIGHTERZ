@@ -24,6 +24,7 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private ImageView characterSelected;
     private Media audioSelect;
     private Media audioGame;
+    private ImageView currentImage;
     
 
     @FXML

@@ -322,7 +322,12 @@ public class World {
     private void setGameWinner(int playerNumb) {
         this.playerNumbWinner = playerNumb;
     }
-
+    /**
+     * Sets the hitStun to a character and * calculates how much the knockback the character getting hit
+     * should have
+     * @param worldCharacter1
+     * @param worldCharacter2
+     */
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
         worldCharacter2.setCurrentAction(1);
         int damage = worldCharacter1.getCurrentAction().getDamage();

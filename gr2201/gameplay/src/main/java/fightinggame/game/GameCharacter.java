@@ -78,7 +78,6 @@ public class GameCharacter extends WorldEntity{
         this.actionHash.put(1, new ActionProperties("HitStun", 4, 7, false, true, 7, false, 0, true));
         this.availKeys = new ArrayList<>();
         this.facingDirection = -1;
-        loadAudio();
         setCurrentAction(0);
     }
     /** 
