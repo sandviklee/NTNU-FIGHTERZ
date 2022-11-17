@@ -116,6 +116,7 @@ public class SingleplayerGameController extends SceneController{
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
         File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
+            System.out.println(sprite.getName());
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
             
         }
