@@ -1,7 +1,7 @@
 module fightinggame.ui {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.media;
+    requires transitive javafx.media;
     requires transitive javafx.graphics;
     requires transitive com.fasterxml.jackson.core;
     requires transitive com.fasterxml.jackson.databind;

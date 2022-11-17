@@ -51,7 +51,7 @@ public class SingleplayerGameController extends SceneController{
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
         //GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
-        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
+        Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 300);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
         loadCharacterSprite(character, playerSprites);
@@ -114,7 +114,7 @@ public class SingleplayerGameController extends SceneController{
     }
 
     private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
+        File[] spriteFiles = new File("gr2201/fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
         for (File sprite : spriteFiles) {
             System.out.println(sprite.getName());
             spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));

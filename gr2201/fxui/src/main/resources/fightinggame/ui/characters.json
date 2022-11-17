@@ -356,9 +356,9 @@
                     0,
                     0
                 ],
-                "duration": 8,
+                "duration": 7,
                 "hitBoxStartTime": 1,
-                "totalFrames": 8,
+                "totalFrames": 7,
                 "isAnimationLoop": false,
                 "animationLoopStartTime": 0,
                 "isProjectile": false,

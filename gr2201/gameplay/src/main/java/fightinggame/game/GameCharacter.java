@@ -1,8 +1,12 @@
 package fightinggame.game;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameCharacter extends WorldEntity{
     private double weight;
@@ -18,12 +22,14 @@ public class GameCharacter extends WorldEntity{
     private int playerNumb;
     
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
+    private HashMap<String, Media> audioHash = new HashMap<>();
     private ArrayList<String> availKeys;
     private Predicate<String> availKey = i -> availKeys.contains(i);
     private ActionProperties property;
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
     private Vector gravityVector = new Vector(0, 8, 0, 0, 1);
+    private MediaPlayer playerAudioPlayer;
 
     private boolean onGround = false;
     private boolean onRight = false;
@@ -40,7 +46,7 @@ public class GameCharacter extends WorldEntity{
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
         this.facingDirection = facingDirection;
-
+        loadAudio(); //loads the characters audiofiles
         // Add all action found in playerproperties to a hashmap that maps them to a number
         for (ActionProperties property : playerProperties.getActionProperties()) {
             actionHash.put(playerProperties.getActionProperties().indexOf(property), property);
@@ -56,6 +62,7 @@ public class GameCharacter extends WorldEntity{
         this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
         this.availKeys = new ArrayList<>();
         this.facingDirection = -1;
+        loadAudio();
         setCurrentAction(0);
     }
 
@@ -71,6 +78,19 @@ public class GameCharacter extends WorldEntity{
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
 
+            if (currentAction.getName().equals("DownSpecial") && onGround == true) {
+                property = actionHash.get(0);
+                this.currentAction = new Action(property);
+                jumpCounter = 0;
+            }
+
+            if (audioHash.get(this.currentAction.getName()) != null) {
+                playerAudioPlayer = new MediaPlayer(audioHash.get(this.currentAction.getName()));
+                playerAudioPlayer.setVolume(0.7);
+                playerAudioPlayer.play();
+    
+            }
+  
             if (currentAction.isProjectile()) {
                 currentAction.getKnockback().setDirection(facingDirection);
             }
@@ -246,6 +266,14 @@ public class GameCharacter extends WorldEntity{
     private void clearVerticalVector() {
         mainVector.setVy(0);
         mainVector.setAy(0);
+    }
+
+    private void loadAudio() {
+        File[] audioFiles = new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
+        for (File audio : audioFiles) {
+            audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
+            
+        }
     }
 
 

@@ -21,21 +21,22 @@ public class SingleplayerSelectionController extends SceneController{
     @FXML private Button lockIn, goBack;
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView characterSelected;
-    Media audio = new Media(new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.mp3").toURI().toString());
-    MediaPlayer audioPlayer = new MediaPlayer(audio);
+    private Media audioSelect = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.mp3").toURI().toString());
+    private Media audioGame = new Media(new File("gr2201/fxui/src/main/resources/fightinggame/ui/Audio/Game.mp3").toURI().toString());
+    
 
     @FXML
     private void initialize(){
         lockIn.setDisable(true);
-        audioPlayer.setOnEndOfMedia(new Runnable() {
+        mainAudioPlayer = new MediaPlayer(audioSelect);
+        mainAudioPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
-              audioPlayer.seek(Duration.ZERO);
+              mainAudioPlayer.seek(Duration.ZERO);
             }
         });
-       audioPlayer.play();
-        audioPlayer.onRepeatProperty();
-        audioPlayer.play();;
-        
+        mainAudioPlayer.setVolume(0.1);
+        mainAudioPlayer.play();
+
     }
 
     public ImageView getCharacterSelected(){
@@ -59,7 +60,16 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleLockIn(ActionEvent event) throws IOException {
-        audioPlayer.stop();
+        mainAudioPlayer.stop();
+        mainAudioPlayer = new MediaPlayer(audioGame);
+        mainAudioPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+              mainAudioPlayer.seek(Duration.ZERO);
+            }
+        });
+        mainAudioPlayer.setVolume(0.1);
+        mainAudioPlayer.play();
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
         Parent root = loader.load();
         SingleplayerGameController singleplayerGameController = loader.getController();
@@ -71,7 +81,7 @@ public class SingleplayerSelectionController extends SceneController{
 
     @FXML
     private void handleGoBack(ActionEvent event) throws IOException {
-        audioPlayer.stop();
+        mainAudioPlayer.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
         MainMenuController mainMenuController = loader.getController();

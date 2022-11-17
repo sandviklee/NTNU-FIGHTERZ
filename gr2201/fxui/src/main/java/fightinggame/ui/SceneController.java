@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Node;
@@ -21,6 +22,7 @@ import javafx.scene.Node;
  */
 public class SceneController {
     private User user;
+    public static MediaPlayer mainAudioPlayer;
 
     protected User getUser(){
         return this.user;
