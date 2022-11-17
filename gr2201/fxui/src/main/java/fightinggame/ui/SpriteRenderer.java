@@ -36,8 +36,6 @@ public class SpriteRenderer {
     private ArrayList<WorldEntity> entities = new ArrayList<>();
     private AnimationSpritePlayer backgroundSpritePlayer = new AnimationSpritePlayer(16, true, 0, 4);
     private AnimationSpritePlayer effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 3); 
-    private MediaPlayer effectAudioPlayer;
-    private Media audioCounter = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Counter.mp3").toURI().toString());
 
     private boolean rectOn = false;
     private double spawnDeathPosX;
@@ -51,8 +49,6 @@ public class SpriteRenderer {
         this.playerSprites = playerSprites;
         this.assetSprites = assetSprites;
         this.backgroundImg = assetSprites.get("Backgroundspritesheet");
-        effectAudioPlayer = new MediaPlayer(audioCounter);
-        effectAudioPlayer.setVolume(0.5);
 
         for (WorldEntity worldEntity : entities) {
             lastPrecentage.put(worldEntity, 0.0);
@@ -140,33 +136,6 @@ public class SpriteRenderer {
                 playerInt = availKeys.get(2).equals("W") ? 1 : (availKeys.get(2).equals("I") ? 2 : 0);
                 Image playerIntImg = assetSprites.get("Assetsplayer" + playerInt);
                 Image playerIntImgFlip = assetSprites.get("Assetsplayer" + playerInt + "Flip");
-                /* 
-                Image playerDeath = assetSprites.get("AssetsDeath");
-                
-                double angle = Math.toDegrees(Math.atan((playerPosY - screenSize[1] / 2) / (playerPosX - screenSize[0] / 2)));
-                System.out.println(angle);
-
-                if (!entity.getAlive()) {
-                    if (!isPlaying.get(entity)) {
-                        spawnDeathAngle = angle;
-                        spawnDeathPosX = playerPosX;
-                        spawnDeathPosY = playerPosY;
-                        isPlaying.put(entity, true);
-                        effectSpritePlayer = new AnimationSpritePlayer(11, true, 0, 2);
-                        
-                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) spawnDeathPosX, (int) spawnDeathPosY, (int) (spawnDeathAngle));
-                        effectSpritePlayer.next();
-                    } else {
-                        
-
-                        drawRotatedImage(content, playerDeath, effectSpritePlayer.getCurrentFrame(), (int) (spawnDeathPosX), (int) (spawnDeathPosY), (int) (spawnDeathAngle));
-                        effectSpritePlayer.next();    
-                    } 
-                } else {
-                    isPlaying.put(entity, false);
-                }
-
-                */
 
                 if ((playerPosY + playerProperties[1]) <= 0) {
                     content.drawImage(playerIntImg, playerPosX + playerIntOffset[0], 80, -60, -65); //draws the player number over the head of the character.
@@ -221,18 +190,6 @@ public class SpriteRenderer {
         cntn.fillText(text, hudPosX, hudPosY, maxWidth); //draws the players precentage.
         cntn.strokeText(text, hudPosX, hudPosY, maxWidth);
 
-    }
-
-    private void rotate(GraphicsContext cntn, double angle, double pivotX, double pivotY) {
-        Rotate rotate = new Rotate(angle, pivotX, pivotY);
-        cntn.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(), rotate.getTy());
-    }
-
-    private void drawRotatedImage(GraphicsContext cntn, Image image, int currentFrame, int posX, int posY, int angle) {
-        cntn.save(); //Saves the current state on a stack, including the current transformation.
-        rotate(cntn, angle, posX, posY);
-        cntn.drawImage(image, 256*currentFrame, 0, 256, 256, posX, posY, 700, 1000);
-        cntn.restore();
     }
 
 }
