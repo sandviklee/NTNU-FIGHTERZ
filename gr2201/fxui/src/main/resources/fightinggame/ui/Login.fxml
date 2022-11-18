@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="loginRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.LoginController">
+   <children>
+      <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Background.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="86.0" layoutY="359.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82; -fx-text-fill: white;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="86.0" layoutY="436.0" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #233e82; -fx-text-fill: white;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font></PasswordField>
+      <Button fx:id="login" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="27.0" />
+         </font>
+      </Button>
+      <Hyperlink fx:id="switchToSignup" layoutX="318.0" layoutY="504.0" onAction="#handleSwitchToSignup" prefHeight="30.0" prefWidth="209.0" text="Create new account" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+      </Hyperlink>
+      <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.png" />
+         </image>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
+      <Label fx:id="errorMessage" layoutX="254.0" layoutY="322.0" prefHeight="34.0" prefWidth="238.0" textAlignment="RIGHT" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font></Label>
+      <Text fill="WHITE" layoutX="85.0" layoutY="278.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Log In">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="48.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="86.0" layoutY="312.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in and let the games begin!">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="86.0" layoutY="346.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="86.0" layoutY="431.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="442.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AngryCyclistSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="647.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@PriestOfVengeanceSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="469.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@JinjierJinkSplashArt.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

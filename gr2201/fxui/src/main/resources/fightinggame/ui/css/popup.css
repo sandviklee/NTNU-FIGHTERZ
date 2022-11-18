@@ -1,0 +1,63 @@
+.textarea .content {
+  -fx-background-color: rgb(201, 96, 89, 1);
+}
+
+.textarea {
+  -fx-background-color: rgb(201, 96, 89, 1);
+  -fx-text-fill: white;
+  -fx-font-size: 20;
+  -fx-font-family: "Comic Sans MS";
+}
+
+.popup {
+    -fx-background-color: rgb(166, 19, 8, 1); /* pane background color */
+    -fx-padding: 1em 1em 1em 1em;
+    -fx-font-family: "Impact";
+    -fx-width: 2000;
+    -fx-height: 2000;
+    -fx-alignment: center;
+}
+
+.popup > .content.area {
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em; /* text padding */
+    -fx-background-color: rgba(255, 255, 255, 0.25); /* text background */
+    -fx-background-opacity: 0.5; /* text background opacity */
+    -fx-text-fill:white; /* Color for  */
+    -fx-font-size:20.0px; /* font size content text */
+    -fx-font-family: "Impact";
+    /* Arial Rounded MT Bold */
+ }
+ 
+ /**Customization of DialogPane Header**/
+ .popup:header .header-panel {
+   -fx-background-color: rgb(166, 19, 8, 1);
+   -fx-font-family: "Impact";
+ }
+ 
+ .popup:header .header-panel .label{
+   -fx-background-color: rgb(166, 19, 8, 1);
+   -fx-background-radius:10px;
+   -fx-text-fill:white;
+   -fx-font-size:40.0px;
+   -fx-font-family: "Impact";
+   -fx-alignment: center;
+ }
+ 
+ 
+ /**Customization of Buttons**/
+ .popup .button{
+    -fx-background-color:rgb(201, 96, 89, 1);
+    -fx-text-fill:white;
+    -fx-font-size: 20px;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow( three-pass-box, black, 10.0, 0.0, 0.0, 0.0);
+    -fx-cursor:hand;
+    -fx-font-family: "Impact";
+    -fx-alignment: center;
+  }
+ 
+ .popup .button:hover{     
+   -fx-background-color:rgb(201, 110, 103);
+   -fx-text-fill:white;
+   -fx-font-weight:bold; 
+  }

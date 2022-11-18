@@ -1,0 +1,152 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Characters",
+    "description": "An array of characters and their actions in the game",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "characterName": {
+                "description": "A character's ingame name.",
+                "type": "string"
+            },
+            "weight": {
+                "description": "A character's weight, influencing gravity and knockback factor.",
+                "type": "number",
+                "exclusiveMinimum": 0.0,
+                "maximum": 2.0
+            },
+            "speed": {
+                "description": "A character's speed, modefying the character's movement",
+                "type": "number",
+                "exclusiveMinimum":0,
+                "maximum": 10
+            },
+            "hurtbox": {
+                "description": "The rectangular area where the character will take damage.",
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "description": "X-axis length of rectangular character hurtbox in pixels.",
+                        "type": "integer",
+                        "exclusiveMinimum": 0
+                    },
+                    "height": {
+                        "description": "Y-axis height of rectangular character hurtbox in pixels.",
+                        "type": "integer",
+                        "exclusiveMinimum": 0
+                    }
+                },
+                "required": ["length", "height"]
+            },
+            "actions": {
+                "description": "A list of all actions the character has and can be in, with items being action names.",
+                "type": "array",
+                "items": {
+                    "action": {
+                        "description": "A specific action object containing all information about an action.",
+                        "type": "object",
+                        "properties": {
+                            "actionName":{
+                                "description": "The name of an action",
+                                "type": "string"
+                            },
+                            "hitBox": {
+                                "description": "The area where the specific action can deal damage.",
+                                "type": "object",
+                                "properties": {
+                                    "width": {
+                                        "description": "X-axis length of rectangular action hitbox in pixels.",
+                                        "type": "integer",
+                                        "exclusiveMinimum": 0
+                                    },
+                                    "height": {
+                                        "description": "Y-axis height of rectangular action hitbox in pixels.",
+                                        "type": "integer",
+                                        "exclusiveMinimum": 0
+                                    },
+                                    "offsetX": {
+                                        "description": "X value of center point of the action hitbox offset from character hurtbox.",
+                                        "type": "integer"
+                                    },
+                                    "offsetY": {
+                                        "description": "Y value of center point of the action hitbox offset from character hurtbox.",
+                                        "type": "integer"
+                                    },
+                                    "isTraversible": {
+                                        "description": "Tells whether other hitboxes/hurtboxes can pass through this hitbox.",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": ["width", "height", "offsetX", "offsetY", "isTraversible"]
+                            },
+                            "isSelfInterruptible": {
+                                "description": "Tells whether the player can interrupt this action with other inputs.",
+                                "type": "boolean"
+                            },
+                            "isEnemyInterruptible":{
+                                "description": "Tells whether enemies can interrupt the action",
+                                "type": "boolean"
+                            },
+                            "actionPriority": {
+                                "description": "Describes the priority of the action, what action it can interrupt/be interrupted by.",
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 3
+                            },
+                            "damage": {
+                                "description": "The base damage this move will deal to other characters, not including modifiers.",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "knockback": {
+                                "description": "Contains the x and y values of a vector describing both the velocity and acceleration knockback from the action, [vx, vy, ax, ay], and possible a direction",
+                                "type": "array",
+                                "minItems": 4,
+                                "maxItems": 5,
+                                "items": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                }
+                            },
+                            "duration": {
+                                "description": "The duration of the action in frames.",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "hitBoxStartTime":{
+                                "description": "Which actionframe the hitBox starts",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "totalFrames": {
+                                "description": "How many frames are there in this action`s AnimationSprite",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "animationLoop": {
+                                "description": "Shall this action`s animation loop when done ",
+                                "type": "boolean"
+                            },
+                            "animationLoopStartFrame": {
+                                "description": "When animation and it shall loop what frame will it return to",
+                                "type": "integer",
+                                "exclusiveMinimum": 0
+                            },
+                            "isProjectile": {
+                                "description": "Tells whether the attack itself is a projectile. If true, the above values will therefore count for the new projectile object created rather than be an extension of the character object.",
+                                "type": "boolean"
+                            },
+                            "isMovement": {
+                                "description": "Tells if the character should be affected by the knockback provided. If true, the above knockback will also affect the character.",
+                                "type": "boolean"
+                            }
+                        },
+                        "required": ["actionName", "isSelfInterruptible", "isEnemyInterruptible", "actionPriority", "damage", "duration", "hitBoxStartTime", "totalFrames", "animationLoop", "animationLoopStartFrame", "isProjectile", "isMovement"]
+                    }
+                }
+            }
+        },
+        "required": ["characterName", "weight", "hurtbox", "actions"]
+    }
+}

@@ -1,0 +1,143 @@
+@startuml GameplayClassDiagram
+
+class AnimationSprite {
+    - currentFrame: integer
+    - totalFrames: integer
+    - animationLoopStartFrame: integer
+    - animationLoop: boolean
+    + AnimationSprite(int totalFrames, boolean animationLoop, int animationLoopStartFrame)
+    + next(): void
+    - jump(int frame): void
+    + hasNext(): boolean
+}
+
+class SinglePlayerController {
+    '- world: World
+    + loadWorld(User user, String character, String gameStage): void
+    - setUser(): void
+    - setCharacter(): void
+    - setStage(): void
+    - loadPlayers(): void
+    - loadTerrain(): void
+    - loadDummy(): void
+}
+'First draft
+class MultiPlayerController {
+    '- world: World
+    + loadWorld(User user, String character, String gameStage): void
+    - setUser(): void
+    - setCharacters(): void
+    - setStage(): void
+    - loadPlayers(): void
+    - loadTerrain(): void
+}
+'First iteration, done for now.
+class World {
+    '- worldEntities: ArrayList<WorldEntity>
+    + World(ArrayList<WorldEntity> worldEntities)
+    + addWorldEntity(WorldEntity worldEntity): void
+    + updateWorld(): void
+    - handleCollisions(): void
+    - setActions(List<String> input): void
+    - applyActions(): void
+    - updateSprites(): void
+}
+'Work in progress, current draft, done for now.
+class Action {
+    '- hitBox: EffectBox
+    '- sprites: AnimationSprite
+    - isSelfInterruptible: boolean
+    - isEnemyInterruptible: boolean
+    - actionPriority: integer
+    '- knockback: Vector
+    - duration: integer
+    - currentTime: integer
+    - hitBoxStartTime: integer
+    - damage: integer
+    + Action(Effectbox hitbox, String spriteName, boolean isSelfInterruptible, boolean isEnemyInterruptible,
+    Vector knockback, integer duration, integer actionPriority, integer hitBoxStartTime,
+    integer damage, integer totalFrames, boolean animationLoop, boolean animationLoopStartTime)
+    + Action(String spriteName, integer actionPriority, integer duration, boolean isSelfInterruptible,
+    boolean isEnemyInterruptible, integer totalFrames, boolean animationLoop, boolean animationLoopStartTime)
+    + nextActionFrame(): void
+    + tryInterrupt(integer otherActionPriority): boolean
+    + isDone(): boolean
+    - iterateSprite(): void
+}
+'In progress, will depend on some other classes. Done for now.
+class EffectBox {
+    '- owner: WorldEntity
+    '- center: Point
+    - isTraversable: boolean
+    - length: integer
+    - height: integer
+    + EffectBox(WorldEntity owner, Point center, boolean isTraversable, integer length, integer height)
+    + entityInEffectArea(WorldEntity worldEntity): boolean
+    + setIsTraversable(boolean state): void
+    - effectBoxInEffectBox(EffectBox otherBox): boolean
+    - setPosition(Point p): void
+    - addForce(Vector v): void
+    - updatePosition(): void
+    - setEffectArea(integer length, integer height): void
+}
+'Not implemented yet, needs work.
+class Vector {
+    - dx: integer
+    - dy: integer
+    - ax: integer
+    - ay: integer
+}
+'Not implemented yet, needs work.
+class Point {
+    - x: integer
+    - y: integer
+    '- speed: Vector
+}
+'Might need id. Deemed unnecessary for now.
+class WorldEntity {
+    '# hurtBox: EffectBox
+    '# currentAction: Action
+    # isAlive: boolean
+    + isAlive(): boolean
+    + setCurrentAction(Action a): void
+}
+'Done
+class Terrain {
+    - isTraversable: boolean
+    + isTraversable(): boolean
+}
+'Done for now.
+class Character {
+    - weight: integer
+    - health: integer
+    '- actions: HashMap<String><Action>
+    + canMove(): boolean
+    + doAction(): void
+    + heal(integer healing): void
+    + hurt(integer damage): void
+}
+'Unsure about implementation, first draft.
+class Projectile {
+    '- actions: HashMap<String><Action>
+    + doAction(): void
+    + canMove(): boolean
+}
+'ActionLoader class?
+
+SinglePlayerController <-- "1" World
+MultiPlayerController <-- "1" World
+World <-- "*" WorldEntity
+Action <-- "1" EffectBox
+Action <-- "1" Vector
+Action <-- "1" AnimationSprite
+EffectBox <-- "1" Point
+Point <-- "1" Vector
+WorldEntity "1" <--> "1" EffectBox
+WorldEntity <-- "1" Action
+Character <-- "*" Action
+Projectile <-- "*" Action
+WorldEntity <|-- Character
+WorldEntity <|-- Projectile
+WorldEntity <|-- Terrain
+
+@enduml

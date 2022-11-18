@@ -1,0 +1,22 @@
+@startuml
+
+  Actor User
+  participant  SignupController as a
+  participant  RemoteModelAccess as b
+  database  ServerController as c
+  
+  User -> a: Pressed Signup with invalid credentials
+  a -> b: handleSignin()
+  b -> c: postUser() (HTTP Post)
+  c --> b: Null
+  b --> a: Null
+  a --> User: Shows an error message
+  
+  User -> a: Pressed Signup with valid credentials
+  a -> b: handleSignin()
+  b -> c: postUser() (HTTP Post)
+  c --> b: User
+  b --> a: User
+  a --> User: Changes sceen to MainMenu
+  
+@enduml

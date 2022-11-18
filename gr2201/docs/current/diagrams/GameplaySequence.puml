@@ -1,0 +1,50 @@
+@startuml GameplaySequenceDiagram
+
+    Actor Player
+    participant SinglePlayerController as c
+    participant World as w
+    participant WorldEntity as e
+    participant Action as a
+    participant EffectBox as box
+
+
+    Player -> c: Presses key
+
+    w -> w: updateWorld()
+    
+    w ->> w: handleCollisions()
+    e -> box: check if boxes collide
+    box --> e: move box for collisions
+    e -->> w: 
+
+    w ->> w: setActions() 
+    Note over w, w: Change action of all characters who have one or more keys as control keys
+    loop for each WorldEntity in World:
+        e --> e: setCurrentAction(keysPressed)
+        alt WorldEntity has key in keyset
+            e -> e: currentAction.getIsDone()
+            alt currentAction is finished
+                a -->> e: change to new action
+            else currentAction not finished
+                e -> a: trySelfInterrupt(newActionPriority)
+                alt can be interrupted
+                    a ---> e: change action
+                end
+            end
+        end        
+    end
+    e ---> w: All WorldEntities have set current action to correct action
+    
+    w --> w: applyActions()
+    Note over w, w: Make each WorldEntity do its action
+    loop for each WorldEntity
+        e -> a: doAction()
+        a -> a: nextActionFrame()
+        a ---> e: nextActionFrame  
+    end
+    e ---> w: All WorldEntities have done their action
+    
+    w -->> c: 
+    c ---> Player: render changes
+
+@enduml

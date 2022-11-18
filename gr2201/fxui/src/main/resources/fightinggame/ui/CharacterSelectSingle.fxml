@@ -11,25 +11,25 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SingleplayerSelectionController">
+<AnchorPane fx:id="characterSelectSingleRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SingleplayerSelectionController">
    <children>
-      <ImageView fitHeight="1094.0" fitWidth="1942.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="739.0" fitWidth="1460.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Character%20selection%20Singleplayer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="449.0" fitWidth="1776.0" layoutX="94.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="101.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCover.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSelected" fitHeight="342.0" fitWidth="898.0" layoutX="524.0" layoutY="666.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="194.0" fitWidth="1227.0" layoutX="366.0" layoutY="856.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="characterSelected" fitHeight="886.0" fitWidth="842.0" layoutX="242.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="278.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCoverSmall.png" />
          </image>
       </ImageView>
-      <GridPane fx:id="characterSelectGrid" layoutX="490.0" layoutY="300.0" prefHeight="302.0" prefWidth="924.0" AnchorPane.leftAnchor="490.0">
+      <GridPane fx:id="characterSelectGrid" layoutX="311.0" layoutY="171.0" prefHeight="274.0" prefWidth="703.0" AnchorPane.leftAnchor="311.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="315.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="231.66668701171875" prefWidth="315.0" />
@@ -39,7 +39,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="Ram" fitHeight="313.0" fitWidth="500.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="AngryCyclist" fitHeight="217.0" fitWidth="251.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Char1Select.png" />
                </image>
@@ -47,7 +47,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sly" fitHeight="323.0" fitWidth="326.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="PriestOfVengeance" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@Char2Select.png" />
                </image>
@@ -55,7 +55,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="Sol" fitHeight="313.0" fitWidth="500.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="JinjierJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>
@@ -65,7 +65,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="goBack" layoutX="130.0" layoutY="114.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="goBack" layoutX="100.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="31.0" />
          </font>
@@ -73,7 +73,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="lockIn" layoutX="776.0" layoutY="890.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="98.0" prefWidth="399.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
+      <Button fx:id="lockIn" layoutX="557.0" layoutY="637.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="36.0" prefWidth="212.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="39.0" />
          </font>

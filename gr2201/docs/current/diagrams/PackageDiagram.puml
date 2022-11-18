@@ -1,0 +1,43 @@
+@startuml PackageDiagram
+
+'External components
+component jackson {
+
+}
+
+component javafx {
+    package fxml
+    package controls
+    package graphics
+}
+
+
+'Internal components
+component base {
+    package fightinggame.dbaccess
+    package fightinggame.users
+    package fightinggame.base.json
+}
+jackson <.. fightinggame.base.json
+fightinggame.dbaccess <..> fightinggame.users
+
+component fxui {
+    package fightinggame.ui
+}
+javafx <.. fxui
+fightinggame.users <.. fxui
+gameplay <.. fxui
+
+component gameplay {
+    package fightinggame.game
+    package fightinggame.gameplay.json
+}
+jackson <.. fightinggame.gameplay.json
+
+component rest {
+    package fightinggame.restapi
+    package fightinggame.restserver
+}
+fightinggame.restapi <.. fightinggame.restserver
+
+@enduml
