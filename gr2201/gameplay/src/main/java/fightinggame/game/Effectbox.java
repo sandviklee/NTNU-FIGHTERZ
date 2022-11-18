@@ -20,7 +20,7 @@ public class Effectbox {
         this.center = center;
         this.isTraversable = isTraversable;
 
-        if (width <= 0 || height <= 0){
+        if (width < 0 || height < 0){
             throw new IllegalArgumentException("Width or height cannot be negative");
         }
         this.width = width;
