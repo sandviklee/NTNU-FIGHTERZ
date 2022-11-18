@@ -93,12 +93,18 @@ public class SingleplayerSelectionController extends SceneController {
             System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
-        Parent root = loader.load();
-        SingleplayerGameController singleplayerGameController = loader.getController();
-        singleplayerGameController.setUser(super.getUser());
-        singleplayerGameController.loadWorld(currentImage.getId(), null);
-        super.changeSceneFullscreen("NTNU Fighterz", root, event);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
+            Parent root = loader.load();
+            SingleplayerGameController singleplayerGameController = loader.getController();
+            singleplayerGameController.setUser(super.getUser());
+            singleplayerGameController.loadWorld(currentImage.getId(), null);
+            super.changeSceneFullscreen("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid go back path",
+                    "Something went wrong and Main menu page could not be found.");
+            e.printStackTrace();
+        }
     
     }
 
