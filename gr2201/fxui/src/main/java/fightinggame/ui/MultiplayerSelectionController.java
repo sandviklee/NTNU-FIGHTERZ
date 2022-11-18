@@ -18,42 +18,35 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
-public class SingleplayerSelectionController extends SceneController {
-    @FXML
-    private Button lockIn, goBack;
-    @FXML
-    private GridPane characterSelectGrid;
-    @FXML
-    private ImageView characterSelected;
+public class MultiplayerSelectionController extends SceneController{
+    @FXML private Button lockIn, goBack;
+    @FXML private GridPane characterSelectGrid;
+    @FXML private ImageView characterSelected;
+    private ImageView currentImage;
     private Media audioSelect;
     private Media audioGame;
-    private ImageView currentImage;
-    
 
     @FXML
-    private void initialize() {
+    private void initialize(){
         lockIn.setDisable(true);
         try {
-            audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.wav")
-                    .toURI().toString());
-            audioGame = new Media(
-                    new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.wav").toURI().toString());
+            audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.wav").toURI().toString());
+            audioGame = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.wav").toURI().toString());
             mainAudioPlayer = new MediaPlayer(audioSelect);
             mainAudioPlayer.setOnEndOfMedia(new Runnable() {
                 public void run() {
-                    mainAudioPlayer.seek(Duration.ZERO);
+                  mainAudioPlayer.seek(Duration.ZERO);
                 }
             });
             mainAudioPlayer.setVolume(0.1);
             mainAudioPlayer.play();
-
+    
         } catch (MediaException e) {
             System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
         }
-
     }
 
-    public ImageView getCharacterSelected() {
+    public ImageView getCharacterSelected(){
         return this.characterSelected;
     }
 
@@ -74,51 +67,39 @@ public class SingleplayerSelectionController extends SceneController {
     }
 
     @FXML
-    private void handleLockIn(ActionEvent event) {
+    private void handleLockIn(ActionEvent event) throws IOException {
         if (mainAudioPlayer != null) {
             mainAudioPlayer.stop();
         }
-
+        
         try {
             mainAudioPlayer = new MediaPlayer(audioGame);
             mainAudioPlayer.setOnEndOfMedia(new Runnable() {
                 public void run() {
-                    mainAudioPlayer.seek(Duration.ZERO);
+                  mainAudioPlayer.seek(Duration.ZERO);
                 }
             });
             mainAudioPlayer.setVolume(0.1);
             mainAudioPlayer.play();
-
+    
         } catch (MediaException e) {
             System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
         }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvasMulti.fxml"));
         Parent root = loader.load();
-        SingleplayerGameController singleplayerGameController = loader.getController();
-        singleplayerGameController.setUser(super.getUser());
-        singleplayerGameController.loadWorld(currentImage.getId(), null);
+        MultiplayerGameController multiplayerGameController = loader.getController();
+        multiplayerGameController.setUser(super.getUser());
+        multiplayerGameController.loadWorld(currentImage.getId(), null);
         super.changeSceneFullscreen("NTNU Fighterz", root, event);
     
     }
 
     @FXML
-    private void handleGoBack(ActionEvent event) {
-        if (mainAudioPlayer != null) {
-            mainAudioPlayer.stop();
-        }
-
+    private void handleGoBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-            MainMenuController mainMenuController = loader.getController();
-            mainMenuController.setUser(super.getUser());
-            super.changeScene("NTNU Fighterz", root, event);
-        } catch (IOException e) {
-            showError("Error: Invalid go back path",
-                    "Something went wrong and Main menu page could not be found.");
-            e.printStackTrace();
-        }
+        Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 }

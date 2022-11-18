@@ -2,7 +2,9 @@ package fightinggame.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * The {@code Action} class represents an action.
+ */
 public class Action {
     private String name;
     private String gameCharName;
@@ -70,9 +72,10 @@ public class Action {
 
     /**
      * Try to interrupt action by another self action.
-     * When the otherSelfActionPriority is higher then this action stop action, else do not stop action
+     * When the otherSelfActionPriority is higher than this action it should be able to be interrupted.
      * 
      * @param otherSelfActionPriority  the value to compare with own actionPriority
+     * @return true if isSelfInterruptible is true and actionPriority is less than otherSelfAction's priority.
      */
     public boolean trySelfInterrupt(Action otherSelfAction) {
         if (isSelfInterruptible) {
@@ -84,14 +87,14 @@ public class Action {
     }
 
     /**
-     * Try to interrupt action by another enemy action.
-     * When the otherEnemyActionPriority is higher then this action stop action, else do not stop action
-     * Needs to be specified when the other action is aquired (if it is an enemy or self)
+     * Try to interrupt current action by another enemy action.
+     * When the otherEnemyActionPriority is higher than this action it should be able to be interrupted.
      * @param otherEnemyActionPriority  the value to compare with own actionPriority
+     * @return true if isEnemyInterrupt is true and actionPriority is less than otherEnemyAction's priority.
      */
-    public boolean tryEnemyInterrupt(Action otherSelfAction) {
+    public boolean tryEnemyInterrupt(Action otherEnemyAction) {
         if (isEnemyInterruptible) {
-            if (actionPriority < otherSelfAction.getActionPriority()) {
+            if (actionPriority < otherEnemyAction.getActionPriority()) {
                 return true;
             } 
         }
@@ -145,6 +148,12 @@ public class Action {
     public boolean getIsDone() {
         return isDone;
     }
+    /**
+     * Starts the hitbox when needed by a character, decided by duration.
+     * Holds the spawn Projectile functionality, since if isProjectile is true, then it should spawn a projectile,
+     * when the hitboxStartTime has been hit.
+     * @return true if currentTime of action is the same as or larger than hitBoxStartTime
+     */
 
     public boolean startHitBox() {
         if (currentTime >= hitBoxStartTime) {
@@ -162,14 +171,27 @@ public class Action {
             return false;
         }
     }
+    /**
+     * Getter for Projectile
+     * @return projectile object.
+     */
 
     public Projectile getProjectile() {
         return projectile;
     }
 
+    /**
+     * Getter for isProjectile
+     * @return isprojectile boolean.
+     */
+
     public boolean isProjectile() {
         return isProjectile;
     }
+    /**
+     * Getter for isMovement
+     * @return isMovement boolean.
+     */
 
     public boolean isMovement() {
         return movement;
@@ -187,6 +209,11 @@ public class Action {
         }
     }
 
+    /**
+     * Getter for ActionPriority
+     * @return actionPriority integer.
+     */
+
     private int getActionPriority(){
         return this.actionPriority;
     }
@@ -197,7 +224,4 @@ public class Action {
     private void iterateSprite() {
         sprites.next();
     }
-
-
-
 }

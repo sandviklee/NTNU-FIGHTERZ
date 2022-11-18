@@ -8,13 +8,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:id="signupRoot" fx:controller="fightinggame.ui.SignupController">
+<AnchorPane fx:id="signupRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.SignupController">
    <children>
       <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@SignUp.png" />
+            <Image url="@Background.png" />
          </image>
       </ImageView>
       <TextField fx:id="usernameField" layoutX="86.0" layoutY="352.0" prefHeight="45.0" prefWidth="409.0" style="-fx-background-color: #233e82; -fx-text-fill: white;">
@@ -53,6 +55,13 @@
          <image>
             <Image url="@Logo.png" />
          </image>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
       </ImageView>
       <Label fx:id="nonValidCredentials" layoutX="170.0" layoutY="322.0" prefHeight="34.0" prefWidth="401.0" textAlignment="RIGHT" textFill="WHITE">
          <font>
@@ -62,7 +71,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font></Label>
-      <Button fx:id="goBack" layoutX="30.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="23.0" prefWidth="71.0" text="Back">
+      <Button fx:id="goBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackToLogin" prefHeight="23.0" prefWidth="71.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
@@ -70,5 +79,45 @@
             <DropShadow />
          </effect>
       </Button>
+      <Text fill="WHITE" layoutX="86.0" layoutY="267.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="48.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="86.0" layoutY="302.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an account with your prefferec credentials!">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="86.0" layoutY="339.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="88.0" layoutY="426.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="104.8359375">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="88.0" layoutY="501.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" wrappingWidth="233.8359375">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="442.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AngryCyclistSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="647.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@PriestOfVengeanceSplashArt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="469.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@JinjierJinkSplashArt.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
