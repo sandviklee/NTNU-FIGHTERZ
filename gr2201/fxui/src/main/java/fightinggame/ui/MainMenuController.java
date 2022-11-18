@@ -14,14 +14,21 @@ public class MainMenuController extends SceneController {
     @FXML
     private void initialize(){
     }
-    
+
     @FXML
-    private void handlePlaySingleplayer(ActionEvent event) throws IOException{
+    private void handlePlaySingleplayer(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectSingle.fxml"));
-        Parent root = loader.load();
-        SingleplayerSelectionController singleplayerSelectionController = loader.getController();
-        singleplayerSelectionController.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event);
+        Parent root;
+        try {
+            root = loader.load();
+            SingleplayerSelectionController singleplayerSelectionController = loader.getController();
+            singleplayerSelectionController.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid Singleplayer path",
+                    "Something went wrong and Singleplayer page could not be found.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -32,7 +39,7 @@ public class MainMenuController extends SceneController {
         multiplayerSelectionController.setUser(super.getUser());
         super.changeScene("NTNU Fighterz", root, event);
     }
-    
+
     @FXML
     private void handleCharacterInfo(ActionEvent event) throws IOException{
         /* FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
@@ -49,7 +56,7 @@ public class MainMenuController extends SceneController {
     }
 
     @FXML
-    private void handleExit(ActionEvent event){
+    private void handleExit(ActionEvent event) {
         Platform.exit();
     }
 
