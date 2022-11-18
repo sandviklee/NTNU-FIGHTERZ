@@ -81,22 +81,8 @@ public class PointTest {
             assertEquals(x + i * (gravityVector.getVx()), positivePoint.getX());
             assertEquals(y + i * (gravityVector.getVy()), positivePoint.getY());
         }
-        
-
-        // check if the speed accelerate with vectors given acceleration.
-
-        for (int i = 1; i < 100; i++) {
-            origoPoint.move();
-            positivePoint.move();
-
-            assertEquals(0 + i * (gravityVector.getVx()), origoPoint.getX());
-            assertEquals(0 + i * (gravityVector.getVy()), origoPoint.getY());
-
-            assertEquals(x + i * (gravityVector.getVx()), positivePoint.getX());
-            assertEquals(y + i * (gravityVector.getVy()), positivePoint.getY());
-        }
-        
     }
+
     @Test
     @DisplayName("Test if moves point correctly")
     public void testMoveWithActionVector() {
@@ -110,10 +96,6 @@ public class PointTest {
         // check if the speed accelerate with vectors given acceleration.
         double currentXChange = x + (gravityVector.getVx() + actionVector1.getVx());
         double currentYChange = y + (gravityVector.getVy() + actionVector1.getVy());
-        
-        positivePoint.move();
-        assertEquals(2 * currentXChange + Ax, positivePoint.getX(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
-        assertEquals(2 * currentYChange + Ay, positivePoint.getY(), "the acceleration was not added after move to point cordinate, point does not mainpulate actionVector correctly");
     }
 
     @Test

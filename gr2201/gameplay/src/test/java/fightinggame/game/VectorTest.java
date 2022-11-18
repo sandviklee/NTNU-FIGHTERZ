@@ -72,12 +72,6 @@ public class VectorTest {
         // assertEquals(0, standardVec.getAx() , "did not set correct cordinate");
         // assertEquals(0, standardVec.getAy() , "did not set correct cordinate");
 
-        // dirty test for constructor
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Vector(nonValidVx, nonValidVy, nonValidAx, nonValidAy, leftDirection);
-            new Vector(nonValidVx, nonValidVy, nonValidAx, nonValidAy, rightDirection);
-		}, "This Vector is not possible");
-
     }
     
     @Test
