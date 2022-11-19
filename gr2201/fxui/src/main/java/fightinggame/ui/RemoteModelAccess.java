@@ -98,12 +98,15 @@ public class RemoteModelAccess {
      */
     public boolean putUser(User user) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/" + user.getUserId()))
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(user.getUserId().getUserId())))
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
                     .PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
-
+            System.out.println("URI:" + uriBase.resolve("/" + user.getUserId()));
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
+            System.out.println(responseString);
             Boolean updated = mapper.readValue(responseString, Boolean.class);
             return updated;
         } catch (IOException | InterruptedException e) {
@@ -122,7 +125,6 @@ public class RemoteModelAccess {
     public boolean deleteUser(User user) {
         try {
             HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/" + user.getUserId())).DELETE().build();
-
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();

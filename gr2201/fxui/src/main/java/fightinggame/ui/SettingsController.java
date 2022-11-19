@@ -23,7 +23,7 @@ public class SettingsController extends SceneController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (password.equals(confirmPassword)) {
+        if (!password.equals(confirmPassword)) {
             feedback.setText("Passwords do not match.");
             return;
         }
