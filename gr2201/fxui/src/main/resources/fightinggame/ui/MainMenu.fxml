@@ -25,7 +25,7 @@
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
