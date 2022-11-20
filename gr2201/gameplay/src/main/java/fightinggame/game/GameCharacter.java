@@ -1,6 +1,5 @@
 package fightinggame.game;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
@@ -8,13 +7,14 @@ import java.util.function.Predicate;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-
-
-
+/**
+ * The {@code GameCharacter} class represents a GameCharacter WorldEntity.
+ * A GameCharacter is the only WorldEntity that is playable. 
+ */
 public class GameCharacter extends WorldEntity{
-    private double weight;
-    private double speed;
-    private double damageModifier;
+    private double weight; //Not implemented yet. Shall change the movement knockback of the character.
+    private double speed; //Not implemented yet. Shall change the movement knockback of the character.
+    private double damageModifier; //Not implemented yet. Shall change the damage of the character.
     private double precentage = 0;
     private double startX;
     private double startY;
@@ -40,14 +40,14 @@ public class GameCharacter extends WorldEntity{
     private boolean onTop = false; 
 
     /**
-     * Makes a GameCharacter.
+     * Makes a GameCharacter with all the needed properties.
      * @param playerProperties
      * @param pos
      * @param availKeys
      * @param playerNumb
      * @param facingDirection
      */
-    public GameCharacter(PlayerProperties playerProperties, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
+    public GameCharacter(PlayerProperties playerProperties, HashMap<String, Media> soundFX, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
         this.startX = getX();
         this.startY = getY();
@@ -57,52 +57,80 @@ public class GameCharacter extends WorldEntity{
         this.weight = playerProperties.getWeight();
         this.speed = playerProperties.getSpeed();
         this.facingDirection = facingDirection;
-        loadAudio(); //loads the characters audiofiles
+        this.audioHash = soundFX; //loads the characters audiofiles
         // Add all action found in playerproperties to a hashmap that maps them to a number
         for (ActionProperties property : playerProperties.getActionProperties()) {
             actionHash.put(playerProperties.getActionProperties().indexOf(property), property);
         }
         setCurrentAction(0);
     }
+
     /**
-     * Makes a Character.
+     * Makes a GameCharacter for the purpose of a Dummy character.
      * @param name
      * @param pos
      */
-    public GameCharacter(String name, ArrayList<Integer> pos) {
+    public GameCharacter(String name, ArrayList<Integer> pos, int facingDirection) {
         super(name, pos);
+        this.startX = getX();
+        this.startY = getY();
         this.weight = 0;
         this.speed = 0;
+        this.playerNumb = 0;
         this.hurtBox = new Effectbox(this, point, false, 80, 172);
         this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
-        this.actionHash.put(1, new ActionProperties("HitStun", 4, 7, false, true, 7, false, 0, true));
+        this.actionHash.put(1, new ActionProperties("HitStun", 4, 6, false, true, 6, false, 0, true));
         this.availKeys = new ArrayList<>();
-        this.facingDirection = -1;
+        this.facingDirection = facingDirection;
         setCurrentAction(0);
     }
+
     /** 
-     * Sets the current action to the character
+     * Sets the current action to the character.
      * @param actionNumber sets the correct action, mapped like in the HashMap of Actionproperties.
      */
     public void setCurrentAction(Integer actionNumber) {
         if (actionNumber != null) {
-            clearVectors();
+            /*
+             * The purpose of clearing the vector is so that if you stop moving
+             * the vectors should dissapear immidiately and not multiply. But since the vector 
+             * clearing happens every time a new action is set, it is also
+             * possible to have actions where the action holds a vector a long time.
+             */
+            clearVectors(); //Clears all the vectors from the last action.
             Action newAction = getAction(actionNumber);
 
+            /*
+             * If the Action has a velocity in the Y direction and
+             * the action waiting to be set is a movement action
+             * the jumpCounter should be incremented.
+             * 
+             * The jump counter is there because we have to set a limit 
+             * to how many times a character can jump in the air.
+             */
             if (newAction.getKnockback().getVy() != 0 && newAction.isMovement()) {
                 jumpCounter++;
-            }
-            
+            } 
             property = actionHash.get(actionNumber);
             this.currentAction = new Action(property);
 
+            /*
+             * If the Action is "DownSpecial" and the character is on ground, it should not let the player constantly 
+             * apply this action when the purpose is to get to the ground faster. Therefore it stunlockes the character
+             * in the Idle animation. This stops the player from possibly "glitching" through the ground.
+             */
             if (currentAction.getName().equals("DownSpecial") && onGround == true) {
                 property = actionHash.get(0);
                 this.currentAction = new Action(property);
                 jumpCounter = 0;
             }
 
-            
+            /*
+             * If you are playing on a device which supports audio, the Actions audio will
+             * be played when you do an action.
+             * 
+             * If not then the MediaException will pop up.
+             */
             if (audioHash.get(this.currentAction.getName()) != null) {
                 try {
                     playerAudioPlayer = new MediaPlayer(audioHash.get(this.currentAction.getName()));
@@ -112,18 +140,34 @@ public class GameCharacter extends WorldEntity{
                 } catch (MediaException e) {
                     System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
                 }
-
             }
-            
-  
+
+            /*
+             * If the current action set is a Projectile Action, AKA if the action
+             * should be able to spawn a projectile, then the knockback of the move should be 
+             * set to the facing direction of the player.
+             * This makes it so for example the Angry Cyclist Wheel gets thrown in the correct
+             * direction.
+             */
             if (currentAction.isProjectile()) {
                 currentAction.getKnockback().setDirection(facingDirection);
             }
 
+            /*
+             * If the current action and the facing direction is not the same, then change the facing direction
+             * of the character. 
+             * For example if you run to the left, then the character should now be facing the left after the
+             * running action.
+             */
             if (currentAction.getKnockback().getDirection() != 0 && currentAction.getKnockback().getVy() == 0) {
                 facingDirection = currentAction.getKnockback().getDirection();
             }
             
+            /*
+             * AppliedVector is a counter that checks whether the character has applied the 
+             * Actions knockback or not to the main Vector of the character.
+             * The Action should also only apply the knockback to the character and move it if isMovement is true.
+             */
             appliedVector = 0;   
             if (currentAction.startHitBox()) {
                 appliedVector++;
@@ -133,11 +177,18 @@ public class GameCharacter extends WorldEntity{
             }  
         } 
     }
+
     /**
      * Exectues the current action the player has gotten from setCurrentAction.
      * Checks different variables like onTop to set the correct updating position.
      */
     public void doAction(){
+        /*
+         * Does the same check as in setActions method. This is for checking every tick, since doAction
+         * is applied every tick of the world. Therefore if the Action knockback has not yet been set,
+         * set it to the character. 
+         * This is especially useful when the hitbox does not start at the beginning of the Action.
+         */
         if (currentAction.startHitBox() && appliedVector == 0) {
             appliedVector++;
             if (currentAction.isMovement()) {
@@ -145,10 +196,19 @@ public class GameCharacter extends WorldEntity{
             }
         }
 
+        /*
+         * When you hit your head your upwards velocity should be removed. 
+         */
         if (onTop) {
             clearVerticalVector();
         }
 
+        /*
+         * When you hit the ground you should stop falling. Therefore there is a check
+         * for whether you are on ground or not. If you are not on ground, you should apply 
+         * the gravity Vector. If you are on ground you should stop falling, therefore clear 
+         * the vertical vector and reset the jump counter. 
+         */
         if (onGround) {
             if (mainVector.getVy() > 0) {
                 clearVerticalVector();
@@ -160,25 +220,42 @@ public class GameCharacter extends WorldEntity{
             }
         }
 
+        /*
+         * If the character is getting hit on the Right or the Left is should clear the
+         * horisontalvectors. This is so the character doesnt move into the walls.
+         */
         if (mainVector.getVx() < 0 && onRight) {
             clearHorisontalVector();
         } else if (mainVector.getVx() > 0 && onLeft) {
             clearHorisontalVector();
         } 
 
+        /*
+         * The way this game updates the position of a character or projectie is by updating the 
+         * position of the point. This is why in Effectbox we stated that the effectbox needs to be updated
+         * as the point of the character is the same as the point of the effectbox.
+         */
 		point.setX(point.getX() + mainVector.getVx());
 		point.setY(point.getY() + mainVector.getVy());
         hurtBox.updatePos();
+
+        /*
+         * If the Action has a hitbox, the point of that hitbox should be updated
+         * to the current position of the character + the hitbox offset.
+         */
         Effectbox currentHitBox = currentAction.getHitBox();
-        
         if (currentHitBox != null) {
             currentHitBox.getPoint().setX(point.getX() + Math.abs(currentHitBox.getOffsetX())*facingDirection);
             currentHitBox.getPoint().setY(point.getY() + currentHitBox.getOffsetY());
-            if (!currentAction.isProjectile()) { //If the current action is a projectile action, dont update the hitbox of the gamechar action.
+            if (!currentAction.isProjectile()) { //If the current action is a projectile action, dont update the hitbox of the gamecharacter action.
                 currentAction.getHitBox().updatePos();
             }
         }
 
+        /*
+         * When everything has been checked the main Vector should apply its acceleration
+         * and the current Action duration should be incremented.
+         */
         mainVector.applyAcceleration();
 		currentAction.nextActionFrame();
 	}
@@ -191,6 +268,7 @@ public class GameCharacter extends WorldEntity{
         mainVector.addVector(knockback);
 
     }
+
     /**
      * Sets the position of the character.
      * @param x
@@ -200,9 +278,10 @@ public class GameCharacter extends WorldEntity{
         this.point.setX(x);
         this.point.setY(y);
     }
+
     /**
      * Sets the onGround property to true or false if character touches the ground.
-     * @param boolean
+     * @param onGround boolean
      */
     public void setOnGround(boolean onGround) {
 		this.onGround = onGround;
@@ -213,8 +292,11 @@ public class GameCharacter extends WorldEntity{
             }
         } 
 	}
+
     /**
      * Setter for onTop
+     * A boolean holding whether the character is colliding with something
+     * on top of it.
      * @param onTop boolean
      */
     public void setOnTop(boolean onTop) {
@@ -223,113 +305,172 @@ public class GameCharacter extends WorldEntity{
 
     /**
      * Setter for onLeft
+     * A boolean holding whether the character is colliding with something
+     * on the left of it.
      * @param onLeft boolean
      */
     public void setOnLeft(boolean onLeft) {
         this.onLeft = onLeft;
     }
 
+    /**
+     * Setter for onRight
+     * A boolean holding whether the character is colliding with something
+     * on the right of it.
+     * @param onRight boolean
+     */
     public void setOnRight(boolean onRight) {
         this.onRight = onRight;
     }
 
+    /**
+     * Resets the precentage of the character
+     */
     public void resetPrecentage() {
         this.precentage = 0;
     }
 
+    /**
+     * Adds precentage to the character.
+     * @param precentage integer
+     */
     public void addPrecentage(int precentage) {
         this.precentage += precentage;
     }
 
+    /**
+     * ResetAction resets the current action to "Idle" action.
+     */
     public void resetAction() {
         setCurrentAction(0);
     }
 
+    /**
+     * Iteratres the deathCounter of the character.
+     */
     public void iterateDeathCounter() {
         this.deathCounter++;
     }
 
-    @Override
+
+    /**
+     * Getter for availble keys from the character.
+     * @return availKeys ArrayList<String>
+     */
     public ArrayList<String> getAvailKeys() {
         return availKeys;
     }
 
+    /**
+     * Getter for availKeys predicate
+     * @return availKey Predicate
+     */
     public Predicate<String> getPredicate() {
         return availKey;
     }
 
+    /**
+     * Getter for character Hurtbox
+     * @return hurtBox Effectbox
+     */
     public Effectbox getHurtBox() {
         return hurtBox;
     }
 
+    /**
+     * Getter for character Actions
+     * @param actionNumber integer
+     * @return action that is specified by the action number
+     */
     public Action getAction(int actionNumber) {
         property = actionHash.get(actionNumber);
         return new Action(property);
     }
 
+    /**
+     * Getter for main Vector
+     * @return mainVector Vector
+     */
     public Vector getVector() {
         return mainVector;
     }
 
+    /**
+     * Getter for character damaged precentage
+     * @return precentage double
+     */
     public double getPrecentage() {
         return precentage;
     }
 
+    /**
+     * Getter for facing direction of character
+     * @return facingDirection integer
+     */
     public int getFacingDirection() {
         return facingDirection;
     }
 
+    /**
+     * Getter for JumpCounter
+     * @return jumpCounter integer
+     */
     public int getJumpCounter() {
         return jumpCounter;
     }
 
+    /**
+     * Getter for DeathCounter
+     * @return deathCounter integer
+     */
     public int getDeathCounter() {
         return deathCounter;
     }
 
+    /**
+     * Getter for player number
+     * @return playerNumb integer
+     */
     public int getPlayerNumb() {
         return playerNumb;
     }
 
+    /**
+     * Getter for character X start position
+     * @return startX double
+     */
     public double getStartX() {
 		return startX;
 	}
 
+    /**
+     * Getter for character Y start position
+     * @return startY double
+     */
 	public double getStartY() {
 		return startY;
 	}
 
+    /**
+     * Clears the main Vector
+     */
     private void clearVectors() {
         mainVector = new Vector();
     }
 
+    /**
+     * Clears the horisontal velocitiy and acceleration
+     */
     private void clearHorisontalVector() {
         mainVector.setVx(0);
         mainVector.setAx(0);
     }
 
+    /**
+     * Clears the vertical velocity and acceleration
+     */
     private void clearVerticalVector() {
         mainVector.setVy(0);
         mainVector.setAy(0);
     }
-
-    /**
-     * Loads the all the audios in the audio folder for the game character.
-     * @throws MediaException if the computer doesnt suppoert MediaPlayer codec.
-     */
-    private void loadAudio() {
-        try {
-            File[] audioFiles = new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name).listFiles();
-            for (File audio : audioFiles) {
-                audioHash.put((audio.getName()).split("\\.")[0], new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/" + this.name + "/" + audio.getName()).toURI().toString()));
-                
-            }
-    
-        } catch (MediaException e) {
-            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
-        }
-
-    }
-
-
 }

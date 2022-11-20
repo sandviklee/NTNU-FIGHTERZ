@@ -1,17 +1,17 @@
 package fightinggame.game;
 /**
- * The {@code AnimationSprite} class represents an AnimationPlayer 
+ * The {@code AnimationSpritePlayer} class represents an AnimationPlayer for sprites. 
  */
 public class AnimationSpritePlayer {
+    private int frameCounter = 0;
     private int currentFrame = 0;
     private int totalFrames;
     private int animationLoopStartFrame;
     private int holdFrame;
-    private int frameCounter = 0;
     private boolean animationLoop;
 
     /**
-     * Make AnimationSpritePlayer with given attributes
+     * Creates AnimationSpritePlayer with the given variables.
      * @param totalFrames
      * @param animationLoop
      * @param animationLoopStartFrame
@@ -34,27 +34,30 @@ public class AnimationSpritePlayer {
         this.holdFrame = holdFrame;
         
     }
+
     /**
-     * getCurrentFrame sends out currentFrame.
-     * Makes the current frame available for other classes. 
+     * Getter for current Frame in animation.
+     * @return currentFrame integer
      */
     public int getCurrentFrame() {
         return currentFrame;
     }
+
     /**
-     * Jump to frame if it exists.
+     * Checks if the userinput is valid.
      * @param userInput integer
+     * @return true if the userInput is positive, and false otherwise
      */
     private boolean validUserInput(int userInput) {
         if (userInput < 0) {
-            throw new IllegalArgumentException("UserInput: "+ userInput + " er mindre enn null.");
+            throw new IllegalArgumentException("UserInput: "+ userInput + " is less than zero");
         } else {
             return true;
         }
     }
 
     /**
-     * Next increments currentFrame.
+     * Increments the current frame.
      * When currentFrame exceeds totalFrames either jump to animationLoopStartTime if animationLoop is true else stop
      */
     public void next(){
@@ -69,17 +72,16 @@ public class AnimationSpritePlayer {
             } else {
                 this.currentFrame++;
             }
-
-            
         }
 
         if (animationLoop && !hasNext()) {
             jump(animationLoopStartFrame);
         }
     }
+
     /**
      * Jump to frame if it exists.
-     * @param frame index
+     * @param frame index integer
      */
     private void jump(int frame){
         if (frame >= 0 && frame <= totalFrames) {
@@ -89,7 +91,7 @@ public class AnimationSpritePlayer {
 
     /**
      * Check if AnimationSprites has a next frame.
-     * @return true if it has a next frame else false.
+     * @return true if it has a next frame, otherwise false
      */
     private boolean hasNext(){
         if (currentFrame >= totalFrames) {

@@ -1,16 +1,26 @@
 package fightinggame.game;
-
+/**
+ * The {@code Effectbox} class represents a Hitbox or Hurtbox for a WorldEntity.
+ */
 public class Effectbox {
     private WorldEntity owner;
     private Point center;
     private boolean isTraversable;
     private double posX; //Position is at the left upper corner.
-    private double posY;
+    private double posY; 
     private double offsetX;
     private double offsetY;
     private int width;
     private int height;
 
+    /**
+     * Creates an Effectbox with the given attributes for a World Entity.
+     * @param owner         WorldEntity
+     * @param center        Point
+     * @param isTraversable boolean
+     * @param width         integer
+     * @param height        integer
+     */
     public Effectbox(WorldEntity owner, Point center, boolean isTraversable, int width, int height) {
         this.owner = owner;
 
@@ -18,28 +28,32 @@ public class Effectbox {
             throw new IllegalArgumentException("Center point cannot be null");
         }
         this.center = center;
-        this.isTraversable = isTraversable;
 
         if (width < 0 || height < 0){
             throw new IllegalArgumentException("Width or height cannot be negative");
         }
+
         this.width = width;
         this.height = height;
+        this.isTraversable = isTraversable;
         posX = center.getX() - (width/2 - 10);
         posY = center.getY() - (height/2);
         offsetX = center.getX();
         offsetY = center.getY();
-
     }
 
+    /**
+     * Updates the position of the Effectbox. 
+     * This works because the Point position is updated
+     * and therefore the Effectbox also needs to be updated internally.
+     */
     public void updatePos() {
         posX = center.getX() - (width/2 - 10);
         posY = center.getY() - (height/2);
     }
 
-
     /**
-     * Checks if an EffectBox intersects with an other Effectbox. 
+     * Checks if an EffectBox intersects with another Effectbox. 
      * @param otherBox
      * @return Returns a string describing if the Effectboxes intercect and if so how. Will return the side which is not contained, prioritizing top and bottom 
      * over left and right. If the Effectbox is fully contained it will return "Contained"
@@ -120,37 +134,70 @@ public class Effectbox {
         this.isTraversable = state;
     }
     
+    /**
+     * Getter for width
+     * @return width integer
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Getter for height
+     * @return height integer
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Getter for X Position
+     * @return posX double
+     */
     public double getPosX() {
         return posX;
     }
 
+    /**
+     * Getter for Y Position
+     * @return posY double
+     */
     public double getPosY() {
         return posY;
     }
 
+    /**
+     * Getter for Point
+     * @return center Point
+     */
     public Point getPoint() {
         return center;
     }
 
+    /**
+     * Getter for X Offset
+     * This is the offset the Effectbox stays at in relation with the WorldEntity position.
+     * @return offsetX integer
+     */
     public double getOffsetX() {
         return offsetX;
     }
 
+    /**
+     * Getter for Y Offset
+     * This is the offset the Effectbox stays at in relation with the WorldEntity position.
+     * @return offsetY integer
+     */
     public double getOffsetY() {
         return offsetY;
     }
 
+    /**
+     * Getter for WorldEntity Owner
+     * The Owner of this Effectbox
+     * @return owner Effectbox
+     */
     public WorldEntity getOwner() {
         return owner;
     }
-
-
 }

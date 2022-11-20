@@ -3,7 +3,8 @@ package fightinggame.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
- * The {@code Action} class represents an action.
+ * The {@code Action} class represents an action for a WorldEntity.
+ * This class holds all the possible actionproperties an action can use.
  */
 public class Action {
     private String name;
@@ -12,24 +13,23 @@ public class Action {
     private Effectbox temporary;
     private AnimationSpritePlayer sprites;
     private Projectile projectile;
-    private boolean isSelfInterruptible;
-    private boolean isEnemyInterruptible;
-    private int actionPriority;
     private Vector knockback;
+    private int actionPriority;
     private int duration;
     private int currentTime;
     private int hitBoxStartTime;
     private int damage;
-    private boolean isDone;
-    private int holdAction = 0;
-    private int holdFrameLength = 3;        
+    private int holdAction = 0; //Counter for holding the action.
+    private int holdFrameLength = 3; //3 because the animation will then run at the best framerate.     
+    private boolean isSelfInterruptible;
+    private boolean isEnemyInterruptible;
+    private boolean isDone;   
     private boolean movement;
     private boolean isProjectile;
-    private boolean createProjectile = true;
-
+    private boolean createProjectile = true; //Check for if the action has created a projectile yet. Will be set to false when the action has created a projectile.
 
     /**
-     * Create an Action for GameCharacter or Projectile.
+     * Creates an Action for a GameCharacter or Projectile.
      * @param properties  of the action it is making
      */
     public Action(ActionProperties properties) {
@@ -53,8 +53,9 @@ public class Action {
 
     /**
      * Iterates the sprite when the tick has reached holdFrameLength,
-     * updates currentTime.
-     * Asserts isDone true if action is done.
+     * and then updates the current frame.
+     * Asserts isDone to true if action is finished. This is when the duration
+     * of the action has been met.
      */
     public void nextActionFrame(){
         if (!isDone()) {
@@ -73,7 +74,6 @@ public class Action {
     /**
      * Try to interrupt action by another self action.
      * When the otherSelfActionPriority is higher than this action it should be able to be interrupted.
-     * 
      * @param otherSelfActionPriority  the value to compare with own actionPriority
      * @return true if isSelfInterruptible is true and actionPriority is less than otherSelfAction's priority.
      */
@@ -87,7 +87,7 @@ public class Action {
     }
 
     /**
-     * Try to interrupt current action by another enemy action.
+     * Try to interrupt current action by an enemy action.
      * When the otherEnemyActionPriority is higher than this action it should be able to be interrupted.
      * @param otherEnemyActionPriority  the value to compare with own actionPriority
      * @return true if isEnemyInterrupt is true and actionPriority is less than otherEnemyAction's priority.
@@ -103,7 +103,7 @@ public class Action {
 
     /**
      * Getter for name.
-     * @return name String.
+     * @return name string
     */
     public String getName() {
         return name;
@@ -111,7 +111,7 @@ public class Action {
 
     /**
      * Getter for currentFrame.
-     * @return animationSprite.getCurrentFrame() frame integer.
+     * @return animationSprite.getCurrentFrame() frame integer
     */
     public int getCurrentFrame() {
         return sprites.getCurrentFrame();
@@ -119,7 +119,7 @@ public class Action {
 
     /**
      * Getter for hitBox.
-     * @return hitbox Effectbox.
+     * @return hitbox Effectbox
     */
     public Effectbox getHitBox() {
         return this.hitBox;
@@ -127,7 +127,7 @@ public class Action {
 
     /**
      * Getter for knockback.
-     * @return knockback Vector.
+     * @return knockback Vector
     */
     public Vector getKnockback() {
         return this.knockback;
@@ -135,7 +135,7 @@ public class Action {
 
     /**
      * Getter for damage.
-     * @return damage integer.
+     * @return damage integer
     */
     public int getDamage() {
         return this.damage;
@@ -143,56 +143,49 @@ public class Action {
 
     /**
      * Getter for isDone.
-     * @return isDone boolean.
+     * @return isDone boolean
     */
     public boolean getIsDone() {
         return isDone;
     }
+
     /**
-     * Starts the hitbox when needed by a character, decided by duration.
-     * Holds the spawn Projectile functionality, since if isProjectile is true, then it should spawn a projectile,
-     * when the hitboxStartTime has been hit.
+     * Starts the hitbox when hitboxStartTime is met. This is counted to by duration.
+     * Useful for actions that dont spawn a hitbox at the start of the action but rather at the end or in the middle of the duration.
+     * It is also very useful to time when a Projectile is to be spawned,
+     * therefore it also holds spawnProjectile.
      * @return true if currentTime of action is the same as or larger than hitBoxStartTime
      */
-
     public boolean startHitBox() {
         if (currentTime >= hitBoxStartTime) {
             this.hitBox = temporary;
-            if ((isProjectile && currentTime == (hitBoxStartTime + 1)) && createProjectile) { //hitboxStartTime + 1 because the projectile cant be made in the same tick, and therefore causes problems with rendering.
-                int hitboxX = (int) hitBox.getPoint().getX();
-                int hitboxY = (int) hitBox.getPoint().getY();
-                ArrayList<Integer> pos = new ArrayList<>(Arrays.asList(hitboxX, hitboxY));
-                this.projectile = new Projectile(gameCharName + name, pos, knockback, hitBox, damage);
-                createProjectile = false;
-            }
-
+            spawnProjectile();
             return true;
         } else {
             return false;
         }
     }
+
     /**
      * Getter for Projectile
-     * @return projectile object.
+     * @return projectile Projectile
      */
-
     public Projectile getProjectile() {
         return projectile;
     }
 
     /**
      * Getter for isProjectile
-     * @return isprojectile boolean.
+     * @return isprojectile boolean
      */
-
     public boolean isProjectile() {
         return isProjectile;
     }
+
     /**
      * Getter for isMovement
-     * @return isMovement boolean.
+     * @return isMovement boolean
      */
-
     public boolean isMovement() {
         return movement;
     }
@@ -211,17 +204,34 @@ public class Action {
 
     /**
      * Getter for ActionPriority
-     * @return actionPriority integer.
+     * @return actionPriority integer
      */
-
     private int getActionPriority(){
         return this.actionPriority;
     }
 
     /**
-     * Make sprite iterate to next frame
+     * Iterates the current sprite from the {@code AnimationSpritePlayer} defined in
+     * the action.
      */
     private void iterateSprite() {
         sprites.next();
+    }
+
+    /**
+     * Spawns a projectile when the conditions have been met.
+     */
+    private void spawnProjectile() {
+        if ((isProjectile && currentTime == (hitBoxStartTime + 1)) && createProjectile) { 
+            /*
+             * hitboxStartTime + 1 because the projectile cant be made in the same tick, and therefore causes problems with rendering.
+             */
+
+            int hitboxX = (int) hitBox.getPoint().getX();
+            int hitboxY = (int) hitBox.getPoint().getY();
+            ArrayList<Integer> pos = new ArrayList<>(Arrays.asList(hitboxX, hitboxY));
+            this.projectile = new Projectile(gameCharName + name, pos, knockback, hitBox, damage);
+            createProjectile = false;
+        }
     }
 }

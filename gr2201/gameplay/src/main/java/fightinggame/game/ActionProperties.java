@@ -1,36 +1,37 @@
 package fightinggame.game;
 /**
- * The {@code ActionProperties} class represents an ActionProperties.
+ * The {@code ActionProperties} class represents a Struct or Structure for all the {@code Action} variables.
+ * It holds getters for the variables.
  */
 public class ActionProperties {
     private String spriteName;
     private String gameCharName;
-    private int actionPriority;
-    private int duration;
-    private boolean isProjectile;
-    private boolean isSelfInterruptible;
-    private boolean isEnemyInterruptible;
-    private int totalFrames;
     private Effectbox hitBox;
     private Vector knockback;
     private Projectile projectile;
+    private boolean isProjectile;
+    private boolean isSelfInterruptible;
+    private boolean isEnemyInterruptible;
+    private boolean isMovement;
     private boolean animationLoop;
+    private int totalFrames;
+    private int actionPriority;
+    private int duration;
     private int animationLoopStartFrame;
     private int hitBoxStartTime;
     private int damage;
-    private boolean isMovement;
     
     /**
-     * Create ActionProperties without hitbox or knockback, e.g. "idle", "stunlock"
-     * @param spriteName               of the sprite to this ActionProperties
-     * @param actionPriority           of the ActionProperties
-     * @param duration                 of the total time
-     * @param isSelfInterruptible      or cant Action owner stop this action
-     * @param isEnemyInterruptible     or cant Action other WorldEnteties stop this action
-     * @param totalFrames              of the animation
-     * @param animationLoop            shall it loop
-     * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param isMovement               shall this move owner of Action
+     * Create ActionProperties for Actions without hitbox or knockback, e.g. "idle", "stunlock"
+     * @param spriteName               asserts the name of the Action
+     * @param actionPriority           asserts the Action priority
+     * @param duration                 asserts the total duration of the Action
+     * @param isSelfInterruptible      asserts if the Action should be able to be interrupted by another Action done by the same owner.
+     * @param isEnemyInterruptible     asserts if the Action should be able to be interrupted by another Action done by another owner.
+     * @param totalFrames              asserts the total frames of the animation
+     * @param animationLoop            asserts if the animation should loop
+     * @param animationLoopStartFrame  asserts from which fram the animation should start to loop
+     * @param isMovement               asserts whether the owner of this Action should move with the knockback or not
      */
     public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement) {
@@ -42,27 +43,28 @@ public class ActionProperties {
         this.totalFrames = totalFrames;
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
-        this.knockback = new Vector(0, 0, 0, 0);
-        this.hitBoxStartTime = 0;
-        this.isProjectile = false;
         this.isMovement = isMovement;
+        this.knockback = new Vector(); //Sets the action knockback to nullvector.
+        this.hitBoxStartTime = 0; //Sets the hitboxStartTime to 0, even if it doesnt have a hitbox.
+        this.isProjectile = false; //Sets isProjectile to false, because the action doesn't spawn a Projectile.
+        
     }
 
     /**
-     * Create ActionProperties without hitbox but has knockback, for movement actions e.g. "moveRight", "moveLeft", "jump"
-     * @param spriteName               of the sprite to this ActionProperties
-     * @param actionPriority           of the ActionProperties
-     * @param duration                 of the total time
-     * @param isSelfInterruptible      or cant Action owner stop this action
-     * @param isEnemyInterruptible     or cant Action other WorldEnteties stop this action
-     * @param totalFrames              of the animation
-     * @param animationLoop            shall it loop
-     * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param isMovement               shall move the owner of the Action
-     * @param knockBack                of character that does action
+     * Create ActionProperties without hitbox but has knockback, for movement Actions e.g. "moveRight", "moveLeft", "jump"
+     * @param spriteName               asserts the name of the Action
+     * @param actionPriority           asserts the Action priority
+     * @param duration                 asserts the total duration of the Action
+     * @param isSelfInterruptible      asserts if the Action should be able to be interrupted by another Action done by the same owner.
+     * @param isEnemyInterruptible     asserts if the Action should be able to be interrupted by another Action done by another owner.
+     * @param totalFrames              asserts the total frames of the animation
+     * @param animationLoop            asserts if the animation should loop
+     * @param animationLoopStartFrame  asserts from which fram the animation should start to loop
+     * @param isMovement               asserts whether the owner of this Action should move with the knockback or not
+     * @param knockBack                asserts the knockback of the action
      */
-    public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible,
-            boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack) {
+    public ActionProperties(String spriteName, int actionPriority, int duration, boolean isSelfInterruptible, boolean isEnemyInterruptible, 
+            int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack) {
         this.spriteName = spriteName;
         this.actionPriority = actionPriority;
         this.duration = duration;
@@ -73,24 +75,26 @@ public class ActionProperties {
         this.animationLoopStartFrame = animationLoopStartFrame;
         this.isMovement = isMovement;
         this.knockback = knockBack;
-        this.isProjectile = false;
-        this.hitBoxStartTime = 0;
+        this.hitBoxStartTime = 0; //Sets the hitboxStartTime to 0, even if it doesnt have a hitbox.
+        this.isProjectile = false; //Sets isProjectile to false, because the action doesn't spawn a Projectile.
+        
     }
 
     /**
-     * Create ActionProperties with hitbox and knockback, for Attack actions e.g. "rightNormal"
-     * @param spriteName               of the sprite to this ActionProperties
-     * @param actionPriority           of the ActionProperties
-     * @param duration                 of the total time
-     * @param isSelfInterruptible      or cant Action owner stop this action
-     * @param isEnemyInterruptible     or cant Action other WorldEnteties stop this action
-     * @param totalFrames              of the animation
-     * @param animationLoop            shall it loop
-     * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param isMovement               shall this move owner of Action
-     * @param knockBack                of character that does Action
-     * @param hitbox                   of Action, where can this Action effect enteties
-     * @param damage                   to apply to WorldEntities in hitbox
+     * Create ActionProperties with hitbox and knockback, for Actions e.g. "rightNormal"
+     * @param spriteName               asserts the name of the Action
+     * @param actionPriority           asserts the Action priority
+     * @param duration                 asserts the total duration of the Action
+     * @param isSelfInterruptible      asserts if the Action should be able to be interrupted by another Action done by the same owner.
+     * @param isEnemyInterruptible     asserts if the Action should be able to be interrupted by another Action done by another owner.
+     * @param totalFrames              asserts the total frames of the animation
+     * @param animationLoop            asserts if the animation should loop
+     * @param animationLoopStartFrame  asserts from which fram the animation should start to loop
+     * @param isMovement               asserts whether the owner of this Action should move with the knockback or not
+     * @param knockBack                asserts the knockback of the action
+     * @param hitbox                   asserts the hitbox of the action
+     * @param hitboxStartTime          asserts when the hitbox should appear
+     * @param damage                   asserts the damage of the Action
      */
     public ActionProperties(String spriteName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible,
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage) {
@@ -105,27 +109,28 @@ public class ActionProperties {
         this.isMovement = isMovement;
         this.knockback = knockBack;
         this.hitBox = hitbox;
-        this.isProjectile = false;
         this.hitBoxStartTime = hitBoxStartTime;
         this.damage = damage;
+        this.isProjectile = false; //This Action does not spawn a projectile.
     }
 
     /**
-     * Create ActionProperties that shall produce an Projectile.
-     * @param spriteName               of the sprite to this ActionProperties
-     * @param gameCharName             of the character worldentity 
-     * @param actionPriority           of the ActionProperties
-     * @param duration                 of the total time
-     * @param isSelfInterruptible      or cant Action owner stop this action
-     * @param isEnemyInterruptible     or cant Action other WorldEnteties stop this action
-     * @param totalFrames              of the animation
-     * @param animationLoop            shall it loop
-     * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param isMovement               shall this move owner of Action
-     * @param knockBack                of character that does Action
-     * @param hitbox                   of Action, where can this Action effect enteties
-     * @param damage                   to apply to WorldEntities in hitbox
-     * @param isProjectile             shall it make an Projectile instance
+     * Create ActionProperties that produces a projectile.
+     * @param spriteName               asserts the name of the Action
+     * @param gameCharName             asserts the name of the character
+     * @param actionPriority           asserts the Action priority
+     * @param duration                 asserts the total duration of the Action
+     * @param isSelfInterruptible      asserts if the Action should be able to be interrupted by another Action done by the same owner.
+     * @param isEnemyInterruptible     asserts if the Action should be able to be interrupted by another Action done by another owner.
+     * @param totalFrames              asserts the total frames of the animation
+     * @param animationLoop            asserts if the animation should loop
+     * @param animationLoopStartFrame  asserts from which fram the animation should start to loop
+     * @param isMovement               asserts whether the owner of this Action should move with the knockback or not
+     * @param knockBack                asserts the knockback of the action
+     * @param hitbox                   asserts the hitbox of the action
+     * @param hitboxStartTime          asserts when the hitbox should appear
+     * @param damage                   asserts the damage of the Action
+     * @param isProjectile             asserts if the Action should produce a projectile
      */
     public ActionProperties(String spriteName, String gameCharName, int actionPriority, int duration, int hitBoxStartTime, boolean isSelfInterruptible, 
             boolean isEnemyInterruptible, int totalFrames, boolean animationLoop, int animationLoopStartFrame, boolean isMovement, Vector knockBack, Effectbox hitbox, int damage, boolean isProjectile) {
@@ -148,32 +153,31 @@ public class ActionProperties {
     }
 
       /**
-     * Create ActionProperties for the Projectile.
-     * @param spriteName               of the sprite to this ActionProperties
-     * @param actionPriority           of the ActionProperties
-     * @param duration                 of the total time
-     * @param totalFrames              of the animation
-     * @param animationLoop            shall it loop
-     * @param animationLoopStartFrame  if it loops what frame shall it start at
-     * @param knockBack                of character that does Action
-     * @param hitbox                   of Action, where can this Action effect enteties
-     * @param damage                   to apply to WorldEntities in hitbox
+     * Create ActionProperties for a Projectile itself.
+     * @param spriteName               asserts the name of the Action
+     * @param duration                 asserts the total duration of the Action
+     * @param totalFrames              asserts the total frames of the animation
+     * @param animationLoop            asserts if the animation should loop
+     * @param animationLoopStartFrame  asserts from which fram the animation should start to loop
+     * @param knockBack                asserts the knockback of the action
+     * @param hitbox                   asserts the hitbox of the action
+     * @param damage                   asserts the damage of the Action
      */
     public ActionProperties(String spriteName, int duration, int totalFrames, boolean animationLoop, int animationLoopStartFrame, Vector knockBack, Effectbox hitbox, int damage) {
         this.spriteName = spriteName;
-        this.actionPriority = 0;
         this.duration = duration;
-        this.isSelfInterruptible = false;
-        this.isEnemyInterruptible = false;
         this.totalFrames = totalFrames;
         this.animationLoop = animationLoop;
         this.animationLoopStartFrame = animationLoopStartFrame;
-        this.isMovement = false;
         this.knockback = knockBack;
         this.hitBox = hitbox;
         this.damage = damage;
-        this.hitBoxStartTime = 0;
-        this.isProjectile = false;
+
+        this.actionPriority = 0; //A Projectile does not need any actionPriority, because it only has one action.
+        this.isSelfInterruptible = false; //A Projectile should not be interruptable
+        this.isEnemyInterruptible = false; //A Projectile should not be interruptable
+        this.hitBoxStartTime = 0; //The hitbox should appear when it gets spawned.
+        this.isProjectile = false; //The projectile should not spawn a projectile itself
     }
 
     /**
@@ -282,14 +286,26 @@ public class ActionProperties {
         return animationLoopStartFrame;
     }
 
+    /**
+     * Getter for isProjectile
+     * @return isProjectile boolean
+     */
     public boolean getIsProjectile() {
         return isProjectile;
     }
 
+    /**
+     * Getter for IsMovement
+     * @return isMovement boolean
+     */
     public boolean getIsMovement() {
         return isMovement;
     }
 
+    /**
+     * Getter for Projectile
+     * @return projectile Projectile
+     */
     public Projectile getProjectile() {
         return projectile;
     }  
