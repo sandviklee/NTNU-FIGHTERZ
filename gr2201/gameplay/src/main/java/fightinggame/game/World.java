@@ -218,9 +218,6 @@ public class World {
                     clickActionHash.put((GameCharacter) worldEntity, false);
                 }
 
- 
-                
-                
                 NewHeldKey = heldKeyHash.get(worldEntity).get(0); //Get the GameCharacters NewHeldKey
 
                 if (actionAvailKeys.contains(NewHeldKey) && actionAvailKeys.indexOf(NewHeldKey) <= 15 && actionAvailKeys.indexOf(NewHeldKey) >= 2) {
