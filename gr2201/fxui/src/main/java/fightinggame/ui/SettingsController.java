@@ -34,6 +34,7 @@ public class SettingsController extends SceneController {
 
         User tempUser = new User(getUser().getUserId(), getUser().getUserData());
         tempUser.getUserData().changePassword(password);
+        System.out.println("The tempUser:" + tempUser);
         boolean changedPassword = remoteModelAccess.putUser(tempUser);
 
         if (changedPassword) {
@@ -51,7 +52,15 @@ public class SettingsController extends SceneController {
         }
 
         if (remoteModelAccess.deleteUser(getUser())){
-            Platform.exit();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Signup.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                this.changeScene("NTNU Fighterz", root, event);
+            } catch (IOException e) {
+                showError("Error: Invalid go back path", "Something went wrong and set up page could not be found.");
+                e.printStackTrace();
+            }
         }
         feedback.setText("Could not delete user");
     }
