@@ -103,6 +103,7 @@ public class RemoteModelAccess {
                     .header("Content-Type", "application/json")
                     .PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
             System.out.println("URI:" + uriBase.resolve("/" + user.getUserId()));
+            System.out.println("The UserJSON; " + mapper.writeValueAsString(user));
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
@@ -124,7 +125,7 @@ public class RemoteModelAccess {
      */
     public boolean deleteUser(User user) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/" + user.getUserId())).DELETE().build();
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(user.getUserId().getUserId())).DELETE().build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
