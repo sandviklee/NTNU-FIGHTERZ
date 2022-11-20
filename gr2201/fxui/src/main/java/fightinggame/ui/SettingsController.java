@@ -1,9 +1,13 @@
 package fightinggame.ui;
 
+import java.io.IOException;
+
 import fightinggame.users.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -50,5 +54,14 @@ public class SettingsController extends SceneController {
             Platform.exit();
         }
         feedback.setText("Could not delete user");
+    }
+
+    @FXML
+    private void handleGoBack(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        Parent root = loader.load();
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setUser(super.getUser());
+        super.changeScene("NTNU Fighterz", root, event);
     }
 }

@@ -22,7 +22,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="goBack" layoutX="35.0" layoutY="36.0" mnemonicParsing="false" text="Go back" />
+      <Button fx:id="goBack" layoutX="35.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleGoBack" text="Go back" />
       <Button fx:id="deleteUser" layoutX="237.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleDeleteUser" text="Delete User" />
       <TextField fx:id="confirmDelete" layoutX="238.0" layoutY="340.0" />
    </children>
