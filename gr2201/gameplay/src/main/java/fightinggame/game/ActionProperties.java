@@ -20,7 +20,6 @@ public class ActionProperties {
     private int animationLoopStartFrame;
     private int hitBoxStartTime;
     private int damage;
-    
     /**
      * Create ActionProperties for Actions without hitbox or knockback, e.g. "idle", "stunlock"
      * @param spriteName               asserts the name of the Action
@@ -47,9 +46,7 @@ public class ActionProperties {
         this.knockback = new Vector(); //Sets the action knockback to nullvector.
         this.hitBoxStartTime = 0; //Sets the hitboxStartTime to 0, even if it doesnt have a hitbox.
         this.isProjectile = false; //Sets isProjectile to false, because the action doesn't spawn a Projectile.
-        
     }
-
     /**
      * Create ActionProperties without hitbox but has knockback, for movement Actions e.g. "moveRight", "moveLeft", "jump"
      * @param spriteName               asserts the name of the Action
@@ -76,10 +73,8 @@ public class ActionProperties {
         this.isMovement = isMovement;
         this.knockback = knockBack;
         this.hitBoxStartTime = 0; //Sets the hitboxStartTime to 0, even if it doesnt have a hitbox.
-        this.isProjectile = false; //Sets isProjectile to false, because the action doesn't spawn a Projectile.
-        
+        this.isProjectile = false; //Sets isProjectile to false, because the action doesn't spawn a Projectile.   
     }
-
     /**
      * Create ActionProperties with hitbox and knockback, for Actions e.g. "rightNormal"
      * @param spriteName               asserts the name of the Action
@@ -113,7 +108,6 @@ public class ActionProperties {
         this.damage = damage;
         this.isProjectile = false; //This Action does not spawn a projectile.
     }
-
     /**
      * Create ActionProperties that produces a projectile.
      * @param spriteName               asserts the name of the Action
@@ -149,10 +143,8 @@ public class ActionProperties {
         this.damage = damage;
         this.hitBoxStartTime = hitBoxStartTime;
         this.isProjectile = isProjectile;
-
     }
-
-      /**
+    /**
      * Create ActionProperties for a Projectile itself.
      * @param spriteName               asserts the name of the Action
      * @param duration                 asserts the total duration of the Action
@@ -172,14 +164,12 @@ public class ActionProperties {
         this.knockback = knockBack;
         this.hitBox = hitbox;
         this.damage = damage;
-
         this.actionPriority = 0; //A Projectile does not need any actionPriority, because it only has one action.
         this.isSelfInterruptible = false; //A Projectile should not be interruptable
         this.isEnemyInterruptible = false; //A Projectile should not be interruptable
         this.hitBoxStartTime = 0; //The hitbox should appear when it gets spawned.
         this.isProjectile = false; //The projectile should not spawn a projectile itself
     }
-
     /**
      * Getter for hitBox
      * @return hitBox Effectbox
@@ -187,7 +177,6 @@ public class ActionProperties {
     public Effectbox getHitBox() {
         return hitBox;
     }
-
     /**
      * Getter for knockback
      * @return knockback Vector
@@ -195,7 +184,6 @@ public class ActionProperties {
     public Vector getKnockback() {
         return knockback;
     }
-
     /**
      * Getter for hitBoxStartTime
      * @return hitBoxStartTime Integer.
@@ -203,7 +191,6 @@ public class ActionProperties {
     public int getHitBoxStartTime() {
         return hitBoxStartTime;
     }
-
     /**
      * Getter for damage
      * @return damage Integer.
@@ -215,11 +202,9 @@ public class ActionProperties {
      * Getter for spriteName
      * @return spriteName String
      */
-
     public String getSpriteName() {
         return spriteName;
     }
-
     /**
      * Getter for gameCharName
      * @return gameCharName String
@@ -227,7 +212,6 @@ public class ActionProperties {
     public String getGameCharName() {
         return gameCharName;
     }
-
     /**
      * Getter for actionPriority
      * @return actionPriority Integer
@@ -235,7 +219,6 @@ public class ActionProperties {
     public int getActionPriority() {
         return actionPriority;
     }
-
     /**
      * Getter for duration
      * @return duration Integer
@@ -243,25 +226,20 @@ public class ActionProperties {
     public int getDuration() {
         return duration;
     }  
-
     /**
      * Getter for isSelfInterruptible
      * @return isSelfInterruptible boolean
      */
-
     public boolean isSelfInterruptible() {
         return isSelfInterruptible;
     }
-
     /**
      * Getter for isEnemyInterruptible
      * @return isEnemyInterruptible boolean
      */
-
     public boolean isEnemyInterruptible() {
         return isEnemyInterruptible;
     }
-
     /**
      * Getter for totalFrames
      * @return totalFrames Integer
@@ -269,7 +247,6 @@ public class ActionProperties {
     public int getTotalFrames() {
         return totalFrames;
     }
-
     /**
      * Getter for animationLoop
      * @return animationLoop boolean
@@ -277,7 +254,6 @@ public class ActionProperties {
     public boolean isAnimationLoop() {
         return animationLoop;
     }
-
     /**
      * Getter for animationLoopStartFrame
      * @return
@@ -285,7 +261,6 @@ public class ActionProperties {
     public int getAnimationLoopStartFrame() {
         return animationLoopStartFrame;
     }
-
     /**
      * Getter for isProjectile
      * @return isProjectile boolean
@@ -293,7 +268,6 @@ public class ActionProperties {
     public boolean getIsProjectile() {
         return isProjectile;
     }
-
     /**
      * Getter for IsMovement
      * @return isMovement boolean
@@ -301,7 +275,6 @@ public class ActionProperties {
     public boolean getIsMovement() {
         return isMovement;
     }
-
     /**
      * Getter for Projectile
      * @return projectile Projectile
@@ -309,5 +282,4 @@ public class ActionProperties {
     public Projectile getProjectile() {
         return projectile;
     }  
-
 }

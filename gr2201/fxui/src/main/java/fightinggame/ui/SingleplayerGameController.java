@@ -61,7 +61,7 @@ public class SingleplayerGameController extends SceneController{
      */
     public void loadWorld(String character, String gameStage) {
         worldCanvas.setFocusTraversable(true);
-        this.path = "gr2201/fxui/src/main/resources/fightinggame/ui/";		
+        this.path = "gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/";		
 
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter dummy = loadPlayer("Dummy", dummyPosition, -1);

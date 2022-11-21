@@ -35,7 +35,7 @@ public class MultiplayerSelectionController extends SceneController{
         lockInPlayer1.setDisable(true);
         lockInPlayer2.setDisable(true);
         player1Selecting = true;
-        this.path = "gr2201/fxui/src/main/resources/fightinggame/ui/";	
+        this.path = "gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/";	
         try {
             audioSelect = new Media(new File(path + "Audio/CharacterSelect.wav").toURI().toString());
             audioGame = new Media(new File(path + "Audio/Game.wav").toURI().toString());

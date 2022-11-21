@@ -27,10 +27,9 @@ public class Action {
     private boolean movement;
     private boolean isProjectile;
     private boolean createProjectile = true; //Check for if the action has created a projectile yet. Will be set to false when the action has created a projectile.
-
     /**
      * Creates an Action for a GameCharacter or Projectile.
-     * @param properties  of the action it is making
+     * @param properties  asserts the properties of the action it is making
      */
     public Action(ActionProperties properties) {
         this.sprites = new AnimationSpritePlayer(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame() , 0);
@@ -50,7 +49,6 @@ public class Action {
         this.isProjectile = properties.getIsProjectile();
         this.projectile = properties.getProjectile();
     }
-
     /**
      * Iterates the sprite when the tick has reached holdFrameLength,
      * and then updates the current frame.
@@ -70,7 +68,6 @@ public class Action {
             this.isDone = true;
         }
     }
-
     /**
      * Try to interrupt action by another self action.
      * When the otherSelfActionPriority is higher than this action it should be able to be interrupted.
@@ -85,7 +82,6 @@ public class Action {
         }
         return false;
     }
-
     /**
      * Try to interrupt current action by an enemy action.
      * When the otherEnemyActionPriority is higher than this action it should be able to be interrupted.
@@ -100,7 +96,6 @@ public class Action {
         }
         return false;
     }
-
     /**
      * Getter for name.
      * @return name string
@@ -108,7 +103,6 @@ public class Action {
     public String getName() {
         return name;
     }
-
     /**
      * Getter for currentFrame.
      * @return animationSprite.getCurrentFrame() frame integer
@@ -116,7 +110,6 @@ public class Action {
     public int getCurrentFrame() {
         return sprites.getCurrentFrame();
     }
-
     /**
      * Getter for hitBox.
      * @return hitbox Effectbox
@@ -124,7 +117,6 @@ public class Action {
     public Effectbox getHitBox() {
         return this.hitBox;
     }
-
     /**
      * Getter for knockback.
      * @return knockback Vector
@@ -132,7 +124,6 @@ public class Action {
     public Vector getKnockback() {
         return this.knockback;
     }
-
     /**
      * Getter for damage.
      * @return damage integer
@@ -140,7 +131,6 @@ public class Action {
     public int getDamage() {
         return this.damage;
     }
-
     /**
      * Getter for isDone.
      * @return isDone boolean
@@ -148,7 +138,6 @@ public class Action {
     public boolean getIsDone() {
         return isDone;
     }
-
     /**
      * Starts the hitbox when hitboxStartTime is met. This is counted to by duration.
      * Useful for actions that dont spawn a hitbox at the start of the action but rather at the end or in the middle of the duration.
@@ -165,7 +154,6 @@ public class Action {
             return false;
         }
     }
-
     /**
      * Getter for Projectile
      * @return projectile Projectile
@@ -173,7 +161,6 @@ public class Action {
     public Projectile getProjectile() {
         return projectile;
     }
-
     /**
      * Getter for isProjectile
      * @return isprojectile boolean
@@ -181,7 +168,6 @@ public class Action {
     public boolean isProjectile() {
         return isProjectile;
     }
-
     /**
      * Getter for isMovement
      * @return isMovement boolean
@@ -189,7 +175,6 @@ public class Action {
     public boolean isMovement() {
         return movement;
     }
-
     /**
      * Check if Action is done
      * @return true if currentTime equal or larger then duration
@@ -201,7 +186,6 @@ public class Action {
             return false;
         }
     }
-
     /**
      * Getter for ActionPriority
      * @return actionPriority integer
@@ -209,7 +193,6 @@ public class Action {
     private int getActionPriority(){
         return this.actionPriority;
     }
-
     /**
      * Iterates the current sprite from the {@code AnimationSpritePlayer} defined in
      * the action.
@@ -217,16 +200,14 @@ public class Action {
     private void iterateSprite() {
         sprites.next();
     }
-
     /**
      * Spawns a projectile when the conditions have been met.
      */
     private void spawnProjectile() {
         if ((isProjectile && currentTime == (hitBoxStartTime + 1)) && createProjectile) { 
             /*
-             * hitboxStartTime + 1 because the projectile cant be made in the same tick, and therefore causes problems with rendering.
+             * HitboxStartTime + 1 because the projectile cant be made in the same tick, and therefore causes problems with rendering.
              */
-
             int hitboxX = (int) hitBox.getPoint().getX();
             int hitboxY = (int) hitBox.getPoint().getY();
             ArrayList<Integer> pos = new ArrayList<>(Arrays.asList(hitboxX, hitboxY));

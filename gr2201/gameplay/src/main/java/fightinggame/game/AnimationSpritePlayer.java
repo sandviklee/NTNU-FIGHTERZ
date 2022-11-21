@@ -9,32 +9,30 @@ public class AnimationSpritePlayer {
     private int animationLoopStartFrame;
     private int holdFrame;
     private boolean animationLoop;
-
     /**
      * Creates AnimationSpritePlayer with the given variables.
-     * @param totalFrames
-     * @param animationLoop
-     * @param animationLoopStartFrame
-     * @param holdFrame
+     * @param totalFrames             asserts how many frames the sprite has to iterate through
+     * @param animationLoop           asserts if the animation should be looped
+     * @param animationLoopStartFrame asserts where the animation should start to loop from
+     * @param holdFrame               asserts how many ticks the animationspriteplayer should hold a frame
+     * @throws IllegalArgumentException if the total frames or animationLoopStartFrame is negative
      */
     public AnimationSpritePlayer(int totalFrames, boolean animationLoop, int animationLoopStartFrame, int holdFrame){
         if (validUserInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
         else {
-            throw new IllegalArgumentException("Can not have negativ total frames");
+            throw new IllegalArgumentException("Total frames can't be negative!");
         }
         if (validUserInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
             this.animationLoopStartFrame = animationLoopStartFrame;
         }
         else {
-            throw new IllegalArgumentException("Can not have negativ total frames");
+            throw new IllegalArgumentException("The animation loop can't start on a negative index!");
         }
         this.animationLoop = animationLoop;
         this.holdFrame = holdFrame;
-        
     }
-
     /**
      * Getter for current Frame in animation.
      * @return currentFrame integer
@@ -42,10 +40,10 @@ public class AnimationSpritePlayer {
     public int getCurrentFrame() {
         return currentFrame;
     }
-
     /**
      * Checks if the userinput is valid.
      * @param userInput integer
+     * @throws IllegalArgumentException
      * @return true if the userInput is positive, and false otherwise
      */
     private boolean validUserInput(int userInput) {
@@ -55,7 +53,6 @@ public class AnimationSpritePlayer {
             return true;
         }
     }
-
     /**
      * Increments the current frame.
      * When currentFrame exceeds totalFrames either jump to animationLoopStartTime if animationLoop is true else stop
@@ -73,12 +70,10 @@ public class AnimationSpritePlayer {
                 this.currentFrame++;
             }
         }
-
         if (animationLoop && !hasNext()) {
             jump(animationLoopStartFrame);
         }
     }
-
     /**
      * Jump to frame if it exists.
      * @param frame index integer
@@ -88,7 +83,6 @@ public class AnimationSpritePlayer {
             this.currentFrame = frame;
         }
     }
-
     /**
      * Check if AnimationSprites has a next frame.
      * @return true if it has a next frame, otherwise false

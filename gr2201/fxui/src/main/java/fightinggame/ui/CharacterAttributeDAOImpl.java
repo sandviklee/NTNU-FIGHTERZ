@@ -18,7 +18,7 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public CharacterAttributeDAOImpl(){
-		this.path = "gr2201/fxui/src/main/resources/fightinggame/ui/";		
+		this.path = "gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/";		
 		mapper.registerModule(new GameplayModule());
 	}
 
