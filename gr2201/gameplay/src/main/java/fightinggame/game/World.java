@@ -534,7 +534,7 @@ public class World {
         clickActionHash.put((GameCharacter) worldCharacter2, true);
     }
     /**
-     * Kills the current gamecharacter and iterates the information and properties
+     * "Kills" the current gamecharacter and iterates the information and properties
      needed to finish the game.
      * @param worldCharacter asserts the GameCharacter this should affect
      */

@@ -41,7 +41,7 @@ public class SpriteRenderer {
      * @param assetSprites
      */
     public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
-        this.path = "gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/";		
+        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
         content = canvas.getGraphicsContext2D();
         this.entities = entities;
         this.playerSprites = playerSprites;

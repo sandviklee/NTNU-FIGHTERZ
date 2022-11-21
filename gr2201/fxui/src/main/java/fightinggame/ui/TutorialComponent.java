@@ -29,7 +29,7 @@ public class TutorialComponent {
         // TODO: Fix persistence
         String tutorial = "";
         try {
-            File tutorialText = new File("gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/Tutorial.txt");
+            File tutorialText = new File("../fxui/src/main/resources/fightinggame/ui/Tutorial.txt");
             tutorial = readFromFile(tutorialText);
         } catch (Exception e) {
             System.out.println(e);

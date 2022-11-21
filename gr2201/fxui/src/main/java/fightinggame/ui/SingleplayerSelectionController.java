@@ -29,7 +29,7 @@ public class SingleplayerSelectionController extends SceneController {
     
     @FXML
     private void initialize() {
-        this.path = "gr2201/gr2201/fxui/src/main/resources/fightinggame/ui/";		
+        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
         
         lockIn.setDisable(true);
         try {
