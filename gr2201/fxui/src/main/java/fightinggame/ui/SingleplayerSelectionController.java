@@ -47,7 +47,7 @@ public class SingleplayerSelectionController extends SceneController {
             mainAudioPlayer.play();
 
         } catch (MediaException e) {
-            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+            System.out.println("You either dont have the correct Media Codec or the audio files did not load in.s You cant play audio. Error: " + e);
         }
     }
 
@@ -100,7 +100,7 @@ public class SingleplayerSelectionController extends SceneController {
                 mainAudioPlayer.play();
     
             } catch (MediaException e) {
-                System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+                System.out.println("You either dont have the correct Media Codec or the audio files did not load in.s You cant play audio. Error: " + e);
             }
 
         } catch (IOException e) {
