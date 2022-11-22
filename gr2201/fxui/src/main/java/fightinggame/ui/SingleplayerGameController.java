@@ -1,6 +1,8 @@
 package fightinggame.ui;
 
 import fightinggame.game.World;
+import fightinggame.dao.DAOFactory;
+import fightinggame.dao.RODAO;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.PlayerProperties;
 import fightinggame.game.Terrain;
@@ -94,10 +96,9 @@ public class SingleplayerGameController extends SceneController{
      * @param availKeys that shall controll the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys,
-            int playerNumb, int facingDirection) {
-        CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
-        PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
+        RODAO<PlayerProperties, String> characterAttributeDAO = DAOFactory.getCharacterAttributeDAO();
+        PlayerProperties playerProperties = characterAttributeDAO.find(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
         HashMap<String, Media> audioHash = new HashMap<>();
         loadAudio(character, audioHash);

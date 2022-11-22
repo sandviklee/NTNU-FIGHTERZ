@@ -1,0 +1,98 @@
+[
+	{
+		"characterName": "AngryCyclist",
+		"characterDescription": "A long time ago, Angry Cyclist was just called Regular Cyclist. He was a happy man who had all a man could dream of: his wife Simone and his bike Bianca. But his joy was one day cut short, when both the love of his life and his wife Simone, were hit by a bus. Enraged by the carelessness of the bus driver, he vowed to go out and fight all the bus drivers he could find, brutally beating them to death with his broken Bianca.",
+		"difficulty": 2,
+		"playstyle": "Allrounder",
+		"specialActions": [
+			{
+				"specialActionName": "Duck!",
+				"specialActionDescription": "Angry Cyclist throws a bike wheel at the enemy."
+			},
+			{
+				"specialActionName": "Get out of my way.",
+				"specialActionDescription": "Angry Cyclist hops on his bike and runs over enemies."
+			},
+			{
+				"specialActionName": "Bike-copter",
+				"specialActionDescription": "Angry Cyclist defies the laws of physics, spinning his bike to fly in the air."
+			},
+			{
+				"specialActionName": "Dash?",
+				"specialActionDescription": "Angry Cyclist."
+			}
+		]
+	},
+	{
+		"characterName": "PriestOfVengeance",
+		"characterDescription": "Born with God's wrath, a mean of vengeance for all those who have sinned. Priest of Vengeance was born angry. When he was born, he was born with little hair on his head, but massive bushy angry eyebrows. By age 7, he had permanent wrinkles from frowning all the time. On his 11th birthday, he got a wig to hide him balding from anger. No one quite knows what has made him so angry, or what can make him happy. All they know is to not cross his path.",
+		"difficulty": 1,
+		"playstyle": "Juggernaut",
+		"specialActions": [
+			{
+				"specialActionName": "God's Wrath",
+				"specialActionDescription": "Priest of Vengeance lifts his cross high and smites enemies in front of him."
+			},
+			{
+				"specialActionName": "God's Embrace",
+				"specialActionDescription": "Priest of Vengeance uses his cross to grab enemies and pull them closer."
+			},
+			{
+				"specialActionName": "Ascent of the Worthy",
+				"specialActionDescription": "Blessed by the light of God, Priest of Vengeance ascends into the skies."
+			},
+			{
+				"specialActionName": "Prayers of Restitution",
+				"specialActionDescription": "Priest of Vengenace prays to his God and restores health."
+			}
+		]
+	},
+	{
+		"characterName": "JinjerJink",
+		"characterDescription": "Jinjer Jink doesn't really need a long introduction. Most people who have met her once, know exactly what she's about as she wears just about every detail about her on her sleeve. An explosive personality, she just does whatever comes to mind, and then figures out the plan as she goes. This has more than often ended her up in some 'interesting' situations, as in the case of her winding up on NTNU Fighterz. Her only plan now: to win.",
+		"difficulty": 3,
+		"playstyle": "Rusher",
+		"specialActions": [
+			{
+				"specialActionName": "Heads up!",
+				"specialActionDescription": "Jinjer Jink pulls out a hair tie and shoots in at the enemy."
+			},
+			{
+				"specialActionName": "Get over here!",
+				"specialActionDescription": "Jinjer Jink tosses her braids forward and entangles enemies, pulling them closer."
+			},
+			{
+				"specialActionName": "Watch out above!",
+				"specialActionDescription": "Jinjer Jink spins her braids upwards, flying up in the air and damaging enemies."
+			},
+			{
+				"specialActionName": "Not today.",
+				"specialActionDescription": "Jinjer Jink spins her braids in front of her, deflecting projectiles back at enemies."
+			}
+		]
+	},
+	{
+		"characterName": "JonathanTrumpist",
+		"characterDescription": "Jonathan Trumpist was a renowned pianist and trumpist. He was known all over his home country and admired by many. He spent his whole life working on some of the greatest works humanity had seen. He was loved by all. Until one day, a new player came to the field. A child prodigy, who could play equally as well, and even better, at the age of 3. Everyone quickly abandoned him, and he swore revenge against any and all child prodigies.",
+		"difficulty": 3,
+		"playstyle": "Zoner",
+		"specialActions": [
+			{
+				"specialActionName": "Requiem",
+				"specialActionDescription": "Jonathan Trumpist charges up a note to shoot that has different effects based on color."
+			},
+			{
+				"specialActionName": "Doot!",
+				"specialActionDescription": "Jonathan Trumpist plays a powerful doot from his trumpet, knocking back himself and enemies."
+			},
+			{
+				"specialActionName": "To the moon!",
+				"specialActionDescription": "Jonathan Trumpist blows his trumpet downwards, pushing him up in the air."
+			},
+			{
+				"specialActionName": "Tick tock",
+				"specialActionDescription": "Jonathan Trumpist places a metronome that explodes."
+			}
+		]
+	}
+]
