@@ -6,6 +6,7 @@ import fightinggame.dbaccess.UserDAO;
 import fightinggame.dbaccess.UserDAOImpl;
 import fightinggame.users.LoginSignup;
 import fightinggame.users.User;
+import fightinggame.users.UserData;
 import fightinggame.users.UserId;
 
 
@@ -40,8 +41,8 @@ public class ServerService {
      * @param user  of the new user values to change data storage
      * @return whether or not user was updated
      */
-    public boolean updateUser(UserId id, User user){
-        return dao.updateUser(id, user.getUserData());
+    public boolean updateUser(String id, String userData){
+        return dao.updateUser(new UserId(id), new UserData(userData));
     }
     /**
      * Delete user from data storage

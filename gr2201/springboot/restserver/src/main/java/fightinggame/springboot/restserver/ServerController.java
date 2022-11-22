@@ -66,8 +66,8 @@ public class ServerController {
      * @return whether the update was successful
      */
     @PutMapping(path = "/{id}")
-    public boolean putUser(@PathVariable("id") String id, @RequestBody User user) {
-        return getServerService().updateUser(new UserId(id), user);
+    public boolean putUser(@PathVariable("id") String id, @RequestBody String password) {
+        return getServerService().updateUser(id, password);
     }
 
     /**
