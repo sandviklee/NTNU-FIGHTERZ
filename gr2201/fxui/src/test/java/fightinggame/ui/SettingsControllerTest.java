@@ -1,6 +1,7 @@
 package fightinggame.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 
@@ -80,8 +81,8 @@ public class SettingsControllerTest extends ApplicationTest{
 
     @Test
     private void testDeleteUser(){
-        clickOn("#usernameField").write("s");
-        clickOn("#passwordField").write("s");
+        clickOn("#usernameField").write("t");
+        clickOn("#passwordField").write("t");
         click("Login");
 
         clickOn("#settings");
@@ -89,6 +90,10 @@ public class SettingsControllerTest extends ApplicationTest{
 
         clickOn("#deleteUser");
         assertEquals("To delete your user, type 'DELETE' in the field bellow", getLabelText("#feedback"));
+
+        clickOn("#confirmDelete").write("DELETE");
+        clickOn("#deleteUser");
+        assertNotNull(getCurrentRootById("signupRoot"), "Wrong root when pressing goBack button");
     }
 
 }
