@@ -64,6 +64,23 @@ public class PointTest {
         assertEquals(y, positivePoint.getY(), " did not set correct values to Point");
     }
 
+    @Test
+    @DisplayName("test if the setters work")
+    public void testSetters() {
+
+        positivePoint.setX(x);
+        positivePoint.setY(y);
+
+        assertEquals(x, positivePoint.getX(), "The X value is not correct");
+        assertEquals(y, positivePoint.getY(), "The Y value is not correct");
+
+        positivePoint.setX(x * x);
+        positivePoint.setY(y * y);
+
+        assertEquals(x * x, positivePoint.getX(), "The X value is not correct");
+        assertEquals(y * y, positivePoint.getY(), "The Y value is not correct");
+    }
+
 
 
 }
