@@ -53,9 +53,9 @@
             <DropShadow />
          </effect>
       </Button>
-      <Label fx:id="description" layoutX="534.0" layoutY="96.0" prefHeight="190.0" prefWidth="735.0" textFill="WHITE" wrapText="true">
+      <Label fx:id="description" layoutX="534.0" layoutY="96.0" prefHeight="196.0" prefWidth="735.0" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Arial Rounded MT Bold" size="22.0" />
+            <Font size="18.0" />
          </font>
          <effect>
             <DropShadow />
@@ -65,7 +65,7 @@
             <Font name="Arial Rounded MT Bold" size="32.0" />
          </font>
       </Text>
-      <Label fx:id="title" layoutX="729.0" layoutY="6.0" prefHeight="89.0" prefWidth="473.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="title" layoutX="534.0" layoutY="7.0" prefHeight="89.0" prefWidth="729.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="54.0" />
          </font></Label>

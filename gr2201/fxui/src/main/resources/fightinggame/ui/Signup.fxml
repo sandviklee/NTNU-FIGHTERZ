@@ -84,7 +84,7 @@
             <Font name="Arial Rounded MT Bold" size="48.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="86.0" layoutY="302.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an account with your prefferec credentials!">
+      <Text fill="WHITE" layoutX="86.0" layoutY="302.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an account with your preferred credentials!">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
