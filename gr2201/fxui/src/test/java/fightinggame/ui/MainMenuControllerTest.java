@@ -31,10 +31,16 @@ public class MainMenuControllerTest extends ApplicationTest{
         return root;
     }
 
+    /*
+     * Clicks a labled node that matches the given string
+     */
     private void click(String lable){
         clickOn(LabeledMatchers.hasText(lable));
     }
 
+    /*
+     * Returns the text on a labled node with the given lable
+     */
     private String getLableText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }

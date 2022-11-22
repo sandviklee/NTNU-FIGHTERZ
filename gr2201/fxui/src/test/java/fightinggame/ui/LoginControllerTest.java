@@ -30,15 +30,22 @@ public class LoginControllerTest extends ApplicationTest{
     private Parent getRoot () {
         return root;
     }
-
+    /*
+     * Clicks a labled node that matches the given string
+     */
     private void click(String label){
         clickOn(LabeledMatchers.hasText(label));
     }
-
+    /*
+     * Returns the text on a labled node with the given lable
+     */
     private String getLabelText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }
 
+    /*
+     * Tries to login with invalid password
+     */
     @Test
     public void testInvalidUser(){
         clickOn("#passwordField").write("...");
@@ -47,12 +54,18 @@ public class LoginControllerTest extends ApplicationTest{
         Assertions.assertEquals("Wrong username or password", getLabelText("#errorMessage"));
     }
 
+    /*
+     * Tries to switch sceen to signup page 
+     */
     @Test
     public void testSwichToSignup(){
         click("Create new account");
         Assertions.assertNotNull(getCurrentRootById("signupRoot"), "Wrong root when pressing goBack button");
     }
 
+    /*
+     * Tries to login with an existing user
+     */
     @Test
     public void testLogin(){
         clickOn("#passwordField").write("s");
@@ -61,6 +74,9 @@ public class LoginControllerTest extends ApplicationTest{
         Assertions.assertNotNull(getCurrentRootById("mainMenuRoot"), "Wrong root when pressing goBack button");
     }
 
+    /*
+     * Tries to find the current root by its root id. If it cant find it it returns null
+     */
     private Parent getCurrentRootById(String id){
         for (Window window: Window.getWindows()){
             if (window.isShowing() && window instanceof Stage){
