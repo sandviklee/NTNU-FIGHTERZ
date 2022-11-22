@@ -15,12 +15,12 @@ public class PlayerProperties {
      * Creates a struct which holds the given parameters.
      * Useful when initiating different characters with different game mechanics.
      * Mainly used in deserializing.
-     * @param characterName asserts the name of the character
+     * @param characterName declares the name of the character
      * @param weight        represents how much damage a character does
-     * @param length        asserts height of character
-     * @param width         asserts width of character
-     * @param speed         asserts character running speed
-     * @param actionP       asserts characters action properties
+     * @param length        declares height of character
+     * @param width         declares width of character
+     * @param speed         declares character running speed
+     * @param actionP       declares characters action properties
      */
     public PlayerProperties(String characterName, double weight, int length, int width, double speed, ArrayList<ActionProperties> actionP) {
         this.characterName = characterName;

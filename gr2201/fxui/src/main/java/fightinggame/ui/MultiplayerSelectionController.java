@@ -23,8 +23,8 @@ public class MultiplayerSelectionController extends SceneController{
     @FXML private GridPane characterSelectGrid;
     @FXML private ImageView character1Selected;
     @FXML private ImageView character2Selected;
-    private ImageView characterSelected1Image;
-    private ImageView characterSelected2Image;
+    private ImageView character1SelectedImage;
+    private ImageView character2SelectedImage;
     private String path;
     private Media audioSelect;
     private Media audioGame;
@@ -54,11 +54,11 @@ public class MultiplayerSelectionController extends SceneController{
     }
 
     private String getCharacterSelected1Id(){
-        return this.characterSelected1Image.getId();
+        return this.character1SelectedImage.getId();
     }
 
     private String getCharacterSelected2Id(){
-        return this.characterSelected2Image.getId();
+        return this.character2SelectedImage.getId();
     }
 
     public ImageView getCharacter1Selected(){
@@ -76,14 +76,14 @@ public class MultiplayerSelectionController extends SceneController{
         if (player1Selecting) {
             resetCharacterImageOpacity();
             ImageView image = (ImageView) event.getSource();
-            this.characterSelected1Image = image;
+            this.character1SelectedImage = image;
             character1Selected.setImage(new Image(getClass().getResource(image.getId() + "SplashArt.png").toString()));
             image.setOpacity(0.7);
             lockInPlayer1.setDisable(false);
         } else {
             resetCharacterImageOpacity();
             ImageView image = (ImageView) event.getSource();
-            this.characterSelected2Image = image;
+            this.character2SelectedImage = image;
             character2Selected.setImage(new Image(getClass().getResource(image.getId() + "SplashArt.png").toString()));
             image.setOpacity(0.7);
             lockInPlayer2.setDisable(false);
@@ -108,7 +108,7 @@ public class MultiplayerSelectionController extends SceneController{
             Parent root = loader.load();
             MultiplayerGameController multiplayerGameController = loader.getController();
             multiplayerGameController.setUser(super.getUser());
-            multiplayerGameController.loadWorld(getCharacterSelected1Id(), getCharacterSelected2Id(), null);
+            multiplayerGameController.loadWorld(getCharacterSelected1Id(), getCharacterSelected2Id(), null, path);
             super.changeSceneFullscreen("NTNU Fighterz", root, event);
 
             if (mainAudioPlayer != null) {

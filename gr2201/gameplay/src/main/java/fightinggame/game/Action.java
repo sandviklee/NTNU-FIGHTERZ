@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 /**
  * The {@code Action} class represents an action for a WorldEntity.
- * This class holds all the possible actionproperties an action can use.
  */
 public class Action {
     private String name;
@@ -19,7 +18,7 @@ public class Action {
     private int currentTime;
     private int hitBoxStartTime;
     private int damage;
-    private int holdAction = 0; //Counter for holding the action.
+    private int holdAction;
     private int holdFrameLength = 3; //3 because the animation will then run at the best framerate.     
     private boolean isSelfInterruptible;
     private boolean isEnemyInterruptible;
@@ -29,7 +28,7 @@ public class Action {
     private boolean createProjectile = true; //Check for if the action has created a projectile yet. Will be set to false when the action has created a projectile.
     /**
      * Creates an Action for a GameCharacter or Projectile.
-     * @param properties  asserts the properties of the action it is making
+     * @param properties  declares the properties of the action it is making
      */
     public Action(ActionProperties properties) {
         this.sprites = new AnimationSpritePlayer(properties.getTotalFrames(), properties.isAnimationLoop(), properties.getAnimationLoopStartFrame() , 0);
@@ -48,11 +47,12 @@ public class Action {
         this.isDone = false;
         this.isProjectile = properties.getIsProjectile();
         this.projectile = properties.getProjectile();
+        this.holdAction = 0;
     }
     /**
-     * Iterates the sprite when the tick has reached holdFrameLength,
+     * Increments the sprite when the tick has reached holdFrameLength,
      * and then updates the current frame.
-     * Asserts isDone to true if action is finished. This is when the duration
+     * Sets isDone to true if action is finished. This is when the duration
      * of the action has been met.
      */
     public void nextActionFrame(){
@@ -139,11 +139,10 @@ public class Action {
         return isDone;
     }
     /**
-     * Starts the hitbox when hitboxStartTime is met. This is counted to by duration.
+     * Starts the hitbox when currentTime is larger or equal to hitBoxStartTime.
      * Useful for actions that dont spawn a hitbox at the start of the action but rather at the end or in the middle of the duration.
-     * It is also very useful to time when a Projectile is to be spawned,
-     * therefore it also holds spawnProjectile.
-     * @return true if currentTime of action is the same as or larger than hitBoxStartTime
+     * This can also tell when a projectile is to be spawned.
+     * @return true if currentTime of action is equal or larger than hitBoxStartTime
      */
     public boolean startHitBox() {
         if (currentTime >= hitBoxStartTime) {

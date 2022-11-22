@@ -9,8 +9,8 @@ public class Point {
     /**
      * Makes a point for a WorldEntity or Effectbox.
      * The point holds the objects position.
-     * @param x asserts the x position
-     * @param y asserts the y position
+     * @param x declares the x position
+     * @param y declares the y position
      */
     public Point(double x, double y) {
         this.x = x;

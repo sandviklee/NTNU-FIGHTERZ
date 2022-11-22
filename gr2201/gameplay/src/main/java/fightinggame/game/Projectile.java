@@ -15,11 +15,11 @@ public class Projectile extends WorldEntity {
      * Creates a projectile with the give parameters. 
      * A projectile is a WorldEntity that like Terrain is not playable,
      * but is movable like a game character.
-     * @param name      asserts the name
-     * @param pos       asserts the starting position
-     * @param knockback asserts the vector of this projectile
-     * @param hitbox    asserts the hitbox
-     * @param damage    asserts the damage
+     * @param name      declares the name
+     * @param pos       declares the starting position
+     * @param knockback declares the vector of this projectile
+     * @param hitbox    declares the hitbox
+     * @param damage    declares the damage
      */
     public Projectile(String name, ArrayList<Integer> pos, Vector knockback, Effectbox hitbox, int damage) {
         super(name, pos);

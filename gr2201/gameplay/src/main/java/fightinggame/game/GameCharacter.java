@@ -15,10 +15,11 @@ public class GameCharacter extends WorldEntity{
     private double weight; //Not implemented yet. Shall change the movement knockback of the character.
     private double speed; //Not implemented yet. Shall change the movement knockback of the character.
     private double damageModifier; //Not implemented yet. Shall change the damage of the character.
-    private double precentage = 0;
+    private double percentage = 0;
     private double startX;
     private double startY;
     private int idle = 0;
+    private int hitStun = 1;
     private int facingDirection = 1;
     private int appliedVector;
     private int jumpCounter = 0;
@@ -39,11 +40,11 @@ public class GameCharacter extends WorldEntity{
     private boolean onTop = false; 
     /**
      * Makes a GameCharacter with all the needed properties.
-     * @param playerProperties asserts the properties of this character
-     * @param pos              asserts the startingposition
-     * @param availKeys        asserts the available key inputs
-     * @param playerNumb       asserts the number of this player
-     * @param facingDirection  asserts the starting facingdirection
+     * @param playerProperties declares the properties of this character
+     * @param pos              declares the startingposition
+     * @param availKeys        declares the available key inputs
+     * @param playerNumb       declares the number of this player
+     * @param facingDirection  declares the starting facingdirection
      */
     public GameCharacter(PlayerProperties playerProperties, HashMap<String, Media> soundFX, ArrayList<Integer> pos, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
         super(playerProperties.getCharacterName(), pos);
@@ -61,20 +62,17 @@ public class GameCharacter extends WorldEntity{
             actionHash.put(playerProperties.getActionProperties().indexOf(property), property);
         }
         /*
-         * Everytime we use the actionNumber 0, it refers to the "Idle" action.
-         * Every action for every WorldEntity, gamecharacter or projectile, has it's 
-         * actions mapped like in their actionhash. 
-         * 
+         * Every action for game character or projectile, has its actions mapped like in their actionhash. 
          * We did this because when you look in the World class, you see that when an action
-         * gets set because of keyinput, it uses the keyinput index of the available keys for that 
+         * gets set through keyinput, it uses the keyinput index of the available keys for that 
          * character.
          */
         setCurrentAction(idle); //Idle = 0
     }
     /**
-     * Makes a GameCharacter for the purpose of a Dummy character.
-     * @param name
-     * @param pos
+     * Makes a Dummy GameCharacter.
+     * @param name declares name of character
+     * @param pos  declares position of character
      */
     public GameCharacter(String name, ArrayList<Integer> pos, int facingDirection) {
         super(name, pos);
@@ -84,14 +82,18 @@ public class GameCharacter extends WorldEntity{
         this.speed = 0;
         this.playerNumb = 0;
         this.hurtBox = new Effectbox(this, point, false, 80, 172);
-        this.actionHash.put(0, new ActionProperties("Idle", 1, 13, false, true, 13, false, 0, false));
-        this.actionHash.put(1, new ActionProperties("HitStun", 4, 6, false, true, 6, false, 0, true));
+        int idleActionDuration = 13;
+        int hitStunActionDuration = 6;
+        int idleActionPriority = 1;
+        int hitStunActionPriority = 4;
+        this.actionHash.put(idle, new ActionProperties("Idle", idleActionPriority, idleActionDuration, false, true, idleActionDuration, false, 0, false));
+        this.actionHash.put(hitStun, new ActionProperties("HitStun", hitStunActionPriority, hitStunActionDuration, false, true, hitStunActionDuration, false, 0, true));
         this.availKeys = new ArrayList<>();
         this.facingDirection = facingDirection;
         setCurrentAction(idle); //Idle = 0
     }
     /** 
-     * Sets the current action to the character.
+     * Sets the current action of the character.
      * @param actionNumber sets the correct action, mapped like in the HashMap of Actionproperties.
      * @throws MediaException if it is not possible to play audio.
      */
@@ -99,7 +101,7 @@ public class GameCharacter extends WorldEntity{
         if (actionNumber != null) {
             /*
              * The purpose of clearing the vector is so that if you stop moving
-             * the vectors should dissapear immidiately and not multiply. But since the vector 
+             * the vectors should disappear immediately and not multiply. But since the vector 
              * clearing happens every time a new action is set, it is also
              * possible to have actions where the action holds a vector a long time.
              */
@@ -120,7 +122,7 @@ public class GameCharacter extends WorldEntity{
             this.currentAction = new Action(property);
             /*
              * If the Action is "DownSpecial" and the character is on ground, it should not let the player constantly 
-             * apply this action when the purpose is to get to the ground faster. Therefore it stunlockes the character
+             * apply this action when the purpose is to get to the ground faster. Therefore it stunlocks the character
              * in the Idle animation. This stops the player from possibly "glitching" through the ground.
              */
             if (currentAction.getName().equals("DownSpecial") && onGround == true) {
@@ -148,7 +150,7 @@ public class GameCharacter extends WorldEntity{
              * If the current action set is a Projectile Action, AKA if the action
              * should be able to spawn a projectile, then the knockback of the move should be 
              * set to the facing direction of the player.
-             * This makes it so for example the Angry Cyclist Wheel gets thrown in the correct
+             * This makes it so that for example the Angry Cyclists Wheel gets thrown in the correct
              * direction.
              */
             if (currentAction.isProjectile()) {
@@ -178,7 +180,7 @@ public class GameCharacter extends WorldEntity{
         } 
     }
     /**
-     * Exectues the current action the player has gotten from setCurrentAction.
+     * Executes the current action the player has gotten from setCurrentAction.
      * Checks different variables like onTop to set the correct updating position.
      */
     public void doAction(){
@@ -195,7 +197,7 @@ public class GameCharacter extends WorldEntity{
             }
         }
         /*
-         * When you hit your head your upwards velocity should be removed. 
+         * When you hit your head, your upwards velocity should be removed. 
          */
         if (onTop) {
             clearVerticalVector();
@@ -217,18 +219,18 @@ public class GameCharacter extends WorldEntity{
             }
         }
         /*
-         * If the character is getting hit on the Right or the Left is should clear the
-         * horisontalvectors. This is so the character doesnt move into the walls.
+         * If the character is getting hit on the Right or the Left it should clear the
+         * horizontalvectors. This is so the character doesn't move into the walls.
          */
         if (mainVector.getVx() < 0 && onRight) {
-            clearHorisontalVector();
+            clearHorizontalVector();
         } else if (mainVector.getVx() > 0 && onLeft) {
-            clearHorisontalVector();
+            clearHorizontalVector();
         } 
         /*
-         * The way this game updates the position of a character or projectie is by updating the 
+         * The way this game updates the position of a character or projectile is by updating the 
          * position of the point. This is why in Effectbox we stated that the effectbox needs to be updated
-         * as the point of the character is the same as the point of the effectbox.
+         * as the point of the character is the same as the point in the effectbox.
          */
 		point.setX(point.getX() + mainVector.getVx());
 		point.setY(point.getY() + mainVector.getVy());
@@ -309,17 +311,17 @@ public class GameCharacter extends WorldEntity{
         this.onRight = onRight;
     }
     /**
-     * Resets the precentage of the character
+     * Resets the percentage of the character
      */
-    public void resetPrecentage() {
-        this.precentage = 0;
+    public void resetPercentage() {
+        this.percentage = 0;
     }
     /**
-     * Adds precentage to the character.
-     * @param precentage integer
+     * Adds percentage to the character.
+     * @param percentage integer
      */
-    public void addPrecentage(int precentage) {
-        this.precentage += precentage;
+    public void addPercentage(int percentage) {
+        this.percentage += percentage;
     }
     /**
      * ResetAction resets the current action to "Idle" action.
@@ -328,13 +330,13 @@ public class GameCharacter extends WorldEntity{
         setCurrentAction(0);
     }
     /**
-     * Iteratres the deathCounter of the character.
+     * Iterates the deathCounter of the character.
      */
-    public void iterateDeathCounter() {
+    public void incrementDeathCounter() {
         this.deathCounter++;
     }
     /**
-     * Getter for availble keys from the character.
+     * Getter for available keys from the character.
      * @return availKeys ArrayList<String>
      */
     public ArrayList<String> getAvailKeys() {
@@ -371,11 +373,11 @@ public class GameCharacter extends WorldEntity{
         return mainVector;
     }
     /**
-     * Getter for character damaged precentage
-     * @return precentage double
+     * Getter for character damaged percentage
+     * @return percentage double
      */
-    public double getPrecentage() {
-        return precentage;
+    public double getPercentage() {
+        return percentage;
     }
     /**
      * Getter for facing direction of character
@@ -426,9 +428,9 @@ public class GameCharacter extends WorldEntity{
         mainVector = new Vector();
     }
     /**
-     * Clears the horisontal velocitiy and acceleration
+     * Clears the horizontal velocity and acceleration
      */
-    private void clearHorisontalVector() {
+    private void clearHorizontalVector() {
         mainVector.setVx(0);
         mainVector.setAx(0);
     }

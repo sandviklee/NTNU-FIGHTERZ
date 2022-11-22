@@ -47,7 +47,7 @@ public class SceneController {
     }
 
     /**
-     * The method {@link #changeSceneFullscreen} will make the scene take all availeble place on the screen.
+     * The method changeSceneFullscreen sets the screen to fullscreen.
      * 
      * @param title  of the page
      * @param root   of the xml

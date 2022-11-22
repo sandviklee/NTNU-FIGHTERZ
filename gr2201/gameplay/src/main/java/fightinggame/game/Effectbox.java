@@ -14,12 +14,12 @@ public class Effectbox {
     private int height;
     /**
      * Creates an Effectbox with the given attributes for a World Entity.
-     * @param owner         asserts the WorldEntity owner
-     * @param center        asserts the center Point
-     * @param isTraversable asserts if this Effectbox is traversable
-     * @param width         asserts the width
-     * @param height        asserts the height
-     * @throws IllegalArgumentException if the height or width of the Effectbox is illegal.
+     * @param owner         declares the WorldEntity owner
+     * @param center        declares the center Point
+     * @param isTraversable declares if this Effectbox is traversable
+     * @param width         declares the width
+     * @param height        declares the height
+     * @throws IllegalArgumentException if the height or width of the Effectbox is negative
      */
     public Effectbox(WorldEntity owner, Point center, boolean isTraversable, int width, int height) {
         this.owner = owner;
@@ -39,9 +39,7 @@ public class Effectbox {
         offsetY = center.getY();
     }
     /**
-     * Updates the position of the Effectbox. 
-     * This works because the Point position is updated
-     * and therefore the Effectbox also needs to be updated internally.
+     * Updates the position of the Effectbox based on the center Point.
      */
     public void updatePos() {
         posX = center.getX() - (width/2 - 10);
@@ -49,8 +47,8 @@ public class Effectbox {
     }
     /**
      * Checks if an EffectBox intersects with another Effectbox. 
-     * @param otherBox
-     * @return Returns a string describing if the Effectboxes intercect and if so how. Will return the side which is not contained, prioritizing top and bottom 
+     * @param otherBox declares the other hitbox.
+     * @return Returns a string describing if the Effectboxes intersect and if so how. Will return the side which is not contained, prioritizing top and bottom 
      * over left and right. If the Effectbox is fully contained it will return "Contained"
      */
     public String EffectBoxInEffectBox(Effectbox otherBox) {
@@ -71,11 +69,6 @@ public class Effectbox {
         double otherLeft = otherBox.center.getX() - otherBox.getWidth()/2;
         //Top means that this effectbox is on top of the other.
         if (dx <= halfWidthSum && dy <= halfHeightSum){
-            /*
-             * Had to configure the priority because if Top and Bottom was tested before left and right, you could just go through the terrain.
-             * This code is made so that if you are on top of a hitbox, you are still at the top, if your characters bottom coordinate is over (in programming case under) the top of the terrain hitbox you are still on top, even if its checked that you are technically on the left or right of the terrain hitbox.
-             * The random +10 is there so that when the gravity takes the character a bit into the terrain hitbox, it still counts the bottom of the character hurtbox as "over" the terrain hitbox.
-             */
             if (thisLeft <= otherLeft){
                 if (thisBottom <= otherBoxTop + 20){
                     return "Top";
@@ -107,6 +100,10 @@ public class Effectbox {
     public void updateCenter(Point center) {
         this.center = center;
     }
+    /**
+     * Getter for isTraversable
+     * @return isTraversable boolean
+     */
     public boolean getIsTraversable(){
         return this.isTraversable;
     }
@@ -154,7 +151,7 @@ public class Effectbox {
     }
     /**
      * Getter for X Offset
-     * This is the offset the Effectbox stays at in relation with the WorldEntity position.
+     * This is the offset the Effectbox stays at in relation to the WorldEntity position.
      * @return offsetX integer
      */
     public double getOffsetX() {
@@ -162,7 +159,7 @@ public class Effectbox {
     }
     /**
      * Getter for Y Offset
-     * This is the offset the Effectbox stays at in relation with the WorldEntity position.
+     * This is the offset the Effectbox stays at in relation to the WorldEntity position.
      * @return offsetY integer
      */
     public double getOffsetY() {

@@ -10,10 +10,10 @@ public class Terrain extends WorldEntity{
      * Creates a Terrain with the given paramenters.
      * Terrain is a WorldEntity made to stop game characters from
      * moving in a certain direction
-     * @param name   asserts the name
-     * @param pos    asserts the starting position
-     * @param width  asserts the width
-     * @param height asserts the height
+     * @param name   declares the name
+     * @param pos    declares the starting position
+     * @param width  declares the width
+     * @param height declares the height
      */
     public Terrain(String name, ArrayList<Integer> pos, int width, int height) {
         super(name, pos);

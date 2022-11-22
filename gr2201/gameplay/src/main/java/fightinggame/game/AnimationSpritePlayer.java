@@ -11,20 +11,20 @@ public class AnimationSpritePlayer {
     private boolean animationLoop;
     /**
      * Creates AnimationSpritePlayer with the given variables.
-     * @param totalFrames             asserts how many frames the sprite has to iterate through
-     * @param animationLoop           asserts if the animation should be looped
-     * @param animationLoopStartFrame asserts where the animation should start to loop from
-     * @param holdFrame               asserts how many ticks the animationspriteplayer should hold a frame
+     * @param totalFrames             declares how many frames the sprite has to iterate through
+     * @param animationLoop           declares if the animation should be looped
+     * @param animationLoopStartFrame declares where the animation should start to loop from
+     * @param holdFrame               declares how many ticks the animationspriteplayer should hold a frame
      * @throws IllegalArgumentException if the total frames or animationLoopStartFrame is negative
      */
     public AnimationSpritePlayer(int totalFrames, boolean animationLoop, int animationLoopStartFrame, int holdFrame){
-        if (validUserInput(totalFrames)) {
+        if (validInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
         else {
             throw new IllegalArgumentException("Total frames can't be negative!");
         }
-        if (validUserInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
+        if (validInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
             this.animationLoopStartFrame = animationLoopStartFrame;
         }
         else {
@@ -42,20 +42,21 @@ public class AnimationSpritePlayer {
     }
     /**
      * Checks if the userinput is valid.
-     * @param userInput integer
-     * @throws IllegalArgumentException
-     * @return true if the userInput is positive, and false otherwise
+     * @param input is an integer
+     * @throws IllegalArgumentException if the input is invalid
+     * @return true if the input is positive, and false otherwise
      */
-    private boolean validUserInput(int userInput) {
-        if (userInput < 0) {
-            throw new IllegalArgumentException("UserInput: "+ userInput + " is less than zero");
+    private boolean validInput(int input) {
+        if (input < 0) {
+            throw new IllegalArgumentException("UserInput: "+ input + " is less than zero");
         } else {
             return true;
         }
     }
     /**
      * Increments the current frame.
-     * When currentFrame exceeds totalFrames either jump to animationLoopStartTime if animationLoop is true else stop
+     * When currentFrame exceeds totalFrames and animationLoop is true, jump to animationLoopStartFrame.
+     * If animationLoop is false, the Action is done.
      */
     public void next(){
         if (currentFrame < totalFrames) {

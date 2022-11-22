@@ -60,11 +60,13 @@ public class MultiplayerGameController extends SceneController{
      * {@link #loadWorld(String, String)} will make an {@code World} with all players and terrain that the game shall have.
      * 
      * @param character  the name of the character loaded
-     * @param gameStage  of the World
+     * @param character2 the name of the second character loaded
+     * @param gameStage  the gamestage (not used yet)
+     * @param path       the path of sprites etc.
      */
-    public void loadWorld(String character, String character2, String gameStage){
+    public void loadWorld(String character, String character2, String gameStage, String path){
         worldCanvas.setFocusTraversable(true);
-        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
+        this.path = path;	
 
 
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
@@ -218,7 +220,7 @@ public class MultiplayerGameController extends SceneController{
 
     /**
      * Loads the all the audios in the audio folder for the game character.
-     * @throws MediaException if the computer doesnt suppoert MediaPlayer codec.
+     * @throws MediaException if the computer doesn't suppoert MediaPlayer codec.
      */
     private void loadAudio(String character, HashMap<String, Media> audioHash) {
         try {

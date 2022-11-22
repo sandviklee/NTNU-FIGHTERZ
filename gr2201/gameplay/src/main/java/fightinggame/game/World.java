@@ -31,27 +31,26 @@ public class World {
     private int playerNumbWinner;
     /**
      * Creates a World with the gived world entities.
-     * @param worldEntities asserts all the world entities that should load in with the world.
+     * @param worldEntities declares all the world entities that should load in with the world.
      */
     public World(ArrayList<WorldEntity> worldEntities){
         this.worldEntities = new ArrayList<>(worldEntities);
         /*
          * Here we introduce the worldbox. This is the "World hitbox", that holds all the characters inside it. If the character
          * is outside of the box, the character dies.
-         * The size of the worldBox size is given by the screensize (1920 * 1080) and adding an offset.
+         * The size of the worldBox is given by the screensize (1920 * 1080) and adding an offset.
          */
         int worldBoxSizeOffset = 1000;
         this.worldBox = new Effectbox(null, new Point(screensize[0]/2, screensize[1]/2), false, screensize[0] + worldBoxSizeOffset, screensize[1] + worldBoxSizeOffset);
         /*
-         * Here all the worldEntities gets loaded in.
-         * Especially gamecharacters have alot of logic,
-         * where they need to initialize all the Hashmaps with a key and value.
+         * Here all the worldEntities get loaded in.
+         * GameCharacters have to initalize Hashmaps with a key and value.
          */
         for (WorldEntity entity : worldEntities) {
             if(entity instanceof GameCharacter){
                 /*
-                 * The Collidehash is just every side the character should be able to interact with terrain or any other
-                 * hitbox or hurtbox.
+                 * The Collidehash is every side the character should be able to interact with terrain or any other
+                 * effectbox.
                  */
                 HashMap<String, Boolean> CollideSideHash = new HashMap<>();
                 ArrayList<String> heldKeysList = new ArrayList<>(Arrays.asList("Idle", "Idle"));
@@ -70,9 +69,9 @@ public class World {
     }
     /**
      * Updates the world with the current keyInput clicked and keyInput released
-     * Using both input and inputR gives us the possibility to make hold movement.
-     * @param input asserts the input key from raw keyboard inputs
-     * @param inputR asserts the input released key
+     * Using both input and inputR gives us the possibility hold actions.
+     * @param input declares the input key from raw keyboard inputs
+     * @param inputR declares the input released key
      */
     public void updateWorld(String input, String inputR){
         /**
@@ -113,14 +112,14 @@ public class World {
         /*
          * To check for collisions we first iterate through all the world entities in the world.
          * Then we check for different states, whether it the character hurtbox collides with Terrain,
-         or something else. 
+         * or something else. 
          */
         for (WorldEntity entity1 : worldEntities) {
             if (entity1 instanceof GameCharacter) {
                 /*
-                 * To check if a character is outside of the worldBox, the effectboxineffectbox method
-                 gives us "Outside".
-                 * If this is true, then the character should reset it's position and iterate the deathcounter.
+                 * To check if a character is outside of the worldBox, we check if the EffectBoxInEffectBox method
+                 * returns "Outside".
+                 * If this is true, then the character should reset its position and iterate the deathcounter.
                  */
                 if (entity1.getHurtBox().EffectBoxInEffectBox(worldBox).equals("Outside")) {
                     characterReset((GameCharacter) entity1);
@@ -128,7 +127,6 @@ public class World {
             }  
             /*
              * For every tick we have to reset if the player is colliding or not. 
-             * This is because of the logic that comes after this. 
              */
             for (String side : Sides) {
                 if (entity1 instanceof GameCharacter) {
@@ -169,7 +167,7 @@ public class World {
                         entity1.setOnRight(CollisionHash.get((GameCharacter) entity1).get(currentSide));
                         break;
                         /*
-                         * If the character is Outside, the characters sides should alle be what they are before.
+                         * If the character is Outside, the characters sides should all be what they are before.
                          * In this case because we reset them earlier, these would most likely all be false.
                          */
                         case "Outside":
@@ -247,11 +245,6 @@ public class World {
                 keysHeld.remove(key);
             }
         }
-        /*
-         * Now since we have all our own logic for how holding keys work,
-         * we can implement the rest of setting WorldEntity actions.
-         * The world entities that can set actions are character and projectiles.
-         */
         for (WorldEntity worldEntity : worldEntities) {
             if (worldEntity instanceof GameCharacter) {     
                 Action currentAction = worldEntity.getCurrentAction();
@@ -261,70 +254,50 @@ public class World {
                 ArrayList<String> actionAvailKeys = worldEntity.getAvailKeys();
                 ArrayList<String> keys = new ArrayList<>();
                 /*
-                 * You will se heldKeyList be used alot in the logic.
+                 * You will see heldKeyList be used alot in the logic.
                  * The first index of this list is the NewHeldkey.
-                 * The second index is the Held key, for checking what the last action when the key
-                 * was being held was.
-                 * 
-                 * More of this is commented later in the code.
+                 * The second index is the Held key, used for checking what the last action was.
                  */
                 ArrayList<String> heldKeyList = heldKeyHash.get(worldEntity);
                 /*
-                 * Checks for all the keys in keysheld and uses the 
-                 * characters key predicate to sort out which keys
-                 * the specific character uses.
+                 * Checks for all the keys in keysHeld and uses the 
+                 * characters key predicate to sort out valid keys.
                  */
                 for (String key : keysHeld) {
                     if (worldEntity.getPredicate().test(key)) {
                         keys.add(key);
                     }
                 }
-                /*
-                 * We then put these keys into the characters keyhash.
-                 */
                 inputPerEntity.put((GameCharacter) worldEntity, keys);
-                /*
-                 * For the held Key and currently holding key logic.
-                 * Since we have the functionality to play two different
-                 * characters, we need to save these keys in the keyshash.
-                 */
                 if (!inputPerEntity.get(worldEntity).isEmpty()) {
-                    /*
-                     * We need to firstly clear the current held key of the character.
-                     */
                     heldKeyList.set(0, "");
                     NewHeldKey = "";    
                     for (String key : inputPerEntity.get(worldEntity)) {
                         NewHeldKey += key;    
                     }
                     /*
-                     * Now the heldKey gets set to the character if there are any keys.
                      * The reason NewHeldKey is a String, is because some actions in the game use 
                      * more than one key to activate.
                      */
                     heldKeyList.set(0, NewHeldKey); 
                 } else {
-                    heldKeyList.set(0, "+"); //If no keys are being held, "+" which is no key gets set. This is because we had bugs when just clearing with " ".
+                    heldKeyList.set(0, "+"); //"+" refers to no keys being pressed.
                 }
                 /*
-                 * This is a check for clickactions.
-                 * Since out method of applying actions are continious, we need
-                 * a state where the action can be "played" after just a click,
+                 * This is a check for clickActions.
+                 * Since out method of applying actions is continuous, we need
+                 * a state where the action can be "played" after just a key click,
                  * and not just get reset to "Idle".
                  */
                 if ((actionDone && clickActionHash.get(worldEntity))) {
                     clickActionHash.put((GameCharacter) worldEntity, false);
                 }
-                /*
-                 * NewHeldKey is just a variable holding the NewHeldKey to the character. The first index 0 is NewHeldKey,
-                 * and second index 1 is HeldKey.
-                 */
                 NewHeldKey = heldKeyList.get(0);
                 clickAction = clickActionHash.get((GameCharacter) worldEntity);
                 /*
                  * The reason for the check <= 15 and >= 2 is because the actual actions that are possible to do with keyinputs
                  * in the actionhash for the character is [2, 15].
-                 * For example the 0 idex of actionhash is the "Idle" action and is not a doable action by keyinputs.
+                 * For example the 0 index of actionhash is the "Idle" action and is not a doable action by keyinputs.
                  */
                 if (actionAvailKeys.contains(NewHeldKey) && actionAvailKeys.indexOf(NewHeldKey) <= 15 && actionAvailKeys.indexOf(NewHeldKey) >= 2) {
                     /*
@@ -337,13 +310,9 @@ public class World {
                     boolean newKeyIsJump = NewHeldKey.contains(actionAvailKeys.get(2));
                     boolean newKeyIsSpecial = NewHeldKey.contains(actionAvailKeys.get(7));
                     boolean newKeyIsNormal = NewHeldKey.contains(actionAvailKeys.get(16));
-                    /*
-                     * Checks for some "special" actions.
-                     */
                     if (newKeyIsJump || newKeyIsNormal || newKeyIsSpecial) {
                         /*
-                         * This action is jump.
-                         * The statements are there to check if jump is doable.
+                         * If the action is jump, check if jump is doable.
                          */
                         if (newKeyIsJump && currentAction.trySelfInterrupt(worldEntity.getAction(actionAvailKeys.indexOf(NewHeldKey))) && worldEntity.getJumpCounter() <= 1) {
                             /*
@@ -354,7 +323,7 @@ public class World {
                             worldEntity.setCurrentAction(actionAvailKeys.indexOf(heldKeyList.get(1)));
                         }
                         /*
-                         * This action is special or normal.
+                         * This action is a special or normal.
                          */
                         else if (((newKeyIsSpecial && !newKeyIsJump) || newKeyIsNormal) && !clickAction) {
                             clickActionHash.put((GameCharacter) worldEntity, true);
@@ -364,7 +333,7 @@ public class World {
                              * If the current action should spawn a projectile,
                              * put the projectile into the spawn projectile hash for the character.
                              */
-                            if (worldEntity.getCurrentAction().isProjectile()) { //Must redefine getCurrentAction.
+                            if (worldEntity.getCurrentAction().isProjectile()) { 
                                 spawnProjectileHash.put((GameCharacter) worldEntity, true);
                             }
                         } else {
@@ -381,7 +350,7 @@ public class World {
                          * character is the same as the new held key, and it is not a click action,
                          * then the character should cancel the action it's performing and do the new action.
                          * 
-                         * This is forexample used when you want to run and stop running without the action being done.
+                         * This is for example used when you want to run and stop running without the action being done.
                          */
                         if (((actionDone || actionName.equals("Idle")) || !heldKeyList.get(1).equals(NewHeldKey)) && !clickAction) {
                             heldKeyList.set(1, NewHeldKey);
@@ -389,24 +358,17 @@ public class World {
                         }
                     }
                     /*
-                     * If there is nothing special fom the key inputs and action is done
+                     * If there are no key inputs and action is done
                      * or the action name is not "Idle" and not a clickaction, the new action
                      * should be idle.
                      * 
-                     * The reasoning behind the NOT "Idle" is since if it is currently an Idle action, 
-                     * it would be immidiately canceled by a new Idle action, and therefore not do 
-                     * the animation. The way we worked out actions is that when it gets applied, it should
-                     * stay if it is the same action. The Looping of Idle therefore works by it being done.
+                     * Checks that the action is NOT "Idle" so it doesn't cancel the ongoing Idle Action.
                      */
                 } else {
                     if ((actionDone || !actionName.equals("Idle")) && !clickAction) {
                         worldEntity.setCurrentAction(idle); //Idle = 0
                     }
                 }
-                /*
-                 * From the check earlier, if the action should spawn a projectile, 
-                 * the spawn projectile hash gets this information.
-                 */
                 if (spawnProjectileHash.get((GameCharacter) worldEntity)) {
                     Projectile projectile = worldEntity.getCurrentAction().getProjectile();
                     if (projectile != null && projectileReady.get(worldEntity) != projectile) {
@@ -422,8 +384,7 @@ public class World {
             }
         }
         /*
-         * Checks for every character in the world,
-         * spawns in the projectiles that are ready.
+         * Spawns all the projectiles
          */
         for (GameCharacter character : gameCharacters) {
             if (spawnProjectileHash.get(character) && projectileReady.get(character) != null) {
@@ -463,30 +424,29 @@ public class World {
     }
     /**
      * Adds a worldEntity to the World
-     * @param worldEntity asserts the WorldEntity
+     * @param worldEntity declares the WorldEntity
      */
     private void addWorldEntity(WorldEntity worldEntity){
         worldEntities.add(worldEntity);
     }
     /**
      * Setter for GameOver state
-     * @param gameOver asserts the boolean state
+     * @param gameOver declares the boolean state
      */
     private void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
     /**
      * Setter for GameWinner
-     * @param playerNumb asserts the player number of the game winner
+     * @param playerNumb declares the player number of the game winner
      */
     private void setGameWinner(int playerNumb) {
         this.playerNumbWinner = playerNumb;
     }
     /**
-     * Setter for the hitStun to a character and calculates how much the knockback the character getting hit
-     * should have
-     * @param worldCharacter1 asserts WorldEntity that is hitting
-     * @param worldCharacter2 asserts WorldEntity that is getting hit
+     * Setter for the hitStun to an enemy and calculates the enemy's knockback
+     * @param worldCharacter1 is the WorldEntity that is hitting
+     * @param worldCharacter2 is the WorldEntity that is getting hit
      */
     private void setHitStun(WorldEntity worldCharacter1, WorldEntity worldCharacter2) {
         /*
@@ -494,7 +454,7 @@ public class World {
          * worldCharacter2 should get damaged
          * worldCharacter2 should be put into hitstun
          * worldCharacter1 knockback vector should be transferred to worldCharacter2
-         * before transferring the knockback vector it should be recalculated, based on the precentage of worldCharacter2.
+         * before transferring the knockback vector it should be recalculated, based on the percentage of worldCharacter2.
          */
         worldCharacter2.setCurrentAction(hitStun);
         int damage = worldCharacter1.getCurrentAction().getDamage();
@@ -508,44 +468,44 @@ public class World {
         /*
          * When setting the X and Y velocity we used an easy formula:
          * 
-         * For the X velocity, worldCharacter2's precentage is the main pointer to how much knockback it is getting,
-         ofcourse also based of the knockback size from the worldCharacter1 action.
-         * We also set the direction on the X axis, but not with the built in setDirection() because it would affect Y.
+         * For the X velocity, worldCharacter2's percentage is the main pointer to how much knockback it is getting,
+         of course also based of the knockback size from the worldCharacter1 action.
+         * We also set the direction on the X axis, but not with the built-in setDirection() because it would affect Y.
          * 
-         * For the Y velocity we dont care about worldCharacter1's facing direction. Therefore the equation is quite similar,
+         * For the Y velocity we don't care about worldCharacter1's facing direction. Therefore the equation is quite similar,
          but with a constant -16. This is because every action with or without Y velocity from worldCharacter1 should apply a 
          * small knockback into the air.
          */
-        vec2.setVx((((worldCharacter2.getPrecentage() / 100)) * Math.abs(vec1.getVx())) * worldCharacter1.getFacingDirection());
-        vec2.setVy((2 * (worldCharacter2.getPrecentage() / 100)*(vec1.getVy() - 16)));
+        vec2.setVx((((worldCharacter2.getPercentage() / 100)) * Math.abs(vec1.getVx())) * worldCharacter1.getFacingDirection());
+        vec2.setVy((2 * (worldCharacter2.getPercentage() / 100)*(vec1.getVy() - 16)));
         /*
          * While setting the Acceleration, we have to be careful.
-         * If the acceleration is not a factor of the velocity, its a big no no.
+         * If the acceleration is not a factor of the velocity, it's a big no no.
          * Therefore to set both the X and Y acceleration, we get the decimal and use that as the deacceleration of the knockback.
-         * This is also the main reason behind having an acceleration, to help the character recover easier at high and low precentages.
+         * This is also the main reason behind having an acceleration, to help the character recover easier at high and low percentages.
          */
         if (vec2.getVx() != 0) {
-            vec2.setAx(vec2.getVx() > 0 ? -(worldCharacter2.getPrecentage() / 100) : (worldCharacter2.getPrecentage() / 100));
+            vec2.setAx(vec2.getVx() > 0 ? -(worldCharacter2.getPercentage() / 100) : (worldCharacter2.getPercentage() / 100));
         }
         if (vec2.getVy() != 0) {
-            vec2.setAy(vec2.getVy() > 0 ? -2 * (worldCharacter2.getPrecentage() / 100) : 2 * (worldCharacter2.getPrecentage() / 100));
+            vec2.setAy(vec2.getVy() > 0 ? -2 * (worldCharacter2.getPercentage() / 100) : 2 * (worldCharacter2.getPercentage() / 100));
         }
-        worldCharacter2.addPrecentage(damage);
+        worldCharacter2.addPercentage(damage);
         clickActionHash.put((GameCharacter) worldCharacter2, true);
     }
     /**
-     * "Kills" the current gamecharacter and iterates the information and properties
+     * "Kills" the current gamecharacter and increments the deathCounter and properties
      needed to finish the game.
-     * @param worldCharacter asserts the GameCharacter this should affect
+     * @param worldCharacter declares the GameCharacter this should affect
      */
     private void characterReset(GameCharacter worldCharacter) {
         if (worldCharacter.getDeathCounter() < 2) {
             worldCharacter.resetAction();
             worldCharacter.setPosition(worldCharacter.getStartX(), worldCharacter.getStartY());
-            worldCharacter.resetPrecentage();
-            worldCharacter.iterateDeathCounter();
+            worldCharacter.resetPercentage();
+            worldCharacter.incrementDeathCounter();
         } else {
-            worldCharacter.iterateDeathCounter();
+            worldCharacter.incrementDeathCounter();
             setGameWinner(worldCharacter.getPlayerNumb() == 1 ? 2 : 1);
             setGameOver(true);
         }

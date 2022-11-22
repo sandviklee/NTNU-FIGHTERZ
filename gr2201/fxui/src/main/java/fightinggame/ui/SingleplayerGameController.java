@@ -237,7 +237,7 @@ public class SingleplayerGameController extends SceneController{
 
     /**
      * Loads the all the audios in the audio folder for the game character.
-     * @throws MediaException if the computer doesnt suppoert MediaPlayer codec.
+     * @throws MediaException if the computer doesn't suppoert MediaPlayer codec.
      */
     private void loadAudio(String character, HashMap<String, Media> audioHash) {
         try {
