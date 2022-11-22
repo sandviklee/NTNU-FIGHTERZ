@@ -58,6 +58,45 @@ public class WorldTest {
         //Now check for different position on the canvas.
         double newCharacterXPos = world.getGameCharacters().get(0).getX();
         assertNotEquals(characterStartXPos, newCharacterXPos);
-        
     }   
+    @Test
+    @DisplayName("Tests for handleCollision")
+    public void testHandleCollison() {
+        assertFalse(world.getGameCharacters().get(0).getOnGround());
+        world.updateWorld("", "");
+        assertTrue(world.getGameCharacters().get(0).getOnGround());
+        //Test if character is outside of worldHitbox
+        //Put the character outside of the worldHitbox
+        double characterXPos = 4000;
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        double newCharacterXPos = world.getGameCharacters().get(0).getX();
+        assertNotEquals(characterXPos, newCharacterXPos);
+
+    }
+    @Test
+    @DisplayName("Tests for Game Over")
+    public void testGameOver() {
+        double characterXPos = 4000;
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        assertTrue(world.getGameOver());
+    }
+
+    @Test
+    @DisplayName("Tests for Game Winner")
+    public void testGameWinner() {
+        double characterXPos = 4000;
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        world.getGameCharacters().get(0).setPosition(characterXPos, 0);
+        world.updateWorld("", "");
+        assertEquals(1, world.getGameWinner());
+    }
 }

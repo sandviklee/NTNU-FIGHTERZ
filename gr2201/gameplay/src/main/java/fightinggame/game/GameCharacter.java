@@ -446,4 +446,7 @@ public class GameCharacter extends WorldEntity{
         mainVector.setVy(0);
         mainVector.setAy(0);
     }
+    public boolean getOnGround() {
+        return onGround;
+    }
 }
