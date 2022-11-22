@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="characterSelectSingleRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MultiplayerSelectionController">
    <children>
@@ -18,16 +19,44 @@
             <Image url="@Character%20selection%20Singleplayer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="101.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="-64.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@CharSelectCover.png" />
+            <Image url="@MultiCharacterSelect.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="character1Selected" fitHeight="493.0" fitWidth="268.0" layoutX="95.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="239.0" fitWidth="422.0" layoutX="118.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@MultiCharSelectCover.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSelected" fitHeight="886.0" fitWidth="842.0" layoutX="242.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="278.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="246.0" fitWidth="1424.0" layoutX="781.0" layoutY="503.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@CharSelectCoverSmall.png" />
+            <Image url="@MultiCharacterSelectFlip.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="character2Selected" fitHeight="493.0" fitWidth="268.0" layoutX="947.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="247.0" fitWidth="426.0" layoutX="776.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@MultiCharSelectCoverFlip.png" />
+         </image>
+         <effect>
+            <DropShadow height="0.0" radius="15.739999999999998" width="64.96" />
+         </effect>
       </ImageView>
       <GridPane fx:id="characterSelectGrid" layoutX="311.0" layoutY="171.0" prefHeight="274.0" prefWidth="703.0" AnchorPane.leftAnchor="311.0">
         <columnConstraints>
@@ -46,6 +75,9 @@
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
             <ImageView fx:id="PriestOfVengeance" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
@@ -54,6 +86,9 @@
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
             <ImageView fx:id="JinjierJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
@@ -62,21 +97,51 @@
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="goBack" layoutX="100.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="lockInPlayer1" layoutX="362.0" layoutY="665.0" mnemonicParsing="false" onAction="#handleLockInPlayer1" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #94A3EA;" text="Lock in">
          <font>
-            <Font name="Arial Rounded MT Bold" size="31.0" />
+            <Font name="Arial Rounded MT Bold" size="21.0" />
          </font>
          <effect>
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="lockIn" layoutX="557.0" layoutY="637.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="36.0" prefWidth="212.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
+      <Button fx:id="lockInPlayer2" layoutX="807.0" layoutY="666.0" mnemonicParsing="false" onAction="#handleLockInPlayer2" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #94A3EA;" text="Lock in">
          <font>
-            <Font name="Arial Rounded MT Bold" size="39.0" />
+            <Font name="Arial Rounded MT Bold" size="21.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Text fill="WHITE" layoutX="362.0" layoutY="563.0" stroke="BLACK" strokeLineCap="BUTT" strokeType="OUTSIDE" strokeWidth="2.0" text="Player1" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <Text fill="WHITE" layoutX="807.0" layoutY="563.0" stroke="BLACK" strokeLineCap="BUTT" strokeType="OUTSIDE" strokeWidth="2.0" text="Player2" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="42.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Text>
+      <Button fx:id="goBack" layoutX="34.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="23.0" prefWidth="71.0" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

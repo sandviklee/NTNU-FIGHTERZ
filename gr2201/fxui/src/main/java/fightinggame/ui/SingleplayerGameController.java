@@ -22,6 +22,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.text.Text;
 
 public class SingleplayerGameController extends SceneController{
@@ -47,6 +49,7 @@ public class SingleplayerGameController extends SceneController{
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private String keyReleased = "";
+    private String path;
     private long fps = 10_000_000;
 
     /**
@@ -56,17 +59,19 @@ public class SingleplayerGameController extends SceneController{
      * @param character the name of the character loaded
      * @param gameStage of the World
      */
-    public void loadWorld(String character, String gameStage) {
+    public void loadWorld(String character, String gameStage, String path) {
         worldCanvas.setFocusTraversable(true);
+        this.path = path;	
+
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
-        GameCharacter dummy = loadPlayer("Dummy", dummyPosition);
+        GameCharacter dummy = loadPlayer("Dummy", dummyPosition, -1);
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
-        loadCharacterSprite(character, playerSprites);
-        loadCharacterSprite("Dummy", playerSprites);
-        loadCharacterSprite("Assets", assetSprites);
-        loadCharacterSprite("Background", assetSprites);
+        loadSprite(character, playerSprites);
+        loadSprite("Dummy", playerSprites);
+        loadSprite("Assets", assetSprites);
+        loadSprite("Background", assetSprites);
 
         worldEntities.add(player);
         worldEntities.add(dummy);
@@ -75,7 +80,7 @@ public class SingleplayerGameController extends SceneController{
         worldEntities.add(terrain);
 
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites, path);
         updateWorld();
     }
 
@@ -92,23 +97,21 @@ public class SingleplayerGameController extends SceneController{
         CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
         PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
+        HashMap<String, Media> audioHash = new HashMap<>();
+        loadAudio(character, audioHash);
 
-        return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); // loaded
-                                                                                                           // from
-                                                                                                           // json,should
-                                                                                                           // maybe have
-                                                                                                           // a starting
-                                                                                                           // position
+        return new GameCharacter(playerProperties, audioHash, position, availKeysArray, playerNumb, facingDirection); //loaded from json
     }
 
      /**
-     * Load the character dummy character without any special properties.
+     * Loads in a character without the need of json properties.
+     * Often used to make dummy characters.
      * @param character  name of the WorldEntity
      * @param position   of the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position){ //Dummy character
-        return new GameCharacter(character, position); 
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, int facingDirection){ 
+        return new GameCharacter(character, position, facingDirection); 
     }
 
      /**
@@ -122,7 +125,6 @@ public class SingleplayerGameController extends SceneController{
     private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
         return new Terrain(name, position, width, heigth);
     }
-
 
     private void updateWorld() {
         this.worldAnimationTimer = new AnimationTimer() {
@@ -156,16 +158,6 @@ public class SingleplayerGameController extends SceneController{
 
     }
 
-    private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
-        for (File sprite : spriteFiles) {
-            System.out.println(sprite.getName());
-            spriteHash.put((character + sprite.getName()).split("\\.")[0],
-                    new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
-
-        }
-    }
-
     private void resetKeyInputs() {
         this.keyInputs = "";
         this.keyReleased = "";
@@ -178,7 +170,6 @@ public class SingleplayerGameController extends SceneController{
         textField.setText("GameOver! \n Winner: Player" + world.getGameWinner());
         openCloseMenu();
     }
-
 
     private void resumeGame() {
         paused = false;
@@ -234,5 +225,31 @@ public class SingleplayerGameController extends SceneController{
         resumeGame();
     }
 
+    private void loadSprite(String character, HashMap<String, Image> spriteHash) {
+        File[] spriteFiles = new File(this.path + character).listFiles();
+        for (File sprite : spriteFiles) {
+            System.out.println(sprite.getName());
+            spriteHash.put((character + sprite.getName()).split("\\.")[0],
+                    new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
+
+        }
+    }
+
+    /**
+     * Loads the all the audios in the audio folder for the game character.
+     * @throws MediaException if the computer doesn't suppoert MediaPlayer codec.
+     */
+    private void loadAudio(String character, HashMap<String, Media> audioHash) {
+        try {
+            File[] audioFiles = new File(this.path + "Audio/" + character).listFiles();
+            for (File audio : audioFiles) {
+                audioHash.put((audio.getName()).split("\\.")[0], new Media(new File(this.path + "Audio/" + character + "/" + audio.getName()).toURI().toString()));
+                
+            }
     
+        } catch (MediaException e) {
+            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+        }
+
+    }
 }

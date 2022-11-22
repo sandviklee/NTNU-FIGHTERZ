@@ -40,12 +40,14 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setMaximized(false);
         stage.setScene(scene);
         stage.show();
     }
 
     /**
-     * The method {@link #changeSceneFullscreen} will make the scene take all availeble place on the screen.
+     * The method changeSceneFullscreen sets the screen to fullscreen.
      * 
      * @param title  of the page
      * @param root   of the xml
@@ -56,6 +58,7 @@ public class SceneController {
         stage.setTitle(title);
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setMaximized(true);
         stage.show();
        
@@ -72,6 +75,7 @@ public class SceneController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         Scene scene = new Scene(root);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
