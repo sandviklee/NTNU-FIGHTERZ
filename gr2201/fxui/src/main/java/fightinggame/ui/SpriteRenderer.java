@@ -46,8 +46,8 @@ public class SpriteRenderer {
      * @param playerSprites asserts the hashmap of playersprites
      * @param assetSprites  asserts the assetsprites, for example the hud of characters
      */
-    public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites) {
-        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
+    public SpriteRenderer(Canvas canvas, ArrayList<WorldEntity> entities, HashMap<String, Image> playerSprites, HashMap<String, Image> assetSprites, String path) {
+        this.path = path;		
         content = canvas.getGraphicsContext2D();
         this.entities = entities;
         this.playerSprites = playerSprites;

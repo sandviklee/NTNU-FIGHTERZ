@@ -86,7 +86,7 @@ public class MultiplayerGameController extends SceneController{
         worldEntities.add(terrain);
 
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites, path);
         updateWorld();
     }
 
