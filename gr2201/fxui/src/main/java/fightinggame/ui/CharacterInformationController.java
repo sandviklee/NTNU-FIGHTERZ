@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fightinggame.characterJSON.CharacterInformationDAO;
-import fightinggame.characterJSON.CharacterInformationObject;
+import fightinggame.utils.CharacterInformationObject;
+import fightinggame.dao.DAOFactory;
+import fightinggame.dao.RODAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,16 +26,15 @@ public class CharacterInformationController extends SceneController{
     @FXML private GridPane characterSpecials;
     @FXML private Button goBack;
 
-    private static CharacterInformationDAO dao;
+    private static RODAO<CharacterInformationObject, String> dao;
 
     public void setCharacter(String character) throws IOException {
-        String path = "../fxui/src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
-        dao = new CharacterInformationDAO(path);
+        dao = DAOFactory.getCharacterInfoDAO();
         initCharacter(character);
     }
 
     private void initCharacter(String character) {
-        CharacterInformationObject characterObject = dao.getCharacter(character);
+        CharacterInformationObject characterObject = dao.find(character);
         // Set title
         title.setText(characterObject.getName());
         // Set character image

@@ -199,6 +199,10 @@ public class Action {
     private void iterateSprite() {
         sprites.next();
     }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
     /**
      * Spawns a projectile when the conditions have been met.
      */

@@ -1,6 +1,8 @@
 package fightinggame.ui;
 
 import fightinggame.game.World;
+import fightinggame.dao.DAOFactory;
+import fightinggame.dao.RODAO;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.PlayerProperties;
 import fightinggame.game.Terrain;
@@ -40,6 +42,8 @@ public class SingleplayerGameController extends SceneController{
      
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
 
+    private ArrayList<String> DummyKeys = new ArrayList<>(Arrays.asList(".", ","));
+
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(200, 300));
     private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 300));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
@@ -64,7 +68,7 @@ public class SingleplayerGameController extends SceneController{
         this.path = path;	
 
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
-        GameCharacter dummy = loadPlayer("Dummy", dummyPosition, -1);
+        GameCharacter dummy = loadPlayer("Dummy", dummyPosition, DummyKeys, -1);
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
@@ -92,10 +96,9 @@ public class SingleplayerGameController extends SceneController{
      * @param availKeys that shall controll the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys,
-            int playerNumb, int facingDirection) {
-        CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
-        PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int playerNumb, int facingDirection) {
+        RODAO<PlayerProperties, String> characterAttributeDAO = DAOFactory.getCharacterAttributeDAO();
+        PlayerProperties playerProperties = characterAttributeDAO.find(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
         HashMap<String, Media> audioHash = new HashMap<>();
         loadAudio(character, audioHash);
@@ -110,8 +113,8 @@ public class SingleplayerGameController extends SceneController{
      * @param position   of the character
      * @return the character with given name
      */
-    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, int facingDirection){ 
-        return new GameCharacter(character, position, facingDirection); 
+    private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> dummyKeys, int facingDirection){ 
+        return new GameCharacter(character, position, dummyKeys, facingDirection); 
     }
 
      /**

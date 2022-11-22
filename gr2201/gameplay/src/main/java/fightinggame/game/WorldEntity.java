@@ -13,7 +13,7 @@ public abstract class WorldEntity {
 	 */
 	protected int id;
 	protected Effectbox hitBox;
-	protected Action currentAction = null;
+	protected Action currentAction;
 	protected String name;
 	protected Point point;
 	/**

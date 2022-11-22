@@ -105,6 +105,9 @@ public class World {
     public int getGameWinner() {
         return playerNumbWinner;
     }
+    public ArrayList<GameCharacter> getGameCharacters() {
+        return gameCharacters;
+    }
     /**
      * Handles all the collisions with the help of Effectboxes.
      */

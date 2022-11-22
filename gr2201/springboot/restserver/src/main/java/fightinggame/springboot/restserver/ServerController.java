@@ -15,9 +15,11 @@ import fightinggame.users.User;
 import fightinggame.users.UserId;
 
 /**
- * The ServerController to the server rest api.
+ * The {@code ServerController} to the server rest api. The
+ * {@code ServerController} maps all the allowed checkpoints for the server.
+ * It will handle all HTTP request made to server and delegate response to
+ * service classes.
  */
-
 @RestController
 @RequestMapping(ServerController.API_USER_SERVICE_PATH)
 public class ServerController {
@@ -27,7 +29,9 @@ public class ServerController {
     private ServerService serverService;
 
     /**
-     * The Serverservice that gets all the methods required to change db
+     * The {@code Serverservice} that provide the {@code ServerController} with
+     * logic for getting, updating, deleting and adding Users to data base.
+     * 
      * @return Serverservice
      */
     public ServerService getServerService() {
@@ -36,8 +40,9 @@ public class ServerController {
 
     /**
      * Get the user in data storage that has matching username and password
-     * @param username  to match with users in db
-     * @param password  to match with users in db
+     * 
+     * @param username to match with users in data base
+     * @param password to match with users in data base
      * @return the user with same username and password or null
      */
     @GetMapping(path = "/{username}/{password}")
@@ -46,9 +51,10 @@ public class ServerController {
     }
 
     /**
-     * Get the user in data storage that has matching username and password
-     * @param username  to match with users in db
-     * @param password  to match with users in db
+     * Add the user in data storage that has matching username and password
+     * 
+     * @param username to match with users in data base
+     * @param password to match with users in data base
      * @return the user with same username and password or null
      */
     @PostMapping(path = "/{username}")
@@ -60,9 +66,10 @@ public class ServerController {
     }
 
     /**
-     * Update user in db if corrensponding id can be found
-     * @param id    the id to check with    
-     * @param user  to change the user data with
+     * Update user in data base if corresponding id can be found
+     * 
+     * @param id   the id to check with
+     * @param user to change the user data with
      * @return whether the update was successful
      */
     @PutMapping(path = "/{id}")
