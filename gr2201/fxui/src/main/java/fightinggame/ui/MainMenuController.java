@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class MainMenuController extends SceneController {
-    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, tutorial, exit;
+    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, tutorial, exit;
 
     @FXML
     private void initialize(){

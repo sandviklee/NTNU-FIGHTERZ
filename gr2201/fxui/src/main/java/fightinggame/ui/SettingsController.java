@@ -19,7 +19,8 @@ public class SettingsController extends SceneController {
     private RemoteModelAccess remoteModelAccess = new RemoteModelAccess();
 
     public void updateView(){
-        username.setText(getUser().getUserId().getUserId());
+        //username.setText(getUser().getUserId().getUserId());
+        username.setText("Username");
     }
 
     @FXML
