@@ -99,9 +99,8 @@ public class RemoteModelAccess {
     public boolean putUser(User user) {
         try {
             HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(user.getUserId().getUserId())))
-                    .header("Accept", "application/json")
-                    .header("Content-Type", "application/x-www-form-urlencoded")
-                    .PUT(BodyPublishers.ofString("password=" + user.getPassword())).build();
+                    // .header("Content-Type", "application/x-www-form-urlencoded")
+                    .PUT(BodyPublishers.ofString(user.getPassword())).build();
             System.out.println("URI:" + uriBase.resolve("/" + user.getUserId()));
             System.out.println("The UserJSON; " + mapper.writeValueAsString(user));
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
