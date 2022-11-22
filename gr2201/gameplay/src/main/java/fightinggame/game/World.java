@@ -105,6 +105,15 @@ public class World {
     public int getGameWinner() {
         return playerNumbWinner;
     }
+    public HashMap<GameCharacter, Boolean> getClickActionHash() {
+        return clickActionHash;
+    }
+    public HashMap<GameCharacter, Boolean> getSpawnProjectileHash() {
+        return spawnProjectileHash;
+    }
+    public ArrayList<GameCharacter> getGameCharacters() {
+        return gameCharacters;
+    }
     /**
      * Handles all the collisions with the help of Effectboxes.
      */

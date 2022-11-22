@@ -28,7 +28,7 @@ public class GameCharacter extends WorldEntity{
     private HashMap<Integer, ActionProperties> actionHash = new HashMap<>();
     private HashMap<String, Media> audioHash = new HashMap<>();
     private ArrayList<String> availKeys;
-    private Predicate<String> availKey = i -> availKeys.contains(i);
+    private Predicate<String> availKey;
     private ActionProperties property;
     private Effectbox hurtBox;
     private Vector mainVector = new Vector();
@@ -51,6 +51,7 @@ public class GameCharacter extends WorldEntity{
         this.startX = getX();
         this.startY = getY();
         this.availKeys = availKeys;
+        this.availKey = i -> availKeys.contains(i);
         this.playerNumb = playerNumb;
         this.hurtBox = new Effectbox(this, this.point, false, playerProperties.getWidth(), playerProperties.getLength());
         this.weight = playerProperties.getWeight();
@@ -74,13 +75,15 @@ public class GameCharacter extends WorldEntity{
      * @param name declares name of character
      * @param pos  declares position of character
      */
-    public GameCharacter(String name, ArrayList<Integer> pos, int facingDirection) {
+    public GameCharacter(String name, ArrayList<Integer> pos, ArrayList<String> availKeys, int facingDirection) {
         super(name, pos);
         this.startX = getX();
         this.startY = getY();
         this.weight = 0;
         this.speed = 0;
         this.playerNumb = 0;
+        this.availKeys = availKeys;
+        this.availKey = i -> availKeys.contains(i);
         this.hurtBox = new Effectbox(this, point, false, 80, 172);
         int idleActionDuration = 13;
         int hitStunActionDuration = 6;
@@ -88,7 +91,9 @@ public class GameCharacter extends WorldEntity{
         int hitStunActionPriority = 4;
         this.actionHash.put(idle, new ActionProperties("Idle", idleActionPriority, idleActionDuration, false, true, idleActionDuration, false, 0, false));
         this.actionHash.put(hitStun, new ActionProperties("HitStun", hitStunActionPriority, hitStunActionDuration, false, true, hitStunActionDuration, false, 0, true));
-        this.availKeys = new ArrayList<>();
+        this.actionHash.put(3, new ActionProperties("Run", 1, 1, true, true, 
+        1, false, 0, true, new Vector(8, 0, 0, 0, 1)));
+
         this.facingDirection = facingDirection;
         setCurrentAction(idle); //Idle = 0
     }
@@ -340,7 +345,7 @@ public class GameCharacter extends WorldEntity{
      * @return availKeys ArrayList<String>
      */
     public ArrayList<String> getAvailKeys() {
-        return availKeys;
+        return this.availKeys;
     }
     /**
      * Getter for availKeys predicate
