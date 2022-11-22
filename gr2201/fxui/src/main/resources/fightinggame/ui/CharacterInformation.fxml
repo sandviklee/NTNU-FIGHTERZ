@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:id="characterInformationRoot" fx:controller="fightinggame.ui.CharacterInformationController">
+<AnchorPane fx:id="characterInformationRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.CharacterInformationController">
    <children>
       <ImageView fitHeight="740.0" fitWidth="1310.0" layoutX="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ACharBackground.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="characterSplashArt" fitHeight="627.0" fitWidth="819.0" layoutX="-7.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="characterSplashArt" fitHeight="1326.0" fitWidth="812.0" layoutX="-254.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="741.0" fitWidth="1306.0" layoutX="-13.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharacterInfoShape.png" />
@@ -53,18 +53,21 @@
             <DropShadow />
          </effect>
       </Button>
-      <Label fx:id="description" layoutX="730.0" layoutY="60.0" prefHeight="226.0" prefWidth="539.0" textFill="WHITE">
+      <Label fx:id="description" layoutX="534.0" layoutY="96.0" prefHeight="190.0" prefWidth="735.0" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Arial Rounded MT Bold" size="29.0" />
-         </font></Label>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
       <Text fill="WHITE" layoutX="838.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specials:" textAlignment="CENTER">
          <font>
             <Font name="Arial Rounded MT Bold" size="32.0" />
          </font>
       </Text>
-      <Label fx:id="title" layoutX="732.0" layoutY="12.0" prefHeight="93.0" prefWidth="511.0" textFill="WHITE">
+      <Label fx:id="title" layoutX="729.0" layoutY="6.0" prefHeight="89.0" prefWidth="473.0" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="72.0" />
+            <Font name="Arial Rounded MT Bold" size="54.0" />
          </font></Label>
    </children>
 </AnchorPane>

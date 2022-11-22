@@ -28,7 +28,7 @@ public class CharacterInformationController extends SceneController{
     private static CharacterInformationDAO dao;
 
     public void setCharacter(String character) throws IOException {
-        String path = "./src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
+        String path = "../fxui/src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
         dao = new CharacterInformationDAO(path);
         initCharacter(character);
     }
@@ -52,7 +52,9 @@ public class CharacterInformationController extends SceneController{
         for (Node Imageview : characterSpecials.getChildren()) {
             if (Imageview instanceof ImageView) {
                 String actionName = specialActionNames.get(i);
-                ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + (i+1) + ".jpeg")).toString()));
+
+                ((ImageView) Imageview).setImage(
+                        new Image((getClass().getResource(character + "Move" + (i + 1) + ".gif")).toString()));
                 Tooltip.install(Imageview, new Tooltip(actionName + "\n" + specialActions.get(actionName)));
             }
             i += 1;
@@ -60,11 +62,18 @@ public class CharacterInformationController extends SceneController{
     }
 
     @FXML
-    private void handleGoBack(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
-        Parent root = loader.load();
-        CharacterInformationMenuController controller = loader.getController();
-        controller.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event);
+    private void handleGoBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
+            Parent root = loader.load();
+            CharacterInformationMenuController controller = loader.getController();
+            controller.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid go back path", "Something went wrong and main menu files could not be found.");
+            e.printStackTrace();
+        }
+
+
     }
 }
