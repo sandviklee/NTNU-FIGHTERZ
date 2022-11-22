@@ -70,7 +70,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
-            <ImageView fx:id="JinjierJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="JinjerJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>

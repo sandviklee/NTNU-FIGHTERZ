@@ -52,7 +52,7 @@
                   <Rectangle2D minX="307.49" />
                </viewport>
             </ImageView>
-            <ImageView fx:id="JinjierJink" fitHeight="760.0" fitWidth="230.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="JinjerJink" fitHeight="760.0" fitWidth="230.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3SelectInfo.png" />
                </image>

@@ -8,14 +8,14 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainMenuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
+<AnchorPane fx:id="mainMenuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
    <children>
-      <ImageView fitHeight="729.0" fitWidth="1300.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="760.0" fitWidth="1300.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Background.png" />
          </image>
       </ImageView>
-      <Button fx:id="playSingleplayer" layoutX="52.0" layoutY="271.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="50.0" layoutY="340.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY MULTIPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
@@ -23,7 +23,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="52.0" layoutY="342.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY MULTIPLAYER" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="50.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="CHARACTER INFO" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
@@ -31,15 +31,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: topcenter-left-left;" text="CHARACTER INFO" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="28.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="exit" layoutX="52.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="EXIT" textFill="WHITE">
+      <Button fx:id="exit" layoutX="50.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="EXIT" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
@@ -59,7 +51,7 @@
             </DropShadow>
          </effect>
       </ImageView>
-      <Button fx:id="tutorial" layoutX="52.0" layoutY="568.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="TUTORIAL" textFill="WHITE">
+      <Button fx:id="tutorial" layoutX="50.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="TUTORIAL" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
@@ -85,13 +77,21 @@
       </ImageView>
       <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="673.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@JinjierJinkSplashArt.png" />
+            <Image url="@JinjerJinkSplashArt.png" />
          </image>
          <effect>
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="settings" layoutX="52.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: topcenter-left-left;" text="SETTINGS" textFill="WHITE">
+      <Button fx:id="settings" layoutX="50.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleSettings" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="SETTINGS" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="28.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button fx:id="playSingleplayer" layoutX="50.0" layoutY="280.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY SINGLEPLAYER" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>

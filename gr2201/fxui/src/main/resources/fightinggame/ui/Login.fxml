@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="loginRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.LoginController">
    <children>
-      <ImageView fitHeight="726.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="760.0" fitWidth="1309.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Background.png" />
          </image>
@@ -29,7 +29,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font></PasswordField>
-      <Button fx:id="login" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
+      <Button fx:id="login" defaultButton="true" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
@@ -93,7 +93,7 @@
       </ImageView>
       <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="683.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@JinjierJinkSplashArt.png" />
+            <Image url="@JinjerJinkSplashArt.png" />
          </image>
          <effect>
             <DropShadow />
