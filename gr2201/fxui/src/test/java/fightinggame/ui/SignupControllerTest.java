@@ -42,8 +42,8 @@ public class SignupControllerTest extends ApplicationTest {
 
     @Test
     public void testInvalidPassword(){
-        clickOn("#passwordField").write("...");
-        clickOn("#confirmPasswordField").write("...");
+        clickOn("#passwordField").write("!!!");
+        clickOn("#confirmPasswordField").write("!!!");
         clickOn("#usernameField").write("George");;
         click("Sign up And Log In");
         Assertions.assertEquals("Username already exists or password/username do not fit criteria.", getLabelText("#nonValidCredentials"));
@@ -54,7 +54,7 @@ public class SignupControllerTest extends ApplicationTest {
     public void testInvalidUsername(){
         clickOn("#passwordField").write("Hans");
         clickOn("#confirmPasswordField").write("Hans");
-        clickOn("#usernameField").write("...");
+        clickOn("#usernameField").write("!!!");
         click("Sign up And Log In");
         Assertions.assertEquals("Username already exists or password/username do not fit criteria.", getLabelText("#nonValidCredentials"));
     }

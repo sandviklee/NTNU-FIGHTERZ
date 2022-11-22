@@ -36,10 +36,16 @@ public class SettingsControllerTest extends ApplicationTest{
         this.root = root;
     }
 
+    /*
+     * Clicks a labled node that matches the given string
+     */
     private void click(String label){
         clickOn(LabeledMatchers.hasText(label));
     }
 
+    /*
+     * Returns the text on a labled node with the given lable
+     */
     private String getLabelText(String label){
         return ((Label) getRoot().lookup(label)).getText();
     }
@@ -55,6 +61,9 @@ public class SettingsControllerTest extends ApplicationTest{
         return null;
     }
 
+    /*
+     * Logs in with a specific user and tries to change its password
+     */
     @Test
     private void testChangePassword(){
         clickOn("#usernameField").write("s");
