@@ -36,7 +36,7 @@ public class User {
 	 * @return if they are equal
 	 */
 	public boolean equals(User u) {
-		return this.getUserId().equals(u.getUserId()) && this.getPassword().equals(u.getPassword());
+		return this.getUserId().equals(u.getUserId());
 	}
 
 	@JsonGetter
