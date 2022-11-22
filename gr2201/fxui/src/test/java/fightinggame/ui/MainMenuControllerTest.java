@@ -45,11 +45,11 @@ public class MainMenuControllerTest extends ApplicationTest{
         Assertions.assertNotNull(getCurrentRootById("characterSelectSingleRoot"));
     }
 
-    @Test
-    public void testSwichToCharacterInformationMenu(){
-        click("CHARACTER INFO");
-        Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"));
-    }
+    // @Test
+    // public void testSwichToCharacterInformationMenu(){
+    //     click("CHARACTER INFO");
+    //     Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"));
+    // }
 
     private Parent getCurrentRootById(String id){
         for (Window window: Window.getWindows()){

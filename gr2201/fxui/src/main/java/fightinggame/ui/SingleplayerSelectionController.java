@@ -19,25 +19,24 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 
 public class SingleplayerSelectionController extends SceneController {
-    @FXML
-    private Button lockIn, goBack;
-    @FXML
-    private GridPane characterSelectGrid;
-    @FXML
-    private ImageView characterSelected;
+    @FXML private Button lockIn, goBack;
+    @FXML private GridPane characterSelectGrid;
+    @FXML private ImageView characterSelected;
+    private ImageView characterSelectedImage;
     private Media audioSelect;
     private Media audioGame;
-    private ImageView currentImage;
+    private String path;
     
-
     @FXML
     private void initialize() {
+        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
+        
         lockIn.setDisable(true);
         try {
-            audioSelect = new Media(new File("../fxui/src/main/resources/fightinggame/ui/Audio/CharacterSelect.wav")
+            audioSelect = new Media(new File(path + "Audio/CharacterSelect.wav")
                     .toURI().toString());
             audioGame = new Media(
-                    new File("../fxui/src/main/resources/fightinggame/ui/Audio/Game.wav").toURI().toString());
+                    new File(path + "Audio/Game.wav").toURI().toString());
             mainAudioPlayer = new MediaPlayer(audioSelect);
             mainAudioPlayer.setOnEndOfMedia(new Runnable() {
                 public void run() {
@@ -50,7 +49,10 @@ public class SingleplayerSelectionController extends SceneController {
         } catch (MediaException e) {
             System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
         }
+    }
 
+    public String getCharacterSelectedId() {
+        return this.characterSelectedImage.getId();
     }
 
     public ImageView getCharacterSelected() {
@@ -67,7 +69,7 @@ public class SingleplayerSelectionController extends SceneController {
     private void handleSelectCharacter(MouseEvent event) {
         resetCharacterImageOpacity();
         ImageView image = (ImageView) event.getSource();
-        currentImage = image;
+        this.characterSelectedImage = image;
         characterSelected.setImage(new Image(getClass().getResource(image.getId() + "SplashArt.png").toString()));
         image.setOpacity(0.7);
         lockIn.setDisable(false);
@@ -75,35 +77,39 @@ public class SingleplayerSelectionController extends SceneController {
 
     @FXML
     private void handleLockIn(ActionEvent event) {
-        if (mainAudioPlayer != null) {
-            mainAudioPlayer.stop();
-        }
-
-        try {
-            mainAudioPlayer = new MediaPlayer(audioGame);
-            mainAudioPlayer.setOnEndOfMedia(new Runnable() {
-                public void run() {
-                    mainAudioPlayer.seek(Duration.ZERO);
-                }
-            });
-            mainAudioPlayer.setVolume(0.1);
-            mainAudioPlayer.play();
-
-        } catch (MediaException e) {
-            System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
-        }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("WorldCanvas.fxml"));
             Parent root = loader.load();
             SingleplayerGameController singleplayerGameController = loader.getController();
             singleplayerGameController.setUser(super.getUser());
-            singleplayerGameController.loadWorld("AngryCyclist", null);
+            singleplayerGameController.loadWorld(getCharacterSelectedId(), null);
             super.changeSceneFullscreen("NTNU Fighterz", root, event);
+
+            if (mainAudioPlayer != null) {
+                mainAudioPlayer.stop();
+            }
+
+            try {
+                mainAudioPlayer = new MediaPlayer(audioGame);
+                mainAudioPlayer.setOnEndOfMedia(new Runnable() {
+                    public void run() {
+                        mainAudioPlayer.seek(Duration.ZERO);
+                    }
+                });
+                mainAudioPlayer.setVolume(0.1);
+                mainAudioPlayer.play();
+    
+            } catch (MediaException e) {
+                System.out.println("Since you dont have the correct Media codec. You cant play audio. Error: " + e);
+            }
+
         } catch (IOException e) {
             showError("Error: Invalid go back path",
                     "Something went wrong and Main menu page could not be found.");
             e.printStackTrace();
+
+        } catch (NullPointerException e) {
+            showError("Error: Not a playable character", "This character is not unlocked or playable yet.");
         }
     
     }

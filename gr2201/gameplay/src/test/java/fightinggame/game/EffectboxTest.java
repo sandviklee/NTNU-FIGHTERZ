@@ -73,14 +73,6 @@ public class EffectboxTest {
             new Effectbox(validWorldEntity, validPoint, false, negNum, validHeight);
 		}, "This Effectbox is not possible, should not allow negativ values as height or length");
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Effectbox(validWorldEntity, validPoint, true, validLength, zero);
-            new Effectbox(validWorldEntity, validPoint, false, validLength, zero);
-
-            new Effectbox(validWorldEntity, validPoint, true, zero, validHeight);
-            new Effectbox(validWorldEntity, validPoint, false, zero, validHeight);
-		}, "This Effectbox is not possible, should not allow zero values as height or length");
-
         // bad point
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Effectbox(validWorldEntity, nonValidPoint, true, validLength, validHeight);

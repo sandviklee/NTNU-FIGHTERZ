@@ -1,61 +1,62 @@
 package fightinggame.game;
 /**
- * The {@code AnimationSprite} class represents an AnimationPlayer 
+ * The {@code AnimationSpritePlayer} class represents an AnimationPlayer for sprites. 
  */
 public class AnimationSpritePlayer {
+    private int frameCounter = 0;
     private int currentFrame = 0;
     private int totalFrames;
     private int animationLoopStartFrame;
     private int holdFrame;
-    private int frameCounter = 0;
     private boolean animationLoop;
-
     /**
-     * Make AnimationSpritePlayer with given attributes
-     * @param totalFrames
-     * @param animationLoop
-     * @param animationLoopStartFrame
-     * @param holdFrame
+     * Creates AnimationSpritePlayer with the given variables.
+     * @param totalFrames             declares how many frames the sprite has to iterate through
+     * @param animationLoop           declares if the animation should be looped
+     * @param animationLoopStartFrame declares where the animation should start to loop from
+     * @param holdFrame               declares how many ticks the animationspriteplayer should hold a frame
+     * @throws IllegalArgumentException if the total frames or animationLoopStartFrame is negative
      */
     public AnimationSpritePlayer(int totalFrames, boolean animationLoop, int animationLoopStartFrame, int holdFrame){
-        if (validUserInput(totalFrames)) {
+        if (validInput(totalFrames)) {
             this.totalFrames = totalFrames;
         }
         else {
-            throw new IllegalArgumentException("Can not have negativ total frames");
+            throw new IllegalArgumentException("Total frames can't be negative!");
         }
-        if (validUserInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
+        if (validInput(animationLoopStartFrame) && (animationLoopStartFrame < totalFrames)) {
             this.animationLoopStartFrame = animationLoopStartFrame;
         }
         else {
-            throw new IllegalArgumentException("Can not have negativ total frames");
+            throw new IllegalArgumentException("The animation loop can't start on a negative index!");
         }
         this.animationLoop = animationLoop;
         this.holdFrame = holdFrame;
-        
     }
     /**
-     * getCurrentFrame sends out currentFrame.
-     * Makes the current frame available for other classes. 
+     * Getter for current Frame in animation.
+     * @return currentFrame integer
      */
     public int getCurrentFrame() {
         return currentFrame;
     }
     /**
-     * Jump to frame if it exists.
-     * @param userInput integer
+     * Checks if the userinput is valid.
+     * @param input is an integer
+     * @throws IllegalArgumentException if the input is invalid
+     * @return true if the input is positive, and false otherwise
      */
-    private boolean validUserInput(int userInput) {
-        if (userInput < 0) {
-            throw new IllegalArgumentException("UserInput: "+ userInput + " er mindre enn null.");
+    private boolean validInput(int input) {
+        if (input < 0) {
+            throw new IllegalArgumentException("UserInput: "+ input + " is less than zero");
         } else {
             return true;
         }
     }
-
     /**
-     * Next increments currentFrame.
-     * When currentFrame exceeds totalFrames either jump to animationLoopStartTime if animationLoop is true else stop
+     * Increments the current frame.
+     * When currentFrame exceeds totalFrames and animationLoop is true, jump to animationLoopStartFrame.
+     * If animationLoop is false, the Action is done.
      */
     public void next(){
         if (currentFrame < totalFrames) {
@@ -69,27 +70,23 @@ public class AnimationSpritePlayer {
             } else {
                 this.currentFrame++;
             }
-
-            
         }
-
         if (animationLoop && !hasNext()) {
             jump(animationLoopStartFrame);
         }
     }
     /**
      * Jump to frame if it exists.
-     * @param frame index
+     * @param frame index integer
      */
     private void jump(int frame){
         if (frame >= 0 && frame <= totalFrames) {
             this.currentFrame = frame;
         }
     }
-
     /**
      * Check if AnimationSprites has a next frame.
-     * @return true if it has a next frame else false.
+     * @return true if it has a next frame, otherwise false
      */
     private boolean hasNext(){
         if (currentFrame >= totalFrames) {

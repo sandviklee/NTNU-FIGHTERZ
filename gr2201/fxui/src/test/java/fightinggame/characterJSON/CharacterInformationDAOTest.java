@@ -23,7 +23,7 @@ public class CharacterInformationDAOTest {
         
         // Test if object can be instantied from test file and contains correct amount of characters
         CharacterInformationDAO dao = new CharacterInformationDAO(path);
-        assertEquals(3,dao.getAllCharacters().size());
+        assertEquals(4, dao.getAllCharacters().size());
     }
 
     @Test

@@ -45,7 +45,6 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 		return null;
 	}
 
-
 	/**
 	 * Convert Json to playerProperties
 	 * @param rawJson  to convert
@@ -90,5 +89,4 @@ public class CharacterAttributeDAOImpl implements CharacterAttributeDAO{
 	private String getPath() {
 		return this.path;
 	}
-
 }

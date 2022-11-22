@@ -75,20 +75,29 @@
             <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="442.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="747.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@AngryCyclistSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="647.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="942.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@PriestOfVengeanceSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="469.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="683.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@JinjierJinkSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>

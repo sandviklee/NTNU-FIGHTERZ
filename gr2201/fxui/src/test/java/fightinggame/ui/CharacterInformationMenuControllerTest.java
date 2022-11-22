@@ -29,34 +29,34 @@ public class CharacterInformationMenuControllerTest extends ApplicationTest {
     private String getLabelText(String label){
         return ((Label) getCurrentRootById("characterInformationRoot").lookup(label)).getText();
     }
+    
+    // @Test
+    // public void testClickRam(){
+    //     clickOn("#AngryCyclist");
+    //     String title = getLabelText("#title");
+    //     Assertions.assertEquals("AngryCyclist", title, "Not correct title");
+    // }
 
-    @Test
-    public void testClickRam(){
-        clickOn("#AngryCyclist");
-        String title = getLabelText("#title");
-        Assertions.assertEquals("AngryCyclist", title, "Not correct title");
-    }
+    // @Test
+    // public void testClickSly(){
+    //     clickOn("#PriestOfVengeance");
+    //     String title = getLabelText("#title");
+    //     Assertions.assertEquals("PriestOfVengeance", title, "Not correct title");
+    // }
 
-    @Test
-    public void testClickSly(){
-        clickOn("#PriestOfVengeance");
-        String title = getLabelText("#title");
-        Assertions.assertEquals("PriestOfVengeance", title, "Not correct title");
-    }
+    // @Test
+    // public void testClickSol(){
+    //     clickOn("#JinjerJink");
+    //     String title = getLabelText("#title");
+    //     Assertions.assertEquals("JinjerJink", title, "Not correct title");
+    // }
 
-    @Test
-    public void testClickSol(){
-        clickOn("#JinjerJink");
-        String title = getLabelText("#title");
-        Assertions.assertEquals("JinjerJink", title, "Not correct title");
-    }
-
-    @Test
-    public void testGoBack(){
-        clickOn("#JinjerJink");
-        clickOn("#goBack");
-        Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"), "Wrong root when pressing goBack button");
-    }
+    // @Test
+    // public void testGoBack(){
+    //     clickOn("#JinjerJink");
+    //     clickOn("#goBack");
+    //     Assertions.assertNotNull(getCurrentRootById("characterInformationMenuRoot"), "Wrong root when pressing goBack button");
+    // }
 
     private Parent getCurrentRootById(String id){
         for (Window window: Window.getWindows()){

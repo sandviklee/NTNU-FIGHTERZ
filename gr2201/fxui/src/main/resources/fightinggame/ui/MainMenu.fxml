@@ -8,64 +8,88 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainMenuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
+<AnchorPane fx:id="mainMenuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fightinggame.ui.MainMenuController">
    <children>
-      <ImageView fitHeight="729.0" fitWidth="1309.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="729.0" fitWidth="1300.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Background.png" />
          </image>
       </ImageView>
-      <Button fx:id="playSingleplayer" layoutX="52.0" layoutY="262.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="PLAY SINGLEPLAYER" textFill="WHITE">
+      <Button fx:id="playSingleplayer" layoutX="52.0" layoutY="271.0" mnemonicParsing="false" onAction="#handlePlaySingleplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY SINGLEPLAYER" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
-      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="52.0" layoutY="342.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE;" text="PLAY MULTIPLAYER" textFill="WHITE">
+      <Button fx:id="playMultiplayer" defaultButton="true" layoutX="52.0" layoutY="342.0" mnemonicParsing="false" onAction="#handlePlayMultiplayer" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="PLAY MULTIPLAYER" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
-      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="CHARACTER INFO" textFill="WHITE">
+      <Button fx:id="characterInfo" layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCharacterInfo" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: topcenter-left-left;" text="CHARACTER INFO" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
-      <Button fx:id="exit" layoutX="52.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="EXIT" textFill="WHITE">
+      <Button fx:id="exit" layoutX="52.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="EXIT" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
       <ImageView fitHeight="126.0" fitWidth="666.0" layoutX="78.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Logo.png" />
          </image>
          <effect>
-            <DropShadow>
+            <DropShadow height="170.49" radius="105.8725" spread="0.64" width="255.0">
                <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
+                  <Color red="1.0" />
                </color>
             </DropShadow>
          </effect>
       </ImageView>
-      <Button fx:id="tutorial" layoutX="52.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: #597BCE; round: ;" text="TUTORIAL" textFill="WHITE">
+      <Button fx:id="tutorial" layoutX="52.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleTutorial" prefHeight="65.0" prefWidth="495.0" style="-fx-background-color: transparent; -fx-alignment: center-left;" text="TUTORIAL" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
-      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="432.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="656.0" fitWidth="1070.0" layoutX="737.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@AngryCyclistSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="637.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="507.0" fitWidth="890.0" layoutX="932.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@PriestOfVengeanceSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="459.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="673.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@JinjierJinkSplashArt.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>
