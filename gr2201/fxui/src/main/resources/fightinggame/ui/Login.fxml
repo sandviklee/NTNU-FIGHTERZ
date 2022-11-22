@@ -29,7 +29,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font></PasswordField>
-      <Button fx:id="login" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
+      <Button fx:id="login" defaultButton="true" layoutX="86.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="54.0" prefWidth="409.0" style="-fx-background-color: #597BCE;" text="Login" textFill="#233e82">
          <font>
             <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
