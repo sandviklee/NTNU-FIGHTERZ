@@ -122,7 +122,7 @@
       </ImageView>
       <ImageView fitHeight="425.0" fitWidth="753.0" layoutX="683.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@JinjierJinkSplashArt.png" />
+            <Image url="@JinjerJinkSplashArt.png" />
          </image>
          <effect>
             <DropShadow />
