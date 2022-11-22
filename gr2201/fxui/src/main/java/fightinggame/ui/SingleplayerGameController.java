@@ -59,9 +59,9 @@ public class SingleplayerGameController extends SceneController{
      * @param character the name of the character loaded
      * @param gameStage of the World
      */
-    public void loadWorld(String character, String gameStage) {
+    public void loadWorld(String character, String gameStage, String path) {
         worldCanvas.setFocusTraversable(true);
-        this.path = "../fxui/src/main/resources/fightinggame/ui/";		
+        this.path = path;	
 
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
         GameCharacter dummy = loadPlayer("Dummy", dummyPosition, -1);
