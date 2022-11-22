@@ -144,6 +144,14 @@ public class MultiplayerGameController extends SceneController{
 
     }
 
+    public World getWorld() {
+        return world;
+    }
+
+    public SpriteRenderer getRenderer() {
+        return renderer;
+    }
+
     private void gameOver() {
         paused = true;
         worldAnimationTimer.stop();
