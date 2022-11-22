@@ -49,6 +49,7 @@ public class SettingsController extends SceneController {
     private void handleDeleteUser(ActionEvent event){
         if (!confirmDelete.getText().equals("DELETE")){
             feedback.setText("To delete your user, type 'DELETE' in the field bellow");
+            return;
         }
 
         if (remoteModelAccess.deleteUser(getUser())){
