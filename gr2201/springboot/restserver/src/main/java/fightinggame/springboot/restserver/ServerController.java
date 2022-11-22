@@ -66,8 +66,8 @@ public class ServerController {
      * @return whether the update was successful
      */
     @PutMapping(path = "/{id}")
-    public boolean putUser(@PathVariable("id") UserId id, @RequestBody User user) {
-        return getServerService().updateUser(id, user);
+    public boolean putUser(@PathVariable("id") String id, @RequestBody String password) {
+        return getServerService().updateUser(id, password);
     }
 
     /**
@@ -76,8 +76,8 @@ public class ServerController {
      * @return whether the deletion was successful
      */
     @DeleteMapping(path = "/{id}")
-    public boolean deleteUser(@PathVariable("id") UserId id) {
-        return getServerService().deleteUser(id);
+    public boolean deleteUser(@PathVariable("id") String id) {
+        return getServerService().deleteUser(new UserId(id));
     }
 
 }

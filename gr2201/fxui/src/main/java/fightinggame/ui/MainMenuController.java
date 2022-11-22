@@ -51,6 +51,16 @@ public class MainMenuController extends SceneController {
     }
 
     @FXML
+    private void handleSettings(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+        Parent root = loader.load();
+        SettingsController settingsController = loader.getController();
+        settingsController.setUser(super.getUser());
+        settingsController.updateView();
+        super.changeScene("NTNU Fighterz", root, event);
+    }
+
+    @FXML
     private void handleCharacterInfo(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
         Parent root = loader.load();
