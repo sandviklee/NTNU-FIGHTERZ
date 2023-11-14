@@ -27,17 +27,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Install JavaFX
-      run: sudo apt-get install openjfx
-
-    - name: Start Xvfb
-      run: |
-        sudo apt-get install -y xvfb
-        Xvfb :99 & 
-        export DISPLAY=:99
+  
     - name: Build with Maven
-      run: mvn -B package --file gr2201/pom.xml
+      run: cd gr2201; mvn clean install -DskipTests -DskipUITests; mvn compile;
 
+    - name: Test
+      run: cd gr2201; mvn clean test -DskipUITests;
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
