@@ -9,10 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class MainMenuController extends SceneController {
-    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, tutorial, exit;
+    @FXML private Button playSingleplayer, playMultiplayer, characterInfo, settings, tutorial, exit;
 
     @FXML
     private void initialize(){
+        if (mainAudioPlayer != null) {
+            mainAudioPlayer.stop();
+        }
     }
 
     @FXML
@@ -33,20 +36,37 @@ public class MainMenuController extends SceneController {
 
     @FXML
     private void handlePlayMultiplayer(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectMulti.fxml"));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterSelectMulti.fxml"));
+            Parent root = loader.load();
+            MultiplayerSelectionController multiplayerSelectionController = loader.getController();
+            multiplayerSelectionController.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid Multiplayer path",
+                    "Something went wrong and Multiplayer page could not be found.");
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void handleSettings(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
         Parent root = loader.load();
-        MultiplayerSelectionController multiplayerSelectionController = loader.getController();
-        multiplayerSelectionController.setUser(super.getUser());
+        SettingsController settingsController = loader.getController();
+        settingsController.setUser(super.getUser());
+        settingsController.updateView();
         super.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML
     private void handleCharacterInfo(ActionEvent event) throws IOException{
-        /* FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
         Parent root = loader.load();
         CharacterInformationMenuController characterInformationMenuController = loader.getController();
         characterInformationMenuController.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event); */
+        super.changeScene("NTNU Fighterz", root, event);
     }
 
     @FXML

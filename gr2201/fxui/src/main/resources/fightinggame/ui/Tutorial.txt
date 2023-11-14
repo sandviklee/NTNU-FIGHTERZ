@@ -12,10 +12,8 @@ After choosing your preferred fighter, you can hone your skills in the singlepla
     * Down special if S is pressed.
 You can at any moment pause the game using the "Esc" key. To unpause, just press the "Esc" key again or the "Resume" button, or leave the game by pressing the "Exit to main menu" button.
 
-After some practice you can try to play against your friends in our local multiplayer mode! For player 1 use WASD, C and V, and for player 2 use IJKL, N and M. You can also change these controls in the settings menu.
+After some practice you can try to play against your friends in our local multiplayer mode! For player 1 use WASD, C and V, and for player 2 use IJKL, N and M.
 
-When playing against your friends, you can unlock achievements. The achievements you have unlocked and the unlock conditions for other achievements can be found under the achievements tab.
-
-Lastly, you can change audio, controls and account details in the settings menu.
+Lastly, you can change your account details, such as password, in the settings menu.
 
 Good luck!

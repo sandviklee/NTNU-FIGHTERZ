@@ -13,8 +13,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.nio.charset.StandardCharsets;
 
-import fightinggame.json.UserModule;
 import fightinggame.users.User;
+import fightinggame.utils.json.users.UserModule;
 
 public class RemoteModelAccess {
 
@@ -53,6 +53,7 @@ public class RemoteModelAccess {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String userString = response.body();
+            System.out.println("The JSON TO CONSTRUCTS: " + userString);
             return mapper.readValue(userString, User.class);
         } catch (IOException | InterruptedException | IllegalArgumentException e) {
             System.err.println(e);
@@ -98,12 +99,12 @@ public class RemoteModelAccess {
      */
     public boolean putUser(User user) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/" + user.getUserId()))
-                    .PUT(BodyPublishers.ofString(mapper.writeValueAsString(user))).build();
-
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(uriParam(user.getUserId().getUserId())))
+                    .PUT(BodyPublishers.ofString(user.getPassword())).build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
+            System.out.println(responseString);
             Boolean updated = mapper.readValue(responseString, Boolean.class);
             return updated;
         } catch (IOException | InterruptedException e) {
@@ -121,8 +122,7 @@ public class RemoteModelAccess {
      */
     public boolean deleteUser(User user) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve("/" + user.getUserId())).DELETE().build();
-
+            HttpRequest request = HttpRequest.newBuilder(uriBase.resolve(user.getUserId().getUserId())).DELETE().build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();

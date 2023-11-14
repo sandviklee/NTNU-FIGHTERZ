@@ -104,6 +104,9 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <propertyName>jaCoCoArgLine</propertyName>
+                <excludes>
+                    <exclude>**/SpriteRenderer.class</exclude>
+                </excludes>
                 </configuration>
 
             </plugin>

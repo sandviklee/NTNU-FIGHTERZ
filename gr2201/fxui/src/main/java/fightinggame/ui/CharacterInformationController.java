@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import fightinggame.characterJSON.CharacterInformationDAO;
-import fightinggame.characterJSON.CharacterInformationObject;
+import fightinggame.utils.CharacterInformationObject;
+import fightinggame.dao.DAOFactory;
+import fightinggame.dao.RODAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,16 +26,15 @@ public class CharacterInformationController extends SceneController{
     @FXML private GridPane characterSpecials;
     @FXML private Button goBack;
 
-    private static CharacterInformationDAO dao;
+    private static RODAO<CharacterInformationObject, String> dao;
 
     public void setCharacter(String character) throws IOException {
-        String path = "./src/main/resources/fightinggame/characterJSON/CharacterInformation.json";
-        dao = new CharacterInformationDAO(path);
+        dao = DAOFactory.getCharacterInfoDAO();
         initCharacter(character);
     }
 
     private void initCharacter(String character) {
-        CharacterInformationObject characterObject = dao.getCharacter(character);
+        CharacterInformationObject characterObject = dao.find(character);
         // Set title
         title.setText(characterObject.getName());
         // Set character image
@@ -52,7 +52,9 @@ public class CharacterInformationController extends SceneController{
         for (Node Imageview : characterSpecials.getChildren()) {
             if (Imageview instanceof ImageView) {
                 String actionName = specialActionNames.get(i);
-                ((ImageView) Imageview).setImage(new Image((getClass().getResource(character + "Move" + (i+1) + ".jpeg")).toString()));
+
+                ((ImageView) Imageview).setImage(
+                        new Image((getClass().getResource(character + "Move" + (i + 1) + ".gif")).toString()));
                 Tooltip.install(Imageview, new Tooltip(actionName + "\n" + specialActions.get(actionName)));
             }
             i += 1;
@@ -60,11 +62,18 @@ public class CharacterInformationController extends SceneController{
     }
 
     @FXML
-    private void handleGoBack(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
-        Parent root = loader.load();
-        CharacterInformationMenuController controller = loader.getController();
-        controller.setUser(super.getUser());
-        super.changeScene("NTNU Fighterz", root, event);
+    private void handleGoBack(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CharacterInformationMenu.fxml"));
+            Parent root = loader.load();
+            CharacterInformationMenuController controller = loader.getController();
+            controller.setUser(super.getUser());
+            super.changeScene("NTNU Fighterz", root, event);
+        } catch (IOException e) {
+            showError("Error: Invalid go back path", "Something went wrong and main menu files could not be found.");
+            e.printStackTrace();
+        }
+
+
     }
 }

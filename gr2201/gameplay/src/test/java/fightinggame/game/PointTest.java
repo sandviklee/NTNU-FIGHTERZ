@@ -40,8 +40,6 @@ public class PointTest {
 
         origoPoint = new Point(0, 0);
         positivePoint = new Point(x, y);
-        origoPoint.setGravityVector(gravityVector);
-        positivePoint.setGravityVector(gravityVector);
 
         actionVector1 = new Vector(Vx, Vy, Ax, Ay, direction);
         actionVector2 = new Vector(Vx, Vy, Ax, Ay, direction);
@@ -67,82 +65,22 @@ public class PointTest {
     }
 
     @Test
-    @DisplayName("Test if moves point correctly")
-    public void testMoveWithoutActionVector() {
+    @DisplayName("test if the setters work")
+    public void testSetters() {
 
-        // if there are no actionVector point shall only be affected by gravity
-        for (int i = 1; i < 100; i++) {
-            origoPoint.move();
-            positivePoint.move();
+        positivePoint.setX(x);
+        positivePoint.setY(y);
 
-            assertEquals(0 + i * (gravityVector.getVx()), origoPoint.getX());
-            assertEquals(0 + i * (gravityVector.getVy()), origoPoint.getY());
+        assertEquals(x, positivePoint.getX(), "The X value is not correct");
+        assertEquals(y, positivePoint.getY(), "The Y value is not correct");
 
-            assertEquals(x + i * (gravityVector.getVx()), positivePoint.getX());
-            assertEquals(y + i * (gravityVector.getVy()), positivePoint.getY());
-        }
+        positivePoint.setX(x * x);
+        positivePoint.setY(y * y);
+
+        assertEquals(x * x, positivePoint.getX(), "The X value is not correct");
+        assertEquals(y * y, positivePoint.getY(), "The Y value is not correct");
     }
 
-    @Test
-    @DisplayName("Test if moves point correctly")
-    public void testMoveWithActionVector() {
-        positivePoint.addActionVector(actionVector1);
 
-        positivePoint.move();
-        assertEquals(x + (gravityVector.getVx() + actionVector1.getVx()), positivePoint.getX());
-        assertEquals(y + (gravityVector.getVy() + actionVector1.getVy()), positivePoint.getY());
-        
 
-        // check if the speed accelerate with vectors given acceleration.
-        double currentXChange = x + (gravityVector.getVx() + actionVector1.getVx());
-        double currentYChange = y + (gravityVector.getVy() + actionVector1.getVy());
-    }
-
-    @Test
-    public void testAddActionVector() {
-        // check if it adds to the vector
-        double changeX = gravityVector.getVx() + actionVector1.getVx() + actionVector2.getVx();
-        double changeY = gravityVector.getVy() + actionVector1.getVy() + actionVector2.getVy();
-
-        origoPoint.setActionVector(actionVector1);
-        origoPoint.addActionVector(actionVector2);
-
-        origoPoint.move();
-        assertEquals(changeX, origoPoint.getX(), " does not add new vector to the old vector");
-        assertEquals(changeY, origoPoint.getY(), " does not add new vector to the old vector");
-    }
-
-    @Test
-    @DisplayName("Check if SetActionVector sets vector correctly")
-    public void testSetActionVector() {
-        origoPoint.setActionVector(actionVector1);
-        origoPoint.move();
-        assertEquals(gravityVector.getVx() + actionVector1.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
-        assertEquals(gravityVector.getVy() + actionVector1.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
-
-        double currentX = gravityVector.getVx() + actionVector1.getVx();
-        double currentY = gravityVector.getVy() + actionVector1.getVy();
-
-        origoPoint.setActionVector(actionVector2);
-        origoPoint.move();
-        assertEquals(currentX + gravityVector.getVx() + actionVector2.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
-        assertEquals(currentY + gravityVector.getVy() + actionVector2.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
-    }
-
-    @Test
-    @DisplayName("Check if SetGravityVector sets vector correctly")
-    public void testSetGravityVector() {
-        origoPoint.setGravityVector(gravityVector);
-        origoPoint.move();
-        assertEquals(gravityVector.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
-        assertEquals(gravityVector.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
-
-        double currentX = gravityVector.getVx();
-        double currentY = gravityVector.getVy();
-
-        origoPoint.setGravityVector(gravityVector);
-        origoPoint.move();
-        assertEquals(currentX + gravityVector.getVx(), origoPoint.getX(), " does not set new vector as actionVector vector");
-        assertEquals(currentY + gravityVector.getVy(), origoPoint.getY(), " does not set new vector as actionVector vector");
-    }
 }

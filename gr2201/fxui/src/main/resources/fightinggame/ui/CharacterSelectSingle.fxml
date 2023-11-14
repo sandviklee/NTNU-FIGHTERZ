@@ -22,12 +22,21 @@
          <image>
             <Image url="@CharSelectCover.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fx:id="characterSelected" fitHeight="886.0" fitWidth="842.0" layoutX="242.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="characterSelected" fitHeight="793.0" fitWidth="607.0" layoutX="354.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
       <ImageView fitHeight="121.0" fitWidth="997.0" layoutX="278.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CharSelectCoverSmall.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <GridPane fx:id="characterSelectGrid" layoutX="311.0" layoutY="171.0" prefHeight="274.0" prefWidth="703.0" AnchorPane.leftAnchor="311.0">
         <columnConstraints>
@@ -46,6 +55,9 @@
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
             <ImageView fx:id="PriestOfVengeance" fitHeight="244.0" fitWidth="226.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
@@ -54,29 +66,38 @@
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
-            <ImageView fx:id="JinjierJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="JinjerJink" fitHeight="244.0" fitWidth="225.0" onMouseClicked="#handleSelectCharacter" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@Char3Select.png" />
                </image>
                <viewport>
                   <Rectangle2D minX="307.49" />
                </viewport>
+               <effect>
+                  <DropShadow />
+               </effect>
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="goBack" layoutX="100.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="79.0" prefWidth="126.0" text="Back">
+      <Button fx:id="lockIn" layoutX="557.0" layoutY="637.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="36.0" prefWidth="212.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="31.0" />
+            <Font name="Arial Rounded MT Bold" size="39.0" />
          </font>
          <effect>
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="lockIn" layoutX="557.0" layoutY="637.0" mnemonicParsing="false" onAction="#handleLockIn" prefHeight="36.0" prefWidth="212.0" style="-fx-background-color: #94A3EA;" text="Lock in" textFill="WHITE">
+      <Button fx:id="goBack" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="23.0" prefWidth="71.0" text="Back">
          <font>
-            <Font name="Arial Rounded MT Bold" size="39.0" />
+            <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

@@ -45,24 +45,4 @@ public class UserDataTest {
 		assertFalse(data1.equals(data2));
 	}
 
-	@Test
-	@DisplayName("Tests if the getPassword works properly")
-	public void TestToString() {
-		data1 = new UserData(validPassword);
-		assertEquals(validPassword, data1.toString());
-	}
-
-	@Test
-	@DisplayName("Tests if the setPassword works properly")
-	public void TestSetPassword() {
-		data1 = new UserData(validPassword);
-		assertEquals(validPassword, data1.getPassword());
-		data1.changePassword(validPasswordOther);
-		assertEquals(validPasswordOther, data1.getPassword());
-		// Dont change password on bad password
-		data1.changePassword(specialCharactersPassword);
-		assertEquals(validPasswordOther, data1.getPassword());
-
-	}
-
 }

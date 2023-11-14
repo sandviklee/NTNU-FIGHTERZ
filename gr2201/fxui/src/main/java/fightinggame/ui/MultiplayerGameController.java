@@ -1,6 +1,8 @@
 package fightinggame.ui;
 
 import fightinggame.game.World;
+import fightinggame.dao.DAOFactory;
+import fightinggame.dao.RODAO;
 import fightinggame.game.GameCharacter;
 import fightinggame.game.PlayerProperties;
 import fightinggame.game.Terrain;
@@ -22,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.text.Text;
 
 public class MultiplayerGameController extends SceneController{
@@ -36,39 +40,46 @@ public class MultiplayerGameController extends SceneController{
     private AnimationTimer worldAnimationTimer;
     private boolean paused;
      
+    //Asserts the player keys.
     private ArrayList<String> player1Keys = new ArrayList<>(Arrays.asList(".", ",", "W", "D", "A", "DW", "AW", "V", "DV", "AV", "WV", "SV", "DC", "AC", "WC", "SC", "C", "S"));
     private ArrayList<String> player2Keys = new ArrayList<>(Arrays.asList(".", ",", "I", "L", "J", "LI", "JI", "N", "LN", "JN", "IN", "KN", "LM", "JM", "IM", "KM", "M", "K"));
 
+    //Asserts all the worldentity positions
     private ArrayList<Integer> playerPosition = new ArrayList<>(Arrays.asList(200, 300));
-    private ArrayList<Integer> dummyPosition = new ArrayList<>(Arrays.asList(1700, 300));
+    private ArrayList<Integer> player2Position = new ArrayList<>(Arrays.asList(1700, 300));
     private ArrayList<Integer> terrainPosition = new ArrayList<>(Arrays.asList(980, 910));
     private ArrayList<Integer> terrainPosition2 = new ArrayList<>(Arrays.asList(1700, 500));
     private ArrayList<Integer> terrainPosition3 = new ArrayList<>(Arrays.asList(200, 500));
     
-    
     private SpriteRenderer renderer;
     private String keyInputs = "";
     private String keyReleased = "";
+    private String path;
     private long fps = 10_000_000;
+    
 
     /**
      * {@link #loadWorld(String, String)} will make an {@code World} with all players and terrain that the game shall have.
      * 
      * @param character  the name of the character loaded
-     * @param gameStage  of the World
+     * @param character2 the name of the second character loaded
+     * @param gameStage  the gamestage (not used yet)
+     * @param path       the path of sprites etc.
      */
-    public void loadWorld(String character, String gameStage){
+    public void loadWorld(String character, String character2, String gameStage, String path){
         worldCanvas.setFocusTraversable(true);
+        this.path = path;	
+
+
         GameCharacter player = loadPlayer(character, playerPosition, player1Keys, 1, 1);
-        GameCharacter player2 = loadPlayer(character, dummyPosition, player2Keys, 2, -1);
+        GameCharacter player2 = loadPlayer(character2, player2Position, player2Keys, 2, -1);
 
         Terrain terrain = loadTerrain("Test", terrainPosition, 1000, 280);
         Terrain terrain2 = loadTerrain("Test2", terrainPosition2, 300, 65);
         Terrain terrain3 = loadTerrain("Test3", terrainPosition3, 300, 65);
-        loadCharacterSprite(character, playerSprites);
-
-        loadCharacterSprite("Assets", assetSprites);
-        loadCharacterSprite("Background", assetSprites);
+        loadSprite(character, playerSprites);
+        loadSprite("Assets", assetSprites);
+        loadSprite("Background", assetSprites);
         
         worldEntities.add(player);
         worldEntities.add(player2);
@@ -77,7 +88,7 @@ public class MultiplayerGameController extends SceneController{
         worldEntities.add(terrain);
 
         world = new World(worldEntities);
-        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites);
+        renderer = new SpriteRenderer(worldCanvas, worldEntities, playerSprites, assetSprites, path);
         updateWorld();
     }
 
@@ -89,11 +100,13 @@ public class MultiplayerGameController extends SceneController{
      * @return the character with given name
      */
     private GameCharacter loadPlayer(String character, ArrayList<Integer> position, ArrayList<String> availKeys, int playerNumb, int facingDirection){
-        CharacterAttributeDAO characterAttributeDAO = new CharacterAttributeDAOImpl();
-        PlayerProperties playerProperties = characterAttributeDAO.findCharacter(character);
+        RODAO<PlayerProperties, String> characterAttributeDAO = DAOFactory.getCharacterAttributeDAO();
+        PlayerProperties playerProperties = characterAttributeDAO.find(character);
         ArrayList<String> availKeysArray = new ArrayList<>(availKeys);
+        HashMap<String, Media> characterAudio = new HashMap<>();
+        loadAudio(character, characterAudio);
 
-        return new GameCharacter(playerProperties, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
+        return new GameCharacter(playerProperties, characterAudio, position, availKeysArray, playerNumb, facingDirection); //loaded from json,should maybe have a starting position
     }
 
     private Terrain loadTerrain(String name, ArrayList<Integer> position, int width, int heigth){
@@ -131,12 +144,12 @@ public class MultiplayerGameController extends SceneController{
 
     }
 
-    private void loadCharacterSprite(String character, HashMap<String, Image> spriteHash) {
-        File[] spriteFiles = new File("../fxui/src/main/resources/fightinggame/ui/" + character).listFiles();
-        for (File sprite : spriteFiles) {
-            spriteHash.put((character + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(character + "/" + sprite.getName())).toString()));
-            
-        }
+    public World getWorld() {
+        return world;
+    }
+
+    public SpriteRenderer getRenderer() {
+        return renderer;
     }
 
     private void gameOver() {
@@ -193,7 +206,6 @@ public class MultiplayerGameController extends SceneController{
         keyReleased += event.getCode();
     }
 
-
     @FXML
     private void handleExit(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
@@ -206,6 +218,32 @@ public class MultiplayerGameController extends SceneController{
     @FXML
     private void handleResume(ActionEvent event) {
         resumeGame();
+    }
+
+    private void loadSprite(String name, HashMap<String, Image> spriteHash) {
+        File[] spriteFiles = new File(this.path + name).listFiles();
+        for (File sprite : spriteFiles) {
+            spriteHash.put((name + sprite.getName()).split("\\.")[0], new Image((getClass().getResource(name + "/" + sprite.getName())).toString()));
+            
+        }
+    }
+
+    /**
+     * Loads the all the audios in the audio folder for the game character.
+     * @throws MediaException if the computer doesn't suppoert MediaPlayer codec.
+     */
+    private void loadAudio(String character, HashMap<String, Media> audioHash) {
+        try {
+            File[] audioFiles = new File(this.path + "Audio/" + character).listFiles();
+            for (File audio : audioFiles) {
+                audioHash.put((audio.getName()).split("\\.")[0], new Media(new File(this.path + "Audio/" + character + "/" + audio.getName()).toURI().toString()));
+                
+            }
+    
+        } catch (MediaException e) {
+            System.out.println("You either dont have the correct Media Codec or the audio files did not load in.s You cant play audio. Error: " + e);
+        }
+
     }
 
     
