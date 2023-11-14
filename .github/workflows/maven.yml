@@ -27,6 +27,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Install JavaFX
+      run: sudo apt-get install openjfx
+
+    - name: Start Xvfb
+      run: |
+        sudo apt-get install -y xvfb
+        Xvfb :99 & 
+        export DISPLAY=:99
     - name: Build with Maven
       run: mvn -B package --file gr2201/pom.xml
 
