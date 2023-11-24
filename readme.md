@@ -33,8 +33,8 @@ _Our Project is seperated into four main parts:  **base**, **docs**, **fxui** og
 
 ## Setup
 **Prerequisites:**
-* Java JDK 11 or higher.
-* Maven 3.6.3 or newer.
+* Java JDK 17 or higher.
+* Maven 3.8.6 or newer.
 
 ### Clone the repository
 ```bash
