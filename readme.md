@@ -1,14 +1,10 @@
 # JavaFX Fighting Game: NTNU FIGHTERZ
-## Group 1 IT1901 Fall 2022 course
-
-### _Made by: Sverre Nystad, Elin Haugum, Kristoffer Olaisen and Simon Sandvik Lee_
----
 [![NTNU FIGTHERZ](https://media.discordapp.net/attachments/353907776633700363/1066753378958442506/6ae495074a7c35656342107b2aa2c2af.gif?width=837&height=454)](https://www.youtube.com/watch?v=3NE40v7QaqM)
 
 _Discover the full dynamics of NTNU FIGHTERZ. Click on the GIF to watch the game in action._
+
 ## Table of contents
 1. [Introduction](#introduction)
-2. [About](#setup)
 3. [Setup](#setup)
 5. [Usage](#usage)
 6. [Tests](#tests)
@@ -16,10 +12,10 @@ _Discover the full dynamics of NTNU FIGHTERZ. Click on the GIF to watch the game
 8. [Contributors](#contributors)
 
 ---
-### About
+## Introduction
 
 NTNU FIGHTERZ is a scaling fighting game inspired by the likes of Super Smash Bros. In its current avatar, players get to embody the unique character,  _"The Angry Cyclist"_, a nimble and dynamic fighter with a quirky set of moves.
-
+Group 1 IT1901 Fall 2022 course
 _Our Project is seperated into four main parts:  **base**, **docs**, **fxui** og **gameplay**_
 
 **Base** contains userinformation. DAO; Database Access Object is used. [Base README](gr2201/base/readme.md)
@@ -83,4 +79,34 @@ Jacoco can be launched by typing:
 mvn clean jacoco:prepare-agent install jacoco:report
 ```
 
+## Contributors
+<table align="center">
+  <tr>
+    <td align="center">
+        <a href="https://github.com/EliHaugu">
+            <img src="https://github.com/EliHaugu.png?size=100" width="100px;" alt="Elin Haugum"/><br />
+            <sub><b>Elin Haugum</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Knolaisen">
+            <img src="https://github.com/Knolaisen.png?size=100" width="100px;" alt="Kristoffer Nohr Olaisen"/><br />
+            <sub><b>Kristoffer Nohr Olaisen</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/SverreNystad">
+            <img src="https://github.com/SverreNystad.png?size=100" width="100px;"/><br />
+            <sub><b>Sverre Nystad</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/sandviklee">
+            <img src="https://github.com/sandviklee.png?size=100" width="100px;" alt="Simon Sandvik Lee"/><br />
+            <sub><b>Simon Sandvik Lee</b></sub>
+        </a>
+    </td>
+  
+  </tr>
+</table>
 
