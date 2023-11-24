@@ -5,12 +5,20 @@
 ---
 [![NTNU FIGTHERZ](https://media.discordapp.net/attachments/353907776633700363/1066753378958442506/6ae495074a7c35656342107b2aa2c2af.gif?width=837&height=454)](https://www.youtube.com/watch?v=3NE40v7QaqM)
 
-_Click on the GIF to watch the full game with sound._
+_Discover the full dynamics of NTNU FIGHTERZ. Click on the GIF to watch the game in action._
+## Table of contents
+1. [Introduction](#introduction)
+2. [About](#setup)
+3. [Setup](#setup)
+5. [Usage](#usage)
+6. [Tests](#tests)
+7. [Repository Structure](#repository-structure)
+8. [Contributors](#contributors)
 
 ---
 ### About
 
-NTNU FIGHTERZ is a scaling fighting game similar to Super Smash bros. It only has one playable character in its current version; _"The Angry Cyclist"_.
+NTNU FIGHTERZ is a scaling fighting game inspired by the likes of Super Smash Bros. In its current avatar, players get to embody the unique character,  _"The Angry Cyclist"_, a nimble and dynamic fighter with a quirky set of moves.
 
 _Our Project is seperated into four main parts:  **base**, **docs**, **fxui** og **gameplay**_
 
@@ -22,21 +30,57 @@ _Our Project is seperated into four main parts:  **base**, **docs**, **fxui** og
 
 **Gameplay** contains all the game logic. [Gameplay README](gr2201/gameplay/readme.md)
 
----
 
-### How to open the project
+## Setup
+**Prerequisites:**
+* Java JDK 11 or higher.
+* Maven 3.6.3 or newer.
 
-Our project can be launched by typing:
+### Clone the repository
+```bash
+git clone https://github.com/sandviklee/NTNU-FIGHTERZ.git;
+cd NTNU-FIGHTERZ;
+cd gr2201;
+```
 
- `mvn javafx:run` in your terminal.
- 
----
+### Install dependencies
+To install all the necessary dependencies run the following command.
+```bash
+mvn clean install -DskipTests
+```
 
-### How to run Jacoco and get the report
+## Usage
+To run NTNU-FIGHTERZ, there are two systems one needs to start; the server and the game. 
+One do not need to run the server to start the game, but then one can not save ones profile or log into an older account.
 
+### Starting the game
+Navigate to the directory named "gr2201" in your command line interface and execute the following command:
+```bash
+mvn clean compile;
+cd fxui;
+mvn javafx:run
+```
+
+### Starting the Server (optional)
+To start the server one needs to make sure that the port 8080 is not currently in use. If it is in use you need to kill the application running on that port to make the server be able to use the port.
+after that run the following code.
+```bash
+mvn clean compile;
+cd springboot/restserver;
+mvn spring-boot:run
+```
+
+## Tests
+To run the full test suit, run the following command in the folder gr2201:
+```bash
+mvn test
+```
+
+### Genererate test coverage repport
 Jacoco can be launched by typing:
 
-`mvn clean jacoco:prepare-agent install jacoco:report` in your terminal.
+```bash
+mvn clean jacoco:prepare-agent install jacoco:report
+```
 
----
 
