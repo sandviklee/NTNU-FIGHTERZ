@@ -95,18 +95,17 @@ mvn clean jacoco:prepare-agent install jacoco:report
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/SverreNystad">
-            <img src="https://github.com/SverreNystad.png?size=100" width="100px;"/><br />
-            <sub><b>Sverre Nystad</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/sandviklee">
             <img src="https://github.com/sandviklee.png?size=100" width="100px;" alt="Simon Sandvik Lee"/><br />
             <sub><b>Simon Sandvik Lee</b></sub>
         </a>
     </td>
-  
+    <td align="center">
+        <a href="https://github.com/SverreNystad">
+            <img src="https://github.com/SverreNystad.png?size=100" width="100px;"/><br />
+            <sub><b>Sverre Nystad</b></sub>
+        </a>
+    </td>
   </tr>
 </table>
 
